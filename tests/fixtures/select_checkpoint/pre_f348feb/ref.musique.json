@@ -1,0 +1,172 @@
+{
+  "bootstrap": {
+    "n_resamples": 1000,
+    "seed": 0,
+    "unit": "(suite_id, task_id)"
+  },
+  "coverage_rule": {
+    "contrasts": [
+      {
+        "base_asks": 3.0,
+        "checkpoint": "ref",
+        "ci_hi": 0.069242,
+        "ci_lo": 0.029242,
+        "comparator": "matched_k",
+        "delta": 0.049242,
+        "metric": "evidence_coverage",
+        "n_tasks": 132,
+        "p_value": 0.01,
+        "suite_id": "musique",
+        "trained_asks": 3.0
+      },
+      {
+        "base_asks": 6.3,
+        "checkpoint": "ref",
+        "ci_hi": -0.01,
+        "ci_lo": -0.09,
+        "comparator": "cap8",
+        "delta": -0.05,
+        "metric": "evidence_coverage",
+        "n_tasks": 132,
+        "p_value": 0.02,
+        "suite_id": "musique",
+        "trained_asks": 3.0
+      }
+    ]
+  },
+  "criteria": {
+    "cad_ge2": {
+      "baseline": null,
+      "ci_hi": -0.02,
+      "ci_lo": -0.2,
+      "gated": true,
+      "n": 80,
+      "passed": false,
+      "reason": "",
+      "threshold": "delta > 0, CI excludes 0",
+      "value": -0.1
+    },
+    "distinct3": {
+      "baseline": 0.4,
+      "gated": true,
+      "n": 132,
+      "passed": true,
+      "reason": "",
+      "threshold": 0.65,
+      "value": 0.8
+    },
+    "evidence_coverage": {
+      "baseline": null,
+      "ci_hi": -0.01,
+      "ci_lo": -0.09,
+      "gated": true,
+      "n": 132,
+      "passed": false,
+      "reason": "",
+      "threshold": "delta > 0, CI excludes 0",
+      "value": -0.05
+    },
+    "facet_breadth": {
+      "baseline": null,
+      "ci_hi": -0.01,
+      "ci_lo": -0.1,
+      "gated": true,
+      "n": 132,
+      "passed": false,
+      "reason": "",
+      "threshold": "CI upper bound >= 0",
+      "value": -0.07
+    },
+    "length_equivalence": {
+      "baseline": 12.5,
+      "gated": true,
+      "n": 400,
+      "passed": true,
+      "reason": "",
+      "threshold": 0.1,
+      "value": 12.0
+    },
+    "malformed": {
+      "baseline": 0.0,
+      "gated": true,
+      "n": 132,
+      "passed": true,
+      "reason": "",
+      "threshold": "<= baseline",
+      "value": 0.0
+    },
+    "newly_reachable_share": {
+      "baseline": null,
+      "ci_hi": 0.2,
+      "ci_lo": -0.01,
+      "gated": false,
+      "n": 50,
+      "passed": true,
+      "reason": "reported",
+      "value": 0.1
+    },
+    "stop_2x2": {
+      "baseline": {
+        "mean_asks_after_done": 0.022727272727272728,
+        "n_done": 60,
+        "n_done_ask": 3,
+        "n_done_stop": 57,
+        "n_forced_stops": 0,
+        "n_not_done": 500,
+        "n_not_done_ask": 400,
+        "n_not_done_stop": 100,
+        "n_runs": 264,
+        "n_skipped_no_coverage": 0,
+        "n_states": 2000,
+        "p_ask_given_not_done": 0.96,
+        "p_stop_given_done": 0.15
+      },
+      "columns": {
+        "done_axis": "frontier_q#t >= 1-1e-12 before the decision at t"
+      },
+      "gated": true,
+      "n": 560,
+      "passed": false,
+      "reason": "",
+      "threshold": "both cells >= baseline",
+      "value": {
+        "mean_asks_after_done": 0.022727272727272728,
+        "n_done": 60,
+        "n_done_ask": 3,
+        "n_done_stop": 57,
+        "n_forced_stops": 0,
+        "n_not_done": 500,
+        "n_not_done_ask": 400,
+        "n_not_done_stop": 100,
+        "n_runs": 132,
+        "n_skipped_no_coverage": 0,
+        "n_states": 560,
+        "p_ask_given_not_done": 0.86,
+        "p_stop_given_done": 0.9
+      }
+    }
+  },
+  "k_matches_baseline": {
+    "musique": null
+  },
+  "pairing": {
+    "key": "(suite_id, task_id, seed)"
+  },
+  "passed": false,
+  "selection": {
+    "baseline_arm": "inquirer_prompted",
+    "baseline_grid_names": [
+      "dev_baseline_musique"
+    ],
+    "baseline_model_id": "qwen3-8b-base",
+    "baseline_model_id_source": "calls.parquet actor='inquirer'",
+    "checkpoint_arm": "inquirer_trained",
+    "grid_name": "dev_select_musique",
+    "parquet_dir": "synthetic",
+    "scorer_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "thresholds": {
+    "distinct_floor": 0.65,
+    "length_margin": 0.1
+  }
+}

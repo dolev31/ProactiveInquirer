@@ -1,0 +1,19 @@
+Write the final answer to the task, using only the evidence and the draft provided.
+
+TASK
+{{question}}
+
+SUITE INSTRUCTIONS
+{{instructions}}
+
+EVIDENCE
+{{evidence}}
+
+DRAFT
+{{draft}}
+
+Answer in at most {{word_cap}} words. Give the answer itself with no preamble, no restatement
+of the task, no bullet list and no description of how it was reached. State the answer first,
+as a bare span. If the evidence leaves part of the task unsupported, add a short clause after
+the answer saying which part -- never in place of it, and never guess a value the evidence
+does not carry.

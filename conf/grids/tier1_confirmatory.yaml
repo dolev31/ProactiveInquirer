@@ -1,0 +1,73 @@
+name: tier1_confirmatory
+description: Grid A/A-prime main run on the controlled multi-hop suites.
+suites: [musique, strategyqa, wiki2]
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 8
+max_turns: 16
+# Measured by `scripts/probe_retrieval.py`, zero tokens, n=300, ON THE CORPORA THAT WILL RUN:
+# the share of tasks holding gold evidence a sub-question reaches and the full question misses,
+# as a function of k.
+#   musique    k2 66%  k3 68%  k5 65%  k8 63%   <- flat over k in [2,5]
+#   strategyqa k2 45%  k3 28%  k5 23%  k8 19%   <- a single k=5 makes this suite unmeasurable
+#   wiki2      k2 72%  k3 58%  k5 39%  k8 21%
+#
+# THE MUSIQUE ROW MOVED TWICE, AND BOTH MOVES WERE THE SAMPLE RATHER THAN THE SUITE.
+#   63/67/67/62  on a 60-task head-N build. Upstream ships hop-sorted, so that sample was
+#                entirely 2hop -- accidentally easy.
+#   49/50/47/44  on the 800-task build, measured over the first 300 ids. `_stratified_order`
+#                selected round-robin across hop classes and then `sorted()` the result, so
+#                the WRITTEN FILE was still hop-ordered and any prefix was 2hop-heavy.
+#   66/68/65/63  with the selection order preserved, so every prefix is hop-balanced. This is
+#                the corpus the grids will actually read, because every consumer takes a prefix.
+# Deeper tasks have MORE sub-question-only evidence, which is why removing the 2hop skew
+# raised the whole curve.
+#
+# k stays 5. The curve is flat over k in [2,5] -- 66/68/65, a 3pp spread at n=300 where the SE
+# is about 2.7pp -- so 5 sits inside the optimum rather than at it, and tier1_trained and
+# tier2_confirmatory must share it or trained-vs-prompted becomes a comparison of retrieval
+# budget too. strategyqa and wiki2 are unchanged corpora and their optima are unmoved.
+k_by_suite:
+  musique: 5
+  strategyqa: 2
+  wiki2: 3
+arms:
+  - drafter_only
+  - compute_matched
+  - query_expansion
+  - verbosity
+  - self_ask
+  - ircot
+  - self_inquire
+  - checklist
+  - inquirer_prompted
+  - inquirer_noevidence
+  - inquirer_depth1
+  - random_q
+  - parallel_replay
+notes: >-
+  gold_evidence and oracle_vreq are NOT here: they read gold and must run under a separate
+  entrypoint that stamps gold_exposed=true, which the aggregator refuses in any primary table.
+
+  SENSITIVITY, MEASURED RATHER THAN ASSUMED. The tier0 canary doubled as the calibration
+  slice, so `scripts/power_analysis.py` no longer reports a 0.10-0.30 range:
+
+    measured paired sd (inquirer_prompted vs drafter_only, evidence_coverage, 15 pairs) 0.2091
+    musique answer_token_f1  MDE at 80% power, n=200, paired sign-flip .......... 0.0461
+    drgym  kpr_incremental   MDE at 80% power ................................... 0.065
+
+  For scale, the canary's observed answer_token_f1 gap on the same contrast is +0.2711 --
+  about 6x the MDE, so this endpoint is not sensitivity-limited at n=200.
+
+  KILL-SWITCH DECIDABILITY, from the same slice. CI half-width at n=200 against each
+  comparator's margin, on evidence_coverage:
+
+    self_inquire          sd 0.0624  hw 0.0086  margin 0.05  fits
+    inquirer_noevidence   sd 0.2183  hw 0.0303  margin 0.05  fits
+    inquirer_depth1       sd 0.2603  hw 0.0361  margin 0.05  fits
+    random_q              sd 0.2989  hw 0.0414  margin 0.05  fits
+    verbosity             sd 0.2091  hw 0.0290  margin 0.03  FITS, BARELY
+
+  verbosity needs n >= 187 for its CI to fit +/-0.03 at the measured sd, so it is decidable
+  in THIS grid (n=200) and NOT in tier1_pilot (n=120, hw 0.0374). The pilot cannot settle
+  the one switch whose consequence is "STOP; no reframe survives" -- that has to happen here.

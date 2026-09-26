@@ -1,0 +1,40 @@
+name: tier2_confirmatory
+description: tau-Knowledge (tau2 banking_knowledge), all 97 tasks, bm25 retrieval.
+suites: [tau2]
+n_tasks: 97
+seeds: [0, 1, 2]
+budget_cap: 8
+max_turns: 16
+arms:
+  - drafter_only
+  - self_inquire
+  - inquirer_prompted
+  - inquirer_noevidence
+  - verbosity
+  - compute_matched
+  # REQUIRED, and not for symmetry. Secondary S5 -- inquirer_prompted vs parallel_replay on
+  # evidence_coverage -- is preregistered with suite_id="*", i.e. POOLED across every
+  # confirmatory suite. Omitting the arm here does not make the test fail; it makes the test
+  # silently become a musique/strategyqa/wiki2 test wearing a pooled label, which is the worse
+  # of the two outcomes. evidence_coverage IS computable on tau2 (73% of required nodes carry
+  # gold_ev_uids, derived from required_documents), so tau2 owes the pooled endpoint its rows.
+  # `parallel_replay` replays inquirer_prompted's own questions, so this cell must be run
+  # AFTER the treatment arm, seeded with --seed-questions-from.
+  - parallel_replay
+notes: >-
+  Structurally underpowered at n=97, so this is preregistered as a DIRECTIONAL REPLICATION
+  WITH A CI, not a powered confirmatory test.
+
+  MDE = 22.1pp at 80% power, SIMULATED THROUGH THE TEST THAT ACTUALLY RUNS
+  (scripts/power_analysis.py). This line previously read "MDE about 12.6pp". That figure is
+  the textbook McNemar normal approximation at roughly 20 discordant pairs; it is not the
+  sensitivity of a CLUSTER-LEVEL PERMUTATION over seed-rounded outcomes, which is what
+  pi_eval.report runs. At a 12.6pp lift the real power is 42%. The claim was optimistic by a
+  factor of 1.8, in a document intended to be frozen.
+  The higher-signal endpoint is the discoverable-tool unlock rate, which is why it carries
+  the headline sentence while the reward carries the statistical test.
+
+  `random_q` is deliberately ABSENT. No preregistered endpoint names it, it is the null for
+  phi rather than a component of a pooled contrast, and its kill-switch decision is made on
+  tier-1 data at Gate 3. 291 tau2 dialogues to re-answer a question already answered
+  elsewhere is not a defensible use of the budget.

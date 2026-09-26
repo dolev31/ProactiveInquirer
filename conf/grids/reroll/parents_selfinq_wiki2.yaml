@@ -1,0 +1,29 @@
+name: parents_selfinq_wiki2
+description: >-
+  GROWTH of the clean cohort, second parent ARM: self_inquire on the fixed loop (3ffa972), the same second arm latent_trainset used. Different trajectories -> different evidence-bearing states.
+suites: [wiki2]
+split: train
+task_ids:
+  - '081aefc4086111ebbd5dac1f6bf848b6'
+  - '39240f9a08b811ebbd88ac1f6bf848b6'
+  - '3f0eaa5e089611ebbd76ac1f6bf848b6'
+  - '4039b1be08d511ebbd98ac1f6bf848b6'
+  - '4d982dc308c111ebbd8bac1f6bf848b6'
+  - '53ab316c08b911ebbd88ac1f6bf848b6'
+  - '59054cad08b311ebbd86ac1f6bf848b6'
+  - '61e5f936086d11ebbd62ac1f6bf848b6'
+  - '84b83b0508c511ebbd8eac1f6bf848b6'
+  - '8f2b2975088a11ebbd6fac1f6bf848b6'
+  - '95d37580085b11ebbd5cac1f6bf848b6'
+  - 'df25946e08b211ebbd85ac1f6bf848b6'
+  - 'eded9bbf08de11ebbd9fac1f6bf848b6'
+  - 'eebc066c08c411ebbd8eac1f6bf848b6'
+  - 'f5855305089211ebbd74ac1f6bf848b6'
+  - 'f7c4fdf2087611ebbd67ac1f6bf848b6'
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+k: 5
+exploratory: true
+arms:
+  - self_inquire

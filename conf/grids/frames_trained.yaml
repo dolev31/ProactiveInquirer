@@ -1,0 +1,49 @@
+name: frames_trained
+description: >-
+  FRAMES (Google DeepMind, NAACL 2025, arXiv:2409.12941, Apache-2.0) in the oracle-articles
+  setting: an EXTERNAL multi-hop benchmark the policy never trained on, scored on its answers
+  only. The transfer claim this grid exists to test is "the trained policy's gain is not a
+  property of the suites it was mined from".
+suites: [frames]
+split: test
+n_tasks: 824
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+k: 5
+arms:
+  - drafter_only
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THE TWO-PIN PROTOCOL, AND WHY IT IS TWO INVOCATIONS RATHER THAN A FOURTH ARM.
+  The published contrast needs three Inquirer lines: prompted@gpt-oss-120b (the teacher-scale
+  reference), prompted@Qwen3-8B (the isolation of training) and trained@Qwen3-8B. The first
+  two are the SAME arm id, `inquirer_prompted`, differing only in which model serves the
+  Inquirer role. A grid cannot express a model sweep -- there is no model key in the schema --
+  so run this file twice, once with PI_MODEL_INQUIRER=gpt-oss-120b and once with
+  PI_MODEL_INQUIRER=Qwen3-8B, and let each run's `model_pin_hash` separate the two in the
+  manifest. Inventing a `inquirer_prompted_8b` arm id to make one invocation do the work would
+  put the model pin in two places that can disagree, and the manifest is the one that decides.
+
+  `split: test` is stated even though `pinq.splitting.EVAL_ONLY_SUITES` already forces every
+  frames task to test, and even though `pi_eval.report.ELIGIBLE` has filtered on split since
+  2026-09-15 (see docs/SUITES.md, "Eligibility filters on split"). It stays because a grid
+  that declares its population is the only one whose population is legible from the grid file
+  alone: the predicate decides what may be REPORTED, the grid says what was RUN.
+
+  SCORED GOLD-FREE. FRAMES ships no need-graph and never will, so `pi score` takes the
+  answers-only branch (`pi_eval.score.GOLD_FREE_SUITES`) and emits `answer_correct`,
+  `answer_token_f1`, `answer_token_recall`, `answer_hedged` and the cost/turn counts, and NO
+  coverage, depth, facet or frontier-Q metric. The frontier figure on frames is therefore
+  success-versus-spend, not Q-versus-spend; the depth axis stays on musique.
+
+  EXPLORATORY BY REGISTRY, NOT BY OVERSIGHT. `pi_run.suites.REGISTRY["frames"].endpoint_status`
+  is "exploratory" because FRAMES was chosen on 2026-09-11, long after the preregistration was
+  sealed. Point estimate and clustered CI; no p-value until that is amended. The `exploratory`
+  GRID flag is deliberately NOT set -- that flag means "these runs are data generation, not
+  measurement", and these are measurements that simply may not carry a p-value yet.
+
+  Budget and cap match tier1_confirmatory (8/16/k=5) so the frontier on frames is comparable
+  to the frontier on musique. The pools are not: ~20 paragraphs per musique task against
+  hundreds here, which makes k=5 a far harder needle and is a fact the figure must state.

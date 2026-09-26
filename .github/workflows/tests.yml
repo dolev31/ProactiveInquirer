@@ -1,0 +1,19 @@
+name: tests
+on: [push, pull_request]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv venv --python 3.12
+      # The extras the unit tests import: the runtime client, the corpus builders, the analysis
+      # stack and the tau2 simulator. No GPU stack (train) and no provider keys.
+      - run: uv pip install -e ".[dev,run,suites,analysis,tau2]"
+      - run: .venv/bin/ruff check .
+      - run: .venv/bin/ruff format --check .
+      - run: .venv/bin/lint-imports
+      - run: .venv/bin/pi suites audit
+      - run: .venv/bin/python -m pytest -q -m "not integration and not slow"
+      - run: bash scripts/check_no_home_paths.sh

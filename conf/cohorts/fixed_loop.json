@@ -1,0 +1,11 @@
+{
+  "generated_by": "scripts/cohort_ids.py",
+  "members": [
+    "3ffa972472cdbc8510c431214beb9ca03a5208af",
+    "a22015fb7acfe03214e9f91c26fad95df8a4ea59",
+    "c84cbad26401ed744cf84d93cc865257af9e7c4d",
+    "e3708646ad1aaf2df5313e05d504307bc35e91c4"
+  ],
+  "n_checked": 192,
+  "root": "3ffa972472cdbc8510c431214beb9ca03a5208af"
+}

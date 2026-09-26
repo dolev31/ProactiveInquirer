@@ -1,0 +1,9 @@
+{
+ "system": "fixture-system",
+ "judge_model": "",
+ "source_url": "",
+ "commit": "",
+ "values": {
+  "clarity": 6.0
+ }
+}

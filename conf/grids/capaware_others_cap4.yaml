@@ -1,0 +1,47 @@
+name: capaware_others_cap4
+description: >-
+  Does telling the comparator its allowance help it? The equal-spend reading takes the prompted
+  comparator's first k questions, which is exchangeable with a true k-question run only because
+  that comparator is budget-blind. A reviewer objected that a comparator TOLD its allowance
+  might ask different, better early questions, in which case the prefix understates it. This
+  grid answers that directly: the same prompted comparator, at the same cap, with and without a
+  statement of the allowance in its prompt. This is the companion of capaware_musique_cap4 on the
+  other two suites, launched only after that one completes and never beside it.
+suites: [strategyqa, wiki2]
+split: test
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 4
+max_turns: 16
+k_by_suite:
+  strategyqa: 2
+  wiki2: 3
+arms:
+  - inquirer_prompted
+  - inquirer_prompted_capaware
+notes: >-
+  EVERY FIELD MATCHES conf/grids/frontier_trained_musique_cap4.yaml except the arm list, so this
+  reads against the published cap-4 point rather than beside it. Cap 4 is chosen because that is
+  where the paper's lead over a much larger prompted model lives, and it is the budget at which
+  a cap-aware policy has the most to gain from knowing the allowance.
+
+  The two arms differ in ONE block of one prompt. `inquirer_prompted_capaware` replaces the
+  RESERVED placebo block, which exists precisely to be displaced, with a statement of the
+  allowance in words. Same policy class, same drafter, same answerer, same slots, and the two
+  prompts differ by five characters in length, so the token-parity guard passes on the arm
+  table rather than by exemption. The allowance is written in words and the word "budget" does
+  not appear, so neither budget-firewall test needed an exemption either. Both were checked
+  non-vacuously: inflating the prompt fails parity and writing "BUDGET" fails the firewall.
+
+  SEQUENCING, and the reason is weaker than the commit that added this file claimed. That message said
+  a peer saw 352 connection errors of 400 at concurrency 16, "so 8 plus 8 is the wall rather than a safe
+  total". Two corrections. The 352 figure belongs to a lane other than the one I attributed it to. And
+  there was a window in which the proxy on 4000 held no LISTEN socket while its process stayed alive, so
+  that observation compares two PROXY STATES as much as two concurrencies and cannot carry a conclusion
+  about either. 125 of 125 ok at concurrency 8 is clean evidence about 8 and is not evidence about 16.
+  This grid is still run after the first rather than beside it, but as a precaution against an untested
+  total rather than as a measured wall, and it costs nothing to be careful about.
+
+  NOT a sealed stage-1 arm, so this is exploratory: a point estimate and an interval, no
+  probability value. It is a methodological control on how the comparator is read, not a new
+  treatment.

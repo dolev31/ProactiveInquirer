@@ -1,0 +1,20 @@
+{
+ "trex": [
+  {
+   "id": "49738ca4-a93b-4bca-8016-342592f40240",
+   "question": "Hurghada [SEP] capital of"
+  }
+ ],
+ "squad2": [
+  {
+   "id": "56be86cf3aeaaa14008c9078",
+   "question": "Which artist did Beyonce marry?"
+  }
+ ],
+ "natural_questions": [
+  {
+   "id": -3586117030178166108,
+   "question": "what episode in season 3 do jim and pam get together"
+  }
+ ]
+}

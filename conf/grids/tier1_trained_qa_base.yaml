@@ -1,0 +1,51 @@
+name: tier1_trained_qa_base
+description: >-
+  THE HEADLINE TEST-SPLIT CONTRAST (plan I.10): drafter_only, inquirer_prompted and
+  inquirer_trained on the three controlled multi-hop suites, held out.
+  This file is the base-pin half of the two-pin protocol; its twin
+  `tier1_trained_qa_teacher` is byte-identical
+  except for this name.
+suites: [musique, strategyqa, wiki2]
+# TEST SPLIT. `tier1_trained` once took the first 97 musique ids in corpus order, 55 of them
+# train-split, and no eval-side consumer reads the `split` column -- so the headline
+# "trained beats prompted" column rested on tasks the arm may have trained on and could not be
+# repaired after the fact. `pi_eval.report.train_split_violations` now refuses a trained-arm
+# row on anything but test, recomputed AND stamped.
+split: test
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 8
+max_turns: 16
+# IDENTICAL TO tier1_confirmatory'S, and it has to be: if the trained and prompted arms ran at
+# different retrieval budgets the contrast would be a comparison of k as well as of policy.
+# Measured sub-question headroom (scripts/probe_retrieval.py, n=300):
+#   musique    k2 66%  k3 68%  k5 65%  k8 63%   flat over [2,5]
+#   strategyqa k2 45%  k3 28%  k5 23%  k8 19%   a single k=5 makes this suite unmeasurable
+#   wiki2      k2 72%  k3 58%  k5 39%  k8 21%
+k_by_suite:
+  musique: 5
+  strategyqa: 2
+  wiki2: 3
+arms:
+  - drafter_only
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THE TWO-PIN PROTOCOL, AND WHY IT IS TWO FILES RATHER THAN ONE.
+  The prompted baseline must be read against BOTH pins: against the teacher (gpt-oss-120b) it
+  answers "does an 8B student match a 120B prompted policy", and against the same base the
+  checkpoint was fitted from it answers the only question that isolates training. Those are two
+  sweeps, and the thing that differs between them -- `PI_MODEL_INQUIRER` -- is not a grid
+  field. So the grid is duplicated under a distinct `grid_name`, which is what lets the two
+  resulting tables be told apart afterwards. `model_pin_hash` is inside `semantic_hash`, so
+  the two invocations yield distinct `run_id`s by construction; the grid name is for the
+  reader, not for identity.
+
+  RUN IT BY SETTING PI_MODEL_INQUIRER AGAINST THE PROXY THAT ALREADY SERVES THE FROZEN ROLES.
+  Never by overriding LITELLM_BASE_URL: one base url serves every role, so overriding it
+  re-routes the frozen Drafter and Answerer too and silently voids the invariant this grid
+  exists to hold. A $0 price-table row per local deployment is required or the run refuses to
+  start (`PriceTable.rates` is strict); those rows are in
+  `scripts/price_tables/2026-09.json`.
+
+  Measured cost basis (I.10): $11.76 per API-Inquirer arm, $6.94 per local-Inquirer arm.

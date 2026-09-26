@@ -1,0 +1,82 @@
+{
+  "run_id": "bc82f6e78f71b793849dc5a52c54c2ae",
+  "semantic_hash": "9764d662e814c8e124446be6142096bdc42c850ac57b5bea82a911338246d8ee",
+  "model_pin_hash": "e690e5de95d509b00ea1955e0b0463b3e36812cc579df0ecec3bfee4d5a98d1d",
+  "suite_id": "strategyqa",
+  "task_id": "3ebb62af96f836d2d4d6",
+  "arm_id": "inquirer_prompted",
+  "policy_id": "inquirer_prompted",
+  "seed": 5,
+  "split": "train",
+  "corpus_hash": "1de6e300a5f6e51e8189780c3ebd72fe64be90980b24161938d87a69ebbfc610",
+  "corpus_dir": "ee8291a32bb761de",
+  "grid_sha256": "",
+  "grid_name": "",
+  "k": 5,
+  "questions_hash": "",
+  "budget_cap": 12,
+  "max_turns": 12,
+  "word_cap": 20,
+  "pins": {
+    "answerer": {
+      "role": "answerer",
+      "model_id": "openai/aws/gpt-oss-120b",
+      "provider": "litellm_proxy",
+      "base_url_sha": "810dc02de640468981cd9c4c7b1c11222ae2b8b790633bc7e265c5f5c0c9c64e",
+      "adapter_sha": null,
+      "system_prompt_sha": "",
+      "sampling_sha": "5eed9b88082a8f12d7b69c7a809b61f4222a8dc66d6e60f532b14b86cce311a2",
+      "price_table_version": "2026-09"
+    },
+    "drafter": {
+      "role": "drafter",
+      "model_id": "openai/aws/gpt-oss-120b",
+      "provider": "litellm_proxy",
+      "base_url_sha": "810dc02de640468981cd9c4c7b1c11222ae2b8b790633bc7e265c5f5c0c9c64e",
+      "adapter_sha": null,
+      "system_prompt_sha": "",
+      "sampling_sha": "5eed9b88082a8f12d7b69c7a809b61f4222a8dc66d6e60f532b14b86cce311a2",
+      "price_table_version": "2026-09"
+    },
+    "inquirer": {
+      "role": "inquirer",
+      "model_id": "openai/aws/gpt-oss-120b",
+      "provider": "litellm_proxy",
+      "base_url_sha": "810dc02de640468981cd9c4c7b1c11222ae2b8b790633bc7e265c5f5c0c9c64e",
+      "adapter_sha": null,
+      "system_prompt_sha": "",
+      "sampling_sha": "5eed9b88082a8f12d7b69c7a809b61f4222a8dc66d6e60f532b14b86cce311a2",
+      "price_table_version": "2026-09"
+    }
+  },
+  "prompt_hashes": {
+    "answerer": "3c35cbfee3d9cb851b9524735453bf34ba4c0b3f1f200fea7b880e150264ee27",
+    "answerer_frozen": "3c35cbfee3d9cb851b9524735453bf34ba4c0b3f1f200fea7b880e150264ee27",
+    "drafter_draft": "8a4a6b0218e798680ceb215831e0b0de3cc6137df9f45eb21db601badbf1fe35",
+    "drafter_resolve": "55607a2b10bb8971d42e3764ff739a24404768308bcc4d542eef4a18345798a1",
+    "fragment_user_channel_placebo": "011360c10d0b63471e5d40fae43fcbd4ec9700aa8dddcbf37edfb3de95a3e85d",
+    "inquirer_prompted": "814658eaa2f09eb798ab6f1019ea9ba728b68a3c00c4aa722f300e87f49b69f7"
+  },
+  "upstream_pins": {
+    "suite_version": "v1"
+  },
+  "template_id": null,
+  "pilot_flag": false,
+  "exploratory": false,
+  "gold_exposed": false,
+  "counterfactual_kind": "none",
+  "prefix_of_run_id": null,
+  "prefix_k": null,
+  "branch_of_run_id": "8e1b6fba828371e8eac2f777a2e0b7e8",
+  "branch_turn_idx": 1,
+  "branch_seed": 3891206558,
+  "permutation_id": null,
+  "prompt_variant_id": "v1",
+  "train_id_set_hash": null,
+  "code_version": "c84cbad26401ed744cf84d93cc865257af9e7c4d",
+  "dirty": false,
+  "dirty_files": [],
+  "canary_hit": false,
+  "firewall_ok": true,
+  "concurrency": 1
+}

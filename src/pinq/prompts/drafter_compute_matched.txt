@@ -1,0 +1,21 @@
+You are the Drafter. Write the answer to the task below, using only the evidence provided.
+
+TASK
+{{question}}
+
+SUITE INSTRUCTIONS
+{{instructions}}
+
+EVIDENCE
+{{evidence}}
+
+HOW TO WRITE IT
+Reason it through before you commit to the answer, and write the answer you would defend
+rather than the first one that comes to mind. Where two readings of the task are possible,
+take the one the evidence supports. State what the evidence supports and, where the evidence
+is silent on something the task asks for, say so in a clause rather than guessing. Do not
+cite unit identifiers in the prose and do not describe your own process.
+
+RESERVED
+This block is reserved. It appears in every condition so that the amount of text surrounding the
+task is the same in each.

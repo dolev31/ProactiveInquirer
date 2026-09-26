@@ -1,0 +1,80 @@
+{
+ "control": "self_ask",
+ "n_not_forks": 75,
+ "n_pairs": 102,
+ "n_unpaired": 0,
+ "per_seed": {
+  "0": {
+   "diff_mean": -0.5,
+   "fewer": 19,
+   "follow_ups": {
+    "control": 5.970588235294118,
+    "treatment": 5.470588235294118
+   },
+   "more": 8,
+   "n_pairs": 34,
+   "reward": {
+    "control": 0.5,
+    "treatment": 0.4411764705882353
+   },
+   "sign_test_p": 0.052238985896110535
+  },
+  "1": {
+   "diff_mean": -0.8529411764705882,
+   "fewer": 16,
+   "follow_ups": {
+    "control": 6.852941176470588,
+    "treatment": 6
+   },
+   "more": 10,
+   "n_pairs": 34,
+   "reward": {
+    "control": 0.5,
+    "treatment": 0.5
+   },
+   "sign_test_p": 0.32693958282470703
+  },
+  "2": {
+   "diff_mean": -1.2941176470588236,
+   "fewer": 22,
+   "follow_ups": {
+    "control": 5.911764705882353,
+    "treatment": 4.617647058823529
+   },
+   "more": 9,
+   "n_pairs": 34,
+   "reward": {
+    "control": 0.5882352941176471,
+    "treatment": 0.5588235294117647
+   },
+   "sign_test_p": 0.029449373483657837
+  }
+ },
+ "pooled": {
+  "diff_mean": -0.8823529411764706,
+  "fewer": 57,
+  "more": 27,
+  "n_pairs": 102,
+  "reward": {
+   "control": 0.5294117647058824,
+   "treatment": 0.5
+  },
+  "sign_test_p": 0.001404494631113956
+ },
+ "provenance": {
+  "code_versions": {
+   "401b8fe": 136,
+   "922060c": 68
+  },
+  "n_runs": 204,
+  "run_ids_sha": "4fc108b375d5b0cb",
+  "seeds": [
+   0,
+   1,
+   2
+  ]
+ },
+ "split": "test",
+ "suite_id": "tau2_airline",
+ "treatment": "inquirer_prompted"
+}

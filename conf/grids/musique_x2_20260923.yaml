@@ -1,0 +1,37 @@
+name: musique_x2_20260923
+description: >-
+  Composed MuSiQue pairs (suite musique_x2, eval-only, exploratory), declared before any data in
+  artifacts/composed_pairs_20260923/DECLARATION.md. Each task joins two held-out MuSiQue test
+  tasks (not in the checkpoint's training ids d6750e34..., no shared template, title or answer),
+  both questions stated, pools unioned, gold graphs unioned with no cross-pair edge (exactly two
+  facets), every pair with a constituent of depth >= 2; both question orders are separate tasks.
+  Built by pi_eval.build.compose_build (seed 20260923) into an isolated root: corpus
+  c7c639acaaf70978, 48 pairs, 96 tasks. Arms: the recipe (training seeds 1 and 2, averaged within
+  the task at read time) and Qwen3-8B base prompted, at ceiling 16 (twice the solo ceiling of 8),
+  rollout seeds 0 and 1, frozen roles as in the Table 3 population (drafter and answerer
+  openai/aws/gpt-oss-120b; the Table 3 runs' manifests pin exactly these). k 5 as musique.
+suites: [musique_x2]
+split: test
+# EVERY task: the grid's n is a head-N after the split filter, and `n_tasks: null` falls back to
+# the CLI default of 5. 96 is the build's task count; a rebuild that changes it changes this.
+n_tasks: 96
+seeds: [0, 1]
+budget_cap: 16
+max_turns: 16
+k_by_suite:
+  musique_x2: 5
+arms:
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THREE pi-run invocations share this grid, because PI_MODEL_INQUIRER is one global per process
+  (the convention of frontier_recipe_cap16 and structured_baselines_20260922): `--arm
+  inquirer_trained` at PI_MODEL_INQUIRER=qwen3-8b-dpo-stacked-notdone-both-s1, `--arm
+  inquirer_trained` at qwen3-8b-dpo-stacked-notdone-both-s2, and `--arm inquirer_prompted` at
+  qwen3-8b-base, each into its OWN runs root (the two trained seeds share an arm_id and would
+  otherwise be told apart only by their pins). All three through ONE base URL (the local proxy
+  on 4030) from ONE pinned clean worktree, so code_version and base_url_sha are shared by every
+  run of the contrast. PI_MODEL_DRAFTER=PI_MODEL_ANSWERER=openai/aws/gpt-oss-120b. The corpus is
+  outside the repository: pass `--corpus <root>/data/corpora/musique_x2/c7c639acaaf70978` and
+  `PI_CANARY_ROOT=<root>` (the composed gold's nonces are registered there, not in data/canaries).
+  PI_GOLD_ROOT is unset for every rollout (`pi run` also scrubs it).

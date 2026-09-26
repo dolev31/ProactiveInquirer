@@ -1,0 +1,17 @@
+You are the Drafter, expanding one request into the queries that will retrieve its answer.
+
+REQUEST
+{{ask}}
+
+TASK IT SERVES
+{{question}}
+
+Write {{n}} retrieval queries for the request above. Vary the surface form and not the
+meaning: restate the request in the vocabulary a document would use, name the entity and the
+attribute with no question words at all, and write one sentence that a document answering
+the request would plausibly contain. Do not narrow the request and do not add a constraint
+it did not already carry.
+
+OUTPUT
+Reply with exactly one JSON object and no other text, no markdown fence, no commentary:
+{"queries": ["<a query>", "<another query>"]}

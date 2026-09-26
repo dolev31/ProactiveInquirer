@@ -1,0 +1,29 @@
+{
+  "answer": null,
+  "artifacts": {},
+  "env_calls": [
+    {
+      "kwargs_json": "{\"summary\":\"User wants to cancel travel insurance and get a refund while keeping the flight reservation.\"}",
+      "latency_ms": 0,
+      "mutating": true,
+      "ok": true,
+      "requestor": "assistant",
+      "result_digest": "96284d9791dd9eee",
+      "seq": 1,
+      "tool_name": "transfer_to_human_agents",
+      "turn_idx": 1,
+      "unlock_required": false,
+      "unlock_satisfied": true
+    }
+  ],
+  "env_final_hashes": {},
+  "native": {
+    "breakdown.DB": 1.0,
+    "db_match": 1.0,
+    "db_reward": 1.0,
+    "tau_reward": 1.0
+  },
+  "stop_reason": "policy_stop",
+  "subset_hash": "9d4a8a7adc6a0336d6368228b344155c776b0d1cc2b003c2a310b02acf485563",
+  "transcript_digest": ""
+}

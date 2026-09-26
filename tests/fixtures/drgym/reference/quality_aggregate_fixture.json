@@ -1,0 +1,12 @@
+{
+ "system": "fixture-system",
+ "judge_model": "fixture-judge",
+ "source_url": "https://example.invalid/fixture-table",
+ "commit": "0000000000000000000000000000000000000000",
+ "n": 2,
+ "values": {
+  "clarity": 6.0,
+  "depth": 5.0,
+  "support": 4.0
+ }
+}

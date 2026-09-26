@@ -1,0 +1,25 @@
+name: latent_trainset_wiki2
+description: >-
+  DATA GENERATION, not measurement. Parent rollouts on wiki2's TRAIN split -- the smaller
+  half of the task-diversity pilot (see latent_trainset_sqa). wiki2 brings corpus breadth
+  (7,636 train tasks) but depth <=1 graphs and 24% edgeless, so its fork-state yield is the
+  open question this tranche exists to measure before any larger buy.
+suites: [wiki2]
+split: train
+n_tasks: 100
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+# Measured optimum for this suite (tier1_confirmatory's probe): 72% at k2, 58% at k3,
+# 39% at k5. k=3 matches tier1_confirmatory's choice so states are comparable objects.
+k: 3
+# Same load-bearing flag as latent_trainset_sqa: report.ELIGIBLE has no split filter.
+exploratory: true
+arms:
+  - inquirer_prompted
+  - self_inquire
+notes: >-
+  100 tasks of the $150 pilot (user-approved, strategyqa-first mix). No wiki2 cost history
+  exists (2 runs ever); musique anchors price this at ~$37 full recipe. Expect a LOWER
+  fork-state yield than musique's 1.78/task -- frontier_size >= 2 has little to fire on in
+  depth-<=1 graphs -- and treat the measured yield as the go/no-go for any wiki2 scale-up.

@@ -1,0 +1,47 @@
+name: dev_select_wiki2_granite_s2
+description: >-
+  THE ONLINE DEV GATE (plan I.8) for wiki2: the candidate checkpoint as the Inquirer, on the
+  same dev tasks `reroll/dev_wiki2.yaml` already ran with `inquirer_prompted`.
+  `pi train gate` pairs the two on (suite, task, seed) and decides whether this checkpoint is
+  worth a test-split rollout. This is checkpoint SELECTION, not a measurement.
+suites: [wiki2]
+# DEV, AND EXPLORATORY, AND BOTH MATTER.
+#   dev          -- the test split is not opened until one checkpoint per arm has been chosen
+#                   here, so selecting on test would burn the only held-out data the paper has.
+#   exploratory  -- these rows are the ones the CHOICE was made on. A dev number for a trained
+#                   arm is a number the selection already optimised; `exploratory` is what
+#                   keeps it out of every reported table, and `pi_eval.report` now treats a
+#                   trained-arm row on anything but test as a contamination violation.
+split: dev
+exploratory: true
+# THE SAME TASKS THE BASELINE RAN, BY THE SAME MECHANISM RATHER THAN BY TRANSCRIPTION.
+# `dev_baseline_wiki2` selects `split: dev` then takes the head 200 in corpus order, with no
+# task_offset and no explicit ids. Replicating the mechanism makes containment structural: every
+# task here has a baseline twin by construction. Transcribing a list of ids would not, and the
+# gate's deltas are paired on task id.
+#
+# MEASURED 2026-09-11 (`pinq.splitting.split_of` over the built corpora):
+#   musique 125 dev of 800 | strategyqa 333 dev of 2,290 | wiki2 1,860 dev of 12,576
+# so musique's declared 132 yields 125 and the three grids run 658 tasks, not the 665 the plan's
+# prose states (665 = 132+333+200, counted from the declared n rather than from the corpus).
+n_tasks: 200
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+# k = 5, MATCHING THE BASELINE AND NOT tier1_confirmatory. The dev baselines ran k=5 on all
+# three suites. A paired delta against a baseline run at a different k is a retrieval-budget
+# contrast as much as a training contrast -- the confound `tier1_trained`'s own notes name
+# ("it MUST match tier1_confirmatory's, or trained-vs-prompted is also a comparison of
+# retrieval budget"). The test-split grids use the per-suite k tier1_confirmatory established;
+# the gate cannot, without re-running 658 baseline rollouts to match. `pi train gate` stamps
+# `k_matches_baseline` per suite so a reader never has to take this on trust.
+k: 5
+arms:
+  - inquirer_trained
+notes: >-
+  ONE GRID PER SUITE, NOT ONE GRID SPANNING THREE. `Grid` carries a single `n_tasks` for all
+  its suites, and `cli.py` hands explicit `task_ids` to every suite unfiltered, so a
+  three-suite grid cannot express 132/333/200 at all: it would either truncate strategyqa or buy
+  wiki2 rollouts with no baseline twin. Three files is what the baseline already is.
+
+  Cost basis: ~$5 per checkpoint across the three (I.8, measured cost x local Inquirer).

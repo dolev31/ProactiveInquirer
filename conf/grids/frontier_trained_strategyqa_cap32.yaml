@@ -1,0 +1,48 @@
+name: frontier_trained_strategyqa_cap32
+description: >-
+  One point on the SECOND frontier: the same three arms and the same rule for choosing budgets
+  as the `frontier_trained_musique_cap*` family, on the IMPLICIT-reasoning suite instead of the
+  multi-hop one. The suite is the only thing that changes. This point sits one step past this
+  family's own cap-24 point, at a retrieval budget of 32, for the same reason the musique family
+  added its own sixth point: cap 24 located where the prompted base's stopping behaviour was
+  still moving rather than flat, and whether it ever overtakes the trained arm, or the gap
+  between them keeps moving with cap instead of closing, is the open question this point gives
+  a next measurement toward.
+suites: [strategyqa]
+split: test
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 32
+max_turns: 32
+k_by_suite:
+  strategyqa: 2
+arms:
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THE CURVE IS IN SPEND, NOT IN TURNS -- the rule the musique family states, carried over
+  unchanged: `budget_cap` is the axis and every other field is held identical across this
+  family's six files, because a curve whose points differ in more than one variable is six
+  unrelated measurements wearing a line.
+
+  K IS 2, NOT MUSIQUE'S 5, AND THAT IS THE DESIGN BEING COPIED RATHER THAN DEPARTED FROM, exactly
+  as `frontier_trained_strategyqa_cap24.yaml` already states: the musique family's own note says
+  k stays "at tier1_confirmatory's 5 for the same reason it does there: vary the budget OR the
+  retrieval depth, never both". tier1_confirmatory sets `strategyqa: 2`, measured by
+  scripts/probe_retrieval.py at n=300 -- k2 45%, k3 28%, k5 23%, k8 19% -- and records in the
+  same file that "a single k=5 makes this suite unmeasurable". Copying the literal 5 would copy
+  a VALUE and break the rule; copying "the suite's tier1_confirmatory k" copies the DESIGN.
+  Holding k fixed across this family's files is what the rule actually demands, and it is held.
+
+  max_turns is 32, raised alongside budget_cap for the musique family's reason: a cap-32 file
+  left at a lower max_turns would let the turn ceiling bind first and silently produce a
+  lower-cap run wearing a higher-cap name. budget_cap and max_turns are therefore the only two
+  fields that differ from `frontier_trained_strategyqa_cap24.yaml`.
+
+  THREE ARMS, TWO ARM IDS. `inquirer_prompted` is run twice at this cap, at two different
+  inquirer model pins (PI_MODEL_INQUIRER=openai/aws/gpt-oss-120b, the 120B teacher, and
+  PI_MODEL_INQUIRER=qwen3-8b-base, the same-base 8B control); `inquirer_trained` is run once at
+  PI_MODEL_INQUIRER=qwen3-8b-dpo-stacked-notdone-both. `arm_id` is not a selector here either;
+  select on `model_pin_hash` or on the promoted run-id lists.
+
+  Not yet run as of writing; cost basis to be recorded here once it has been.

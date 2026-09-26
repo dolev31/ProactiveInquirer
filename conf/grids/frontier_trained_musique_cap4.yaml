@@ -1,0 +1,28 @@
+name: frontier_trained_musique_cap4
+description: >-
+  One point on the frontier: prompted against trained on held-out musique at a retrieval budget
+  of 4. The four `frontier_trained_musique_cap*` files differ in `budget_cap` and in
+  nothing else.
+suites: [musique]
+split: test
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 4
+max_turns: 16
+k_by_suite:
+  musique: 5
+arms:
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THE CURVE IS IN SPEND, NOT IN TURNS. `budget_cap` is the axis; every other field is held
+  identical across the four files, because a curve whose points differ in more than one
+  variable is four unrelated measurements wearing a line. k stays at tier1_confirmatory's 5 for
+  the same reason it does there: vary the budget OR the retrieval depth, never both.
+
+  max_turns stays 16 at every cap. Every ask charges one retrieval, so at cap 4 the budget
+  binds long before the turn limit and at cap 16 the two coincide; holding max_turns fixed
+  keeps the stopping behaviour comparable across the four rather than making the turn limit a
+  second, hidden axis.
+
+  Measured cost basis (I.10): $32 for the four files together.

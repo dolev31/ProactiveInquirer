@@ -1,0 +1,45 @@
+name: frontier_trained_musique_cap32
+description: >-
+  A sixth point on the frontier, one step past cap 24's own ceiling-locating point. Cap 24 was
+  added "not to extend the rising part of the curve but to locate the PROMPTED base's own
+  ceiling"; whether that ceiling is real or still receding is exactly what this point tests --
+  the open question is whether enough budget ever puts the prompted base ahead of the trained
+  arm, or whether the gap between them keeps moving with cap rather than closing. This file
+  does not itself state which way it moves; it only extends the ladder so that question has a
+  next measurement.
+suites: [musique]
+split: test
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 32
+max_turns: 32
+k_by_suite:
+  musique: 5
+arms:
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THE CURVE IS IN SPEND, NOT IN TURNS -- same rule as the other five
+  `frontier_trained_musique_cap*` files. `budget_cap` is the axis; every other field is held
+  identical across all six, because a curve whose points differ in more than one variable is
+  six unrelated measurements wearing a line.
+
+  max_turns is raised to 32 alongside budget_cap, for the reason `frontier_trained_musique_cap24.yaml`
+  already states: at cap 16, max_turns=16 coincided exactly with budget_cap=16, so any file that
+  raises budget_cap while leaving max_turns behind lets the turn ceiling bind first and silently
+  produces a lower-cap run wearing a higher-cap name. budget_cap and max_turns are therefore the
+  only two fields that differ from `frontier_trained_musique_cap24.yaml`. k stays at
+  tier1_confirmatory's 5, unchanged, for the reason it does everywhere else in this family: vary
+  the budget OR the retrieval depth, never both.
+
+  Read this file's stop_reason distribution knowing that "budget" and "max_turns" are the same
+  ceiling here, exactly as at every other cap in this family -- not two different stopping
+  mechanisms.
+
+  THE TWO-PIN PROTOCOL IS INHERITED VERBATIM: `inquirer_prompted` is run TWICE at this cap, once
+  with PI_MODEL_INQUIRER=openai/aws/gpt-oss-120b (the teacher-scale reference) and once with
+  PI_MODEL_INQUIRER=qwen3-8b-base (the same-base isolation of training); `inquirer_trained` is
+  run once with PI_MODEL_INQUIRER=qwen3-8b-dpo-stacked-notdone-both. `arm_id` IS NOT A SELECTOR
+  on this suite; select on `model_pin_hash` or on a promoted run-id list.
+
+  Not yet run as of writing; cost basis to be recorded here once it has been.

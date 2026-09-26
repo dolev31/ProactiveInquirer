@@ -1,0 +1,36 @@
+{
+  "_what": "The A14 from-base grid: `conf/train/rung2_8b.json` with reference=base and NOTHING else changed. `pi train rung2 --config conf/train/rung2_8b_from_base.json --base-model Qwen/Qwen3-8B --reference base --pairs data/rl/pairs.jsonl`. Every flag overrides the value here, and every value here is in cfg.sha. Used by E39-8b and E39-4b (conf/programme/experiments.yaml); the base is the row's, not this file's, which is why one grid serves both.",
+  "_why_it_is_a_copy": "A14 ablates the INITIALISATION and nothing else: 'did SFT have to come first'. A second knob moved here -- a lower beta because the KL is anchored to a different model, a longer schedule because a fresh LoRA starts further away -- makes the contrast against rung2_8b.json a contrast in two things, and the paper's sentence would then be about neither. beta, learning_rate, epochs, the sequence budgets, the batch shape and the pair selection are byte-identical to rung2_8b.json; only `reference` differs. docs/TRAINING.md 6.1 records that beta and lr do NOT transfer between the two references -- that is a reason to READ this arm's loss curve carefully, not a licence to retune it inside the ablation.",
+  "_not_here_on_purpose": "base_model, adapter and any merge provenance. Under reference=base there is no adapter and nothing is merged: the policy is a fresh LoRA on the untrained base and pi_ref is that same base with every adapter disabled. `pi train rung2 --reference base` REFUSES both --adapter (AmbiguousReference: with rung 1's LoRA and the fresh one loaded, WHICH one is the policy?) and --merged-base (a merge output resolves INTO base_model, so the run would start from rung 1's weights under the name of the arm that has no rung 1 in it).",
+
+  "_why_max_seq_len": "MEASURED on the real tokenizer: the longest state is 4,963 tokens and the longest templated example ~5,045. 5,120 is the next multiple of 1,024 above that.",
+  "max_seq_len": 5120,
+
+  "_why_max_prompt_len": "512 below max_seq_len, which is well above the longest action (a question is 40-120 characters). On trl 1.x there is no separate prompt budget at all and this is recorded rather than applied -- `prompt_length_hook` in rung2.manifest.json says which regime the run was under, because truncating the prompt and truncating the concatenation are not the same experiment.",
+  "max_prompt_len": 4608,
+
+  "_why_bf16": "As rung 1: the compute dtype, not a storage dtype.",
+  "bf16": true,
+
+  "_why_batch_and_accum": "As rung 1. Two forward passes per example here, so the wall time per step is roughly twice rung 1's.",
+  "per_device_batch": 1,
+  "grad_accum": 16,
+
+  "_why_learning_rate": "5e-6, an order of magnitude below rung 1: DPO moves a policy that already exists. Kept at the adapter arm's value BECAUSE this arm is the one where that sentence is not true -- the number the ablation compares against is the number the headline arm used, so moving it would ablate the schedule as well as the initialisation.",
+  "learning_rate": 5e-6,
+
+  "_why_epochs": "One pass. A preference dataset re-visited is a preference dataset memorised.",
+  "epochs": 1,
+
+  "_why_beta": "0.1 is the standard DPO KL weight. It is in cfg.sha because beta and label_smoothing are the two fields that define the objective itself. Here the KL it weights is anchored to the UNTRAINED base rather than to rung 1, which is what the arm measures and not a reason to change the number.",
+  "beta": 0.1,
+
+  "_why_loss_type": "Plain DPO -- the default, named here because the objective is the one thing this grid should never leave implicit. A single name renders in cfg.sha as the bare string the pre-tuple field rendered, so writing it changes nothing about this run's identity. `[\"sigmoid\", \"sft\"]` with loss_weights is the RPO/MPO arm; it is a second run, not an edit of this one.",
+  "loss_type": ["sigmoid"],
+
+  "_why_include_pair_kinds": "ask_ask ALONE is the primary arm. MEASURED on data/rl/pairs.jsonl: among ask_stop pairs ASK is chosen 1,356 times and STOP 236, so the 236 cannot teach stopping and the 1,356 import the 'longer question wins' gradient the length guard exists to keep out. The stopping ablation is a second run with this list extended, not a mixture.",
+  "include_pair_kinds": ["ask_ask"],
+
+  "_why_reference": "THE ONE FIELD THAT DIFFERS FROM conf/train/rung2_8b.json. 'base' is the A14 ablation: no rung 1 anywhere, a fresh LoRA on the untrained base and pi_ref that same untrained base -- i.e. what the preference label buys with no imitation in front of it. `verify_base_reference` checks on the assembled model that no reference adapter exists, that the installed TRL disables adapters for the reference forward, and that the policy's lora_B is still zero at step 0; any of those failing means pi_ref was something else and the arm's claim is false. See docs/TRAINING.md 6.1.",
+  "reference": "base"
+}

@@ -1,0 +1,58 @@
+name: frames_trained_cap4
+description: >-
+  One point on the EXTERNAL cost frontier: the same four pins as `frames_trained.yaml` on
+  FRAMES (Google DeepMind, NAACL 2025, arXiv:2409.12941, Apache-2.0) in the oracle-articles
+  setting, at a retrieval budget of 4. The five `frames_trained*` files
+  (`frames_trained.yaml` is the cap-8 member) differ in `budget_cap` and in nothing else --
+  except this family's cap-24 member, which also raises `max_turns`, for the reason
+  `frontier_trained_musique_cap24.yaml` states.
+suites: [frames]
+split: test
+n_tasks: 824
+seeds: [0]
+budget_cap: 4
+max_turns: 16
+k: 5
+arms:
+  - drafter_only
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THE CAP IS THE ONLY AXIS, AND IT IS NOT A GRID FLAG. `pi run --sweep` assigns
+  `sub.budget_cap = grid.budget_cap` unconditionally, so a cap sweep on this suite is
+  FIVE FILES, never one file and a flag.
+
+  UNTIL 2026-09-18 THAT WAS A SILENT DISCARD: `grid_flag_conflicts` did not inspect
+  `budget_cap`, so `--budget-cap 4` typed beside `--sweep frames_trained.yaml` was
+  accepted, discarded, and run at 8 -- a mislabelled point on this very curve. It is now
+  REFUSED (`--budget-cap 4 but the grid makes it 8`), so the wrong command fails
+  instead of producing runs. The five files are still the only way to sweep the cap; what
+  changed is that the shortcut no longer looks like it worked.
+
+  THE TWO-PIN PROTOCOL IS INHERITED VERBATIM from `frames_trained.yaml`: `inquirer_prompted`
+  is run TWICE per cap, once with PI_MODEL_INQUIRER=openai/aws/gpt-oss-120b (the teacher-scale
+  reference) and once with PI_MODEL_INQUIRER=qwen3-8b-base (the same-base isolation of
+  training), and `model_pin_hash` separates them in the manifest. `arm_id` IS NOT A SELECTOR
+  on this suite.
+
+  `drafter_only` IS EXPECTED TO BE CAP-INVARIANT AND IS RUN ANYWAY. `NeverAsk` emits zero
+  asks, so no retrieval is charged and no cap can bind; its trajectory should be identical at
+  every cap and its calls should be a total cache replay of the cap-8 campaign's. That is a
+  measurement worth taking rather than an assertion worth making, and it costs cache lookups.
+
+  COMPARABILITY WITH THE INTERNAL FRONTIER IS THE POINT. The cap values are exactly
+  `conf/grids/frontier_trained_musique_cap{4,8,12,16,24}.yaml`'s, so the external curve and
+  the internal one are read on the same x-axis. k stays at 5 for the reason it does there:
+  vary the budget OR the retrieval depth, never both. What is NOT shared is the y-axis --
+  FRAMES ships no need-graph, is in `pi_eval.score.GOLD_FREE_SUITES`, and emits NO coverage,
+  depth, facet or frontier-Q metric, so the external frontier is success-versus-spend where
+  the internal one is coverage-versus-spend. Those are two axes, not one; the curves are
+  compared on SHAPE, not on level.
+
+  EXPLORATORY BY REGISTRY, NOT BY OVERSIGHT, exactly as the cap-8 file records:
+  `pi_run.suites.REGISTRY["frames"].endpoint_status` is "exploratory" because FRAMES was
+  chosen on 2026-09-11, after the preregistration was sealed. Point estimate and clustered CI;
+  NO p-value. The `exploratory` GRID flag is deliberately NOT set -- that flag means "these
+  runs are data generation, not measurement", and `pi_eval.report.ELIGIBLE` carries
+  `AND r.exploratory = FALSE`, so setting it would make every unit here ineligible to be
+  reported.

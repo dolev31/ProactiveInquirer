@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "ProactiveInquirer"
+message: "If you use this software or the mined information-need graphs, please cite it."
+type: software
+authors:
+  - name: "Anonymous (under double-blind review)"
+abstract: >-
+  Code for measuring and training proactive information-seeking in tool-using agents:
+  horizontal proactivity (needs the current state already names) and vertical proactivity
+  (needs only newly found evidence names), scored against need graphs without a model judge,
+  and Q&D (questioner and drafter), which trains a questioner from the consequences of its
+  questions.
+license: Apache-2.0
+keywords:
+  - proactive agents
+  - information seeking
+  - retrieval-augmented generation
+  - agent evaluation

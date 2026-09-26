@@ -1,0 +1,39 @@
+{
+  "_what": "A11 / E48, `dpo_outcome_only` at 4B: the rung-2 grid of record with the gain-decided pairs DROPPED. `pi train rung2 --config conf/train/rung2_4b_outcome_only.json --base-model Qwen/Qwen3-4B --adapter {artifacts}/E11/s{seed} --pairs data/rl/headline/pairs.jsonl --out ... --seed S`. Every flag overrides the value here, and every value here is in cfg.sha.",
+  "_not_here_on_purpose": "base_model, adapter and pairs. The experiment row names all three; under reference=adapter the policy IS rung 1's LoRA, so the adapter path is the run's identity and must be typed, not defaulted. `4b` in this file's name is the base the ROW pairs it with -- nothing in this file selects a model.",
+  "_why_this_is_the_8b_recipe_verbatim": "The only difference between this arm and its control is exclude_decided_by. Every other key is byte-identical to conf/train/rung2_8b.json (tests/test_rung2_exclude_decided_by_config.py::test_the_two_a11_grids_share_one_recipe pins that), because a contrast that also moves a hyperparameter measures the pair of them and A11's own sentence -- 'if the two arms are equal, the gain-decided pairs carried no signal' -- is then unavailable. The 4B rows E44-E48 already ran conf/train/rung2_8b.json for the same reason: the numbers below were measured on the tokenizer and the objective, not on the parameter count.",
+
+  "_why_exclude_decided_by": "WHICH DECIDER ORDERED THE PAIR, which is not the same question as which file it came from: 532 rows on data/rl/pairs.rater.jsonl carry label_source=rule and decided_by=rater, so filtering the label source alone excludes none of them. MEASURED on the headline export (sha256 05cf3bf845493be384412b4600f20e120768f4b3e487c05d77233265d17400f3, 17,430 rows) through this command's own preflight: 11,305 ask_ask pairs, of which 4,964 (43.9%) are decided_by=gain, leaving n_pairs=6,341. Its matched control is conf/train/rung2_4b_outcome_matched.json, which draws 6,341 of the 11,305 -- equal at different n says nothing.",
+  "exclude_decided_by": ["gain"],
+
+  "_why_max_seq_len": "MEASURED on the real tokenizer: the longest state is 4,963 tokens and the longest templated example ~5,045. 5,120 is the next multiple of 1,024 above that.",
+  "max_seq_len": 5120,
+
+  "_why_max_prompt_len": "512 below max_seq_len, which is well above the longest action (a question is 40-120 characters). On trl 1.x there is no separate prompt budget at all and this is recorded rather than applied -- `prompt_length_hook` in rung2.manifest.json says which regime the run was under, because truncating the prompt and truncating the concatenation are not the same experiment.",
+  "max_prompt_len": 4608,
+
+  "_why_bf16": "As rung 1: the compute dtype, not a storage dtype.",
+  "bf16": true,
+
+  "_why_batch_and_accum": "As rung 1. Two forward passes per example here, so the wall time per step is roughly twice rung 1's.",
+  "per_device_batch": 1,
+  "grad_accum": 16,
+
+  "_why_learning_rate": "5e-6, an order of magnitude below rung 1: DPO moves a policy that already exists.",
+  "learning_rate": 5e-6,
+
+  "_why_epochs": "One pass. A preference dataset re-visited is a preference dataset memorised.",
+  "epochs": 1,
+
+  "_why_beta": "0.1 is the standard DPO KL weight. It is in cfg.sha because beta and label_smoothing are the two fields that define the objective itself.",
+  "beta": 0.1,
+
+  "_why_loss_type": "Plain DPO -- the default, named here because the objective is the one thing this grid should never leave implicit. A single name renders in cfg.sha as the bare string the pre-tuple field rendered, so writing it changes nothing about this run's identity.",
+  "loss_type": ["sigmoid"],
+
+  "_why_include_pair_kinds": "ask_ask ALONE is the primary arm, as in the grid of record. On the headline export this drops 6,125 rows before the decider filter is applied at all, which is why the 43.9% above is a share of 11,305 and not of 17,430.",
+  "include_pair_kinds": ["ask_ask"],
+
+  "_why_reference": "The frozen rung-1 adapter, not a merge: a bf16 fold lost 44.7% of rung 1's update and the fp32 fix makes an 8B base ~32 GB that this rung would then load. See docs/TRAINING.md 6.1.",
+  "reference": "adapter"
+}

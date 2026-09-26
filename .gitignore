@@ -1,0 +1,27 @@
+# Python and tooling
+.venv
+.venv-*
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.DS_Store
+
+# Secrets
+.env
+
+# Generated outputs: content-addressed and regenerable, never tracked
+runs/
+cache/
+scores/
+tables/
+figures/
+artifacts/
+.smoke/
+
+# Data. Upstream corpus text may not be redistributed (docs/DATA.md), and the gold graphs and
+# canary nonces are the evaluation firewall, so nothing under data/ is ever tracked.
+data/

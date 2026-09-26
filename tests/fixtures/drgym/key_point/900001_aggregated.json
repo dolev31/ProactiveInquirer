@@ -1,0 +1,29 @@
+{
+  "question": "should city centres ban private cars",
+  "key_points": [
+    {
+      "point_number": 1,
+      "point_content": "Car-free city centres in Europe reduced measured NO2 concentrations.",
+      "original_point_number": [
+        1,
+        4,
+        9
+      ]
+    },
+    {
+      "point_number": 2,
+      "point_content": "Retailers inside pedestrianised zones report mixed revenue effects.",
+      "original_point_number": [
+        2
+      ]
+    },
+    {
+      "point_number": 3,
+      "point_content": "Bans shift trips to public transport only where capacity already exists.",
+      "original_point_number": [
+        3,
+        7
+      ]
+    }
+  ]
+}

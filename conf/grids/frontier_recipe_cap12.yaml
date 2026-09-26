@@ -1,0 +1,28 @@
+name: frontier_recipe_cap12
+description: >-
+  The retrieval-budget frontier re-measured for the reported questioner (the recipe, training
+  seeds 1 and 2) and its two prompted comparators at ONE code version. The published frontier
+  (artifacts/frontier, artifacts/frontier_strategyqa) ran the registered pin, which is seed 0,
+  whose final DPO stage a resume cut to about a tenth (artifacts/seed_identity_20260923), and its
+  two panels ran at two different commits. These grids are run from the pinned worktree at
+  a61c4f4be3e9 through proxy 4030, the same code, base URL and frozen roles as
+  structured_baselines_20260922, whose cap-8 cells for all four questioners already exist and are
+  the fifth point of each curve. The four files differ in budget_cap (and max_turns at cap 24,
+  as in the published frontier) and in nothing else; every other field equals
+  structured_baselines_20260922.yaml.
+suites: [musique, strategyqa]
+split: test
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 12
+max_turns: 16
+k_by_suite:
+  musique: 5
+  strategyqa: 2
+arms:
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  One pi run invocation per questioner, because PI_MODEL_INQUIRER is one global per process:
+  inquirer_prompted at openai/aws/gpt-oss-120b and at qwen3-8b-base, inquirer_trained at
+  qwen3-8b-dpo-stacked-notdone-both-s1 and -s2. Frozen roles openai/aws/gpt-oss-120b.

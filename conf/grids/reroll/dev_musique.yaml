@@ -1,0 +1,15 @@
+name: dev_baseline_musique
+description: >-
+  DEV-SPLIT BASELINE for rung-1/rung-2 checkpoint selection: the prompted policy on the fixed
+  loop (3ffa972), so a trained checkpoint evaluated later runs the same code as its baseline.
+  Not a measurement: exploratory, and dev tasks never enter a reported table.
+suites: [musique]
+split: dev
+n_tasks: 132
+seeds: [0, 1]
+budget_cap: 8
+max_turns: 16
+k: 5
+exploratory: true
+arms:
+  - inquirer_prompted

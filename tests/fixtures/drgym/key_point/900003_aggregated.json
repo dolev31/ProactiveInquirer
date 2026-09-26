@@ -1,0 +1,20 @@
+{
+  "question": "is nuclear power worth the cost",
+  "key_points": [
+    {
+      "point_number": 1,
+      "point_content": "Levelised cost estimates for new nuclear vary by more than a factor of two.",
+      "original_point_number": [
+        1
+      ]
+    },
+    {
+      "point_number": 2,
+      "point_content": "Construction overruns dominate the cost of recent Western reactors.",
+      "original_point_number": [
+        2,
+        5
+      ]
+    }
+  ]
+}

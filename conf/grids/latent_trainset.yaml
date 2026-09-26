@@ -1,0 +1,46 @@
+name: latent_trainset
+description: >-
+  DATA GENERATION, not measurement. Parent rollouts on musique's TRAIN split, from which the
+  latent-need dataset is extracted and from which rung-2 candidates are branched.
+suites: [musique]
+split: train
+n_tasks: 461
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+k: 5
+# EXCLUDED FROM EVERY REPORTED TABLE, and this is the point of the flag rather than a
+# formality. `report.ELIGIBLE` filters `exploratory = FALSE` but has NO split filter, so
+# without this these 461 train-split tasks would silently enlarge musique's denominator in
+# T1, T1b and T1c -- and P2 (answer_token_f1, inquirer_prompted vs self_inquire) would then be
+# computed partly over the tasks a trained arm is about to learn from. The runs are honest
+# rollouts; they are simply not measurements.
+exploratory: true
+arms:
+  # The treatment: these runs are the PARENTS that `pi train sample-candidates` forks, so the
+  # arm that produces the states worth branching from is the one that must cover the split.
+  - inquirer_prompted
+  # The ancestor, for candidate diversity in the SFT pool. Cross-arm rejection sampling does
+  # NOT happen through `state_key` -- different arms are different run_ids and therefore
+  # different states -- so a second arm buys more rows, not better selection per state. Real
+  # same-state selection comes from the branching runner.
+  - self_inquire
+notes: >-
+  Sized and priced from measured per-unit cost on the existing admissible musique runs:
+  inquirer_prompted $0.0132, self_inquire $0.0115, so 2 x 461 = 922 units is about $11.4.
+  `budget_cap`, `max_turns` and `k` match tier1_confirmatory so a state sampled here is the
+  same object the confirmatory grid would produce; a dataset built at a different retrieval
+  budget would train the policy for a experiment nobody runs.
+
+  THE FORKS DEVIATE FROM THIS, DELIBERATELY. `pi train sample-candidates --budget-cap 24
+  --max-turns 24` re-forks these parents at a larger budget, and that is not a contradiction
+  of the paragraph above. The sentence is about the STATE: a state sampled at cap 8 and the
+  same state sampled at cap 24 are identical objects, because the policy is budget-blind by
+  type (`Inquirer.act(s)` takes no ledger; the cap is a FORBIDDEN_PLACEHOLDER in every
+  prompt). What the cap changes is the EPISODE label, and that is exactly why it had to move:
+  measured on the overnight campaign, 53% of cap-8 candidates stopped on the budget rather
+  than because the policy chose to, and 71.3% carried `turns_to_complete = -1` because
+  coverage never reached 1.0 -- so the two keys the preference label puts above evidence gain
+  were unavailable on most pairs and the label fell back to retrieval-greedy per-turn gain.
+  The parents stay at 8/16 (they are the states); the forks run at 24/24 (they are the
+  labels), and `export_pairs` refuses to pair across the two cohorts.

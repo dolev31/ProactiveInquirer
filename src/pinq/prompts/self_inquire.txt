@@ -1,0 +1,5 @@
+Carry out the instructions below ALONE: there is no second agent. You are both the Inquirer
+who asks and the Drafter who answers, so answer your own question in an extra "self_answer"
+field.
+
+{{inquirer_prompt}}

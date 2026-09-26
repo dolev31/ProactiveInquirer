@@ -1,0 +1,42 @@
+name: tier1_trained_killswitch
+description: >-
+  The kill switches on the test split, so the trained-vs-prompted win can be read as question
+  CONTENT rather than as length, as samples, or as a policy that merely spends more.
+suites: [musique, strategyqa]
+split: test
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 8
+max_turns: 16
+k_by_suite:
+  musique: 5
+  strategyqa: 2
+arms:
+  - verbosity
+  - compute_matched
+  - self_inquire
+  - inquirer_noevidence
+  - inquirer_depth1
+  - random_q
+notes: >-
+  `inquirer_trained` IS DELIBERATELY ABSENT. The treatment arm is measured in
+  `tier1_trained_qa_*`; repeating it here would buy the same column twice at $49 a copy. These
+  arms are read against that grid's rows, which is what "the same tasks, the same k, the same
+  seeds" above is for.
+
+  n = 200 IS NOT A ROUND NUMBER, it is the smallest n at which the tightest switch is
+  decidable. From tier1_confirmatory's measured calibration slice, CI half-width at n=200
+  against each comparator's margin on evidence_coverage:
+
+    self_inquire          sd 0.0624  hw 0.0086  margin 0.05  fits
+    inquirer_noevidence   sd 0.2183  hw 0.0303  margin 0.05  fits
+    inquirer_depth1       sd 0.2603  hw 0.0361  margin 0.05  fits
+    random_q              sd 0.2989  hw 0.0414  margin 0.05  fits
+    verbosity             sd 0.2091  hw 0.0290  margin 0.03  FITS, BARELY
+
+  verbosity needs n >= 187 for its CI to fit +/-0.03 at the measured sd, and it is the one
+  switch whose consequence is "STOP; no reframe survives". At n=120 it is not decidable, so
+  this grid cannot be shrunk to save money without losing the switch it exists for.
+
+  wiki2 is absent: the two switches that need the most tasks are decided on musique and
+  strategyqa, and a third suite here is $25 for a row no endpoint reads.

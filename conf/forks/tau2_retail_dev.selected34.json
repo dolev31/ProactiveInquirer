@@ -1,0 +1,249 @@
+{
+  "suite": "tau2_retail",
+  "split": "dev",
+  "source_pool": "conf/forks/tau2_retail_dev.pool.json",
+  "n_points": 34,
+  "purpose": "Mirrors the recorded 34-point tau2_retail TEST fork benchmark's SIZE (204 units, same 2 arms x 3 seeds shape) AND its prefix-depth (k) distribution, so a checkpoint chosen on this set is evaluated across the same range of dialogue progress the test set covers, not only on near-fresh prefixes.",
+  "defect_this_supersedes": "An earlier version of this file sorted the pool by (task_id, trace_sha, k) and round-robinned by task, which always drew each task's shallowest available point first: k in {2: 18, 4: 16}, median 2, mean 2.94, against the pool's own median 8 / mean 10.67 and the TEST set's median 12.5 / mean 12.32. That sample tested a checkpoint only on prefixes where almost all the work remained. Superseded by the k-stratified rule below.",
+  "selection_rule": "Deterministic, reproducible from tau2_retail_dev.pool.json plus the recorded TEST benchmark's own k values alone (no randomness): (1) read the 34 k values of the recorded tau2_retail TEST fork benchmark from runs/*/manifest.json via scripts/run_tau2_forks.py's points_from_runs(suite='tau2_retail', split='test', arms=['inquirer_prompted','self_ask']) -- run_ids_sha 1a060380806fff3e -- giving 34 target k values (histogram in docs/HPC_FORKS.md); (2) sort the 34 targets ascending and draw one pool point per target, in that order; for each target k, use the pool's exact k if any pool point (not already drawn) has it, otherwise the available k closest to the target (ties toward the smaller k) -- the only such case is target k=34, which has no pool point (the pool's own max is 31) and maps to k=31; (3) within a stratum (all draws sharing one resolved k), break ties by task-diversity: prefer the task_id that has contributed the FEWEST points to the sample so far, cumulative across every stratum drawn before it (not reset per stratum), then ascending int(task_id), then ascending trace_sha. tests/test_fork_pool_selection.py re-derives this exact list from the pool file and the live TEST-set manifests and asserts it equals what is stored below.",
+  "k_histograms": {
+    "test_benchmark_34_points": {
+      "2": 5,
+      "4": 6,
+      "6": 2,
+      "8": 1,
+      "11": 2,
+      "12": 1,
+      "13": 2,
+      "14": 2,
+      "15": 1,
+      "16": 3,
+      "18": 1,
+      "20": 1,
+      "21": 3,
+      "25": 1,
+      "26": 1,
+      "28": 1,
+      "34": 1
+    },
+    "this_sample_34_points": {
+      "2": 5,
+      "4": 6,
+      "6": 2,
+      "8": 1,
+      "11": 2,
+      "12": 1,
+      "13": 2,
+      "14": 2,
+      "15": 1,
+      "16": 3,
+      "18": 1,
+      "20": 1,
+      "21": 3,
+      "25": 1,
+      "26": 1,
+      "28": 1,
+      "31": 1
+    },
+    "test_median": 12.5,
+    "test_mean": 12.3235,
+    "sample_median": 12.5,
+    "sample_mean": 12.2353,
+    "targets_with_no_exact_pool_match": {
+      "34": 31
+    }
+  },
+  "n_distinct_tasks_represented": 18,
+  "per_task_contribution_counts": {
+    "0": 2,
+    "1": 2,
+    "6": 3,
+    "9": 2,
+    "10": 2,
+    "11": 2,
+    "25": 2,
+    "27": 2,
+    "31": 3,
+    "42": 1,
+    "43": 2,
+    "44": 1,
+    "58": 2,
+    "78": 1,
+    "86": 2,
+    "93": 2,
+    "111": 2,
+    "113": 1
+  },
+  "fork_points": [
+    {
+      "task_id": "0",
+      "trace_sha": "237119d5fccf48d6478c62a492abaa1cd5206ab4f2d618bedf3fd8e2982c16a9",
+      "k": 2
+    },
+    {
+      "task_id": "1",
+      "trace_sha": "17748a872d4114de6b1ed314486f8d82ac1054b63c333ba51cced4bd0485f05a",
+      "k": 2
+    },
+    {
+      "task_id": "6",
+      "trace_sha": "222053103e0d5993df4c5bb5b93b8f825e17cb5e2a94411326539e86ed43d92c",
+      "k": 2
+    },
+    {
+      "task_id": "9",
+      "trace_sha": "57e019f6ab5314c95301bbae70f651ebc3f75eb9272f0d7cc3f02c2b5a2e9fcd",
+      "k": 2
+    },
+    {
+      "task_id": "10",
+      "trace_sha": "1a6f5ccdfef8430b686f0db49317b333dbbb7cfe28b75bc6e909267fd2899e7f",
+      "k": 2
+    },
+    {
+      "task_id": "11",
+      "trace_sha": "185d8dd17da45973e2562de2a20f82d6999ef7dada1b2f9774a8a6e17004ddb8",
+      "k": 4
+    },
+    {
+      "task_id": "25",
+      "trace_sha": "076d863cbd84c2137596cf0ee44c87d7589a4f6e3f4002007012d3f253e2b50d",
+      "k": 4
+    },
+    {
+      "task_id": "27",
+      "trace_sha": "1cbbb456bf1a9905bac9bbab8a15d438ed9569a4f4e53d52b36ba01524aeee3e",
+      "k": 4
+    },
+    {
+      "task_id": "31",
+      "trace_sha": "1072a13f43059882f0e7eba782bb60dbd8492e791e045114d3d25d22acdefb6b",
+      "k": 4
+    },
+    {
+      "task_id": "42",
+      "trace_sha": "569f5a52287f80dc43bbf2c04e1f4f576b4f3bbed64580b04214c11af4390e09",
+      "k": 4
+    },
+    {
+      "task_id": "43",
+      "trace_sha": "07b68ee990bfffdcf716cb24ed46eef2bf5db320507eb8fce249790c73f35754",
+      "k": 4
+    },
+    {
+      "task_id": "44",
+      "trace_sha": "42fefa3fd06f7b16f6e8e016f58837851c2a17906ca2f6adc2bed411a3604b65",
+      "k": 6
+    },
+    {
+      "task_id": "93",
+      "trace_sha": "6702e2da28b4032e01114f674536eecddecd100ec7ff00fb462375eeee6e2f66",
+      "k": 6
+    },
+    {
+      "task_id": "58",
+      "trace_sha": "3bcb6b0f2eafe3a5719b7e05bc17676b5112eecb4a808be29ea8c54737deedf1",
+      "k": 8
+    },
+    {
+      "task_id": "78",
+      "trace_sha": "e1c6b5382a6231391dcad5a6b12fcbbf9230b80d41b6550d638f39fde52343cc",
+      "k": 11
+    },
+    {
+      "task_id": "86",
+      "trace_sha": "2b8161ef68dbdcb5ecdfe5f0ed1c3c837a0c698938efd48ab0474aa8ac7cf948",
+      "k": 11
+    },
+    {
+      "task_id": "0",
+      "trace_sha": "8917a3d0b1338d8f7a2d2374476644a47b490448dd5940c2ed7ab17071b45268",
+      "k": 12
+    },
+    {
+      "task_id": "1",
+      "trace_sha": "35ef98622497347361b299fc5e6e3682a3c358ef030d83f0d5339c9776fdd5fb",
+      "k": 13
+    },
+    {
+      "task_id": "10",
+      "trace_sha": "3928d7d08b419913134b21e4866b3aac49f4150d64a23d7d930a6df1a9a90171",
+      "k": 13
+    },
+    {
+      "task_id": "6",
+      "trace_sha": "38581af242b4efdf8bd3ccda83f189c573ec1f6998ae3d2fa3bc129efe25d0aa",
+      "k": 14
+    },
+    {
+      "task_id": "9",
+      "trace_sha": "6497a43694339fa23960a7987e694edf875ec704c21716c7ccfe582afdba11d0",
+      "k": 14
+    },
+    {
+      "task_id": "113",
+      "trace_sha": "93e0ad44142d0fd5ab4324ffeb9c33b99407d424ba31bda7b2bbf3fc6e964fd5",
+      "k": 15
+    },
+    {
+      "task_id": "11",
+      "trace_sha": "9add6f38e1045ed472946925394017f95ec599de9f99db59634b668a993dc173",
+      "k": 16
+    },
+    {
+      "task_id": "31",
+      "trace_sha": "1072a13f43059882f0e7eba782bb60dbd8492e791e045114d3d25d22acdefb6b",
+      "k": 16
+    },
+    {
+      "task_id": "43",
+      "trace_sha": "1fc9db4c43e4ced87de58dfa67d90ebe94d8bae43a53f0b12ecddf0c212d7c65",
+      "k": 16
+    },
+    {
+      "task_id": "111",
+      "trace_sha": "f7eae7c7193782131e858bda516e9b18742be9d9040b256a6d81a7d309273c24",
+      "k": 18
+    },
+    {
+      "task_id": "25",
+      "trace_sha": "990b62a699735082454ab9630d65c1fe14efb0af489d9511dfb17c099194b090",
+      "k": 20
+    },
+    {
+      "task_id": "27",
+      "trace_sha": "25e31174e94939c17ca872568e3cbac72ea91c32930a1fdb15a786e0a312b50e",
+      "k": 21
+    },
+    {
+      "task_id": "86",
+      "trace_sha": "b5c21a5928cc2fe4c12b070a45f41e8b53d7fc5d196fa00820826fcef5fccef6",
+      "k": 21
+    },
+    {
+      "task_id": "93",
+      "trace_sha": "6702e2da28b4032e01114f674536eecddecd100ec7ff00fb462375eeee6e2f66",
+      "k": 21
+    },
+    {
+      "task_id": "111",
+      "trace_sha": "86cfdf3fc133a32fd99bc43f1b68d76f11cc12a81abf8a10be4dd9e50b7910cd",
+      "k": 25
+    },
+    {
+      "task_id": "6",
+      "trace_sha": "38581af242b4efdf8bd3ccda83f189c573ec1f6998ae3d2fa3bc129efe25d0aa",
+      "k": 26
+    },
+    {
+      "task_id": "58",
+      "trace_sha": "84219f5055c910b1217ee3bd0b3f4354205d2d4c06b5a7e222bf8f8f85fbe82e",
+      "k": 28
+    },
+    {
+      "task_id": "31",
+      "trace_sha": "5c714fc7b96c60ecb5ba3c7a229ba939872e9ed28a9d9284f58b6a613baa1e9c",
+      "k": 31
+    }
+  ]
+}

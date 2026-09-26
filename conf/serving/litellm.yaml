@@ -1,0 +1,555 @@
+# THE MAC-SIDE ROUTER FOR TIER-B SWEEPS.  docs/HPC_RUNBOOK.md 6, docs/GPU_RUNBOOK.md 8.
+#
+# WHY THIS FILE HAS TO EXIST.  `LiteLLMClient` holds ONE base url for every role
+# (src/pinq_adapters/llm/litellm_client.py: `self._base_url = base_url or
+# env.get("LITELLM_BASE_URL")`) -- there is no per-model base-url map.  But a Tier-B sweep
+# needs two endpoints at once: the Inquirer on the tunnelled vLLM at 127.0.0.1:8000, and the
+# frozen Drafter/Answerer/user-sim/judge on the team gateway.  A proxy on :4000 that routes by
+# MODEL NAME is the only way to give one base url two destinations.
+#
+# NO SECRET IS IN THIS FILE.  The gateway key is read from the environment at proxy start
+# (`os.environ/LITELLM_API_KEY`, out of `.env`), never written here.
+#
+# WHY THE GATEWAY URL IS `PINQ_GATEWAY_BASE_URL` AND NOT `LITELLM_BASE_URL`.  The sweep sets
+# `LITELLM_BASE_URL=http://127.0.0.1:4000` so the harness talks to this proxy.  If the
+# passthrough below also read `LITELLM_BASE_URL` it would resolve to the proxy itself and every
+# gateway call would loop back into :4000.  A separate name makes that impossible rather than
+# merely unlikely.  Launch with:
+#   set -a; . ./.env; set +a
+#   PINQ_GATEWAY_BASE_URL="$LITELLM_BASE_URL" <venv>/bin/litellm --config conf/serving/litellm.yaml --port 4000
+#
+# WHY `enable_thinking: false`.  Qwen3 is a hybrid-reasoning model and its chat template emits
+# a `<think>` channel by default.  The rung-1 SFT rows were built with it OFF
+# (`build_chat_masked_example(..., enable_thinking=False)`; the checkpoint evaluator records
+# `"enable_thinking": false` in every artifacts/eval/*.tierA.json), and
+# tests/test_chat_template_identity.py sends the same kwarg to `/tokenize`.  A served prompt
+# with the thinking channel on is a DIFFERENT PROMPT than the one the adapter was fitted to,
+# and the dev NLL that selected this checkpoint would not describe what the policy sees.
+
+model_list:
+  # ----------------------------------------------------------- local, tunnelled vLLM (free)
+  # `hosted_vllm/` is litellm's OpenAI-compatible vLLM provider; the name after the slash is
+  # what vLLM itself publishes -- the --served-model-name for the base, the --lora-modules
+  # name for the adapter.  scripts/price_tables/2026-09.json already carries $0 rows for both.
+  - model_name: qwen3-8b-base
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-base
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-headline
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-headline
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-headline-stop
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-headline-stop
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+  - model_name: qwen3-4b-base
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-base
+      api_base: http://127.0.0.1:8001/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline
+      api_base: http://127.0.0.1:8001/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-nll
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-nll
+      api_base: http://127.0.0.1:8001/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-stop
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-stop
+      api_base: http://127.0.0.1:8001/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-final
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-final
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-stop
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-stop
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-headline-s1
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-headline-s1
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-headline-s2
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-headline-s2
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-headline-control
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-headline-control
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-1.7b-base
+    litellm_params:
+      model: hosted_vllm/qwen3-1.7b-base
+      api_base: http://127.0.0.1:8002/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-1.7b-sft-headline-s0
+    litellm_params:
+      model: hosted_vllm/qwen3-1.7b-sft-headline-s0
+      api_base: http://127.0.0.1:8002/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-1.7b-sft-headline-s1
+    litellm_params:
+      model: hosted_vllm/qwen3-1.7b-sft-headline-s1
+      api_base: http://127.0.0.1:8002/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-1.7b-sft-headline-s2
+    litellm_params:
+      model: hosted_vllm/qwen3-1.7b-sft-headline-s2
+      api_base: http://127.0.0.1:8002/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-headline-rater
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-headline-rater
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-headline-reaches
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-headline-reaches
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-headline-stopcontrast
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-headline-stopcontrast
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-pooled-control
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-pooled-control
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-pooled-reaches
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-pooled-reaches
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-sw05
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-sw05
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-sw05-nll800
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-sw05-nll800
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-sw025
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-sw025
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-sw025-nll1600
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-sw025-nll1600
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-sw025-stop1400
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-sw025-stop1400
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-dpo-headline-control
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-dpo-headline-control
+      api_base: http://127.0.0.1:8001/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-pooled-rater
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-pooled-rater
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-headline-notdone-only
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-headline-notdone-only
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-headline-notdone-both
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-headline-notdone-both
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-stacked-notdone-both
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-stacked-notdone-both
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-sft-sw01
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-sft-sw01
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-s1
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-s1
+      api_base: http://127.0.0.1:8011/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-s2
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-s2
+      api_base: http://127.0.0.1:8011/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: granite33-8b-base
+    litellm_params:
+      model: hosted_vllm/granite33-8b-base
+      api_base: http://127.0.0.1:8301/v1
+      api_key: "not-used-vllm-is-open"
+
+  - model_name: granite33-8b-sft-headline-s0
+    litellm_params:
+      model: hosted_vllm/granite33-8b-sft-headline-s0
+      api_base: http://127.0.0.1:8301/v1
+      api_key: "not-used-vllm-is-open"
+
+  - model_name: granite33-8b-sft-headline-s1
+    litellm_params:
+      model: hosted_vllm/granite33-8b-sft-headline-s1
+      api_base: http://127.0.0.1:8301/v1
+      api_key: "not-used-vllm-is-open"
+
+  - model_name: granite33-8b-sft-headline-s2
+    litellm_params:
+      model: hosted_vllm/granite33-8b-sft-headline-s2
+      api_base: http://127.0.0.1:8301/v1
+      api_key: "not-used-vllm-is-open"
+
+  - model_name: qwen3-8b-dpo-stacked-notdone-both-s1
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-stacked-notdone-both-s1
+      api_base: http://127.0.0.1:8302/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-stacked-notdone-both-s2
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-stacked-notdone-both-s2
+      api_base: http://127.0.0.1:8302/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-easyfirst-s0
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-easyfirst-s0
+      api_base: http://127.0.0.1:8011/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-easyfirst-s1
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-easyfirst-s1
+      api_base: http://127.0.0.1:8011/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-easyfirst-s2
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-easyfirst-s2
+      api_base: http://127.0.0.1:8011/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-hardfirst-s0
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-hardfirst-s0
+      api_base: http://127.0.0.1:8011/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-hardfirst-s1
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-hardfirst-s1
+      api_base: http://127.0.0.1:8011/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-4b-sft-headline-hardfirst-s2
+    litellm_params:
+      model: hosted_vllm/qwen3-4b-sft-headline-hardfirst-s2
+      api_base: http://127.0.0.1:8011/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-32b-base
+    litellm_params:
+      model: hosted_vllm/qwen3-32b-base
+      api_base: http://127.0.0.1:8003/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-32b-sft-headline
+    litellm_params:
+      model: hosted_vllm/qwen3-32b-sft-headline
+      api_base: http://127.0.0.1:8003/v1
+      api_key: "not-used-vllm-is-open"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  # >>> router_add.py inserts local deployments above this line <<<
+  # ADDING A CHECKPOINT IS A COMMAND, NOT AN EDIT (2026-09-15).  The two entries above were
+  # written by hand; seventeen more checkpoints (three bases, six rung-2 arms, the seed
+  # replicates) are not going to be.  `scripts/hpc/router_add.py --name X --port 8000` inserts
+  # an entry shaped exactly like the `qwen3-8b-sft` one immediately above that marker, and
+  # `tests/test_router_add.py` holds it to that by GENERATING the `qwen3-8b-sft` entry and
+  # comparing it against the hand-written one.  One instance per base, one port each: 8000 is
+  # the 8B, 8001 the 4B, 8002 the 1.7B -- an adapter can only be applied to the base it was
+  # trained on, so a 4B checkpoint pointed at :8000 would be refused by vLLM at load time.
+  # The marker is load-bearing: an entry appended at the END of this file would sit after the
+  # wildcard, and a catch-all ahead of an exact name shadows it on some litellm versions.
+
+  # ------------------------------------------ gateway passthrough, prefix already present
+  # MEASURED 2026-09-18, lane L0.8, root cause of the 22:07 Drafter refusal. A caller that
+  # sends a role pin VERBATIM -- e.g. a raw smoke test whose request body is
+  # `{"model": "openai/aws/gpt-oss-120b", ...}`, copied straight from `$PI_MODEL_DRAFTER`,
+  # rather than going through `MeteredClient`/the litellm SDK (which strips the `openai/`
+  # prefix client-side before the HTTP request is even built -- docs/DATA.md) -- used to hit
+  # only the bare `"*"` wildcard below, which captures the FULL "openai/aws/gpt-oss-120b" as
+  # its one wildcard group. `PatternMatchRouter.set_deployment_model_name` substitutes that
+  # whole capture into the `openai/*` template, producing `openai/openai/aws/gpt-oss-120b`;
+  # one `openai/` is stripped again before the wire, leaving `openai/aws/gpt-oss-120b` -- a
+  # name on no team's allow-list -- arriving at the real gateway. That is exactly the shape of
+  # the 22:07 failure ("team not allowed to access model ... Tried to access
+  # openai/aws/gpt-oss-120b"), reproduced directly:
+  #   curl :4000/chat/completions -d '{"model":"openai/aws/gpt-oss-120b",...}'  -> 403
+  #   curl :4000/chat/completions -d '{"model":"aws/gpt-oss-120b",...}'         -> 200
+  # A normal sweep call never hits this -- the SDK has already stripped the prefix by the time
+  # the request leaves the Mac -- but nothing should depend on every future caller remembering
+  # to strip it by hand. `openai/*` sorts as a MORE SPECIFIC litellm pattern than `*`
+  # (`PatternUtils.calculate_pattern_specificity` ranks by pattern length, longest first -- 8
+  # beats 1), so a request that already carries the prefix matches THIS entry first and is
+  # passed through unchanged (one `openai/`, not two); a request without the prefix still
+  # falls through to the bare `"*"` pair below, exactly as before. Sharded across both gateway
+  # keys for the same reason the bare wildcard is -- see the comment on that pair. Both
+  # measured OK for every role model on both keys (`tests/test_router_add.py`, and the
+  # gateway-matrix check in this lane's report), so this is a naming fix, not an access
+  # exclusion: no key's team is missing a role model.
+  - model_name: "openai/*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/PINQ_GATEWAY_BASE_URL
+      api_key: os.environ/LITELLM_API_KEY
+
+  - model_name: "openai/*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/PINQ_GATEWAY_BASE_URL
+      api_key: os.environ/PI_AGENT_LITELLM_API_KEY
+
+  # ------------------------------------------------------- everything else -> team gateway
+  # The frozen roles are pinned to `openai/aws/gpt-oss-120b` in `.env`.  litellm's SDK strips
+  # the `openai/` provider prefix before it puts the name on the wire, so what ARRIVES here is
+  # `aws/gpt-oss-120b`.  The wildcard catches that and every other gateway id (the annotator's
+  # `azure/gpt-5.6-terra` included) without this file having to list them, so a role re-pin in
+  # `.env` does not need a proxy edit.
+  - model_name: "*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/PINQ_GATEWAY_BASE_URL
+      api_key: os.environ/LITELLM_API_KEY
+
+  #
+  # SHARDED ACROSS TWO GATEWAY KEYS (2026-09-18, lane L0.5).  `.env` holds three
+  # key-shaped vars but only two DISTINCT keys: `LITELLM_API_KEY` and `LITELLM_API_KEY_2`
+  # hash identical (measured 2026-09-17, sha256 prefix 633a8483 both) and share whatever
+  # quota the gateway gives that one credential; `PI_AGENT_LITELLM_API_KEY` (sha256 prefix
+  # cfde3d83) is the only other distinct key.  litellm's `PatternMatchRouter` stores every
+  # deployment registered under one pattern as a list
+  # (`router_utils/pattern_match_deployments.py:add_pattern`), and
+  # `_common_checks_available_deployment` hands that whole list to the router's normal
+  # deployment selection (`routing_strategy`, default `simple-shuffle`) -- so two `"*"`
+  # entries that differ only in `api_key` are load-balanced like any other same-`model_name`
+  # pair, and a sweep is rate-limited by two teams' quotas instead of one.  `router_add.py`
+  # cannot generate this entry: its `_NAME` pattern refuses "*" outright (by design -- see
+  # its docstring) and `entry_yaml` hardcodes `hosted_vllm/<name>` plus a `127.0.0.1:<port>`
+  # `api_base`, neither of which this passthrough uses.  Pinned by
+  # `tests/test_router_add.py::test_the_wildcard_is_sharded_across_both_gateway_keys`.
+  - model_name: "*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/PINQ_GATEWAY_BASE_URL
+      api_key: os.environ/PI_AGENT_LITELLM_API_KEY
+
+litellm_settings:
+  # The harness owns retries (tenacity, in `_dispatch`, with `num_retries=0` passed down on
+  # purpose: "two retry layers make `retries` a lie").  The proxy must not add a third.
+  num_retries: 0
+  request_timeout: 600
+
+general_settings:
+  # No master key: the proxy binds loopback only and holds the gateway credential, so the
+  # thing to keep it away from is the network, not the local sweep.
+  disable_spend_logs: true

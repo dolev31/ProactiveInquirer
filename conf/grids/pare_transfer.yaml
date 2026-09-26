@@ -1,0 +1,13 @@
+name: pare_transfer
+description: >-
+  Grid E. Does a policy trained or prompted for proactive INFORMATION ACQUISITION improve a
+  proactive ACTION agent? Only PARE can answer this.
+suites: [pare]
+n_tasks: 143
+seeds: [0]
+exploratory: true
+arms: [pare_baseline, pare_plus_inquirer_prompted, pare_plus_verbosity]
+notes: >-
+  Replaces ONLY PARE's goal-inference stage; its executor is held fixed. Scored on PARE's own
+  oracle validation, so no new judge and no new gold. Carries no confirmatory test: if it
+  lands it is the generalization claim, and if not it is one honest sentence.

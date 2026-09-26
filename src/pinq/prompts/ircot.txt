@@ -1,0 +1,41 @@
+Answer the task by reasoning one sentence at a time. Write the NEXT sentence of the
+reasoning chain and nothing else: no preamble, no list, no repetition of the sentences you
+have already written. Each sentence you write is also used verbatim as the query that
+retrieves the next paragraphs, so state the entity you need information about explicitly
+rather than referring to it as it, they or the former, and put the part you most need
+evidence for in the sentence rather than leaving it implied.
+
+Base each sentence on the paragraphs below. If they do not yet contain what the next step of
+the reasoning requires, write the sentence that states what that step needs, naming the
+entity involved, so that the retrieval it triggers can supply it. Do not invent a fact that
+no paragraph supports and do not restate a paragraph verbatim; carry the reasoning forward
+by one step.
+
+When the paragraphs are sufficient to conclude, write a final sentence that begins with
+"So the answer is:" followed by the answer, and stop there. A chain that concludes early on
+sufficient evidence is better than one padded with restatements of what is already known.
+
+RESERVED
+This block is reserved. It appears in every condition so that the amount of text surrounding the
+task is the same in each. It states no requirement and expresses no preference. It carries no
+fact about the task, about the evidence or about the answer. It is not a hint, and nothing in it
+should be treated as one. It describes neither what to ask nor when to stop. It names no entity
+and refers to no document. Reading it changes nothing about what the sections above and below
+ask for. It exists only so that prompt length is not a difference between conditions. A
+condition whose scaffolding is shorter would also be cheaper to read, and that is a difference
+nobody set out to study. Holding the length fixed is what allows a difference in outcome to be
+attributed to what the prompt says instead. Nothing further is stated here. This block is
+reserved. It appears in every condition so that the amount of text surrounding the task is the
+same in each. It states no requirement and expresses no preference. It carries no fact about the
+task, about the evidence or about the answer.
+
+PARAGRAPHS
+{{evidence}}
+
+TASK
+{{question}}
+
+REASONING SO FAR
+{{cot}}
+
+NEXT SENTENCE

@@ -1,0 +1,143 @@
+{
+  "_aliases": {
+    "openai/Azure/gpt-5-2025-08-07": "same model as openai/gpt-5, reached through the litellm proxy under its Azure deployment id; rate copied rather than re-sourced so the two cannot drift"
+  },
+  "_cached_semantics": "tok_cached is a SUBSET of tok_prompt. The uncached remainder is billed at input, the cached part at cached_input. A provider that reports cached tokens disjointly would be double-counted, so adapters must normalise to the subset convention.",
+  "_why": "USD is computed as tokens x these rates and NEVER read from a provider response field. A provider's dollar figure depends on account tier, promotional credits and the day it was billed, so it is not reproducible from an artifact; this table is. Rates are list prices as published 2026-08 and are pinned by ModelPin.price_table_version, so re-pricing a finished sweep is a re-read of parquet rather than a re-run.",
+  "fallback": {
+    "cached_input": 0.0,
+    "input": 0.0,
+    "output": 0.0,
+    "reasoning": null
+  },
+  "models": {
+    "anthropic/claude-haiku-4-5": {
+      "cached_input": 0.1,
+      "input": 1.0,
+      "output": 5.0,
+      "reasoning": null
+    },
+    "anthropic/claude-opus-4-1": {
+      "cached_input": 1.5,
+      "input": 15.0,
+      "output": 75.0,
+      "reasoning": null
+    },
+    "anthropic/claude-sonnet-4-5": {
+      "cached_input": 0.3,
+      "input": 3.0,
+      "output": 15.0,
+      "reasoning": null
+    },
+    "aws/gpt-oss-120b": {
+      "cached_input": null,
+      "input": 0.15,
+      "output": 0.75,
+      "reasoning": null
+    },
+    "azure/gpt-oss-120b": {
+      "cached_input": null,
+      "input": 0.15,
+      "output": 0.75,
+      "reasoning": null
+    },
+    "fireworks_ai/accounts/fireworks/models/qwen3-8b": {
+      "cached_input": 0.2,
+      "input": 0.2,
+      "output": 0.2,
+      "reasoning": null
+    },
+    "gemini/gemini-2.5-flash": {
+      "cached_input": 0.075,
+      "input": 0.3,
+      "output": 2.5,
+      "reasoning": null
+    },
+    "gemini/gemini-2.5-pro": {
+      "cached_input": 0.31,
+      "input": 1.25,
+      "output": 10.0,
+      "reasoning": null
+    },
+    "groq/llama-3.3-70b-versatile": {
+      "cached_input": 0.59,
+      "input": 0.59,
+      "output": 0.79,
+      "reasoning": null
+    },
+    "groq/openai/gpt-oss-120b": {
+      "cached_input": null,
+      "input": 0.15,
+      "output": 0.75,
+      "reasoning": null
+    },
+    "groq/openai/gpt-oss-20b": {
+      "cached_input": null,
+      "input": 0.1,
+      "output": 0.5,
+      "reasoning": null
+    },
+    "groq/qwen3-32b": {
+      "cached_input": 0.29,
+      "input": 0.29,
+      "output": 0.59,
+      "reasoning": null
+    },
+    "hosted_vllm/qwen3-8b": {
+      "cached_input": 0.0,
+      "input": 0.0,
+      "output": 0.0,
+      "reasoning": null
+    },
+    "openai/Azure/gpt-5-2025-08-07": {
+      "cached_input": 0.125,
+      "input": 1.25,
+      "output": 10.0,
+      "reasoning": null
+    },
+    "openai/aws/gpt-oss-120b": {
+      "cached_input": null,
+      "input": 0.15,
+      "output": 0.75,
+      "reasoning": null
+    },
+    "openai/azure/gpt-oss-120b": {
+      "cached_input": null,
+      "input": 0.15,
+      "output": 0.75,
+      "reasoning": null
+    },
+    "openai/gpt-4.1": {
+      "cached_input": 0.5,
+      "input": 2.0,
+      "output": 8.0,
+      "reasoning": null
+    },
+    "openai/gpt-5": {
+      "cached_input": 0.125,
+      "input": 1.25,
+      "output": 10.0,
+      "reasoning": null
+    },
+    "openai/gpt-5-mini": {
+      "cached_input": 0.025,
+      "input": 0.25,
+      "output": 2.0,
+      "reasoning": null
+    },
+    "stub/echo": {
+      "cached_input": 0.0,
+      "input": 0.0,
+      "output": 0.0,
+      "reasoning": null
+    },
+    "together_ai/Qwen/Qwen2.5-72B-Instruct-Turbo": {
+      "cached_input": 1.2,
+      "input": 1.2,
+      "output": 1.2,
+      "reasoning": null
+    }
+  },
+  "unit": "usd_per_1m_tokens",
+  "version": "2026-08"
+}

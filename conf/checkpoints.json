@@ -1,0 +1,486 @@
+{
+  "_schema": "Deployment model id -> {adapter_sha, training_manifest_sha, base_model, rung, dataset_sha, train_id_set_hash} plus init_from on any row whose rung is >= 2. The KEY is the served model id -- what PI_MODEL_INQUIRER is set to, what the vLLM --lora-modules name is, and what the pricing lookup sees -- NOT an arm id. adapter_sha is the sha256 of the adapter directory's weights; training_manifest_sha names the run that produced them; base_model is the id the adapter is applied to; rung is 1 (SFT), 2 (DPO) or 3 (GRPO); dataset_sha is the ExportManifest sha of the file it was fitted on. train_id_set_hash is the id set the WEIGHTS saw, under the name every other artifact uses for it -- the export manifest, the train_ids.<hash16>.txt sidecar, RunManifest.train_id_set_hash, the runs.parquet column and pi_eval.report.train_split_violations. AT RUNG 1 those are one quantity and the loader REFUSES a row whose two names disagree, because a difference would mean one of them names an id set this adapter was not fitted on. AT RUNG >= 2 they are TWO quantities: a DPO adapter is initialised from an SFT adapter, so it was fitted on that export's tasks as well as its own, and train_id_set_hash is the UNION while dataset_sha keeps naming this row's own export. init_from names the registered row the union was taken with; the loader REQUIRES it at rung >= 2, REFUSES it at rung 1, and refuses a row whose init_from is unregistered, names a HIGHER rung (lineage does not run backwards: a DPO pass cannot have started from a GRPO), or whose chain does not reach a base case. Termination is checked by WALKING init_from with a visited set to a row with no init_from or to the literal 'base'; a cycle, including a row naming itself, is a refusal. A strictly lower parent rung is deliberately NOT required: DPO-on-DPO is still rung 2, and a second DPO pass from an existing DPO adapter is a planned arm.",
+  "_why_it_is_empty": "adapter_sha is inside ModelPin.key -> model_pin_hash -> semantic_hash -> run_id. Adding an entry for a model id that has ALREADY RUN renames every finished run that used it, retroactively, in a repo whose tables cite run ids. So an entry is added at the same time as the deployment and never afterwards, and until a deployment exists this file has rows in it only as documentation.",
+  "_example": "\"qwen3-8b-sft\": {\"adapter_sha\": \"<64 hex>\", \"training_manifest_sha\": \"<64 hex>\", \"base_model\": \"Qwen/Qwen3-8B\", \"rung\": 1, \"dataset_sha\": \"<64 hex>\", \"train_id_set_hash\": \"<the same 64 hex>\"}",
+  "_first_row_added": "qwen3-8b-sft was added 2026-09-15 at the same time as its deployment (LSF job 775651, vLLM 0.29.0 on gpu-n629, --lora-modules qwen3-8b-sft=~/pinq-serve/adapters/qwen3-8b-sft-step2600), which is the moment _why_it_is_empty says a row may be added. The precondition was MEASURED first, not assumed: `SELECT count(*) FROM 'scores/parquet/calls.parquet' WHERE model LIKE '%qwen%'` returned 0, so no finished run carries this id and no run_id moves. training_manifest_sha is the sha256 of artifacts/eval/rung1-8b.ckpt-2600.trainer_state.json (the trainer's own state for the selected step) and NOT of a rung1.manifest.json, because the rung-1 job 766502 is still running and has not written one yet; it must be replaced with the manifest sha when that job finishes, which renames nothing that has run under it only if it is done before the first sweep.",
+  "_rows_are_written_by_a_script": "ROWS ARE WRITTEN BY scripts/hpc/register_checkpoint.py FROM 2026-09-15. The first row was typed by hand; there are three bases, six rung-2 arms and the seed replicates still to come, and by hand a wrong sha is a schedule rather than a risk. The script computes adapter_sha (sha256 of adapter_model.safetensors, or --adapter-sha from a remote `sha256sum` when the 350 MB file is on the cluster), training_manifest_sha (rung{1,2}.manifest.json, else the run dir's trainer_state.json with \"provisional\": true in the entry), dataset_sha (the export manifest's train_id_set_hash), writes the $0 row scripts/price_tables/2026-09.json needs for the same name, and REFUSES to re-point an existing name at a different adapter_sha without --force. tests/test_register_checkpoint.py covers all of it; tests/test_checkpoint_registry.py::test_no_registry_row_RENAMES_A_RUN_THAT_HAS_ALREADY_FINISHED compares every row against the pins the finished runs recorded for themselves.",
+  "_second_row_added": "qwen3-8b-sft-headline is the FINAL adapter at the root of artifacts/rung1-8b-headline on the cluster (the headline SFT run: 14,302 examples, inquirer_prompted only, 2 epochs; best/by_nll selects that same `final` tag at dev NLL 0.2943, best/by_stop2x2 selects step 1200). adapter_sha was MEASURED TWICE by `sha256sum` on login-node, an hour apart, and both reads returned a255a40b...; the adapter_sha.txt file sitting in that directory says 06ee9c1d... and is NOT the sha of adapter_model.safetensors -- nothing in scripts/ writes that file, its origin is unknown, and it is not what this row records. training_manifest_sha is the run's own rung1.manifest.json (7220e885...), verified to hash identically on the cluster and after the transfer, so this row is NOT provisional. dataset_sha is train_id_set_hash from data/rl/headline/sft.manifest.json. The name had never run when the row was added.",
+  "qwen3-8b-sft": {
+    "adapter_sha": "7f91d868e9ac8c251c275e2d0d2eead9f5dfd195606c362561f12f6307286185",
+    "training_manifest_sha": "e27c270719c7a4a846739993dcfdb2c87b2ffafe81e03865a5f172266b3807f9",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "037f94b5bec536e298496861668259e282b7b195d6980ae8a12ff7b33474d32a",
+    "train_id_set_hash": "037f94b5bec536e298496861668259e282b7b195d6980ae8a12ff7b33474d32a"
+  },
+  "qwen3-8b-sft-headline": {
+    "adapter_sha": "a255a40b3c29f4953b866c6f16ba616948bda1b04836e4c12a575f5aeff6dffe",
+    "training_manifest_sha": "7220e8857c0c8768dccd83f39e4f933fa919abe9b3dd2a5048e47568d3179560",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-headline-stop": {
+    "adapter_sha": "a845feca69b61928ba1ad9aac4c25fb10b5ab6143b0cea5cec065f096a5c2394",
+    "training_manifest_sha": "7220e8857c0c8768dccd83f39e4f933fa919abe9b3dd2a5048e47568d3179560",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline": {
+    "adapter_sha": "e9152c0564db43eef279a76128fd71cfd757692fa2618788a1b5536dbee0adf3",
+    "training_manifest_sha": "9b15691e7fe472a043e140e4eb0a598aae8c95d79a51fa1cbb63a44ae3f65abd",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-nll": {
+    "adapter_sha": "7aad3cb1318f4bee6d16d5692e7d6d81912adb0fea231acb6a8ec878fc15f865",
+    "training_manifest_sha": "9b15691e7fe472a043e140e4eb0a598aae8c95d79a51fa1cbb63a44ae3f65abd",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-stop": {
+    "adapter_sha": "a81275a0d07a683584a01805df8567c07add9afb364b3ca9328503291989dcaf",
+    "training_manifest_sha": "9b15691e7fe472a043e140e4eb0a598aae8c95d79a51fa1cbb63a44ae3f65abd",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-final": {
+    "adapter_sha": "42eb43fce8f20aeddd9e0421d592ebb1620a65683667cff28583c596703f83fa",
+    "training_manifest_sha": "e27c270719c7a4a846739993dcfdb2c87b2ffafe81e03865a5f172266b3807f9",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "037f94b5bec536e298496861668259e282b7b195d6980ae8a12ff7b33474d32a",
+    "train_id_set_hash": "037f94b5bec536e298496861668259e282b7b195d6980ae8a12ff7b33474d32a"
+  },
+  "qwen3-8b-sft-stop": {
+    "adapter_sha": "ee2eef848062fff59790642d1dc92dc8a47bffa06c0e0e96513e287998044e87",
+    "training_manifest_sha": "e27c270719c7a4a846739993dcfdb2c87b2ffafe81e03865a5f172266b3807f9",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "037f94b5bec536e298496861668259e282b7b195d6980ae8a12ff7b33474d32a",
+    "train_id_set_hash": "037f94b5bec536e298496861668259e282b7b195d6980ae8a12ff7b33474d32a"
+  },
+  "qwen3-8b-sft-headline-s1": {
+    "adapter_sha": "1da8e7b923b343a413095154d20f9d800ada1c4b9103976d53bf5899b85c6fb4",
+    "training_manifest_sha": "7f980e2b18c169706117f0503b70dc85898fe8ad6b1eae57fa2a8244142e0a50",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-headline-s2": {
+    "adapter_sha": "c92cd4f4bfe71e3ebcc77f795d4c8c6957a5f94ea0160a277a3c59269cdf3723",
+    "training_manifest_sha": "45e5688ee967eaaf6daefe90c28be4b9df4b1ced119a4635f4a70ac6964e9b63",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-dpo-headline-control": {
+    "adapter_sha": "bef8f638cb9b10fa1f48d01b418264a1bb3f33407ba6d83a4c1d124aaa22ab33",
+    "training_manifest_sha": "f49b7a649f4e27eecd04880949da0ae0286c069d2b100c848073d5a3fea9b325",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "c1444a77617b402d17af09861713df4c9a4dd4291538cfd158c75d967fc9854e",
+    "train_id_set_hash": "11bd5de6d558be20f521fb9d3e04f0d4114f7bc3a68081d46ab0c8cf05bac37e",
+    "init_from": "qwen3-8b-sft-headline"
+  },
+  "qwen3-1.7b-sft-headline-s0": {
+    "adapter_sha": "963119ae57c1c0b1d7e1436b84bd1dd437dd401c90eb404010e1170cedf72704",
+    "training_manifest_sha": "136968bd11f9d3df8baf1019096a905d5bc031fb967aed8f7102f68a010c0155",
+    "base_model": "Qwen/Qwen3-1.7B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-1.7b-sft-headline-s1": {
+    "adapter_sha": "a678a52eb82488a3caf54a7e5795f408c4f4900a468719d616c55c7e1e99bce6",
+    "training_manifest_sha": "20d6d6fcbc1e8c9abf6f70c2b9541e6041ac09cb76675cd64c90ee2688d7131c",
+    "base_model": "Qwen/Qwen3-1.7B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-1.7b-sft-headline-s2": {
+    "adapter_sha": "a03cb97effbb6a15c3f781c7c32148719913f8471048906acc6fee5745dafeec",
+    "training_manifest_sha": "714dd50befa7a70c4f54671c23f1fa546783881ac9cacc02abaf11d74c36ad1c",
+    "base_model": "Qwen/Qwen3-1.7B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-dpo-headline-rater": {
+    "adapter_sha": "a262da43b3e87e42465e099f5c364256ab53c2f062e49b5eb3c4276168641138",
+    "training_manifest_sha": "6f9a5f4d87668fa6bc39218c046072a683d8b0cf359932b6c110e380e6e81671",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "c1444a77617b402d17af09861713df4c9a4dd4291538cfd158c75d967fc9854e",
+    "train_id_set_hash": "11bd5de6d558be20f521fb9d3e04f0d4114f7bc3a68081d46ab0c8cf05bac37e",
+    "init_from": "qwen3-8b-sft-headline"
+  },
+  "qwen3-8b-dpo-headline-reaches": {
+    "adapter_sha": "e7857cdf135df6c8379b486119b5fe1e4844b3613cf4095f94416c1717a68eb3",
+    "training_manifest_sha": "564d4699018d415481c2fa3e8df9b4bc413d4dd341877ef331d1cb2b1ad8fbbc",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "c1444a77617b402d17af09861713df4c9a4dd4291538cfd158c75d967fc9854e",
+    "train_id_set_hash": "11bd5de6d558be20f521fb9d3e04f0d4114f7bc3a68081d46ab0c8cf05bac37e",
+    "init_from": "qwen3-8b-sft-headline"
+  },
+  "qwen3-8b-dpo-headline-stopcontrast": {
+    "adapter_sha": "7a3227b7633b1ca385766af02ac799de6a7d6a86c8e21a0e8d238405ab525f56",
+    "training_manifest_sha": "9db0b2ebac25313586dc3ad670e85bbe9ddfe6c06dfefa416b02b48b8b5ad51e",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "c1444a77617b402d17af09861713df4c9a4dd4291538cfd158c75d967fc9854e",
+    "train_id_set_hash": "11bd5de6d558be20f521fb9d3e04f0d4114f7bc3a68081d46ab0c8cf05bac37e",
+    "init_from": "qwen3-8b-sft-headline"
+  },
+  "qwen3-8b-dpo-pooled-control": {
+    "adapter_sha": "c0d360e6a36131f9acf926433581ebe65c04b1730e38775a1f1cc2c0ec4ef499",
+    "training_manifest_sha": "6978c4c53c3035546512d4650b4efcc529a82e3985e54b5b0f280f06dde93cc8",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "f3632ac09d84fc1c38ba1a0be4e0b7ae56c3983df760fc1e4a1e34519061891d",
+    "train_id_set_hash": "00c7f6e44c65c614950b313c4ef7308ae9914739259971c264bba6073b8001d1",
+    "init_from": "qwen3-8b-sft"
+  },
+  "qwen3-8b-dpo-pooled-reaches": {
+    "adapter_sha": "dcbfd6cdbec34a4938979c061264abe75ee4cc4b4539d1c575492a3022589852",
+    "training_manifest_sha": "4fa28da5ea2dbf9ab6a076a8d7e8268a62336a44e1070277f963101bcc3b4676",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "f3632ac09d84fc1c38ba1a0be4e0b7ae56c3983df760fc1e4a1e34519061891d",
+    "train_id_set_hash": "00c7f6e44c65c614950b313c4ef7308ae9914739259971c264bba6073b8001d1",
+    "init_from": "qwen3-8b-sft"
+  },
+  "qwen3-8b-sft-sw05": {
+    "adapter_sha": "24806fab1a2a48e175745297ce57be6f4e3696e3dec4df046739123b390cac55",
+    "training_manifest_sha": "f859910023416a501bb12749e570ce85ae5a7d542821581e15a786f103749045",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-sw05-nll800": {
+    "adapter_sha": "ed741e09c79a4b509fbafda11c22eb2e46ba65c13aed0c750ef780b024b46988",
+    "training_manifest_sha": "f859910023416a501bb12749e570ce85ae5a7d542821581e15a786f103749045",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-sw025": {
+    "adapter_sha": "eb7143ab0137697534f62d58e56c2234bf414fbdd7d431cbca00b30329f3287c",
+    "training_manifest_sha": "8ffa7e1ec183d9d69d1f6a9d5cd1703f536b1a4a81f329ef3e7344cf863f8912",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-sw025-nll1600": {
+    "adapter_sha": "37088847838b2d8a9f2d8ca7a4b5e0d126bf6acc8ed60623e8b7d4e115081004",
+    "training_manifest_sha": "8ffa7e1ec183d9d69d1f6a9d5cd1703f536b1a4a81f329ef3e7344cf863f8912",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-sw025-stop1400": {
+    "adapter_sha": "2d6e3e42ecff001c13a8efc2a94f2178107b054b72964a489ab5b71150cf452c",
+    "training_manifest_sha": "8ffa7e1ec183d9d69d1f6a9d5cd1703f536b1a4a81f329ef3e7344cf863f8912",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-dpo-headline-control": {
+    "adapter_sha": "8e7c032fe4865938a097c7e56370a8b2ff40c5882b81aa07084e4e8e7ae82595",
+    "training_manifest_sha": "99a6f9e98fd0a0f453e4b44bff059ff7af514b771678970b5eb89ccd2d63f59b",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 2,
+    "dataset_sha": "c1444a77617b402d17af09861713df4c9a4dd4291538cfd158c75d967fc9854e",
+    "train_id_set_hash": "11bd5de6d558be20f521fb9d3e04f0d4114f7bc3a68081d46ab0c8cf05bac37e",
+    "init_from": "qwen3-4b-sft-headline"
+  },
+  "_train_id_set_hash_was_backfilled": "train_id_set_hash became a REQUIRED field on 2026-09-15 and the six rows above predate it, so they were migrated by `scripts/hpc/register_checkpoint.py --backfill`, which copies dataset_sha across and REFUSES rather than choosing where the two already disagree (none did). It is a second name for one value and NOT a second measurement: the point is that the stamp pi_run.manifest.build_manifest puts on a run, and the column pi_eval.report.train_split_violations reads back, use the same word the registry does. Nothing about run identity moved -- train_id_set_hash is absent from RunManifest.semantic_hash, unlike adapter_sha, so stamping it renames no finished run.",
+  "_lineage_rows_carry_a_union": "init_from AND THE UNION WERE ADDED 2026-09-15, AND HERE IS THE MEASUREMENT THAT FORCED THEM. A rung-2 row named only the pairs export it was trained on, while the weights had also seen everything its SFT initialiser was fitted on -- pinq_train.rung2_dpo's DPOConfig.validate refuses an empty `adapter` under either reference mode, so a DPO run initialised from nothing does not exist. Measured on the shipped headline export: data/rl/headline/train_ids.c8b89f4dc1520c6f.txt (SFT) holds 2,525 ids, train_ids.c1444a77617b402d.txt (pairs) holds 1,027, SFT minus pairs is 1,499, pairs minus SFT is 1, and the union is 2,526. The pooled export is the same shape: 2,664 and 1,933 with 732 outside the pairs set. So qwen3-8b-dpo-headline-control stamped its runs with a hash resolving to 1,027 of the 2,526 tasks its weights had seen. The split predicate in train_split_violations still covered those rows; the id-set canary beside it was blind to the other 1,499, which is what a leak through a served NAME could reach unseen -- the case layer 4 of the firewall exists for, since layers 1-3 stop leakage through code and only this one catches leakage through a string. The canary also covers what the split predicate structurally cannot see, a task exported into a training file and since re-bucketed, where split_of answers 'test' today and is RIGHT while the weights still saw it; that argument is structural, not a count. RETRACTED 2026-09-15: an earlier version of this note said 94 of the SFT ids are 'test' today and 22 of those are in no pairs export. That came from split_of(suite_id, task_id) with no template_id, and bucket() hashes template_id or task_id -- musique carries template ids, so for its 453 SFT ids (and 337 pairs ids) that call hashes the wrong string. Every one of the 148 SFT and 114 pairs ids it mislabels is musique; joined to scores/parquet/runs.parquet for the template id, 0 of the 2,525 SFT ids and 0 of the 1,027 pairs ids are test or dev today. The other 2,072 SFT ids (strategyqa, wiki2, synth) carry no template id, so there the bare call is already the right one. The reader was never affected: train_split_violations keys on the parquet's template_id column, the same quantity bucket() wants. scripts/hpc/register_checkpoint.py --init-from computes the union with pinq_train.split.id_set_hash (the exporter's own function, imported rather than reimplemented) and writes its preimage as a train_ids.<hash16>.txt sidecar beside the dataset manifest, so the stamp resolves by the same filename rule the reader already uses, with no index in between. An init row's train_id_set_hash is ALREADY a union when that row is itself a lineage row, so a stacked arm -- a second DPO pass from a DPO adapter, which is rung 2 initialised from rung 2 -- recurses for free. Nothing about run identity moved: train_id_set_hash is absent from RunManifest.semantic_hash, so rewriting it on a row that has already served renames no finished run -- which is what lets --backfill-init-from migrate a row in place.",
+  "qwen3-8b-dpo-pooled-rater": {
+    "adapter_sha": "aebfa049404717104fb03bc4b6427f3024c784ff294b9a81bc59ed640324f131",
+    "training_manifest_sha": "66bc63d03697f0a3e84f1cac5dbb80ec4928eed7c6e1ba8cb72993990d621f6a",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "f3632ac09d84fc1c38ba1a0be4e0b7ae56c3983df760fc1e4a1e34519061891d",
+    "train_id_set_hash": "00c7f6e44c65c614950b313c4ef7308ae9914739259971c264bba6073b8001d1",
+    "init_from": "qwen3-8b-sft"
+  },
+  "qwen3-8b-sft-sw01": {
+    "adapter_sha": "443d1f93ed0e7934a39373d71cd0bbf1f9d84bbefd901d48174c813ea0f71d36",
+    "training_manifest_sha": "a11dda4eafdeac830139a185fcc5aeb575a3b1a7dfbfe2cc26ee9ace24ec875e",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-32b-sft-headline": {
+    "adapter_sha": "cd931ff4f17c3358acd3e467190f57f7347b813b75879a9b848017e2ffa7ed76",
+    "training_manifest_sha": "313f9217b3dd71f70e467aac58ab3f989ef9f9e8e585466ca1e2c16c96317bf6",
+    "base_model": "Qwen/Qwen3-32B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-dpo-headline-notdone-only": {
+    "adapter_sha": "69a4c1fbaa5965997f0bb483114bc1faffbab14917485cb7cb3fc5ce8ec5730b",
+    "training_manifest_sha": "2a1a7151a57740f96b968a446cedfbc3aff7bb5022ce69bfa9a6679788376a59",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "d6750e34239f398f0bb912bd74729ab22b11d8f8b7e762b5d8a7035038a22f7c",
+    "train_id_set_hash": "d6750e34239f398f0bb912bd74729ab22b11d8f8b7e762b5d8a7035038a22f7c",
+    "init_from": "qwen3-8b-sft-headline"
+  },
+  "qwen3-8b-dpo-headline-notdone-both": {
+    "adapter_sha": "c315b795c877656cb12a650c150e7a0666b12e9f53f2606adfc26b29e03e8c9a",
+    "training_manifest_sha": "55db76c033bdee1f1f4a92b9a7b3ddea15079f1a39d24abd2493c1a22c6c9104",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "d6750e34239f398f0bb912bd74729ab22b11d8f8b7e762b5d8a7035038a22f7c",
+    "train_id_set_hash": "d6750e34239f398f0bb912bd74729ab22b11d8f8b7e762b5d8a7035038a22f7c",
+    "init_from": "qwen3-8b-sft-headline"
+  },
+  "qwen3-8b-dpo-stacked-notdone-both": {
+    "adapter_sha": "80a56b744d502b49646e735b2f35772faec82d1eb039d8757ca97db6a13d0c06",
+    "training_manifest_sha": "571952edf0b83a4699ea6793e2e03e50c6c59761ffa239e3a5ba0ced9d615f31",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 2,
+    "dataset_sha": "d6750e34239f398f0bb912bd74729ab22b11d8f8b7e762b5d8a7035038a22f7c",
+    "train_id_set_hash": "d6750e34239f398f0bb912bd74729ab22b11d8f8b7e762b5d8a7035038a22f7c",
+    "init_from": "qwen3-8b-dpo-headline-control"
+  },
+  "gptoss-20b-sft-headline": {
+    "adapter_sha": "250a392b85c5697f0690f3f05e3773b125981650e98ddcd488cdcb266afb58e3",
+    "training_manifest_sha": "a8b795101a1aa58fb04100f1a4ba96284c0aa4c18dd696cf7053288ce6c9ea7e",
+    "base_model": "openai/gpt-oss-20b",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-s1": {
+    "adapter_sha": "212cc105114c797d24f5667512c21e48fa4388751818f856fc48f653f34348fa",
+    "training_manifest_sha": "7072d0476f827ae30c2b9da9b38f1de8337dd912c729e53568b69fa62f40665c",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-s2": {
+    "adapter_sha": "ffff0f0c1ff15261861e831e1e1ac26460a4c7e74f7ef099e3d1ba1f006ae9a3",
+    "training_manifest_sha": "dea60ea5d716303b545308653d2dee8793986b962608549421b6a11279bfda2f",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "_granite33_8b_seeds_ARE_UNREGISTERED_ON_PURPOSE_a_registration_would_rename_5611_finished_runs": {
+    "applies_to": [
+      "granite33-8b-sft-headline-s0",
+      "granite33-8b-sft-headline-s1",
+      "granite33-8b-sft-headline-s2"
+    ],
+    "read_this_before_re_adding_a_row_here": "These three were registered by commit 60bd644 (2026-09-18) with real adapter_sha values, months into their own run history under the bare, unregistered name. tests/test_checkpoint_registry.py::test_no_registry_row_RENAMES_A_RUN_THAT_HAS_ALREADY_FINISHED measured the damage on 2026-09-19 at 5,611 finished runs (3,600 split=test, all adapter_sha:None on disk) whose recomputed run_id no longer matches what is on disk -- 3,600 of them already the population of the committed artifacts/granite_family_20260918/run_ids.test_split_isolated_store.txt. Reverted here for exactly the reason scripts/hpc/register_checkpoint.py's own refusal message gives: adapter_sha is inside run_id, so serve the new weights under a NEW deployment name rather than retroactively naming this one. register_checkpoint.py now also refuses this on a FIRST registration (see _history_offenders), not only on a re-point, so this cannot recur silently.",
+    "the_selection_caveat_below_is_unaffected_and_kept": "it describes a property of the trained adapters (no per-checkpoint tierA ladder was ever built, so `final` was substituted for a selected checkpoint), which is true whether or not this file names an adapter_sha for them.",
+    "declared_selection_rule": "by_nll",
+    "selection_procedure_actually_run": null,
+    "weights_used": "final (the adapter at the trainer's --out root; step 1788 == max_steps, epoch 2.0)",
+    "read_this_before_comparing_these_rows_to_the_others": "EVERY OTHER CHECKPOINT ROW IN THIS FILE NAMES WEIGHTS THAT A PROCEDURE CHOSE. THESE THREE DO NOT. scripts/hpc/keep_best.py selects from per-checkpoint <run>.ckpt-<tag>.tierA.json verdicts written by a SEPARATE `pi train eval-offline` job that must run CONCURRENTLY with training, because the trainer keeps only two checkpoints. That job was never submitted for this family. Retention has since deleted every checkpoint but two per seed (1600 and 1788), so the ladder cannot be rebuilt and this family has NO checkpoint selection, permanently. The three SELECTION.json records exist and are EMPTY: n_verdicts 0, tag null, history []. The final checkpoint was therefore SUBSTITUTED and the rule is DECLARED, not executed.",
+    "why_the_declared_rule_is_by_nll_and_not_by_stop2x2": "Selection does NOT converge on final -- over the five arms with a full ladder, by_nll chose final in 2 of 5 and by_stop2x2 in 1 of 5 -- so the defence is NOT 'final is what selection would have picked'. It is that the two criteria differ sharply in what their disagreements COST. Where by_nll preferred an earlier checkpoint the margins were at most FOUR TENTHS OF ONE PERCENT RELATIVE. Where by_stop2x2 did, they reached 9 items in 350 = 1.29 percentage points, and that largest margin is on the arm matching this recipe EXACTLY (rung1-8b-headline: headline SFT, inquirer_prompted only, 14,302 examples, 2 epochs, final step 1788). AND by_stop2x2 IS DEGENERATE: P(STOP|done) is exactly 1.0 at all 30 trained checkpoints in the 32 local tierA verdicts (the only 0.0 rows are ckpt-0, which keep_best excludes as a candidate by construction), so (P(STOP|done)+P(ASK|not done))/2 collapses to one cell over 350 items. Under the declared rule the substitution costs AT MOST 0.4% RELATIVE; under the degenerate one it could cost 1.29pp. Do not silently declare by_stop2x2 for these rows instead.",
+    "bound_on_the_substitution": "at most 0.4% relative dev NLL, under by_nll",
+    "re_derived_here_on_the_recipe_matching_arm": {
+      "arm": "rung1-8b-headline",
+      "criterion": "by_nll = min dev sft_nll.nll_per_token over candidates; tag 0 excluded",
+      "by_nll_argmin_over_candidates": "final",
+      "nll_at_final": 0.29428415974481387,
+      "nll_at_1788": 0.29428415974481387,
+      "why_final_and_1788_coincide": "they are the SAME WEIGHTS under two tags -- `final` is the adapter at the trainer's --out root and 1788 is the last saved checkpoint. Evaluated from two different directories (/tmp/pinq-ckpt-eval/checkpoint-final and .../checkpoint-1788) and returning one value is a confirmation of that identity, not a coincidence and not a caching artifact.",
+      "best_NON_final_candidate": "step 800",
+      "nll_at_best_non_final": 0.2950841637759997,
+      "final_beats_best_non_final_absolute_nats_per_token": 0.0008000040311858525,
+      "final_beats_best_non_final_relative_pct": 0.2711104591140108,
+      "leading_digits_shared_with_best_non_final": 7,
+      "nll_at_1200_the_by_stop2x2_winner": 0.30228168407805905,
+      "final_beats_1200_absolute_nats_per_token": 0.007997524333245187,
+      "final_beats_1200_relative_pct": 2.64571912705765,
+      "distinct_candidate_nll_values": "9 over 10 candidate tags (only final and 1788 coincide, because they are one set of weights)",
+      "candidate_nll_range": [
+        0.29428415974481387,
+        0.33497049122574085
+      ],
+      "SO_by_nll_DISCRIMINATES_HERE": true,
+      "RETRACTED_EARLIER_STATEMENT": "An earlier pass reported 'by_nll relative margin of final 0.000000%'. That number was nll[final] - nll[by_nll winner] where the winner IS final: zero BY CONSTRUCTION, a quantity that could not have come out otherwise, and it read as though the loss criterion could not tell the two checkpoints apart. It can. final is the STRICT argmin, ahead of step 800 by 0.00080000403 nats/token (0.2711% relative, sharing only 7 leading digits) and ahead of step 1200 -- the checkpoint the stopping criterion picks -- by 0.00799752433 (2.6457% relative).",
+      "what_this_does_to_the_defence_of_the_declared_rule": "It strengthens it. The cost of substituting final on this arm is zero NOT because by_nll is indifferent but because by_nll SELECTS final outright, over a field of 9 distinct values, including over the stopping criterion's own winner by 2.6457% relative. So this is a selection and not a tie resolved by a default."
+    },
+    "adapter_sha_txt_in_each_run_dir_IS_NOT_THE_ADAPTER_SHA": {
+      "what_it_is": "pinq_train.merge.adapter_sha(<run dir>) -- the MERGE identity: adapter_model.safetensors AND adapter_config.json, each path hashed alongside its bytes, checkpoint-*/ and training_args.bin excluded.",
+      "written_by": "scripts/hpc/rung1.sh line 261 (`... | tee \"$OUT/adapter_sha.txt\"`)",
+      "verified_2026_09_17": "recomputed with pinq_train.merge.adapter_sha on login-node (python3.11) and it reproduces the on-disk sidecar EXACTLY on all three seeds: 21591627.., d8482670.., 49823d41..",
+      "registry_rows_carry_a_different_quantity": "conf/checkpoints.json rows carry sha256(adapter_model.safetensors) ALONE: a6273c8d.., 1e381436.., 787f2150... Both quantities are real and correctly computed; they are not the same quantity. rung1.sh's own comment says registering from the sidecar 'names weights that never answered', which is why these rows do not use it.",
+      "nothing_in_the_eval_or_selection_PATH_READS_IT": "grep over src/ and scripts/: the only references are rung1.sh (which writes it) and register_checkpoint.py's docstring. So it cannot cause a loader to attach the wrong weights.",
+      "RETRACTED_EARLIER_STATEMENT": "An earlier pass in this lane called the sidecar a wrong hash of unknown origin, echoing the registry's own _second_row_added note. That was itself a misreading: the origin is known, documented and reproduced. The note on the qwen3-8b-sft-headline row saying 'nothing in scripts/ writes that file, its origin is unknown' is OUT OF DATE for the same reason."
+    },
+    "full_record": "artifacts/granite33_family_gate/SELECTION_RULE.json (pinq.selection_rule.v1)",
+    "PROVENANCE_OF_THE_JUSTIFICATION_IT_IS_CROSS_FAMILY": {
+      "QUESTION": "Which arm is the ten-row dev-NLL ladder measured on?",
+      "ANSWER": "THE QWEN ARM. NOT GRANITE.",
+      "ladder_files": [
+        "artifacts/hpc/rung1-8b-headline/*.tierA.json  (11 verdicts)",
+        "artifacts/hpc/rung1-8b/*.tierA.json           (21 verdicts)"
+      ],
+      "ladder_n_verdicts": 32,
+      "ladder_base_model": "Qwen/Qwen3-8B (adapter_config.json base_model_name_or_path, and the registry rows qwen3-8b-sft-headline / qwen3-8b-sft)",
+      "granite_per_checkpoint_verdicts_anywhere": 0,
+      "granite_per_checkpoint_verdicts_evidence": "find over the Mac checkout: 0 files matching *granite*tierA*. On the cluster the ONLY granite tier-A files are /proj/pinq/user/artifacts/eval/rung1-granite8b-headline-s{0,1,2}.tierA.json -- END-OF-RUN verdicts, one per seed, with NO .ckpt-<tag>. component in the name. There is no granite ladder and no granite best/ winner.",
+      "so_both_reports_are_consistent": "A second lane reporting 'a single end-of-run tierA.json per granite seed, no per-checkpoint verdicts, no best/ winners' and this lane's ten-row ladder describe DIFFERENT ARMS and are both correct.",
+      "THE_CLAIM_IN_ITS_ONLY_TRUE_FORM": "On the arm where per-checkpoint evaluations exist (qwen3-8b, the recipe-matching arm), the declared criterion by_nll selects the FINAL checkpoint outright. On granite NO per-checkpoint evaluation exists, so the same criterion CANNOT BE EVALUATED there, and the final checkpoint is registered on the strength of that CROSS-FAMILY evidence. This is an EXTRAPOLATION ACROSS MODEL FAMILIES, not a within-arm measurement of granite.",
+      "RETRACTED_EARLIER_WORDING": "Earlier wording in this record and in this lane's reports said, in effect, 'the substitution costs at most 0.4% relative' and 'costs nothing on this arm' without making it unmissable that every one of those margins is measured on Qwen3-8B and none on Granite-3.3-8B. A cross-family extrapolation presented as a within-arm measurement is retracted here and replaced by THE_CLAIM_IN_ITS_ONLY_TRUE_FORM above.",
+      "IS_THE_SUBSTITUTION_FORCED_OR_CHOSEN": "FORCED.",
+      "forced_evidence": "Measured 2026-09-17: each granite seed dir holds exactly checkpoint-1600 and checkpoint-1788 and nothing else (save_total_limit=2). checkpoint-1788 IS `final` -- byte-identical weights. The ladder the selection is defined over (steps 200..1788) is therefore permanently unreconstructable: not by this session and not by any future one. We could not run the selection now even if we wanted to.",
+      "the_one_honest_qualification": "A TWO-POINT comparison of the surviving 1600 against 1788 is still physically possible and has NOT been run. It is not the selection (which ranks the whole ladder) and it would not change which weights are registered, since `final` is what is deployed. It is recorded here as an available, unrun measurement rather than left unmentioned.",
+      "DOES_GRANITE_ITSELF_SHOW_THE_STOP_DEGENERACY": "UNRESOLVED PENDING LSF 823810. The end-of-run verdicts cannot answer it: their stop cell was never scored.",
+      "granite_stop_cells_MEASURED": {
+        "source": "/proj/pinq/user/artifacts/eval/rung1-granite8b-headline-s{0,1,2}.tierA.json",
+        "p_stop_given_done": "nan on all three seeds",
+        "n_done": 0.0,
+        "p_ask_given_not_done": [
+          0.8322422258592471,
+          0.8359247135842881,
+          0.8265139116202946
+        ],
+        "n_not_done": 2444.0,
+        "nll_per_token": [
+          0.27642076602208143,
+          0.2779711740807334,
+          0.27687531958790285
+        ],
+        "enable_thinking": false
+      },
+      "what_that_means": "SUPERSEDED -- see THE_POPULATION_GAP_RESOLVED_FROM_THE_FILES. n_done=0 is an instrument artifact of a missing --reference-ask, NOT an absence of done-states in granite's population, which holds 4,531 of them.",
+      "do_NOT_cross_compare_these_nlls": "granite's 0.2764/0.2780/0.2769 are NOT comparable to the qwen ladder's 0.2943: different evaluation population (2,444 not-done / 0 done here against 350 not-done / 650 done there). The two sets of NLLs must not be placed in one column."
+    },
+    "TWO_POINT_FALSIFICATION_TEST_PRECOMMITMENT": {
+      "recorded_at": "2026-09-17, BEFORE the measurement was taken",
+      "test": "granite's own by_nll between the ONLY two checkpoints that still exist per seed: checkpoint-1600 against checkpoint-1788 (=`final`, the registered weights).",
+      "why_it_is_being_run": "BECAUSE IT CAN FALSIFY THE SUBSTITUTION. If checkpoint-1600 has LOWER dev NLL than 1788, then the declared criterion, applied to the only granite-internal evidence that still exists, prefers a checkpoint that is NOT the one registered, and we would be deploying `final` against our own rule. It does not complete the selection -- the 200..1400 rungs are permanently gone -- so its whole value is that it could contradict us.",
+      "PRE_COMMITMENT": "The result is recorded here and reported to the coordinator EITHER WAY, including if it goes against the registration. This entry was written before the job was submitted so that the commitment cannot be read as retrospective.",
+      "what_each_outcome_means": {
+        "nll(1788) < nll(1600)": "granite's own two surviving points agree with the registration; the cross-family extrapolation gains a within-family corroboration at ONE comparison, not a selection.",
+        "nll(1600) < nll(1788)": "the declared criterion prefers the UNREGISTERED checkpoint on the only granite-internal evidence available. This must be stated plainly and the registration revisited with the coordinator; it does not get softened into 'the margin is small'.",
+        "effectively tied": "reported with the unrounded values and the number of shared digits, never as 0.000000%, which is the error already retracted in this record."
+      },
+      "also_recovered_in_the_same_job": "P(STOP|done) for granite WITH --reference-ask supplied, which the original granite eval omitted -- so granite's own stop cell becomes defined and the degeneracy question is answered on the family being registered instead of by analogy to qwen.",
+      "dev_file_used": "data/rl/dev/sft.dev.jsonl (6,975 rows), the SAME file granite's end-of-run verdict used, so the new numbers are comparable to it.",
+      "reference_ask": "{\"action\": \"ASK\", \"question\": \"What else do I need to know to answer the question?\", \"rationale\": \"Identify the remaining information need\"} -- the identical string the qwen ladder used (from its own eval logs)."
+    },
+    "THE_POPULATION_GAP_RESOLVED_FROM_THE_FILES": {
+      "QUESTION": "Granite reads n_done=0 / n_not_done=2444; the qwen ladder read 650/350. Which of the three explanations is it, from the files?",
+      "ANSWER": "BOTH (1) AND (2). (3) IS FALSE. n_done=0 IS AN INSTRUMENT ARTIFACT, NOT A PROPERTY OF GRANITE.",
+      "the_two_arms_were_scored_against_DIFFERENT_FILES": {
+        "qwen_ladder_dev_sft": "data/rl/dev/sft.dev.sample.jsonl",
+        "qwen_ladder_n_sft_rows": 1000,
+        "qwen_ladder_composition": "350 ASK + 650 STOP (counted from the file)",
+        "qwen_ladder_dev_pairs": "data/rl/dev/pairs.dev.sample.jsonl  (n_pairs 1485)",
+        "granite_dev_sft": "data/rl/dev/sft.dev.jsonl",
+        "granite_n_sft_rows": 6975,
+        "granite_composition": "2444 ASK + 4531 STOP (counted from the file)",
+        "granite_dev_pairs": "data/rl/dev/pairs.dev.jsonl  (n_pairs 4962)",
+        "ask_share": "qwen 350/1000 = 35.00%; granite 2444/6975 = 35.04% -- the SAME composition, so the sample is a proportional sample of the same dev export, not a different kind of population. Same export, different row counts.",
+        "consequence": "The NLLs are computed over DIFFERENT ROWS and must never share a column. Keeping them apart is substance, not formatting."
+      },
+      "WHY_n_done_IS_ZERO_THE_EXACT_MECHANISM": {
+        "granite_n_skipped_no_reference": 4531,
+        "arithmetic": "2444 not-done + 4531 skipped = 6975 = every row in the file, and 4531 is EXACTLY the STOP-row count of that file. The done-states were all skipped.",
+        "qwen_n_skipped_no_reference": 0,
+        "mechanism": "`pi train eval-offline --reference-ask` is the ASK string a STOP row is scored against. WITHOUT it, STOP rows are skipped and counted rather than scored. The repo's own scripts say so in as many words: scripts/hpc/eval_once.sh:70 and scripts/hpc/eval_checkpoints.sh:173 -- 'no PI_REFERENCE_ASK: STOP rows will be skipped and counted, p_stop_given_done will be null'. The qwen ladder WAS given the string (its eval logs print it); the granite run was NOT.",
+        "so_case_2_is_true": "n_done=0 is a missing flag, not a behavioural fact.",
+        "so_case_3_IS_FALSE": "Granite is NOT failing to reach coverage completion. Its evaluation file contains 4,531 done-states, 65.0% of all rows. THE PAPER MUST NOT SAY GRANITE HAS NO DONE-STATES."
+      },
+      "RETRACTED_TWO_OF_MY_OWN_STATEMENTS": {
+        "retracted_1": "'granite's evaluation population contains ZERO done-states'. FALSE. The population contains 4,531 done-states; the instrument skipped them for want of --reference-ask.",
+        "retracted_2": "'on granite the set-aside criterion is not merely degenerate, it is unevaluable'. TOO STRONG. by_stop2x2 was unevaluable FROM THE VERDICTS AS RUN, because the flag was omitted -- not because the data cannot support it. Supply the flag and it becomes computable, which is what LSF job 823810 does.",
+        "why_this_matters": "An instrument error announces itself as a finding about the thing you measure. 'Granite never completes' would have been a striking and publishable behavioural claim, and it would have been an artifact of a missing command-line flag."
+      }
+    }
+  },
+  "qwen3-4b-sft-headline-easyfirst-s0": {
+    "adapter_sha": "7f7dc9a152c9b63353a656a731cef70ef1a4f90fa9b42ccb26996879f172abf8",
+    "training_manifest_sha": "9eb7a21afc952477a5b286abd9e7811dfda20d72e5caea25fd63bc18f2c8f3d6",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-easyfirst-s1": {
+    "adapter_sha": "096dcc11c2a8aa8f384cc59400f8441aecd5a7aa734e6bca2df35a38398a2a6e",
+    "training_manifest_sha": "cfdd8c558c5cc0bffcfa7e9c5692e3ded6a203b54b68596ac24360c00ca590f0",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-easyfirst-s2": {
+    "adapter_sha": "1bb3fe629a2aedb7690c5d532f65fa275dc94a33a8130670836dbafe7a5e5c5e",
+    "training_manifest_sha": "ccc82d0ce373d29b430db47561245002fb3ba9cd2c5f4b9c209b8463ac3c5192",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-hardfirst-s0": {
+    "adapter_sha": "5f85cf2a3512637400a9e79d206b50d2254b944c6b5a8553b3a11b1dead00933",
+    "training_manifest_sha": "1ac3d2593db953cad15f887bda9a2c8d7ea187cb5a2e86baf222e15b9b0c3627",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-hardfirst-s1": {
+    "adapter_sha": "4f93ca7f8c25e4c330bfb8d20a47673790077c7bed6e93695a2a63fd80e94e7c",
+    "training_manifest_sha": "6fe38e78c514587de386b5bdd9ed7b56060fe3cce9581a4a7a557bd11c6fbefd",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-4b-sft-headline-hardfirst-s2": {
+    "adapter_sha": "0415c0c2c8c38884cef7f7c62d0f6fae4497e03d247e276e0f1f9f1b26e5621d",
+    "training_manifest_sha": "01936212d345c2d7e89da1d5bdcba54e9efea4b7ea6f0cba4d63f9aae5ad4f3d",
+    "base_model": "Qwen/Qwen3-4B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-headline-answernode": {
+    "adapter_sha": "8d8c2ab539cdec39b13f2c13d8667252b113aa5b800294892a46e031b46e3d64",
+    "training_manifest_sha": "c3606270950426c565d09ac7168ca8c85ae788430837ba40dbe8f44f209f44ab",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  },
+  "qwen3-8b-sft-headline-refresh": {
+    "adapter_sha": "d4327fbb59ba03a672b742d028a6bba6440ffd79e067071ac1969634346b029f",
+    "training_manifest_sha": "b0f895eb85a5782b50b2cad35604e0ba0320aa1e8b6b63c930392bea92956d27",
+    "base_model": "Qwen/Qwen3-8B",
+    "rung": 1,
+    "dataset_sha": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94",
+    "train_id_set_hash": "c8b89f4dc1520c6f4daf0cbb1b78ed425b1c5189e2327e8c3bd93cc61f2eff94"
+  }
+}

@@ -1,0 +1,50 @@
+name: tier1_trained
+description: >-
+  Grid C. The trained/prompted contrast: `inquirer_trained` against `inquirer_prompted` on the
+  suite the policy was trained on (musique) and on the suite it has NEVER seen (tau2), with
+  `drafter_only` carried as the shared comparator so both arms are read against the same floor.
+suites: [musique, tau2]
+# TEST SPLIT ONLY. Selection used to be the first 97 ids in corpus order, of which 55 are
+# `split == "train"` -- so the trained arm was evaluated on 57% of the tasks it may have
+# trained on, and the headline "trained beats prompted" column rested on them. Nothing
+# eval-side reads the `split` column, so this could not be repaired after the fact.
+split: test
+n_tasks: 97          # tau2 has 97 tasks and no more; musique is capped to match so the two
+                     # halves of the grid are the same size and the transfer gap is not also
+                     # a sample-size difference.
+seeds: [0, 1, 2]
+budget_cap: 8
+max_turns: 16
+# musique: re-measured on the 800-task corpus in the order it is actually read
+# (probe_retrieval.py, n=300: k2 66% k3 68% k5 65% k8 63%). Flat over k in [2,5], so 5 is
+# inside the optimum rather than at it -- and it MUST match tier1_confirmatory's, or
+# trained-vs-prompted is also a comparison of retrieval budget. See that grid for why this row
+# moved twice, and why both moves were the sample rather than the suite.
+# tau2: the probe reports INAPPLICABLE there, because a tau2 gold node is a document title and
+# the token that keys retrieval lives inside the document rather than in the need text. So k=5
+# is carried over from tier2_confirmatory unchanged -- the trained arm must meet the prompted
+# arm under the SAME retrieval budget the tier-2 table already reports, or the comparison is
+# against a differently-configured baseline.
+k_by_suite:
+  musique: 5
+  tau2: 5
+arms:
+  - drafter_only
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THE ONLY DIFFERENCE BETWEEN THE TWO TREATMENT ARMS IS THE INQUIRER'S MODEL PIN.
+  `inquirer_trained` and `inquirer_prompted` share a policy class (PromptedInquirer), a prompt
+  (rung 0's winner, reached through PI_PROMPT_OVERLAY), a Drafter, a frozen Answerer and a
+  retrieval budget. `ModelPin.base_url_sha` and the Inquirer's model name are the whole
+  treatment, which is what makes this "trained vs prompted" rather than a prompt contest.
+  Run it with the checkpoint registered as a MODEL NAME on the proxy that already serves the
+  frozen roles (`PI_MODEL_INQUIRER=<adapter>`), not by overriding LITELLM_BASE_URL: one base
+  URL serves every role, so overriding it re-routes the frozen Drafter and Answerer too and
+  silently voids the invariant this grid exists to hold.
+
+  tau2 IS EVAL-ONLY BY CONSTRUCTION (pinq_train.split.EVAL_ONLY_SUITES). It contributes zero
+  training examples -- the exporter refuses it by name and the scorer refuses it again -- so
+  its column here is genuine zero-shot transfer rather than a within-suite gain. That is also
+  why it is worth three seeds at n=97: seeds are the only lever on variance when the task
+  count is fixed by the benchmark.

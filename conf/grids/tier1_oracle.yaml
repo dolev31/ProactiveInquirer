@@ -1,0 +1,13 @@
+name: tier1_oracle
+description: >-
+  Ceiling and upper-bound arms. Runs under the gold-exposed entrypoint and is MECHANICALLY
+  EXCLUDED from every primary endpoint; it exists only to measure headroom.
+suites: [musique]
+n_tasks: 200
+seeds: [0]
+budget_cap: 8
+exploratory: true
+arms: [gold_evidence, oracle_vreq]
+notes: >-
+  If F1(gold_evidence) - F1(drafter_only) < 0.10 there is no headroom on this suite and no
+  policy can demonstrate anything, so this runs BEFORE any Inquirer arm.

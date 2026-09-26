@@ -1,0 +1,31 @@
+{
+ "900001": {
+  "labels": {
+   "1": [
+    "Supported",
+    "the report states the NO2 reduction"
+   ],
+   "2": [
+    "Omitted",
+    "no revenue discussion"
+   ],
+   "3": [
+    "Supported",
+    "capacity condition is stated"
+   ]
+  }
+ },
+ "900003": {
+  "labels": {
+   "1": [
+    "Supported",
+    "cost range is given"
+   ],
+   "2": [
+    "Contradicted",
+    "report claims overruns are rare"
+   ]
+  }
+ },
+ "900099": null
+}

@@ -1,0 +1,167 @@
+{
+  "judge_family": "openai",
+  "judge_model": "openai/aws/gpt-oss-120b",
+  "min_pairs_required": 200,
+  "n_paraphrased": 225,
+  "n_runs": 230,
+  "note": "sigma_J is the SD of a SINGLE judge measurement: SD(differences)/sqrt(2) over paired repeats, taken as the MAXIMUM over the identical-retest and paraphrase-retest conditions. Read by pi_eval.prereg.load_sigma_j and used by pi_eval.report as a dead band.",
+  "paraphrase_prompt_sha": "65a2727c858d3495edb6e77cb7f00bf8cfc51dbc8ef6c70c8475cd8b5f7ee9fa",
+  "per_metric": {
+    "citation_support": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 0,
+          "sigma": null
+        },
+        "paraphrase": {
+          "n_pairs": 0,
+          "sigma": null
+        }
+      },
+      "n_pairs": 0,
+      "sigma_j": null
+    },
+    "keypoint_contradiction_rate": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 228,
+          "sigma": 0.039544986858466705
+        },
+        "paraphrase": {
+          "n_pairs": 220,
+          "sigma": 0.06529052791702702
+        }
+      },
+      "n_pairs": 220,
+      "sigma_j": 0.06529052791702702
+    },
+    "keypoint_recall": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 228,
+          "sigma": 0.16490166480179747
+        },
+        "paraphrase": {
+          "n_pairs": 220,
+          "sigma": 0.20365726059827188
+        }
+      },
+      "n_pairs": 220,
+      "sigma_j": 0.20365726059827188
+    },
+    "kpr_incremental": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 228,
+          "sigma": 0.16490166480179747
+        },
+        "paraphrase": {
+          "n_pairs": 220,
+          "sigma": 0.20365726059827188
+        }
+      },
+      "n_pairs": 220,
+      "sigma_j": 0.20365726059827188
+    },
+    "kpr_repetition_gap": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 228,
+          "sigma": 0.0
+        },
+        "paraphrase": {
+          "n_pairs": 220,
+          "sigma": 0.0
+        }
+      },
+      "n_pairs": 220,
+      "sigma_j": 0.0
+    },
+    "quality_balance": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 226,
+          "sigma": 0.7282270600122738
+        },
+        "paraphrase": {
+          "n_pairs": 222,
+          "sigma": 1.0431802830436285
+        }
+      },
+      "n_pairs": 222,
+      "sigma_j": 1.0431802830436285
+    },
+    "quality_breadth": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 226,
+          "sigma": 0.2867270293860189
+        },
+        "paraphrase": {
+          "n_pairs": 222,
+          "sigma": 0.5315549361991749
+        }
+      },
+      "n_pairs": 222,
+      "sigma_j": 0.5315549361991749
+    },
+    "quality_clarity": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 226,
+          "sigma": 0.36493288131692564
+        },
+        "paraphrase": {
+          "n_pairs": 222,
+          "sigma": 0.7175081779368238
+        }
+      },
+      "n_pairs": 222,
+      "sigma_j": 0.7175081779368238
+    },
+    "quality_depth": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 226,
+          "sigma": 0.18688567009622653
+        },
+        "paraphrase": {
+          "n_pairs": 222,
+          "sigma": 0.47526567430394
+        }
+      },
+      "n_pairs": 222,
+      "sigma_j": 0.47526567430394
+    },
+    "quality_insightfulness": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 226,
+          "sigma": 0.31873644340423685
+        },
+        "paraphrase": {
+          "n_pairs": 222,
+          "sigma": 0.46116123347254434
+        }
+      },
+      "n_pairs": 222,
+      "sigma_j": 0.46116123347254434
+    },
+    "quality_support": {
+      "conditions": {
+        "identical": {
+          "n_pairs": 226,
+          "sigma": 0.0
+        },
+        "paraphrase": {
+          "n_pairs": 222,
+          "sigma": 0.0
+        }
+      },
+      "n_pairs": 222,
+      "sigma_j": 0.0
+    }
+  },
+  "retest_seed": 1,
+  "seed": 0
+}

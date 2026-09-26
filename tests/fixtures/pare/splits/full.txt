@@ -1,0 +1,5 @@
+# A deliberately TRUNCATED copy of the benchmark split: 3 ids where 143 are required.
+# Exists so the strict-count guard can be proven to fire on the split that matters.
+add_missing_group_contacts
+project_task_filtering_calendar
+airport_return_ride_from_notes

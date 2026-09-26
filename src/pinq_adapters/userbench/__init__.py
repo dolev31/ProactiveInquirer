@@ -1,0 +1,121 @@
+"""UserBench adapter (SalesforceAIResearch/UserBench, internal package name `travelgym`).
+
+EVALUATION ONLY. See `suite.UserBenchSuite` for why, and `pinq.splitting.EVAL_ONLY_SUITES`
+for the enforcement.
+
+Every symbol here is importable with `travelgym` ABSENT and with no UserBench checkout on
+the machine: the package is offline-first, and the only things that touch upstream are
+function bodies guarded by `_probe.available()`. That is what lets the failure counter --
+the one piece of this package that must never be allowed to rot -- be tested in the default
+`pytest -m "not integration"` run.
+"""
+
+from ._probe import (
+    DATA_TAGS,
+    ENVS,
+    N_SCENARIOS,
+    N_TEST,
+    N_TEST_BY_ENV,
+    N_TEST_TASKS,
+    N_TRAIN,
+    PINNED_COMMIT,
+    PUBLIC_SCENARIO_KEYS,
+    SPLIT,
+    UserBenchUnavailable,
+    available,
+    env_tag,
+    load_scenarios,
+    scenario_public,
+    split_index,
+    userbench_root,
+)
+from .session import (
+    ACTION_PREFIXES,
+    GOLD_SURFACE_KEYS,
+    RAW_INFO_KEYS,
+    RAW_OBSERVATION_KEYS,
+    EpisodeAlreadyOver,
+    ObservationShapeChanged,
+    ObservationView,
+    StepResult,
+    TurnMetrics,
+    UserBenchSession,
+    make_metrics,
+    make_observation,
+)
+from .simulator import (
+    SIM_MODEL_ENV,
+    SIMULATOR_ENTRY_POINTS,
+    UPSTREAM_DEFAULT_MODEL,
+    SimulatorCallFailed,
+    SimulatorFailureCounter,
+    SimulatorNotPinned,
+    SimulatorPin,
+    counted_simulator,
+    endpoint_model,
+    openai_endpoint,
+    travelgym_entry_points,
+)
+from .suite import (
+    CORPUS_ID,
+    ENV_SEED,
+    INSTRUCTIONS,
+    MAX_STEPS,
+    ONE_CHOICE_PER_ASPECT,
+    SIMULATOR_MAX_TOKENS,
+    SIMULATOR_TIMEOUT_S,
+    UserBenchNeedsGymLoop,
+    UserBenchSuite,
+)
+
+__all__ = [
+    "ACTION_PREFIXES",
+    "CORPUS_ID",
+    "DATA_TAGS",
+    "ENVS",
+    "ENV_SEED",
+    "EpisodeAlreadyOver",
+    "GOLD_SURFACE_KEYS",
+    "INSTRUCTIONS",
+    "MAX_STEPS",
+    "N_SCENARIOS",
+    "N_TEST",
+    "N_TEST_BY_ENV",
+    "N_TEST_TASKS",
+    "N_TRAIN",
+    "ONE_CHOICE_PER_ASPECT",
+    "ObservationShapeChanged",
+    "ObservationView",
+    "PINNED_COMMIT",
+    "PUBLIC_SCENARIO_KEYS",
+    "RAW_INFO_KEYS",
+    "RAW_OBSERVATION_KEYS",
+    "SIMULATOR_ENTRY_POINTS",
+    "SIMULATOR_MAX_TOKENS",
+    "SIMULATOR_TIMEOUT_S",
+    "SIM_MODEL_ENV",
+    "SPLIT",
+    "SimulatorCallFailed",
+    "SimulatorFailureCounter",
+    "SimulatorNotPinned",
+    "SimulatorPin",
+    "StepResult",
+    "TurnMetrics",
+    "UPSTREAM_DEFAULT_MODEL",
+    "UserBenchNeedsGymLoop",
+    "UserBenchSession",
+    "UserBenchSuite",
+    "UserBenchUnavailable",
+    "available",
+    "counted_simulator",
+    "endpoint_model",
+    "env_tag",
+    "load_scenarios",
+    "make_metrics",
+    "make_observation",
+    "openai_endpoint",
+    "scenario_public",
+    "split_index",
+    "travelgym_entry_points",
+    "userbench_root",
+]

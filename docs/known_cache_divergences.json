@@ -1,0 +1,172 @@
+{
+  "why": "Calls whose recorded response_sha is not what the cache holds for that request. All of these predate 95d6524, the commit that made a losing write racer adopt the canonical response instead of returning its own. They are unrepairable rather than unfixed: the recorded sha is what the run actually received, so rewriting it would falsify provenance; and a re-roll cannot overwrite the run because code_version is in SEMANTIC_FIELDS, so it lands in a new directory and would put two admissible runs in each affected P3 grid cell. Recorded here so `pi cache verify` fails on a NEW divergence -- which would mean the fix regressed -- rather than on closed history. This list must only ever shrink.",
+  "fixed_by": "95d6524",
+  "measured": "2026-08-29",
+  "n": 41,
+  "known": [
+    {
+      "run_id": "0dc89c3f860f10b860c28587ff5431ef",
+      "request_sha": "a7b3a9e06db890b8bb243728e915e3e1f5dd653e580b349760802683bbd733aa"
+    },
+    {
+      "run_id": "0f921eea1a0870c78bdf5f2b72f00f0e",
+      "request_sha": "3897a5fe895889936b49ba06ce60b0011e5b17f3a31fe06d3b26323208b3be04"
+    },
+    {
+      "run_id": "26ebf7fa0d4e28797841e10559a40e72",
+      "request_sha": "ab592da69a400e240fcc7d005f018e97eafce4c3c19b5f8872581576067fc913"
+    },
+    {
+      "run_id": "3d2587b654919dff4e0e4a8593cce3e6",
+      "request_sha": "e62a18a5cf00d6c5238e4f86bfbc8a2fbca5280d37fc32aa71851aa7533da3f0"
+    },
+    {
+      "run_id": "45f904847d59752ab0d6826459a7194c",
+      "request_sha": "300d093dd4409cfd35119984abcd89a9d47975bcbbbc7e0d713d7a7993be90f4"
+    },
+    {
+      "run_id": "4a549aa56ce1e6b48ceb053b68519a8d",
+      "request_sha": "3a93ef989bd71e13aaacc70404d2d7880fd4bb92f07fef3674747a017dac179b"
+    },
+    {
+      "run_id": "4a549aa56ce1e6b48ceb053b68519a8d",
+      "request_sha": "c9d784284b089bc1712fc5c6c5914c3c0a57e0c12ea16bce89615cbaa9103060"
+    },
+    {
+      "run_id": "6249b5586a86ad679b42a29bdddde20a",
+      "request_sha": "79cfca2c28f81371199077832c4e1c19dfb32f71c55d4f508ff36de17bb0e051"
+    },
+    {
+      "run_id": "6cf451bd3b42c931075e39aeee64ad46",
+      "request_sha": "f0c1ff4d21ed7bf5839ad2ea95dfa66f63bc085c548761e81c1064b7b60ebb0a"
+    },
+    {
+      "run_id": "6fe836c868f5203f625bcc86cd01e5b9",
+      "request_sha": "02284942b7000f333fdbafe8501dbe8db771c1f85bdfc0a9056ab9c989bcbd76"
+    },
+    {
+      "run_id": "78c8611ce2dc57689e3c5366e40c6aa7",
+      "request_sha": "76b2f3d235c0f88e01e637090e8af22c1a0e10ade6c93c47666a226fc188c201"
+    },
+    {
+      "run_id": "790f47c07df74b7facb0fbba04527e41",
+      "request_sha": "24ab8ae8fa7bcab0308d08b89f30f6517f791e92a67b0a96595849425f38ed3b"
+    },
+    {
+      "run_id": "a9f1fe82e867eabf92cf0ae011b2ecaf",
+      "request_sha": "cdb0435dd4d19ebe52d9210dba18ba682af123d2cdfe0786a9756fbe7f1a232f"
+    },
+    {
+      "run_id": "c72b7c850f4f035df862d704c15835f7",
+      "request_sha": "1fb4739504c0c1259b545e080578901835706d08df54e55b9a90007df5409165"
+    },
+    {
+      "run_id": "d9bcc498f4637e23d875b775df65e8a6",
+      "request_sha": "95d9e02ef61329d7ab5aaa2a58e9bd8982443275f756c2698adcc8009a3fabe4"
+    },
+    {
+      "run_id": "dev-071453007d05f6abae9289f3174ad1bf",
+      "request_sha": "4d276f82110ef2fb70166756c8a74db4c8456dc35e548572bc2d4dd35f2c4095"
+    },
+    {
+      "run_id": "dev-1c50b4cc3f9d81f70df6e3119e299d2d",
+      "request_sha": "5ed7008ad92ec3fae0b82ab55a2c86d22182dcfccdd77fd584f36cc5596dd046"
+    },
+    {
+      "run_id": "dev-1c50b4cc3f9d81f70df6e3119e299d2d",
+      "request_sha": "dc4d0828f70ecde8cb92fed64f5c5bead2125e21cacd12772101400ed5d580ed"
+    },
+    {
+      "run_id": "dev-382f034bf1be4d699c66463dc57a63f2",
+      "request_sha": "f7176eb6b98b7de47c4ff664c56171c15a168cbd2c687cc3d57c325dfd03c2a0"
+    },
+    {
+      "run_id": "dev-47bde74cc2fafe2b9329c90cda4ff534",
+      "request_sha": "293a9b48c100229d9821fe6465fcadc905678314ded857b5d49cb053f817a273"
+    },
+    {
+      "run_id": "dev-492682282d934020af649cee24a86362",
+      "request_sha": "2bfea0671cd8ed6ed3d9edc4c0f66530634521396be2242c915a9bb68cda780b"
+    },
+    {
+      "run_id": "dev-492682282d934020af649cee24a86362",
+      "request_sha": "edde8c5790002cac8660f476e4722b2957a229ba2a6f2e0ceeac48ea2a051aa1"
+    },
+    {
+      "run_id": "dev-6a1d3e2d9a89d2f88c55cfa9659a7e87",
+      "request_sha": "e904d030527820069cf385a26a52d297a606722110c98fd15c94834142e57903"
+    },
+    {
+      "run_id": "dev-6a1d3e2d9a89d2f88c55cfa9659a7e87",
+      "request_sha": "f23a91afa9362d6f57eab283e40e382e7de0973966312d9679abbff041280700"
+    },
+    {
+      "run_id": "dev-77e8b73732022b461ea6ecd2de820e21",
+      "request_sha": "4d276f82110ef2fb70166756c8a74db4c8456dc35e548572bc2d4dd35f2c4095"
+    },
+    {
+      "run_id": "dev-7aff1c97ac1da8615a8ea463a9d1e36b",
+      "request_sha": "132a0dc593131f72a39656f7c9980e97f263003866f97c1c73e00d262210d43a"
+    },
+    {
+      "run_id": "dev-7aff1c97ac1da8615a8ea463a9d1e36b",
+      "request_sha": "bf565357a98e9630abe0ae68cef1aa50083f7bafb0f7c140b1a017c9606b30e5"
+    },
+    {
+      "run_id": "dev-7b0c34533a0ff5d4b41a711a94223792",
+      "request_sha": "bdb9837277f84012e88c675122a79cec2eb7e403ead07cfe45d6f2564afd8432"
+    },
+    {
+      "run_id": "dev-7b0c34533a0ff5d4b41a711a94223792",
+      "request_sha": "e56ea7d774fc25010f082cd8fa90994519e8cf289da0bb2887fcd16a3a9ea754"
+    },
+    {
+      "run_id": "dev-8116119fd8d20298bdeb67b1a1c2fed4",
+      "request_sha": "4554412fc81903ab9b6a7a079d9e79754fe285152d640135191bf75e53411273"
+    },
+    {
+      "run_id": "dev-83b828d4794ab3ad02852cf6e6a6434e",
+      "request_sha": "de43f435497a311231c83fb6e67e86c1083464d2900e7e901264d63e83b6eea7"
+    },
+    {
+      "run_id": "dev-8b1d4efc2a7e23a827084fb4928fb430",
+      "request_sha": "0e3ac857190ea522929c09d3468aff9453817e1bdf8da87808973700d5875a84"
+    },
+    {
+      "run_id": "dev-8b1d4efc2a7e23a827084fb4928fb430",
+      "request_sha": "64c0da69fbb08a7d8a4feef40d7014209bc885f4cab36ace554dea1ce47969e7"
+    },
+    {
+      "run_id": "dev-94366304fbd6f719e15b6644b42e5d96",
+      "request_sha": "9754761749500b13ae102db6b1b23aa412ee14341c3fc4d982e74aefa76e86eb"
+    },
+    {
+      "run_id": "dev-94366304fbd6f719e15b6644b42e5d96",
+      "request_sha": "c3ac73b65de96444c40f1ed1d8b93c4b82047f7db464785f0ac826826ce1a8dc"
+    },
+    {
+      "run_id": "dev-bdd297701b4e81a394858731c1f0d507",
+      "request_sha": "d7bde9287429b7ddfd8ca3271a962a5fa07ed5160dc0ad22f5cfc24e5da40470"
+    },
+    {
+      "run_id": "dev-c70e076a2892755cd8996748e1630e37",
+      "request_sha": "9ab0c4575b24e37e9fcfbd07da447171ffc2c7d70d93caaf91317388154d96ed"
+    },
+    {
+      "run_id": "dev-c9d041a8c699ec2976e607ef1654d8eb",
+      "request_sha": "7ee392f6a5291bce7d9d396f8a2e1c04b05cfddd5cc92df8f35fe3943a231a86"
+    },
+    {
+      "run_id": "dev-d34f5af4d47fd42877e8be5b9ef732e0",
+      "request_sha": "4ba59cbdce87019ffe21455c4e8d01dca00405bdcd60456bbef9775f111f8732"
+    },
+    {
+      "run_id": "dev-fe6d5467a16aa88ff234bad84b42b31c",
+      "request_sha": "2f7fd589dbfcfee48f2b0e4801fdc70c1382145f08bba0c731d213cc40138dc0"
+    },
+    {
+      "run_id": "dev-ffb2f900ba0d24277d2e7507b567e7fc",
+      "request_sha": "88dcf773b98f5bee3e0b41a0e7963c4dd473dd0b5b99e74d28bd79c3ba05b801"
+    }
+  ]
+}

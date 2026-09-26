@@ -1,0 +1,32 @@
+name: dev_select_wiki2_qwen_base
+description: >-
+  THE MATCHED BASELINE HALF of the wiki2 dev gate for the qwen3-8b family. `dev_baseline_wiki2`
+  exists on disk with 200 clean dev runs, but its prompted Inquirer is `openai/aws/gpt-oss-120b`
+  on the remote gateway (base_url_sha 810dc02d) -- MEASURED 2026-09-18 over all 200 manifests.
+  Every published qwen gate (dev_baseline_musique / dev_baseline_strategyqa as selected into
+  artifacts/gate/n1/parquet_qwen3-8b-dpo-stacked-notdone-both) pairs against `qwen3-8b-base` on
+  http://127.0.0.1:4000 (base_url_sha e6436030) instead. The baseline grid NAME is re-run once
+  per model family -- musique carries five variants of it (granite33-8b-base, gpt-oss-120b,
+  qwen3-1.7b-base, qwen3-4b-base, qwen3-8b-base) under the one name -- so the name is not a
+  selector and no qwen3-8b-base wiki2 baseline had ever been run.
+
+  Pairing the trained qwen arm against the gpt-oss-120b baseline would make the wiki2 cell a
+  MODEL-SWAP contrast (qwen3-8b trained vs gpt-oss-120b prompted) while musique and strategyqa
+  are TRAINING contrasts at a fixed base model. Same table, two estimands. This grid buys the
+  missing half instead.
+
+  The peer granite lane reached the same conclusion independently: it runs
+  `dev_select_wiki2_granite_base` with `granite33-8b-base`, not `dev_baseline_wiki2`.
+suites: [wiki2]
+split: dev
+exploratory: true
+# MECHANISM-IDENTICAL TO dev_select_wiki2, NOT TRANSCRIBED. Same split filter, same head-200 in
+# corpus order, no task_offset and no explicit ids -- so every task here has a twin in the
+# trained half by construction, which is what the gate's per-task pairing needs.
+n_tasks: 200
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+k: 5
+arms:
+  - inquirer_prompted

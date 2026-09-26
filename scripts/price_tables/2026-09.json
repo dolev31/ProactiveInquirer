@@ -1,0 +1,528 @@
+{
+ "_aliases": {
+  "azure/gpt-5.6-sol": "GPT-5.6 Sol through the litellm proxy's Azure deployment. $4.00 input / $0.40 cached / $20.00 output per million (developers.openai.com/api/docs/models/gpt-5.6-sol, read 2026-09-02). THESE ARE PROMOTIONAL RATES, stated as running at least through 2026-11-21; the standard rates are $5.00/$30.00 and a sweep priced after that date under this table version will understate spend. The >272k-token tier (2x input, 1.5x output) is not used: convlog prompts are capped near 5k tokens.",
+  "openai/Azure/gpt-4.1": "same model as openai/gpt-4.1, reached through the litellm proxy under its Azure deployment id; rate copied rather than re-sourced so the two cannot drift. ADDING A KEY RE-PRICES NOTHING: every run that resolved this pin before the row existed raised LLMConfigError, recorded $0.00 and counted the message in user_sim_unpriced_msgs, so no finished figure moves and the counter is what makes the gap auditable. Measured on the lane L4.1 costing: 98 of 98 user-simulator messages unpriced.",
+  "openai/Azure/gpt-5-2025-08-07": "same model as openai/gpt-5, reached through the litellm proxy under its Azure deployment id; rate copied rather than re-sourced so the two cannot drift",
+  "openai/aws/claude-opus-5": "Claude Opus 5 reached through the litellm proxy's AWS deployment; the key is the full string passed to --model, because that is what the pricing lookup sees. List price $5/$25 per million (anthropic.com/news/claude-opus-5, read 2026-09-02). cached_input is the published 'up to 90% savings with prompt caching' applied to the input rate.",
+  "openai/aws/claude-sonnet-5": "Claude Sonnet 5 through the litellm proxy's AWS deployment. $2/$10 per million, stated as permanent rather than introductory (anthropic.com/news/claude-sonnet-5, read 2026-09-03). cached_input is the published 'up to 90% savings with prompt caching' applied to input.",
+  "openai/gcp/gemini-3.1-pro-preview": "Gemini 3.1 Pro Preview through the litellm proxy's GCP deployment. Standard tier, prompts <= 200k tokens: $2.00/$12.00 per million (ai.google.dev/gemini-api/docs/pricing, read 2026-09-02); the >200k tier is $4/$18 and is NOT used here -- the convlog prompts are capped near 5k tokens. cached_input is set EQUAL to input because the source publishes no cached rate for this model: assuming a discount would understate spend, and a null reads as zero in `usd`, which is the same mistake in a worse disguise."
+ },
+ "_cached_semantics": "tok_cached is a SUBSET of tok_prompt. The uncached remainder is billed at input, the cached part at cached_input. A provider that reports cached tokens disjointly would be double-counted, so adapters must normalise to the subset convention.",
+ "_why": "USD is computed as tokens x these rates and NEVER read from a provider response field. A provider's dollar figure depends on account tier, promotional credits and the day it was billed, so it is not reproducible from an artifact; this table is. Rates are list prices as published 2026-08 and are pinned by ModelPin.price_table_version, so re-pricing a finished sweep is a re-read of parquet rather than a re-run.",
+ "_why_2026_09": "Adds azure/gpt-5.6-terra, the deployment PI_MODEL_ANNOTATOR is pinned to. A NEW VERSION rather than an edit to 2026-08, because ModelPin.price_table_version records which table a run was priced under and editing 2026-08 in place would silently re-price every finished sweep citing it. Rates read from OpenAI's own model documentation (developers.openai.com/api/docs/models/gpt-5.6-terra) on 2026-08-31: input $2, cached input $0.2, output $12 per 1M tokens. Sol and Luna are deliberately ABSENT: their input and output rates are public ($5/$30 and $0.20/$1.20) but their CACHED-input rates were not on the page read, and a guessed rate in this table is the silent-zero failure it exists to prevent. Add them when someone has read the number.",
+ "_why_local_deployments": "The qwen3-8b-* and qwen3-4b-* rows are LOCALLY SERVED weights: the vLLM process on the rented box (plan I.14) publishes one --lora-modules name per checkpoint, and nobody bills per token for them. $0.0 is the only honest per-token rate. Their real cost is GPU-HOUR AMORTISATION of the rented box, which a per-token table cannot express and which is recorded in the compute section of the plan instead; reading a $0 here as 'this arm was free' is a misreading of the table, not of the arm. The rows exist because PriceTable.rates is strict -- an unpriced model raises LLMConfigError -- so without them a sweep against the box refuses to start. WHY THIS IS AN EDIT TO 2026-09 AND NOT A NEW VERSION: _why_2026_09 forbids editing a table a finished sweep was priced under, because ModelPin.price_table_version records which table priced a run. That prohibition is on CHANGING A RATE. These ids have never run -- measured 2026-09-11, `calls.parquet WHERE model LIKE '%qwen%'` returns 0 rows -- so naming them re-prices nothing that exists.",
+ "fallback": {
+  "cached_input": 0.0,
+  "input": 0.0,
+  "output": 0.0,
+  "reasoning": null
+ },
+ "models": {
+  "anthropic/claude-haiku-4-5": {
+   "cached_input": 0.1,
+   "input": 1.0,
+   "output": 5.0,
+   "reasoning": null
+  },
+  "anthropic/claude-opus-4-1": {
+   "cached_input": 1.5,
+   "input": 15.0,
+   "output": 75.0,
+   "reasoning": null
+  },
+  "anthropic/claude-sonnet-4-5": {
+   "cached_input": 0.3,
+   "input": 3.0,
+   "output": 15.0,
+   "reasoning": null
+  },
+  "aws/gpt-oss-120b": {
+   "cached_input": null,
+   "input": 0.15,
+   "output": 0.75,
+   "reasoning": null
+  },
+  "azure/gpt-5.6-sol": {
+   "cached_input": 0.4,
+   "input": 4.0,
+   "output": 20.0,
+   "reasoning": null
+  },
+  "azure/gpt-5.6-terra": {
+   "cached_input": 0.2,
+   "input": 2.0,
+   "output": 12.0,
+   "reasoning": null
+  },
+  "azure/gpt-oss-120b": {
+   "cached_input": null,
+   "input": 0.15,
+   "output": 0.75,
+   "reasoning": null
+  },
+  "fireworks_ai/accounts/fireworks/models/qwen3-8b": {
+   "cached_input": 0.2,
+   "input": 0.2,
+   "output": 0.2,
+   "reasoning": null
+  },
+  "gemini/gemini-2.5-flash": {
+   "cached_input": 0.075,
+   "input": 0.3,
+   "output": 2.5,
+   "reasoning": null
+  },
+  "gemini/gemini-2.5-pro": {
+   "cached_input": 0.31,
+   "input": 1.25,
+   "output": 10.0,
+   "reasoning": null
+  },
+  "gptoss-20b-sft-headline": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "granite33-8b-base": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "granite33-8b-sft-headline-s0": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "granite33-8b-sft-headline-s1": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "granite33-8b-sft-headline-s2": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "groq/llama-3.3-70b-versatile": {
+   "cached_input": 0.59,
+   "input": 0.59,
+   "output": 0.79,
+   "reasoning": null
+  },
+  "groq/openai/gpt-oss-120b": {
+   "cached_input": null,
+   "input": 0.15,
+   "output": 0.75,
+   "reasoning": null
+  },
+  "groq/openai/gpt-oss-20b": {
+   "cached_input": null,
+   "input": 0.1,
+   "output": 0.5,
+   "reasoning": null
+  },
+  "groq/qwen3-32b": {
+   "cached_input": 0.29,
+   "input": 0.29,
+   "output": 0.59,
+   "reasoning": null
+  },
+  "hosted_vllm/qwen3-8b": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "openai/Azure/gpt-4.1": {
+   "cached_input": 0.5,
+   "input": 2.0,
+   "output": 8.0,
+   "reasoning": null
+  },
+  "openai/Azure/gpt-5-2025-08-07": {
+   "cached_input": 0.125,
+   "input": 1.25,
+   "output": 10.0,
+   "reasoning": null
+  },
+  "openai/aws/claude-opus-5": {
+   "cached_input": 0.5,
+   "input": 5.0,
+   "output": 25.0,
+   "reasoning": null
+  },
+  "openai/aws/claude-sonnet-5": {
+   "cached_input": 0.2,
+   "input": 2.0,
+   "output": 10.0,
+   "reasoning": null
+  },
+  "openai/aws/gpt-oss-120b": {
+   "cached_input": null,
+   "input": 0.15,
+   "output": 0.75,
+   "reasoning": null
+  },
+  "openai/azure/gpt-oss-120b": {
+   "cached_input": null,
+   "input": 0.15,
+   "output": 0.75,
+   "reasoning": null
+  },
+  "openai/gcp/gemini-3.1-pro-preview": {
+   "cached_input": 2.0,
+   "input": 2.0,
+   "output": 12.0,
+   "reasoning": null
+  },
+  "openai/gpt-4.1": {
+   "cached_input": 0.5,
+   "input": 2.0,
+   "output": 8.0,
+   "reasoning": null
+  },
+  "openai/gpt-5": {
+   "cached_input": 0.125,
+   "input": 1.25,
+   "output": 10.0,
+   "reasoning": null
+  },
+  "openai/gpt-5-mini": {
+   "cached_input": 0.025,
+   "input": 0.25,
+   "output": 2.0,
+   "reasoning": null
+  },
+  "qwen3-1.7b-base": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-1.7b-sft-headline-s0": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-1.7b-sft-headline-s1": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-1.7b-sft-headline-s2": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-32b-base": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-32b-sft-headline": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-32b-sft-headline-s1-step1600": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-base": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-dpo-headline-control": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-easyfirst-s0": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-easyfirst-s1": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-easyfirst-s2": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-hardfirst-s0": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-hardfirst-s1": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-hardfirst-s2": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-nll": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-s1": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-s2": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-4b-sft-headline-stop": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-base": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-control": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-headline-control": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-headline-notdone-both": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-headline-notdone-only": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-headline-rater": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-headline-reaches": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-headline-stopcontrast": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-pooled-control": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-pooled-rater": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-pooled-reaches": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-rater": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-reaches": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-stacked-notdone-both": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-stacked-notdone-both-s1": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-dpo-stacked-notdone-both-s2": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-final": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-headline": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-headline-answernode": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-headline-refresh": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-headline-s1": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-headline-s2": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-headline-stop": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-stop": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-sw01": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-sw025": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-sw025-nll1600": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-sw025-stop1400": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-sw05": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "qwen3-8b-sft-sw05-nll800": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "stub/echo": {
+   "cached_input": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "reasoning": null
+  },
+  "together_ai/Qwen/Qwen2.5-72B-Instruct-Turbo": {
+   "cached_input": 1.2,
+   "input": 1.2,
+   "output": 1.2,
+   "reasoning": null
+  }
+ },
+ "unit": "usd_per_1m_tokens",
+ "version": "2026-09"
+}

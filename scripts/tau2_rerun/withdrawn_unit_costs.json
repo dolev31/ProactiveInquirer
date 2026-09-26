@@ -1,0 +1,1899 @@
+{
+  "_what": "per-unit cost and wall of the withdrawn tau2 transfer campaign, one code_version per suite; written by `rerun.py stats`",
+  "cells": {
+    "tau2_airline|inquirer_prompted|tau2_base": {
+      "code_version": "0276ce8116511a6f8df8cb7ae7fcc56710911229",
+      "n": 102,
+      "n_calls_median": 75.0,
+      "n_turns_median": 13.5,
+      "status": {
+        "ok": 102
+      },
+      "stock_agent_usd_total": 0.0,
+      "usd_billed": {
+        "max": 0.9429,
+        "mean": 0.2961,
+        "median": 0.248,
+        "p90": 0.604
+      },
+      "usd_metered": {
+        "max": 1.2535,
+        "mean": 0.5728,
+        "median": 0.5422,
+        "p90": 0.9648
+      },
+      "user_sim_unpriced_msgs_per_unit": 2.412,
+      "wall_s": {
+        "max": 917.639,
+        "mean": 388.5156,
+        "median": 352.612,
+        "p90": 711.2495
+      }
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop": {
+      "code_version": "0276ce8116511a6f8df8cb7ae7fcc56710911229",
+      "n": 102,
+      "n_calls_median": 65.5,
+      "n_turns_median": 11.0,
+      "status": {
+        "ok": 102
+      },
+      "stock_agent_usd_total": 0.0,
+      "usd_billed": {
+        "max": 1.055,
+        "mean": 0.2839,
+        "median": 0.2013,
+        "p90": 0.627
+      },
+      "usd_metered": {
+        "max": 1.418,
+        "mean": 0.5518,
+        "median": 0.498,
+        "p90": 1.006
+      },
+      "user_sim_unpriced_msgs_per_unit": 2.412,
+      "wall_s": {
+        "max": 1095.063,
+        "mean": 383.4508,
+        "median": 323.583,
+        "p90": 788.194
+      }
+    },
+    "tau2_airline|inquirer_trained|tau2_base": {
+      "code_version": "0276ce8116511a6f8df8cb7ae7fcc56710911229",
+      "n": 102,
+      "n_calls_median": 72.5,
+      "n_turns_median": 15.0,
+      "status": {
+        "ok": 102
+      },
+      "stock_agent_usd_total": 0.0,
+      "usd_billed": {
+        "max": 0.988,
+        "mean": 0.3305,
+        "median": 0.2894,
+        "p90": 0.6344
+      },
+      "usd_metered": {
+        "max": 1.413,
+        "mean": 0.5983,
+        "median": 0.6022,
+        "p90": 0.9753
+      },
+      "user_sim_unpriced_msgs_per_unit": 2.412,
+      "wall_s": {
+        "max": 881.281,
+        "mean": 371.8755,
+        "median": 350.3005,
+        "p90": 637.4318
+      }
+    },
+    "tau2_airline|inquirer_trained|tau2_stop": {
+      "code_version": "0276ce8116511a6f8df8cb7ae7fcc56710911229",
+      "n": 102,
+      "n_calls_median": 74.0,
+      "n_turns_median": 15.0,
+      "status": {
+        "ok": 102
+      },
+      "stock_agent_usd_total": 0.0,
+      "usd_billed": {
+        "max": 1.3739,
+        "mean": 0.3365,
+        "median": 0.3093,
+        "p90": 0.6662
+      },
+      "usd_metered": {
+        "max": 1.6804,
+        "mean": 0.6318,
+        "median": 0.6118,
+        "p90": 1.0582
+      },
+      "user_sim_unpriced_msgs_per_unit": 2.412,
+      "wall_s": {
+        "max": 908.317,
+        "mean": 381.3128,
+        "median": 367.038,
+        "p90": 700.1317
+      }
+    },
+    "tau2_retail|inquirer_prompted|tau2_base": {
+      "code_version": "ecdbb88ad83c98ebf97f9fde608ad0d105844157",
+      "n": 102,
+      "n_calls_median": 63.0,
+      "n_turns_median": 8.0,
+      "status": {
+        "ok": 102
+      },
+      "stock_agent_usd_total": 0.0,
+      "usd_billed": {
+        "max": 1.073,
+        "mean": 0.292,
+        "median": 0.2093,
+        "p90": 0.717
+      },
+      "usd_metered": {
+        "max": 1.4806,
+        "mean": 0.4791,
+        "median": 0.4133,
+        "p90": 0.9983
+      },
+      "user_sim_unpriced_msgs_per_unit": 3.265,
+      "wall_s": {
+        "max": 1275.042,
+        "mean": 450.1101,
+        "median": 368.727,
+        "p90": 922.0253
+      }
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop": {
+      "code_version": "ecdbb88ad83c98ebf97f9fde608ad0d105844157",
+      "n": 102,
+      "n_calls_median": 62.5,
+      "n_turns_median": 9.0,
+      "status": {
+        "ok": 102
+      },
+      "stock_agent_usd_total": 0.0,
+      "usd_billed": {
+        "max": 0.9441,
+        "mean": 0.256,
+        "median": 0.1984,
+        "p90": 0.619
+      },
+      "usd_metered": {
+        "max": 1.2711,
+        "mean": 0.4399,
+        "median": 0.3992,
+        "p90": 0.9226
+      },
+      "user_sim_unpriced_msgs_per_unit": 3.275,
+      "wall_s": {
+        "max": 1159.537,
+        "mean": 405.6677,
+        "median": 350.156,
+        "p90": 769.3337
+      }
+    },
+    "tau2_retail|inquirer_trained|tau2_base": {
+      "code_version": "ecdbb88ad83c98ebf97f9fde608ad0d105844157",
+      "n": 102,
+      "n_calls_median": 82.0,
+      "n_turns_median": 16.0,
+      "status": {
+        "ok": 102
+      },
+      "stock_agent_usd_total": 0.0,
+      "usd_billed": {
+        "max": 0.882,
+        "mean": 0.3193,
+        "median": 0.2865,
+        "p90": 0.6147
+      },
+      "usd_metered": {
+        "max": 1.092,
+        "mean": 0.5456,
+        "median": 0.5277,
+        "p90": 0.8682
+      },
+      "user_sim_unpriced_msgs_per_unit": 3.265,
+      "wall_s": {
+        "max": 904.248,
+        "mean": 417.3063,
+        "median": 385.721,
+        "p90": 653.4654
+      }
+    },
+    "tau2_retail|inquirer_trained|tau2_stop": {
+      "code_version": "ecdbb88ad83c98ebf97f9fde608ad0d105844157",
+      "n": 102,
+      "n_calls_median": 83.5,
+      "n_turns_median": 16.0,
+      "status": {
+        "ok": 102
+      },
+      "stock_agent_usd_total": 0.0,
+      "usd_billed": {
+        "max": 0.9663,
+        "mean": 0.3377,
+        "median": 0.2843,
+        "p90": 0.7204
+      },
+      "usd_metered": {
+        "max": 1.3643,
+        "mean": 0.5783,
+        "median": 0.5395,
+        "p90": 0.9928
+      },
+      "user_sim_unpriced_msgs_per_unit": 3.265,
+      "wall_s": {
+        "max": 996.051,
+        "mean": 429.2887,
+        "median": 396.906,
+        "p90": 761.1231
+      }
+    }
+  },
+  "points": {
+    "tau2_airline|inquirer_prompted|tau2_base|15672d51ffab6df3a9d18054812deabfdab5bc4b96ca0a45b633a08c0d8fb00e|19": {
+      "n": 3,
+      "usd_billed_mean": 0.4102,
+      "usd_metered_mean": 0.7508,
+      "wall_s_mean": 554.96
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|16b02864016f6ced300cc9a6ff41426c839557be16fbebd3f482ff3550682e0f|2": {
+      "n": 3,
+      "usd_billed_mean": 0.4432,
+      "usd_metered_mean": 0.8638,
+      "wall_s_mean": 507.06
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9|13": {
+      "n": 3,
+      "usd_billed_mean": 0.3309,
+      "usd_metered_mean": 0.6731,
+      "wall_s_mean": 461.89
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9|21": {
+      "n": 3,
+      "usd_billed_mean": 0.476,
+      "usd_metered_mean": 0.7983,
+      "wall_s_mean": 606.05
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|1d4d7b28920de0608104dad152758253c0649ef9fbe5a7e0df1585e5ea386ea4|12": {
+      "n": 3,
+      "usd_billed_mean": 0.6179,
+      "usd_metered_mean": 0.8903,
+      "wall_s_mean": 706.3
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|20437840b53a86206372536edff93e33ce55cc664a4cb37f345123dc5f4f7c29|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2759,
+      "usd_metered_mean": 0.568,
+      "wall_s_mean": 355.23
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|2b994204127eb0b541d640a89e89ddf5720b6b1b12609e631e59ca0bfac9418f|6": {
+      "n": 3,
+      "usd_billed_mean": 0.2207,
+      "usd_metered_mean": 0.3906,
+      "wall_s_mean": 274.16
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|2d37c35f32705d609113aeecf6d82f9008da7f1f2b8238b5c6998048df5a3bb4|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0276,
+      "usd_metered_mean": 0.2015,
+      "wall_s_mean": 67.28
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|2e92d38652041e1c8607c6d05ca076a16542d82c339eadfaa09bece3b01759c7|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2546,
+      "usd_metered_mean": 0.5788,
+      "wall_s_mean": 451.41
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|2f6e4ce3df1fbfad9c8d8a7b6bd7aa3a74480ef0dfdc290e9613d3f8173171e1|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2267,
+      "usd_metered_mean": 0.4305,
+      "wall_s_mean": 286.53
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|32ecc7ff012163bd51c48d2b3652555b267653f9b5031f245075d48cef0088c7|6": {
+      "n": 3,
+      "usd_billed_mean": 0.5096,
+      "usd_metered_mean": 0.8594,
+      "wall_s_mean": 575.67
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514|4": {
+      "n": 3,
+      "usd_billed_mean": 0.4671,
+      "usd_metered_mean": 0.6487,
+      "wall_s_mean": 538.51
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514|71": {
+      "n": 3,
+      "usd_billed_mean": 0.5208,
+      "usd_metered_mean": 0.8607,
+      "wall_s_mean": 687.69
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|61322b49ed9ca1ad6de9ecb8969466df39f03afd9b189b3739a5cb051e2e8ae6|18": {
+      "n": 3,
+      "usd_billed_mean": 0.4882,
+      "usd_metered_mean": 0.8628,
+      "wall_s_mean": 642.21
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|6ed9f438a4d17c25a553ced20e077ab9712b17771ef8ec5e83d8ea42d487be2f|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1253,
+      "usd_metered_mean": 0.3969,
+      "wall_s_mean": 233.03
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|741ec105a634cac94c295dca30e8b13930d9cb921022b6990c2a80ac18716f5c|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1389,
+      "usd_metered_mean": 0.4094,
+      "wall_s_mean": 250.17
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|8061a2f31af5c0a5479988de3b2794ec0e9e2c67762f86700c22de516e88124e|19": {
+      "n": 3,
+      "usd_billed_mean": 0.2774,
+      "usd_metered_mean": 0.5677,
+      "wall_s_mean": 379.03
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|80dd4f5afd2d15eede29b35e627e26d5aa48aa46933796aeea89c85bc49f0b96|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1995,
+      "usd_metered_mean": 0.4986,
+      "wall_s_mean": 389.2
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|8df2acb202fb8478652a661eb14bf9624ae65f8d854af0975e20e361733371dc|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3744,
+      "usd_metered_mean": 0.6954,
+      "wall_s_mean": 383.08
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa|13": {
+      "n": 3,
+      "usd_billed_mean": 0.3864,
+      "usd_metered_mean": 0.8276,
+      "wall_s_mean": 499.82
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1615,
+      "usd_metered_mean": 0.4746,
+      "wall_s_mean": 270.97
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3613,
+      "usd_metered_mean": 0.5754,
+      "wall_s_mean": 401.0
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292|21": {
+      "n": 3,
+      "usd_billed_mean": 0.4397,
+      "usd_metered_mean": 0.7024,
+      "wall_s_mean": 471.44
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|ab0a7a0c048079ad40310e86286777909ae16cb95071c5971a701a091d71a986|4": {
+      "n": 3,
+      "usd_billed_mean": 0.3678,
+      "usd_metered_mean": 0.7753,
+      "wall_s_mean": 529.15
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|abc0990ec2eabc5f508f1bbd908f17d80293316229ffa85e73042eaeaded07c1|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1959,
+      "usd_metered_mean": 0.3986,
+      "wall_s_mean": 257.76
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|b1d32a011f2aab2fe86251fc9409ee46d7d406d0686574b1bf9bafb0920ea428|19": {
+      "n": 3,
+      "usd_billed_mean": 0.1587,
+      "usd_metered_mean": 0.3917,
+      "wall_s_mean": 261.81
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|b43536ce228faae54560b811405b19c15e77a5cc49ba2d2ab5577481c3795f17|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2136,
+      "usd_metered_mean": 0.3836,
+      "wall_s_mean": 262.71
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|ba53ba1ee895adeea2530bda1a52a097fee843786d88753e88f08263b3332db1|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1313,
+      "usd_metered_mean": 0.3297,
+      "wall_s_mean": 216.36
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|c647f80989dc28b7009d72f9ff8ac0081b6ba78a3de5b85f017efeb2f828f37a|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1882,
+      "usd_metered_mean": 0.3918,
+      "wall_s_mean": 279.49
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|d928a6160aaab78fe02e30027351f5a20bf928e3dc93586e8f86a2f2c90e8222|2": {
+      "n": 3,
+      "usd_billed_mean": 0.364,
+      "usd_metered_mean": 0.6288,
+      "wall_s_mean": 404.21
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|e1daf8e803963af80f1e1cba044ce411e8929347804af20ce1b29534fe90b1b4|18": {
+      "n": 3,
+      "usd_billed_mean": 0.0314,
+      "usd_metered_mean": 0.1345,
+      "wall_s_mean": 86.47
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|ea3aadeef258338524cb2837c8bb0a030ab3480410d1cba8c5f2561e58866813|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2835,
+      "usd_metered_mean": 0.5105,
+      "wall_s_mean": 343.31
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|ec8239338323cfdee8ee37bbdcbd1e9d399be078545a7405ecc4939a2a389770|8": {
+      "n": 3,
+      "usd_billed_mean": 0.1467,
+      "usd_metered_mean": 0.3276,
+      "wall_s_mean": 208.71
+    },
+    "tau2_airline|inquirer_prompted|tau2_base|fb857900346cc775b009741a8e6f20239c4a7cf14cd77b6647ecbc717a33c075|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2508,
+      "usd_metered_mean": 0.6784,
+      "wall_s_mean": 366.84
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|15672d51ffab6df3a9d18054812deabfdab5bc4b96ca0a45b633a08c0d8fb00e|19": {
+      "n": 3,
+      "usd_billed_mean": 0.2878,
+      "usd_metered_mean": 0.758,
+      "wall_s_mean": 386.96
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|16b02864016f6ced300cc9a6ff41426c839557be16fbebd3f482ff3550682e0f|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3567,
+      "usd_metered_mean": 0.6902,
+      "wall_s_mean": 493.98
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9|13": {
+      "n": 3,
+      "usd_billed_mean": 0.2367,
+      "usd_metered_mean": 0.5798,
+      "wall_s_mean": 334.59
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9|21": {
+      "n": 3,
+      "usd_billed_mean": 0.3769,
+      "usd_metered_mean": 0.5999,
+      "wall_s_mean": 487.63
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|1d4d7b28920de0608104dad152758253c0649ef9fbe5a7e0df1585e5ea386ea4|12": {
+      "n": 3,
+      "usd_billed_mean": 0.2109,
+      "usd_metered_mean": 0.5025,
+      "wall_s_mean": 402.97
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|20437840b53a86206372536edff93e33ce55cc664a4cb37f345123dc5f4f7c29|2": {
+      "n": 3,
+      "usd_billed_mean": 0.431,
+      "usd_metered_mean": 0.6899,
+      "wall_s_mean": 533.05
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|2b994204127eb0b541d640a89e89ddf5720b6b1b12609e631e59ca0bfac9418f|6": {
+      "n": 3,
+      "usd_billed_mean": 0.2843,
+      "usd_metered_mean": 0.552,
+      "wall_s_mean": 351.05
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|2d37c35f32705d609113aeecf6d82f9008da7f1f2b8238b5c6998048df5a3bb4|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0643,
+      "usd_metered_mean": 0.3036,
+      "wall_s_mean": 119.91
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|2e92d38652041e1c8607c6d05ca076a16542d82c339eadfaa09bece3b01759c7|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1773,
+      "usd_metered_mean": 0.4913,
+      "wall_s_mean": 422.53
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|2f6e4ce3df1fbfad9c8d8a7b6bd7aa3a74480ef0dfdc290e9613d3f8173171e1|2": {
+      "n": 3,
+      "usd_billed_mean": 0.4146,
+      "usd_metered_mean": 0.7324,
+      "wall_s_mean": 614.93
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|32ecc7ff012163bd51c48d2b3652555b267653f9b5031f245075d48cef0088c7|6": {
+      "n": 3,
+      "usd_billed_mean": 0.2872,
+      "usd_metered_mean": 0.6603,
+      "wall_s_mean": 400.71
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514|4": {
+      "n": 3,
+      "usd_billed_mean": 0.4558,
+      "usd_metered_mean": 0.6575,
+      "wall_s_mean": 553.9
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514|71": {
+      "n": 3,
+      "usd_billed_mean": 0.8509,
+      "usd_metered_mean": 1.1625,
+      "wall_s_mean": 945.61
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|61322b49ed9ca1ad6de9ecb8969466df39f03afd9b189b3739a5cb051e2e8ae6|18": {
+      "n": 3,
+      "usd_billed_mean": 0.0502,
+      "usd_metered_mean": 0.1713,
+      "wall_s_mean": 104.2
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|6ed9f438a4d17c25a553ced20e077ab9712b17771ef8ec5e83d8ea42d487be2f|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1045,
+      "usd_metered_mean": 0.3244,
+      "wall_s_mean": 194.09
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|741ec105a634cac94c295dca30e8b13930d9cb921022b6990c2a80ac18716f5c|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1318,
+      "usd_metered_mean": 0.3074,
+      "wall_s_mean": 198.69
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|8061a2f31af5c0a5479988de3b2794ec0e9e2c67762f86700c22de516e88124e|19": {
+      "n": 3,
+      "usd_billed_mean": 0.4455,
+      "usd_metered_mean": 0.8315,
+      "wall_s_mean": 453.35
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|80dd4f5afd2d15eede29b35e627e26d5aa48aa46933796aeea89c85bc49f0b96|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1855,
+      "usd_metered_mean": 0.3846,
+      "wall_s_mean": 316.12
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|8df2acb202fb8478652a661eb14bf9624ae65f8d854af0975e20e361733371dc|2": {
+      "n": 3,
+      "usd_billed_mean": 0.5324,
+      "usd_metered_mean": 0.9263,
+      "wall_s_mean": 518.83
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa|13": {
+      "n": 3,
+      "usd_billed_mean": 0.3454,
+      "usd_metered_mean": 0.8331,
+      "wall_s_mean": 487.49
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2993,
+      "usd_metered_mean": 0.6308,
+      "wall_s_mean": 408.3
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292|2": {
+      "n": 3,
+      "usd_billed_mean": 0.4153,
+      "usd_metered_mean": 0.6761,
+      "wall_s_mean": 500.59
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292|21": {
+      "n": 3,
+      "usd_billed_mean": 0.3214,
+      "usd_metered_mean": 0.5577,
+      "wall_s_mean": 384.0
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|ab0a7a0c048079ad40310e86286777909ae16cb95071c5971a701a091d71a986|4": {
+      "n": 3,
+      "usd_billed_mean": 0.384,
+      "usd_metered_mean": 0.8643,
+      "wall_s_mean": 600.35
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|abc0990ec2eabc5f508f1bbd908f17d80293316229ffa85e73042eaeaded07c1|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2864,
+      "usd_metered_mean": 0.5221,
+      "wall_s_mean": 307.79
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|b1d32a011f2aab2fe86251fc9409ee46d7d406d0686574b1bf9bafb0920ea428|19": {
+      "n": 3,
+      "usd_billed_mean": 0.2304,
+      "usd_metered_mean": 0.39,
+      "wall_s_mean": 331.8
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|b43536ce228faae54560b811405b19c15e77a5cc49ba2d2ab5577481c3795f17|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1846,
+      "usd_metered_mean": 0.3572,
+      "wall_s_mean": 254.66
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|ba53ba1ee895adeea2530bda1a52a097fee843786d88753e88f08263b3332db1|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1445,
+      "usd_metered_mean": 0.3708,
+      "wall_s_mean": 249.25
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|c647f80989dc28b7009d72f9ff8ac0081b6ba78a3de5b85f017efeb2f828f37a|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1056,
+      "usd_metered_mean": 0.2271,
+      "wall_s_mean": 163.61
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|d928a6160aaab78fe02e30027351f5a20bf928e3dc93586e8f86a2f2c90e8222|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2249,
+      "usd_metered_mean": 0.3693,
+      "wall_s_mean": 316.79
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|e1daf8e803963af80f1e1cba044ce411e8929347804af20ce1b29534fe90b1b4|18": {
+      "n": 3,
+      "usd_billed_mean": 0.0334,
+      "usd_metered_mean": 0.0781,
+      "wall_s_mean": 65.0
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|ea3aadeef258338524cb2837c8bb0a030ab3480410d1cba8c5f2561e58866813|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1944,
+      "usd_metered_mean": 0.2781,
+      "wall_s_mean": 252.91
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|ec8239338323cfdee8ee37bbdcbd1e9d399be078545a7405ecc4939a2a389770|8": {
+      "n": 3,
+      "usd_billed_mean": 0.3421,
+      "usd_metered_mean": 0.7078,
+      "wall_s_mean": 452.05
+    },
+    "tau2_airline|inquirer_prompted|tau2_stop|fb857900346cc775b009741a8e6f20239c4a7cf14cd77b6647ecbc717a33c075|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2572,
+      "usd_metered_mean": 0.5745,
+      "wall_s_mean": 429.64
+    },
+    "tau2_airline|inquirer_trained|tau2_base|15672d51ffab6df3a9d18054812deabfdab5bc4b96ca0a45b633a08c0d8fb00e|19": {
+      "n": 3,
+      "usd_billed_mean": 0.4906,
+      "usd_metered_mean": 0.9038,
+      "wall_s_mean": 532.37
+    },
+    "tau2_airline|inquirer_trained|tau2_base|16b02864016f6ced300cc9a6ff41426c839557be16fbebd3f482ff3550682e0f|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3487,
+      "usd_metered_mean": 0.6164,
+      "wall_s_mean": 351.66
+    },
+    "tau2_airline|inquirer_trained|tau2_base|1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9|13": {
+      "n": 3,
+      "usd_billed_mean": 0.3877,
+      "usd_metered_mean": 0.644,
+      "wall_s_mean": 399.43
+    },
+    "tau2_airline|inquirer_trained|tau2_base|1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9|21": {
+      "n": 3,
+      "usd_billed_mean": 0.2917,
+      "usd_metered_mean": 0.6584,
+      "wall_s_mean": 355.63
+    },
+    "tau2_airline|inquirer_trained|tau2_base|1d4d7b28920de0608104dad152758253c0649ef9fbe5a7e0df1585e5ea386ea4|12": {
+      "n": 3,
+      "usd_billed_mean": 0.4253,
+      "usd_metered_mean": 0.7033,
+      "wall_s_mean": 444.53
+    },
+    "tau2_airline|inquirer_trained|tau2_base|20437840b53a86206372536edff93e33ce55cc664a4cb37f345123dc5f4f7c29|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3256,
+      "usd_metered_mean": 0.5539,
+      "wall_s_mean": 322.34
+    },
+    "tau2_airline|inquirer_trained|tau2_base|2b994204127eb0b541d640a89e89ddf5720b6b1b12609e631e59ca0bfac9418f|6": {
+      "n": 3,
+      "usd_billed_mean": 0.4036,
+      "usd_metered_mean": 0.8494,
+      "wall_s_mean": 508.18
+    },
+    "tau2_airline|inquirer_trained|tau2_base|2d37c35f32705d609113aeecf6d82f9008da7f1f2b8238b5c6998048df5a3bb4|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0912,
+      "usd_metered_mean": 0.2211,
+      "wall_s_mean": 97.19
+    },
+    "tau2_airline|inquirer_trained|tau2_base|2e92d38652041e1c8607c6d05ca076a16542d82c339eadfaa09bece3b01759c7|4": {
+      "n": 3,
+      "usd_billed_mean": 0.4441,
+      "usd_metered_mean": 0.6419,
+      "wall_s_mean": 411.32
+    },
+    "tau2_airline|inquirer_trained|tau2_base|2f6e4ce3df1fbfad9c8d8a7b6bd7aa3a74480ef0dfdc290e9613d3f8173171e1|2": {
+      "n": 3,
+      "usd_billed_mean": 0.318,
+      "usd_metered_mean": 0.606,
+      "wall_s_mean": 311.99
+    },
+    "tau2_airline|inquirer_trained|tau2_base|32ecc7ff012163bd51c48d2b3652555b267653f9b5031f245075d48cef0088c7|6": {
+      "n": 3,
+      "usd_billed_mean": 0.2006,
+      "usd_metered_mean": 0.4756,
+      "wall_s_mean": 244.34
+    },
+    "tau2_airline|inquirer_trained|tau2_base|3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514|4": {
+      "n": 3,
+      "usd_billed_mean": 0.5692,
+      "usd_metered_mean": 0.8557,
+      "wall_s_mean": 538.38
+    },
+    "tau2_airline|inquirer_trained|tau2_base|3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514|71": {
+      "n": 3,
+      "usd_billed_mean": 0.798,
+      "usd_metered_mean": 1.1187,
+      "wall_s_mean": 741.22
+    },
+    "tau2_airline|inquirer_trained|tau2_base|61322b49ed9ca1ad6de9ecb8969466df39f03afd9b189b3739a5cb051e2e8ae6|18": {
+      "n": 3,
+      "usd_billed_mean": 0.29,
+      "usd_metered_mean": 0.4732,
+      "wall_s_mean": 343.44
+    },
+    "tau2_airline|inquirer_trained|tau2_base|6ed9f438a4d17c25a553ced20e077ab9712b17771ef8ec5e83d8ea42d487be2f|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1042,
+      "usd_metered_mean": 0.3038,
+      "wall_s_mean": 178.85
+    },
+    "tau2_airline|inquirer_trained|tau2_base|741ec105a634cac94c295dca30e8b13930d9cb921022b6990c2a80ac18716f5c|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2093,
+      "usd_metered_mean": 0.4381,
+      "wall_s_mean": 284.15
+    },
+    "tau2_airline|inquirer_trained|tau2_base|8061a2f31af5c0a5479988de3b2794ec0e9e2c67762f86700c22de516e88124e|19": {
+      "n": 3,
+      "usd_billed_mean": 0.2867,
+      "usd_metered_mean": 0.6022,
+      "wall_s_mean": 298.88
+    },
+    "tau2_airline|inquirer_trained|tau2_base|80dd4f5afd2d15eede29b35e627e26d5aa48aa46933796aeea89c85bc49f0b96|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2424,
+      "usd_metered_mean": 0.5118,
+      "wall_s_mean": 355.14
+    },
+    "tau2_airline|inquirer_trained|tau2_base|8df2acb202fb8478652a661eb14bf9624ae65f8d854af0975e20e361733371dc|2": {
+      "n": 3,
+      "usd_billed_mean": 0.424,
+      "usd_metered_mean": 0.8304,
+      "wall_s_mean": 470.08
+    },
+    "tau2_airline|inquirer_trained|tau2_base|9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa|13": {
+      "n": 3,
+      "usd_billed_mean": 0.6462,
+      "usd_metered_mean": 0.9427,
+      "wall_s_mean": 717.13
+    },
+    "tau2_airline|inquirer_trained|tau2_base|9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa|2": {
+      "n": 3,
+      "usd_billed_mean": 0.5781,
+      "usd_metered_mean": 0.944,
+      "wall_s_mean": 611.52
+    },
+    "tau2_airline|inquirer_trained|tau2_base|9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292|2": {
+      "n": 3,
+      "usd_billed_mean": 0.358,
+      "usd_metered_mean": 0.561,
+      "wall_s_mean": 401.27
+    },
+    "tau2_airline|inquirer_trained|tau2_base|9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292|21": {
+      "n": 3,
+      "usd_billed_mean": 0.1654,
+      "usd_metered_mean": 0.4202,
+      "wall_s_mean": 189.37
+    },
+    "tau2_airline|inquirer_trained|tau2_base|ab0a7a0c048079ad40310e86286777909ae16cb95071c5971a701a091d71a986|4": {
+      "n": 3,
+      "usd_billed_mean": 0.5471,
+      "usd_metered_mean": 0.8887,
+      "wall_s_mean": 619.37
+    },
+    "tau2_airline|inquirer_trained|tau2_base|abc0990ec2eabc5f508f1bbd908f17d80293316229ffa85e73042eaeaded07c1|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1812,
+      "usd_metered_mean": 0.5169,
+      "wall_s_mean": 276.84
+    },
+    "tau2_airline|inquirer_trained|tau2_base|b1d32a011f2aab2fe86251fc9409ee46d7d406d0686574b1bf9bafb0920ea428|19": {
+      "n": 3,
+      "usd_billed_mean": 0.3901,
+      "usd_metered_mean": 0.7526,
+      "wall_s_mean": 472.53
+    },
+    "tau2_airline|inquirer_trained|tau2_base|b43536ce228faae54560b811405b19c15e77a5cc49ba2d2ab5577481c3795f17|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1602,
+      "usd_metered_mean": 0.3721,
+      "wall_s_mean": 201.37
+    },
+    "tau2_airline|inquirer_trained|tau2_base|ba53ba1ee895adeea2530bda1a52a097fee843786d88753e88f08263b3332db1|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2042,
+      "usd_metered_mean": 0.4164,
+      "wall_s_mean": 300.53
+    },
+    "tau2_airline|inquirer_trained|tau2_base|c647f80989dc28b7009d72f9ff8ac0081b6ba78a3de5b85f017efeb2f828f37a|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1475,
+      "usd_metered_mean": 0.2959,
+      "wall_s_mean": 180.1
+    },
+    "tau2_airline|inquirer_trained|tau2_base|d928a6160aaab78fe02e30027351f5a20bf928e3dc93586e8f86a2f2c90e8222|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2929,
+      "usd_metered_mean": 0.5413,
+      "wall_s_mean": 351.24
+    },
+    "tau2_airline|inquirer_trained|tau2_base|e1daf8e803963af80f1e1cba044ce411e8929347804af20ce1b29534fe90b1b4|18": {
+      "n": 3,
+      "usd_billed_mean": 0.0876,
+      "usd_metered_mean": 0.1552,
+      "wall_s_mean": 113.63
+    },
+    "tau2_airline|inquirer_trained|tau2_base|ea3aadeef258338524cb2837c8bb0a030ab3480410d1cba8c5f2561e58866813|2": {
+      "n": 3,
+      "usd_billed_mean": 0.281,
+      "usd_metered_mean": 0.5329,
+      "wall_s_mean": 362.38
+    },
+    "tau2_airline|inquirer_trained|tau2_base|ec8239338323cfdee8ee37bbdcbd1e9d399be078545a7405ecc4939a2a389770|8": {
+      "n": 3,
+      "usd_billed_mean": 0.1815,
+      "usd_metered_mean": 0.3513,
+      "wall_s_mean": 230.37
+    },
+    "tau2_airline|inquirer_trained|tau2_base|fb857900346cc775b009741a8e6f20239c4a7cf14cd77b6647ecbc717a33c075|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3653,
+      "usd_metered_mean": 0.645,
+      "wall_s_mean": 427.02
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|15672d51ffab6df3a9d18054812deabfdab5bc4b96ca0a45b633a08c0d8fb00e|19": {
+      "n": 3,
+      "usd_billed_mean": 0.566,
+      "usd_metered_mean": 0.9441,
+      "wall_s_mean": 596.55
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|16b02864016f6ced300cc9a6ff41426c839557be16fbebd3f482ff3550682e0f|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3135,
+      "usd_metered_mean": 0.6538,
+      "wall_s_mean": 333.4
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9|13": {
+      "n": 3,
+      "usd_billed_mean": 0.5448,
+      "usd_metered_mean": 0.9092,
+      "wall_s_mean": 571.96
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9|21": {
+      "n": 3,
+      "usd_billed_mean": 0.4243,
+      "usd_metered_mean": 0.8231,
+      "wall_s_mean": 482.5
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|1d4d7b28920de0608104dad152758253c0649ef9fbe5a7e0df1585e5ea386ea4|12": {
+      "n": 3,
+      "usd_billed_mean": 0.3869,
+      "usd_metered_mean": 0.7202,
+      "wall_s_mean": 465.29
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|20437840b53a86206372536edff93e33ce55cc664a4cb37f345123dc5f4f7c29|2": {
+      "n": 3,
+      "usd_billed_mean": 0.5681,
+      "usd_metered_mean": 0.8162,
+      "wall_s_mean": 474.67
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|2b994204127eb0b541d640a89e89ddf5720b6b1b12609e631e59ca0bfac9418f|6": {
+      "n": 3,
+      "usd_billed_mean": 0.323,
+      "usd_metered_mean": 0.8764,
+      "wall_s_mean": 413.02
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|2d37c35f32705d609113aeecf6d82f9008da7f1f2b8238b5c6998048df5a3bb4|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0639,
+      "usd_metered_mean": 0.1678,
+      "wall_s_mean": 71.68
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|2e92d38652041e1c8607c6d05ca076a16542d82c339eadfaa09bece3b01759c7|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2276,
+      "usd_metered_mean": 0.5351,
+      "wall_s_mean": 301.34
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|2f6e4ce3df1fbfad9c8d8a7b6bd7aa3a74480ef0dfdc290e9613d3f8173171e1|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3852,
+      "usd_metered_mean": 0.748,
+      "wall_s_mean": 425.4
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|32ecc7ff012163bd51c48d2b3652555b267653f9b5031f245075d48cef0088c7|6": {
+      "n": 3,
+      "usd_billed_mean": 0.1772,
+      "usd_metered_mean": 0.5097,
+      "wall_s_mean": 232.56
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514|4": {
+      "n": 3,
+      "usd_billed_mean": 0.4603,
+      "usd_metered_mean": 0.7713,
+      "wall_s_mean": 432.1
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514|71": {
+      "n": 3,
+      "usd_billed_mean": 0.4584,
+      "usd_metered_mean": 0.8322,
+      "wall_s_mean": 509.15
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|61322b49ed9ca1ad6de9ecb8969466df39f03afd9b189b3739a5cb051e2e8ae6|18": {
+      "n": 3,
+      "usd_billed_mean": 0.3157,
+      "usd_metered_mean": 0.644,
+      "wall_s_mean": 424.82
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|6ed9f438a4d17c25a553ced20e077ab9712b17771ef8ec5e83d8ea42d487be2f|2": {
+      "n": 3,
+      "usd_billed_mean": 0.0558,
+      "usd_metered_mean": 0.2175,
+      "wall_s_mean": 105.39
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|741ec105a634cac94c295dca30e8b13930d9cb921022b6990c2a80ac18716f5c|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2891,
+      "usd_metered_mean": 0.5465,
+      "wall_s_mean": 367.81
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|8061a2f31af5c0a5479988de3b2794ec0e9e2c67762f86700c22de516e88124e|19": {
+      "n": 3,
+      "usd_billed_mean": 0.5146,
+      "usd_metered_mean": 0.7147,
+      "wall_s_mean": 384.46
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|80dd4f5afd2d15eede29b35e627e26d5aa48aa46933796aeea89c85bc49f0b96|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1482,
+      "usd_metered_mean": 0.4335,
+      "wall_s_mean": 252.16
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|8df2acb202fb8478652a661eb14bf9624ae65f8d854af0975e20e361733371dc|2": {
+      "n": 3,
+      "usd_billed_mean": 0.5242,
+      "usd_metered_mean": 0.9016,
+      "wall_s_mean": 560.17
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa|13": {
+      "n": 3,
+      "usd_billed_mean": 0.7219,
+      "usd_metered_mean": 1.111,
+      "wall_s_mean": 747.16
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa|2": {
+      "n": 3,
+      "usd_billed_mean": 0.5463,
+      "usd_metered_mean": 0.9034,
+      "wall_s_mean": 650.58
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3408,
+      "usd_metered_mean": 0.6595,
+      "wall_s_mean": 367.1
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292|21": {
+      "n": 3,
+      "usd_billed_mean": 0.4365,
+      "usd_metered_mean": 0.7119,
+      "wall_s_mean": 441.68
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|ab0a7a0c048079ad40310e86286777909ae16cb95071c5971a701a091d71a986|4": {
+      "n": 3,
+      "usd_billed_mean": 0.6137,
+      "usd_metered_mean": 0.9645,
+      "wall_s_mean": 631.48
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|abc0990ec2eabc5f508f1bbd908f17d80293316229ffa85e73042eaeaded07c1|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1521,
+      "usd_metered_mean": 0.3871,
+      "wall_s_mean": 242.57
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|b1d32a011f2aab2fe86251fc9409ee46d7d406d0686574b1bf9bafb0920ea428|19": {
+      "n": 3,
+      "usd_billed_mean": 0.4122,
+      "usd_metered_mean": 0.7727,
+      "wall_s_mean": 540.72
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|b43536ce228faae54560b811405b19c15e77a5cc49ba2d2ab5577481c3795f17|4": {
+      "n": 3,
+      "usd_billed_mean": 0.158,
+      "usd_metered_mean": 0.3743,
+      "wall_s_mean": 216.52
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|ba53ba1ee895adeea2530bda1a52a097fee843786d88753e88f08263b3332db1|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1844,
+      "usd_metered_mean": 0.5116,
+      "wall_s_mean": 308.34
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|c647f80989dc28b7009d72f9ff8ac0081b6ba78a3de5b85f017efeb2f828f37a|4": {
+      "n": 3,
+      "usd_billed_mean": 0.0459,
+      "usd_metered_mean": 0.1577,
+      "wall_s_mean": 75.23
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|d928a6160aaab78fe02e30027351f5a20bf928e3dc93586e8f86a2f2c90e8222|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1782,
+      "usd_metered_mean": 0.3942,
+      "wall_s_mean": 232.77
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|e1daf8e803963af80f1e1cba044ce411e8929347804af20ce1b29534fe90b1b4|18": {
+      "n": 3,
+      "usd_billed_mean": 0.0391,
+      "usd_metered_mean": 0.1556,
+      "wall_s_mean": 74.66
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|ea3aadeef258338524cb2837c8bb0a030ab3480410d1cba8c5f2561e58866813|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2751,
+      "usd_metered_mean": 0.5447,
+      "wall_s_mean": 327.56
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|ec8239338323cfdee8ee37bbdcbd1e9d399be078545a7405ecc4939a2a389770|8": {
+      "n": 3,
+      "usd_billed_mean": 0.1877,
+      "usd_metered_mean": 0.3338,
+      "wall_s_mean": 213.76
+    },
+    "tau2_airline|inquirer_trained|tau2_stop|fb857900346cc775b009741a8e6f20239c4a7cf14cd77b6647ecbc717a33c075|2": {
+      "n": 3,
+      "usd_billed_mean": 0.4028,
+      "usd_metered_mean": 0.7327,
+      "wall_s_mean": 490.07
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|07a61bc4b3301ab0fc40bb4e16ad6d9d8b72b8379ffeba20056b4e42110fc7e8|34": {
+      "n": 3,
+      "usd_billed_mean": 0.3588,
+      "usd_metered_mean": 0.5039,
+      "wall_s_mean": 586.93
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|11b5877b8c0c90ba6be7e855432a1ff60863c5b4a5fd1a6629135708d299e0b5|12": {
+      "n": 3,
+      "usd_billed_mean": 0.2478,
+      "usd_metered_mean": 0.4098,
+      "wall_s_mean": 445.54
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|1ae85edba14f0f46821f8aad34ba8a504486246606a2aebd0998c9a8d09adf77|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1593,
+      "usd_metered_mean": 0.3212,
+      "wall_s_mean": 322.53
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|1ecab1dc525df268686405a4286dad5c19bff5b18d984e4dbd44f222fdf5035c|21": {
+      "n": 3,
+      "usd_billed_mean": 0.3317,
+      "usd_metered_mean": 0.5835,
+      "wall_s_mean": 454.16
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|1fed91ee3128d87f36c598e3b07dbbb6a436041dde79015241329d1b4d6e5b6f|16": {
+      "n": 3,
+      "usd_billed_mean": 0.3251,
+      "usd_metered_mean": 0.4951,
+      "wall_s_mean": 550.63
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|2152192f7eb96ed86801ae039c0cab42e342083cfd1397a4df46eb3b969d56b3|25": {
+      "n": 3,
+      "usd_billed_mean": 0.7457,
+      "usd_metered_mean": 1.0429,
+      "wall_s_mean": 920.33
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|3bb37f41af544a79419cf112ae8320a5d426a51c0abb319d9d321e05f752c36a|16": {
+      "n": 3,
+      "usd_billed_mean": 0.4425,
+      "usd_metered_mean": 0.6769,
+      "wall_s_mean": 655.82
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|3ea8167906e7f78a95327f0f6525b0095979d9d7075b05df9f6c8fdca6f79bc9|13": {
+      "n": 3,
+      "usd_billed_mean": 0.5039,
+      "usd_metered_mean": 0.8081,
+      "wall_s_mean": 790.63
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|3fff735015218473cfc774a369cb7993b6ae7ba27a0028dd7bd74f5274b9b1b4|20": {
+      "n": 3,
+      "usd_billed_mean": 0.427,
+      "usd_metered_mean": 0.6575,
+      "wall_s_mean": 635.91
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|453d75df479730a66b6452c9ab7fbcdc0841df876f523df6056343314d20ce24|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1526,
+      "usd_metered_mean": 0.3602,
+      "wall_s_mean": 358.4
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|518cb2e783cfffedbfe00b0482d58955501ab99a1f996868c6d1d70a31c6c13c|6": {
+      "n": 3,
+      "usd_billed_mean": 0.3877,
+      "usd_metered_mean": 0.6226,
+      "wall_s_mean": 563.88
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|585bfb722ee2c657df994d4f8c373702833b2c673b7ecb614eb7ad683741e849|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2153,
+      "usd_metered_mean": 0.4351,
+      "wall_s_mean": 416.29
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|5b31e09f0180c1145d3460d19abf94906dac2f2bfc6f4b6ad87417c85097b574|8": {
+      "n": 3,
+      "usd_billed_mean": 0.2441,
+      "usd_metered_mean": 0.4322,
+      "wall_s_mean": 303.4
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|5b3e17901eaddbdf8f387e95f1f06522f5b037bd140c73f764a45034dc09dbca|11": {
+      "n": 3,
+      "usd_billed_mean": 0.2343,
+      "usd_metered_mean": 0.3263,
+      "wall_s_mean": 357.81
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|5d4197f3314f248a744d471e5b813ef5f8f28202787ce8a3a52853f8f1cfa10a|2": {
+      "n": 3,
+      "usd_billed_mean": 0.4267,
+      "usd_metered_mean": 0.7294,
+      "wall_s_mean": 690.61
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|5f557fdfb07e4448de6e77e0b6fd15afb3a55d2c94400ceca907376ac1791727|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1319,
+      "usd_metered_mean": 0.1697,
+      "wall_s_mean": 225.63
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|67036a5f65cacfe24b2efd8ac2b524a73a7025b099b75924117e9441b9382824|16": {
+      "n": 3,
+      "usd_billed_mean": 0.2831,
+      "usd_metered_mean": 0.4061,
+      "wall_s_mean": 409.54
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|73432084905d0b916dc57639e6db1a9eaa3296e849eae82b24f8a7ff4369faf6|11": {
+      "n": 3,
+      "usd_billed_mean": 0.57,
+      "usd_metered_mean": 0.8184,
+      "wall_s_mean": 854.36
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|83bf41c29b9ecdad80194c960aba5d7aa09a6d97a91c53efee35c0c10d26b2f9|21": {
+      "n": 3,
+      "usd_billed_mean": 0.222,
+      "usd_metered_mean": 0.4448,
+      "wall_s_mean": 390.3
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|87980f9204e46038cb3876775aec9b6e3ec82bddc8fff67aebeec2026ccd217a|2": {
+      "n": 3,
+      "usd_billed_mean": 0.6626,
+      "usd_metered_mean": 1.0445,
+      "wall_s_mean": 855.56
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|936e437024076f2a4ba3fc083429fc1add3f357927e5bf70d3cde39507d65fd6|4": {
+      "n": 3,
+      "usd_billed_mean": 0.3186,
+      "usd_metered_mean": 0.6246,
+      "wall_s_mean": 526.58
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|94d8f220447e306dd41ae4a07219511b4e116cf208d1bc5f5fb48887b62ef127|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2132,
+      "usd_metered_mean": 0.3972,
+      "wall_s_mean": 386.64
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|9aeca4c5518ed3a2c3dc4c52b056499f5814e4b648e0a920ebaf16f3021b0e94|28": {
+      "n": 3,
+      "usd_billed_mean": 0.2071,
+      "usd_metered_mean": 0.3319,
+      "wall_s_mean": 312.74
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|a5bd4244165fe5bf76f1f5fd1fc41de954bd023b3e897b31781600728f7152bf|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0073,
+      "usd_metered_mean": 0.0278,
+      "wall_s_mean": 32.28
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb|18": {
+      "n": 3,
+      "usd_billed_mean": 0.1434,
+      "usd_metered_mean": 0.2549,
+      "wall_s_mean": 272.73
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb|4": {
+      "n": 3,
+      "usd_billed_mean": 0.3986,
+      "usd_metered_mean": 0.5463,
+      "wall_s_mean": 566.53
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910|26": {
+      "n": 3,
+      "usd_billed_mean": 0.2244,
+      "usd_metered_mean": 0.3973,
+      "wall_s_mean": 363.64
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910|6": {
+      "n": 3,
+      "usd_billed_mean": 0.0863,
+      "usd_metered_mean": 0.1892,
+      "wall_s_mean": 171.76
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|b19ea58a453aeb68ba431ef4cafc87d4d31a9153804aefa9eb9531b7a0e82ddd|21": {
+      "n": 3,
+      "usd_billed_mean": 0.4356,
+      "usd_metered_mean": 0.7192,
+      "wall_s_mean": 582.98
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|b1cf20069acd0d8466b0d36876e404e6e27b953e2c0bc09ee93ab1d920cfca4c|4": {
+      "n": 3,
+      "usd_billed_mean": 0.0848,
+      "usd_metered_mean": 0.2144,
+      "wall_s_mean": 192.12
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|cbeb1a9bc0078ecd6d817160fde5f4e17a40878fcd923ebfafe0cc7434e62455|15": {
+      "n": 3,
+      "usd_billed_mean": 0.1981,
+      "usd_metered_mean": 0.3081,
+      "wall_s_mean": 311.95
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|d4edff0e3ee084df732a6eb706d80a6fa5179e6fa7adaf9f6e2afde1be919c98|13": {
+      "n": 3,
+      "usd_billed_mean": 0.299,
+      "usd_metered_mean": 0.4299,
+      "wall_s_mean": 363.39
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|d732f3b38276b4fafbad9b7cde61ff44650a5f3ab211ed3ab655ef6dc9ab3e96|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2369,
+      "usd_metered_mean": 0.5177,
+      "wall_s_mean": 403.24
+    },
+    "tau2_retail|inquirer_prompted|tau2_base|d8ae000dd3d56644d8c2ea9767a4fdbcd524de73992e8febf1f1f0347a82af3c|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0023,
+      "usd_metered_mean": 0.0442,
+      "wall_s_mean": 28.91
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|07a61bc4b3301ab0fc40bb4e16ad6d9d8b72b8379ffeba20056b4e42110fc7e8|34": {
+      "n": 3,
+      "usd_billed_mean": 0.3949,
+      "usd_metered_mean": 0.6517,
+      "wall_s_mean": 630.58
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|11b5877b8c0c90ba6be7e855432a1ff60863c5b4a5fd1a6629135708d299e0b5|12": {
+      "n": 3,
+      "usd_billed_mean": 0.1918,
+      "usd_metered_mean": 0.3921,
+      "wall_s_mean": 449.57
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|1ae85edba14f0f46821f8aad34ba8a504486246606a2aebd0998c9a8d09adf77|4": {
+      "n": 3,
+      "usd_billed_mean": 0.3602,
+      "usd_metered_mean": 0.6134,
+      "wall_s_mean": 604.36
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|1ecab1dc525df268686405a4286dad5c19bff5b18d984e4dbd44f222fdf5035c|21": {
+      "n": 3,
+      "usd_billed_mean": 0.4231,
+      "usd_metered_mean": 0.7415,
+      "wall_s_mean": 617.46
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|1fed91ee3128d87f36c598e3b07dbbb6a436041dde79015241329d1b4d6e5b6f|16": {
+      "n": 3,
+      "usd_billed_mean": 0.1433,
+      "usd_metered_mean": 0.3762,
+      "wall_s_mean": 350.7
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|2152192f7eb96ed86801ae039c0cab42e342083cfd1397a4df46eb3b969d56b3|25": {
+      "n": 3,
+      "usd_billed_mean": 0.4257,
+      "usd_metered_mean": 0.908,
+      "wall_s_mean": 735.37
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|3bb37f41af544a79419cf112ae8320a5d426a51c0abb319d9d321e05f752c36a|16": {
+      "n": 3,
+      "usd_billed_mean": 0.1325,
+      "usd_metered_mean": 0.3456,
+      "wall_s_mean": 328.35
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|3ea8167906e7f78a95327f0f6525b0095979d9d7075b05df9f6c8fdca6f79bc9|13": {
+      "n": 3,
+      "usd_billed_mean": 0.3459,
+      "usd_metered_mean": 0.6215,
+      "wall_s_mean": 513.83
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|3fff735015218473cfc774a369cb7993b6ae7ba27a0028dd7bd74f5274b9b1b4|20": {
+      "n": 3,
+      "usd_billed_mean": 0.1958,
+      "usd_metered_mean": 0.3249,
+      "wall_s_mean": 335.47
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|453d75df479730a66b6452c9ab7fbcdc0841df876f523df6056343314d20ce24|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2487,
+      "usd_metered_mean": 0.5679,
+      "wall_s_mean": 448.81
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|518cb2e783cfffedbfe00b0482d58955501ab99a1f996868c6d1d70a31c6c13c|6": {
+      "n": 3,
+      "usd_billed_mean": 0.1571,
+      "usd_metered_mean": 0.307,
+      "wall_s_mean": 318.01
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|585bfb722ee2c657df994d4f8c373702833b2c673b7ecb614eb7ad683741e849|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2219,
+      "usd_metered_mean": 0.3114,
+      "wall_s_mean": 366.33
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|5b31e09f0180c1145d3460d19abf94906dac2f2bfc6f4b6ad87417c85097b574|8": {
+      "n": 3,
+      "usd_billed_mean": 0.0498,
+      "usd_metered_mean": 0.1912,
+      "wall_s_mean": 117.1
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|5b3e17901eaddbdf8f387e95f1f06522f5b037bd140c73f764a45034dc09dbca|11": {
+      "n": 3,
+      "usd_billed_mean": 0.2114,
+      "usd_metered_mean": 0.2716,
+      "wall_s_mean": 305.9
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|5d4197f3314f248a744d471e5b813ef5f8f28202787ce8a3a52853f8f1cfa10a|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3684,
+      "usd_metered_mean": 0.5751,
+      "wall_s_mean": 535.0
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|5f557fdfb07e4448de6e77e0b6fd15afb3a55d2c94400ceca907376ac1791727|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2454,
+      "usd_metered_mean": 0.2901,
+      "wall_s_mean": 374.48
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|67036a5f65cacfe24b2efd8ac2b524a73a7025b099b75924117e9441b9382824|16": {
+      "n": 3,
+      "usd_billed_mean": 0.1501,
+      "usd_metered_mean": 0.2524,
+      "wall_s_mean": 249.98
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|73432084905d0b916dc57639e6db1a9eaa3296e849eae82b24f8a7ff4369faf6|11": {
+      "n": 3,
+      "usd_billed_mean": 0.2148,
+      "usd_metered_mean": 0.2861,
+      "wall_s_mean": 322.76
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|83bf41c29b9ecdad80194c960aba5d7aa09a6d97a91c53efee35c0c10d26b2f9|21": {
+      "n": 3,
+      "usd_billed_mean": 0.5215,
+      "usd_metered_mean": 0.7732,
+      "wall_s_mean": 664.22
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|87980f9204e46038cb3876775aec9b6e3ec82bddc8fff67aebeec2026ccd217a|2": {
+      "n": 3,
+      "usd_billed_mean": 0.5516,
+      "usd_metered_mean": 0.8217,
+      "wall_s_mean": 645.87
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|936e437024076f2a4ba3fc083429fc1add3f357927e5bf70d3cde39507d65fd6|4": {
+      "n": 3,
+      "usd_billed_mean": 0.1226,
+      "usd_metered_mean": 0.2899,
+      "wall_s_mean": 251.61
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|94d8f220447e306dd41ae4a07219511b4e116cf208d1bc5f5fb48887b62ef127|2": {
+      "n": 3,
+      "usd_billed_mean": 0.0803,
+      "usd_metered_mean": 0.3492,
+      "wall_s_mean": 280.24
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|9aeca4c5518ed3a2c3dc4c52b056499f5814e4b648e0a920ebaf16f3021b0e94|28": {
+      "n": 3,
+      "usd_billed_mean": 0.4389,
+      "usd_metered_mean": 0.4836,
+      "wall_s_mean": 490.47
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|a5bd4244165fe5bf76f1f5fd1fc41de954bd023b3e897b31781600728f7152bf|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0971,
+      "usd_metered_mean": 0.2005,
+      "wall_s_mean": 177.08
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb|18": {
+      "n": 3,
+      "usd_billed_mean": 0.1681,
+      "usd_metered_mean": 0.3364,
+      "wall_s_mean": 322.78
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb|4": {
+      "n": 3,
+      "usd_billed_mean": 0.3436,
+      "usd_metered_mean": 0.4739,
+      "wall_s_mean": 493.99
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910|26": {
+      "n": 3,
+      "usd_billed_mean": 0.2347,
+      "usd_metered_mean": 0.2558,
+      "wall_s_mean": 293.35
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910|6": {
+      "n": 3,
+      "usd_billed_mean": 0.1485,
+      "usd_metered_mean": 0.3871,
+      "wall_s_mean": 303.41
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|b19ea58a453aeb68ba431ef4cafc87d4d31a9153804aefa9eb9531b7a0e82ddd|21": {
+      "n": 3,
+      "usd_billed_mean": 0.1418,
+      "usd_metered_mean": 0.2918,
+      "wall_s_mean": 223.36
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|b1cf20069acd0d8466b0d36876e404e6e27b953e2c0bc09ee93ab1d920cfca4c|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2349,
+      "usd_metered_mean": 0.4406,
+      "wall_s_mean": 375.16
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|cbeb1a9bc0078ecd6d817160fde5f4e17a40878fcd923ebfafe0cc7434e62455|15": {
+      "n": 3,
+      "usd_billed_mean": 0.405,
+      "usd_metered_mean": 0.5684,
+      "wall_s_mean": 557.08
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|d4edff0e3ee084df732a6eb706d80a6fa5179e6fa7adaf9f6e2afde1be919c98|13": {
+      "n": 3,
+      "usd_billed_mean": 0.4653,
+      "usd_metered_mean": 0.6851,
+      "wall_s_mean": 593.48
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|d732f3b38276b4fafbad9b7cde61ff44650a5f3ab211ed3ab655ef6dc9ab3e96|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2418,
+      "usd_metered_mean": 0.5457,
+      "wall_s_mean": 480.52
+    },
+    "tau2_retail|inquirer_prompted|tau2_stop|d8ae000dd3d56644d8c2ea9767a4fdbcd524de73992e8febf1f1f0347a82af3c|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0274,
+      "usd_metered_mean": 0.0274,
+      "wall_s_mean": 36.04
+    },
+    "tau2_retail|inquirer_trained|tau2_base|07a61bc4b3301ab0fc40bb4e16ad6d9d8b72b8379ffeba20056b4e42110fc7e8|34": {
+      "n": 3,
+      "usd_billed_mean": 0.4694,
+      "usd_metered_mean": 0.7491,
+      "wall_s_mean": 582.87
+    },
+    "tau2_retail|inquirer_trained|tau2_base|11b5877b8c0c90ba6be7e855432a1ff60863c5b4a5fd1a6629135708d299e0b5|12": {
+      "n": 3,
+      "usd_billed_mean": 0.1859,
+      "usd_metered_mean": 0.3346,
+      "wall_s_mean": 369.81
+    },
+    "tau2_retail|inquirer_trained|tau2_base|1ae85edba14f0f46821f8aad34ba8a504486246606a2aebd0998c9a8d09adf77|4": {
+      "n": 3,
+      "usd_billed_mean": 0.4937,
+      "usd_metered_mean": 0.6546,
+      "wall_s_mean": 617.19
+    },
+    "tau2_retail|inquirer_trained|tau2_base|1ecab1dc525df268686405a4286dad5c19bff5b18d984e4dbd44f222fdf5035c|21": {
+      "n": 3,
+      "usd_billed_mean": 0.3689,
+      "usd_metered_mean": 0.623,
+      "wall_s_mean": 514.21
+    },
+    "tau2_retail|inquirer_trained|tau2_base|1fed91ee3128d87f36c598e3b07dbbb6a436041dde79015241329d1b4d6e5b6f|16": {
+      "n": 3,
+      "usd_billed_mean": 0.0785,
+      "usd_metered_mean": 0.4052,
+      "wall_s_mean": 317.47
+    },
+    "tau2_retail|inquirer_trained|tau2_base|2152192f7eb96ed86801ae039c0cab42e342083cfd1397a4df46eb3b969d56b3|25": {
+      "n": 3,
+      "usd_billed_mean": 0.3066,
+      "usd_metered_mean": 0.6183,
+      "wall_s_mean": 458.27
+    },
+    "tau2_retail|inquirer_trained|tau2_base|3bb37f41af544a79419cf112ae8320a5d426a51c0abb319d9d321e05f752c36a|16": {
+      "n": 3,
+      "usd_billed_mean": 0.2384,
+      "usd_metered_mean": 0.3543,
+      "wall_s_mean": 300.44
+    },
+    "tau2_retail|inquirer_trained|tau2_base|3ea8167906e7f78a95327f0f6525b0095979d9d7075b05df9f6c8fdca6f79bc9|13": {
+      "n": 3,
+      "usd_billed_mean": 0.2392,
+      "usd_metered_mean": 0.5066,
+      "wall_s_mean": 380.61
+    },
+    "tau2_retail|inquirer_trained|tau2_base|3fff735015218473cfc774a369cb7993b6ae7ba27a0028dd7bd74f5274b9b1b4|20": {
+      "n": 3,
+      "usd_billed_mean": 0.5291,
+      "usd_metered_mean": 0.7951,
+      "wall_s_mean": 653.99
+    },
+    "tau2_retail|inquirer_trained|tau2_base|453d75df479730a66b6452c9ab7fbcdc0841df876f523df6056343314d20ce24|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2683,
+      "usd_metered_mean": 0.6544,
+      "wall_s_mean": 421.78
+    },
+    "tau2_retail|inquirer_trained|tau2_base|518cb2e783cfffedbfe00b0482d58955501ab99a1f996868c6d1d70a31c6c13c|6": {
+      "n": 3,
+      "usd_billed_mean": 0.6881,
+      "usd_metered_mean": 0.8955,
+      "wall_s_mean": 717.15
+    },
+    "tau2_retail|inquirer_trained|tau2_base|585bfb722ee2c657df994d4f8c373702833b2c673b7ecb614eb7ad683741e849|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2747,
+      "usd_metered_mean": 0.5526,
+      "wall_s_mean": 372.06
+    },
+    "tau2_retail|inquirer_trained|tau2_base|5b31e09f0180c1145d3460d19abf94906dac2f2bfc6f4b6ad87417c85097b574|8": {
+      "n": 3,
+      "usd_billed_mean": 0.0963,
+      "usd_metered_mean": 0.3494,
+      "wall_s_mean": 203.89
+    },
+    "tau2_retail|inquirer_trained|tau2_base|5b3e17901eaddbdf8f387e95f1f06522f5b037bd140c73f764a45034dc09dbca|11": {
+      "n": 3,
+      "usd_billed_mean": 0.1934,
+      "usd_metered_mean": 0.3495,
+      "wall_s_mean": 272.83
+    },
+    "tau2_retail|inquirer_trained|tau2_base|5d4197f3314f248a744d471e5b813ef5f8f28202787ce8a3a52853f8f1cfa10a|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3204,
+      "usd_metered_mean": 0.6883,
+      "wall_s_mean": 469.22
+    },
+    "tau2_retail|inquirer_trained|tau2_base|5f557fdfb07e4448de6e77e0b6fd15afb3a55d2c94400ceca907376ac1791727|4": {
+      "n": 3,
+      "usd_billed_mean": 0.4445,
+      "usd_metered_mean": 0.6563,
+      "wall_s_mean": 530.94
+    },
+    "tau2_retail|inquirer_trained|tau2_base|67036a5f65cacfe24b2efd8ac2b524a73a7025b099b75924117e9441b9382824|16": {
+      "n": 3,
+      "usd_billed_mean": 0.331,
+      "usd_metered_mean": 0.4777,
+      "wall_s_mean": 376.85
+    },
+    "tau2_retail|inquirer_trained|tau2_base|73432084905d0b916dc57639e6db1a9eaa3296e849eae82b24f8a7ff4369faf6|11": {
+      "n": 3,
+      "usd_billed_mean": 0.415,
+      "usd_metered_mean": 0.5776,
+      "wall_s_mean": 481.04
+    },
+    "tau2_retail|inquirer_trained|tau2_base|83bf41c29b9ecdad80194c960aba5d7aa09a6d97a91c53efee35c0c10d26b2f9|21": {
+      "n": 3,
+      "usd_billed_mean": 0.291,
+      "usd_metered_mean": 0.5555,
+      "wall_s_mean": 413.72
+    },
+    "tau2_retail|inquirer_trained|tau2_base|87980f9204e46038cb3876775aec9b6e3ec82bddc8fff67aebeec2026ccd217a|2": {
+      "n": 3,
+      "usd_billed_mean": 0.4842,
+      "usd_metered_mean": 0.7389,
+      "wall_s_mean": 517.98
+    },
+    "tau2_retail|inquirer_trained|tau2_base|936e437024076f2a4ba3fc083429fc1add3f357927e5bf70d3cde39507d65fd6|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2338,
+      "usd_metered_mean": 0.5249,
+      "wall_s_mean": 428.26
+    },
+    "tau2_retail|inquirer_trained|tau2_base|94d8f220447e306dd41ae4a07219511b4e116cf208d1bc5f5fb48887b62ef127|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1313,
+      "usd_metered_mean": 0.4257,
+      "wall_s_mean": 317.17
+    },
+    "tau2_retail|inquirer_trained|tau2_base|9aeca4c5518ed3a2c3dc4c52b056499f5814e4b648e0a920ebaf16f3021b0e94|28": {
+      "n": 3,
+      "usd_billed_mean": 0.0705,
+      "usd_metered_mean": 0.1287,
+      "wall_s_mean": 76.38
+    },
+    "tau2_retail|inquirer_trained|tau2_base|a5bd4244165fe5bf76f1f5fd1fc41de954bd023b3e897b31781600728f7152bf|14": {
+      "n": 3,
+      "usd_billed_mean": 0.2432,
+      "usd_metered_mean": 0.4299,
+      "wall_s_mean": 323.57
+    },
+    "tau2_retail|inquirer_trained|tau2_base|a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb|18": {
+      "n": 3,
+      "usd_billed_mean": 0.2352,
+      "usd_metered_mean": 0.4771,
+      "wall_s_mean": 339.39
+    },
+    "tau2_retail|inquirer_trained|tau2_base|a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2532,
+      "usd_metered_mean": 0.452,
+      "wall_s_mean": 391.08
+    },
+    "tau2_retail|inquirer_trained|tau2_base|abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910|26": {
+      "n": 3,
+      "usd_billed_mean": 0.3963,
+      "usd_metered_mean": 0.6164,
+      "wall_s_mean": 434.11
+    },
+    "tau2_retail|inquirer_trained|tau2_base|abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910|6": {
+      "n": 3,
+      "usd_billed_mean": 0.2768,
+      "usd_metered_mean": 0.4921,
+      "wall_s_mean": 352.28
+    },
+    "tau2_retail|inquirer_trained|tau2_base|b19ea58a453aeb68ba431ef4cafc87d4d31a9153804aefa9eb9531b7a0e82ddd|21": {
+      "n": 3,
+      "usd_billed_mean": 0.3623,
+      "usd_metered_mean": 0.5347,
+      "wall_s_mean": 393.72
+    },
+    "tau2_retail|inquirer_trained|tau2_base|b1cf20069acd0d8466b0d36876e404e6e27b953e2c0bc09ee93ab1d920cfca4c|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2417,
+      "usd_metered_mean": 0.476,
+      "wall_s_mean": 333.23
+    },
+    "tau2_retail|inquirer_trained|tau2_base|cbeb1a9bc0078ecd6d817160fde5f4e17a40878fcd923ebfafe0cc7434e62455|15": {
+      "n": 3,
+      "usd_billed_mean": 0.5791,
+      "usd_metered_mean": 0.757,
+      "wall_s_mean": 549.18
+    },
+    "tau2_retail|inquirer_trained|tau2_base|d4edff0e3ee084df732a6eb706d80a6fa5179e6fa7adaf9f6e2afde1be919c98|13": {
+      "n": 3,
+      "usd_billed_mean": 0.5391,
+      "usd_metered_mean": 0.7319,
+      "wall_s_mean": 543.26
+    },
+    "tau2_retail|inquirer_trained|tau2_base|d732f3b38276b4fafbad9b7cde61ff44650a5f3ab211ed3ab655ef6dc9ab3e96|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3507,
+      "usd_metered_mean": 0.5666,
+      "wall_s_mean": 443.93
+    },
+    "tau2_retail|inquirer_trained|tau2_base|d8ae000dd3d56644d8c2ea9767a4fdbcd524de73992e8febf1f1f0347a82af3c|14": {
+      "n": 3,
+      "usd_billed_mean": 0.2256,
+      "usd_metered_mean": 0.4,
+      "wall_s_mean": 290.54
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|07a61bc4b3301ab0fc40bb4e16ad6d9d8b72b8379ffeba20056b4e42110fc7e8|34": {
+      "n": 3,
+      "usd_billed_mean": 0.5432,
+      "usd_metered_mean": 0.7943,
+      "wall_s_mean": 631.21
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|11b5877b8c0c90ba6be7e855432a1ff60863c5b4a5fd1a6629135708d299e0b5|12": {
+      "n": 3,
+      "usd_billed_mean": 0.194,
+      "usd_metered_mean": 0.3359,
+      "wall_s_mean": 346.1
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|1ae85edba14f0f46821f8aad34ba8a504486246606a2aebd0998c9a8d09adf77|4": {
+      "n": 3,
+      "usd_billed_mean": 0.5286,
+      "usd_metered_mean": 0.7562,
+      "wall_s_mean": 738.63
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|1ecab1dc525df268686405a4286dad5c19bff5b18d984e4dbd44f222fdf5035c|21": {
+      "n": 3,
+      "usd_billed_mean": 0.2612,
+      "usd_metered_mean": 0.4923,
+      "wall_s_mean": 361.56
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|1fed91ee3128d87f36c598e3b07dbbb6a436041dde79015241329d1b4d6e5b6f|16": {
+      "n": 3,
+      "usd_billed_mean": 0.2203,
+      "usd_metered_mean": 0.5838,
+      "wall_s_mean": 483.36
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|2152192f7eb96ed86801ae039c0cab42e342083cfd1397a4df46eb3b969d56b3|25": {
+      "n": 3,
+      "usd_billed_mean": 0.3419,
+      "usd_metered_mean": 0.7108,
+      "wall_s_mean": 544.93
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|3bb37f41af544a79419cf112ae8320a5d426a51c0abb319d9d321e05f752c36a|16": {
+      "n": 3,
+      "usd_billed_mean": 0.0678,
+      "usd_metered_mean": 0.2795,
+      "wall_s_mean": 166.02
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|3ea8167906e7f78a95327f0f6525b0095979d9d7075b05df9f6c8fdca6f79bc9|13": {
+      "n": 3,
+      "usd_billed_mean": 0.2684,
+      "usd_metered_mean": 0.5534,
+      "wall_s_mean": 425.06
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|3fff735015218473cfc774a369cb7993b6ae7ba27a0028dd7bd74f5274b9b1b4|20": {
+      "n": 3,
+      "usd_billed_mean": 0.534,
+      "usd_metered_mean": 0.7711,
+      "wall_s_mean": 611.61
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|453d75df479730a66b6452c9ab7fbcdc0841df876f523df6056343314d20ce24|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3562,
+      "usd_metered_mean": 0.674,
+      "wall_s_mean": 489.25
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|518cb2e783cfffedbfe00b0482d58955501ab99a1f996868c6d1d70a31c6c13c|6": {
+      "n": 3,
+      "usd_billed_mean": 0.8415,
+      "usd_metered_mean": 1.1401,
+      "wall_s_mean": 851.47
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|585bfb722ee2c657df994d4f8c373702833b2c673b7ecb614eb7ad683741e849|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2946,
+      "usd_metered_mean": 0.4937,
+      "wall_s_mean": 371.35
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|5b31e09f0180c1145d3460d19abf94906dac2f2bfc6f4b6ad87417c85097b574|8": {
+      "n": 3,
+      "usd_billed_mean": 0.1596,
+      "usd_metered_mean": 0.4481,
+      "wall_s_mean": 288.69
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|5b3e17901eaddbdf8f387e95f1f06522f5b037bd140c73f764a45034dc09dbca|11": {
+      "n": 3,
+      "usd_billed_mean": 0.1958,
+      "usd_metered_mean": 0.3057,
+      "wall_s_mean": 230.83
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|5d4197f3314f248a744d471e5b813ef5f8f28202787ce8a3a52853f8f1cfa10a|2": {
+      "n": 3,
+      "usd_billed_mean": 0.3059,
+      "usd_metered_mean": 0.5793,
+      "wall_s_mean": 422.35
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|5f557fdfb07e4448de6e77e0b6fd15afb3a55d2c94400ceca907376ac1791727|4": {
+      "n": 3,
+      "usd_billed_mean": 0.2057,
+      "usd_metered_mean": 0.3663,
+      "wall_s_mean": 256.82
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|67036a5f65cacfe24b2efd8ac2b524a73a7025b099b75924117e9441b9382824|16": {
+      "n": 3,
+      "usd_billed_mean": 0.4038,
+      "usd_metered_mean": 0.5692,
+      "wall_s_mean": 413.06
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|73432084905d0b916dc57639e6db1a9eaa3296e849eae82b24f8a7ff4369faf6|11": {
+      "n": 3,
+      "usd_billed_mean": 0.5656,
+      "usd_metered_mean": 0.7496,
+      "wall_s_mean": 580.84
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|83bf41c29b9ecdad80194c960aba5d7aa09a6d97a91c53efee35c0c10d26b2f9|21": {
+      "n": 3,
+      "usd_billed_mean": 0.3172,
+      "usd_metered_mean": 0.4942,
+      "wall_s_mean": 389.88
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|87980f9204e46038cb3876775aec9b6e3ec82bddc8fff67aebeec2026ccd217a|2": {
+      "n": 3,
+      "usd_billed_mean": 0.5162,
+      "usd_metered_mean": 0.861,
+      "wall_s_mean": 566.93
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|936e437024076f2a4ba3fc083429fc1add3f357927e5bf70d3cde39507d65fd6|4": {
+      "n": 3,
+      "usd_billed_mean": 0.3847,
+      "usd_metered_mean": 0.6639,
+      "wall_s_mean": 473.0
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|94d8f220447e306dd41ae4a07219511b4e116cf208d1bc5f5fb48887b62ef127|2": {
+      "n": 3,
+      "usd_billed_mean": 0.1608,
+      "usd_metered_mean": 0.4643,
+      "wall_s_mean": 347.0
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|9aeca4c5518ed3a2c3dc4c52b056499f5814e4b648e0a920ebaf16f3021b0e94|28": {
+      "n": 3,
+      "usd_billed_mean": 0.0837,
+      "usd_metered_mean": 0.1909,
+      "wall_s_mean": 112.69
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|a5bd4244165fe5bf76f1f5fd1fc41de954bd023b3e897b31781600728f7152bf|14": {
+      "n": 3,
+      "usd_billed_mean": 0.0322,
+      "usd_metered_mean": 0.1857,
+      "wall_s_mean": 131.05
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb|18": {
+      "n": 3,
+      "usd_billed_mean": 0.1582,
+      "usd_metered_mean": 0.4741,
+      "wall_s_mean": 312.76
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb|4": {
+      "n": 3,
+      "usd_billed_mean": 0.3259,
+      "usd_metered_mean": 0.4916,
+      "wall_s_mean": 392.42
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910|26": {
+      "n": 3,
+      "usd_billed_mean": 0.2293,
+      "usd_metered_mean": 0.4175,
+      "wall_s_mean": 273.56
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910|6": {
+      "n": 3,
+      "usd_billed_mean": 0.2424,
+      "usd_metered_mean": 0.4863,
+      "wall_s_mean": 356.94
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|b19ea58a453aeb68ba431ef4cafc87d4d31a9153804aefa9eb9531b7a0e82ddd|21": {
+      "n": 3,
+      "usd_billed_mean": 0.6833,
+      "usd_metered_mean": 0.9948,
+      "wall_s_mean": 670.46
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|b1cf20069acd0d8466b0d36876e404e6e27b953e2c0bc09ee93ab1d920cfca4c|4": {
+      "n": 3,
+      "usd_billed_mean": 0.391,
+      "usd_metered_mean": 0.6598,
+      "wall_s_mean": 473.08
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|cbeb1a9bc0078ecd6d817160fde5f4e17a40878fcd923ebfafe0cc7434e62455|15": {
+      "n": 3,
+      "usd_billed_mean": 0.6877,
+      "usd_metered_mean": 0.9727,
+      "wall_s_mean": 647.58
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|d4edff0e3ee084df732a6eb706d80a6fa5179e6fa7adaf9f6e2afde1be919c98|13": {
+      "n": 3,
+      "usd_billed_mean": 0.429,
+      "usd_metered_mean": 0.6623,
+      "wall_s_mean": 500.25
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|d732f3b38276b4fafbad9b7cde61ff44650a5f3ab211ed3ab655ef6dc9ab3e96|2": {
+      "n": 3,
+      "usd_billed_mean": 0.2835,
+      "usd_metered_mean": 0.549,
+      "wall_s_mean": 377.19
+    },
+    "tau2_retail|inquirer_trained|tau2_stop|d8ae000dd3d56644d8c2ea9767a4fdbcd524de73992e8febf1f1f0347a82af3c|14": {
+      "n": 3,
+      "usd_billed_mean": 0.2684,
+      "usd_metered_mean": 0.4898,
+      "wall_s_mean": 357.88
+    }
+  },
+  "sources": [
+    {
+      "file": "retail_final.json",
+      "n": 408,
+      "population": {
+        "inflight_assumed": 12,
+        "n": 408,
+        "observed_span_h": 4.336,
+        "predicted_span_h_at_inflight": 4.019,
+        "run_ids_sha256_16": "b53331b2d1e528ea",
+        "sum_wall_h": 48.234
+      },
+      "sha256": "bce035b2f2ff766d73b04f62aba537a0177fe6053f26d566b751c6e2dfaf21df"
+    },
+    {
+      "file": "airline_final.json",
+      "n": 408,
+      "population": {
+        "inflight_assumed": 12,
+        "n": 408,
+        "observed_span_h": 4.119,
+        "predicted_span_h_at_inflight": 3.601,
+        "run_ids_sha256_16": "7c7eb008a55e78e6",
+        "sum_wall_h": 43.213
+      },
+      "sha256": "63f826f5a88cd20bb10f0de9f25176b4ba43f0d1b279caf0fe419762deea418f"
+    }
+  ]
+}

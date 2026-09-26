@@ -1,0 +1,234 @@
+[
+ {
+  "qid": "fixture0000000000000a",
+  "term": "Aristotle",
+  "description": "Greek philosopher",
+  "question": "Did Aristotle use a laptop?",
+  "answer": false,
+  "facts": [
+   "Aristotle died in 322 BC.",
+   "The laptop was invented in 1981."
+  ],
+  "decomposition": [
+   "When did Aristotle live?",
+   "When was the laptop invented?",
+   "Is #2 before #1?"
+  ],
+  "evidence": [
+   [
+    [
+     [
+      "Aristotle-1"
+     ]
+    ],
+    [
+     [
+      "Laptop-1"
+     ]
+    ],
+    [
+     "operation"
+    ]
+   ],
+   [
+    [
+     [
+      "Aristotle-1",
+      "Plato-1"
+     ]
+    ],
+    [
+     [
+      "Osborne Computer Corporation-1"
+     ]
+    ],
+    [
+     "operation"
+    ]
+   ],
+   [
+    [
+     [
+      "Aristotle-1"
+     ]
+    ],
+    [
+     [
+      "Laptop-1"
+     ]
+    ],
+    [
+     "no_evidence",
+     "operation"
+    ]
+   ]
+  ]
+ },
+ {
+  "qid": "fixture0000000000000b",
+  "term": "Genghis Khan",
+  "description": "founder of the Mongol Empire",
+  "question": "Are more people today related to Genghis Khan than Julius Caesar?",
+  "answer": true,
+  "facts": [
+   "Julius Caesar had three children.",
+   "Genghis Khan had sixteen children."
+  ],
+  "decomposition": [
+   "How many kids did Julius Caesar have?",
+   "How many kids did Genghis Khan have?",
+   "Is #2 greater than #1?"
+  ],
+  "evidence": [
+   [
+    [
+     [
+      "Caesarion-2"
+     ]
+    ],
+    [
+     [
+      "Genghis Khan-17"
+     ]
+    ],
+    [
+     "operation"
+    ]
+   ],
+   [
+    [
+     [
+      "Julius Caesar-75"
+     ]
+    ],
+    [
+     [
+      "Genghis Khan-17"
+     ]
+    ],
+    [
+     "operation"
+    ]
+   ],
+   [
+    [
+     [
+      "Julius Caesar-75"
+     ]
+    ],
+    [
+     [
+      "Mongol Empire-3"
+     ]
+    ],
+    [
+     "no_evidence",
+     "operation"
+    ]
+   ]
+  ]
+ },
+ {
+  "qid": "fixture0000000000000c",
+  "term": "Fish",
+  "description": "aquatic vertebrate",
+  "question": "Do fish need water to survive?",
+  "answer": true,
+  "facts": [
+   "Fish breathe with gills.",
+   "Gills extract oxygen from water."
+  ],
+  "decomposition": [
+   "Is water wet?",
+   "Do fish live in water?"
+  ],
+  "evidence": [
+   [
+    [
+     [
+      "Water-1"
+     ]
+    ],
+    [
+     [
+      "Fish-2"
+     ]
+    ]
+   ],
+   [
+    [
+     [
+      "Water-1",
+      "Ocean-1"
+     ]
+    ],
+    [
+     [
+      "Fish-2",
+      "Gill-1"
+     ]
+    ]
+   ],
+   [
+    [
+     [
+      "Water-1"
+     ]
+    ],
+    [
+     [
+      "Fish-2"
+     ]
+    ]
+   ]
+  ]
+ },
+ {
+  "qid": "fixture0000000000000d",
+  "term": "Boiling point",
+  "description": "temperature at which a liquid boils",
+  "question": "Would water boil on a comfortable summer day?",
+  "answer": false,
+  "facts": [
+   "Water boils at 100 degrees Celsius."
+  ],
+  "decomposition": [
+   "What is the boiling point of water?",
+   "Is the previous value below 40 degrees Celsius?"
+  ],
+  "evidence": [
+   [
+    [
+     [
+      "Boiling point-1"
+     ]
+    ],
+    [
+     "operation"
+    ]
+   ],
+   [
+    [
+     [
+      "Boiling point-1",
+      "Celsius-1"
+     ]
+    ],
+    [
+     "operation"
+    ]
+   ],
+   [
+    [
+     [
+      "Boiling point-1"
+     ]
+    ],
+    [
+     "no_evidence",
+     "operation"
+    ]
+   ]
+  ]
+ }
+]

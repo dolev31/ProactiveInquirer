@@ -1,0 +1,107 @@
+# The tau2 campaign's own proxy config. SEPARATE FROM `litellm.yaml` ON PURPOSE.
+#
+# The shared proxy on :4000 is owned by whoever started it and other lanes route local-model
+# traffic through it; this campaign needs two things that config cannot give it right now, and
+# neither is worth a restart of shared infrastructure:
+#
+#   1. `qwen3-8b-dpo-stacked-notdone-both` -- the tau2 treatment arm -- served somewhere. The
+#      live serve job (886119, gpu-n606:8301) publishes `qwen3-8b-base` and another lane's two
+#      `sft-headline-*` adapters, NOT this one. LSF 887439 serves base + this adapter together.
+#   2. A gateway `api_base` that actually resolves. See `scripts/tau2_campaign/proxy_up.sh`.
+#
+# WHY THE LOCAL api_base IS A LITERAL AND NOT `os.environ/...`. Because the fault this whole
+# file exists to route around was an UNSET env var in an `api_base`. A literal loopback URL
+# cannot be unset. The tunnel that must stand behind it:
+#
+#   ssh -N -L 8402:<serve-host>:8310 user@login-node.example.com
+#
+# `tests/test_proxy_launch_refuses_unresolved_gateway.py` pins the rule that every `os.environ/`
+# api_base name in this file is one the launcher refuses to start without.
+model_list:
+  # WHY `enable_thinking: false` (added, matching conf/serving/litellm.yaml's own routes for
+  # the same two model ids EXACTLY). This file never carried it, so every tau2 unit that ran a
+  # local Qwen3 questioner ran with the thinking channel ON: Qwen3's chat template emits
+  # `<think>...</think>` by default, and the rung-1 SFT rows were built with it OFF. MEASURED:
+  # 43.5% of prompted-arm calls landed at the token cap (memory: tau2-ran-with-qwen3-thinking-on).
+  - model_name: qwen3-8b-base
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-base
+      api_base: http://127.0.0.1:8402/v1
+      api_key: unused-by-vllm
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-stacked-notdone-both
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-stacked-notdone-both
+      api_base: http://127.0.0.1:8402/v1
+      api_key: unused-by-vllm
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  # THE RERUN'S SEED REPLICATES. Neither name below had a route here, so each fell through to
+  # the bare "*" gateway pattern below and got a 200 from a DIFFERENT model on a DIFFERENT
+  # host -- indistinguishable on the wire from a correct answer, which is exactly the failure
+  # `tests/test_litellm_tau2_thinking.py::test_every_rerun_model_resolves_to_an_explicit_hosted_vllm_route`
+  # exists to catch. SAME api_base as the base route above (8402), not a new port: base, s1 and
+  # s2 all reach ONE serve (LSF 910128) behind ONE tunnel, `8402 -> gpu-n595:8302`, opened at
+  # launch. Served names match `conf/serving/litellm.yaml:372-388` on main
+  # (`qwen3-8b-dpo-stacked-notdone-both-s1` / `-s2`, both on the 8B base).
+  - model_name: qwen3-8b-dpo-stacked-notdone-both-s1
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-stacked-notdone-both-s1
+      api_base: http://127.0.0.1:8402/v1
+      api_key: unused-by-vllm
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  - model_name: qwen3-8b-dpo-stacked-notdone-both-s2
+    litellm_params:
+      model: hosted_vllm/qwen3-8b-dpo-stacked-notdone-both-s2
+      api_base: http://127.0.0.1:8402/v1
+      api_key: unused-by-vllm
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+
+  # ------------------------------------------------------- gateway passthrough
+  # `openai/*` is a MORE SPECIFIC litellm pattern than `*` (PatternUtils ranks by length), so a
+  # request that already carries the provider prefix matches here and is passed through with one
+  # `openai/`, not two. Sharded across the two DISTINCT keys for the same reason the shared
+  # config is: `LITELLM_API_KEY` and `LITELLM_API_KEY_2` hash identical (633a8483, measured
+  # 2026-09-17) and share one team's quota; `PI_AGENT_LITELLM_API_KEY` (cfde3d83) is the other.
+  - model_name: "openai/*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/PINQ_GATEWAY_BASE_URL
+      api_key: os.environ/LITELLM_API_KEY
+
+  - model_name: "openai/*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/PINQ_GATEWAY_BASE_URL
+      api_key: os.environ/PI_AGENT_LITELLM_API_KEY
+
+  - model_name: "*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/PINQ_GATEWAY_BASE_URL
+      api_key: os.environ/LITELLM_API_KEY
+
+  - model_name: "*"
+    litellm_params:
+      model: openai/*
+      api_base: os.environ/PINQ_GATEWAY_BASE_URL
+      api_key: os.environ/PI_AGENT_LITELLM_API_KEY
+
+litellm_settings:
+  # The harness owns retries (tenacity, in `_dispatch`, with `num_retries=0` passed down on
+  # purpose). The proxy must not add a third layer.
+  num_retries: 0
+  request_timeout: 600
+
+general_settings:
+  disable_spend_logs: true

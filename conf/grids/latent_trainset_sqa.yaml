@@ -1,0 +1,32 @@
+name: latent_trainset_sqa
+description: >-
+  DATA GENERATION, not measurement. Parent rollouts on strategyqa's TRAIN split -- the
+  task-diversity expansion of latent_trainset, which exhausted musique's train split at
+  456/456 tasks. strategyqa is chosen first over wiki2 because its graphs reach depth 4
+  (real multi-hop anticipation) where wiki2 caps at depth 1 with 24% edgeless graphs.
+suites: [strategyqa]
+split: train
+n_tasks: 300
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+# k=2 is NOT a preference: measured sub-question-only gold-evidence share collapses from
+# 45% at k2 to 23% at k5 on this suite (tier1_confirmatory's probe). A k=5 strategyqa run
+# would generate states where the sub-question has nothing left to add.
+k: 2
+# EXCLUDED FROM EVERY REPORTED TABLE. `report.ELIGIBLE` filters `exploratory = FALSE` but
+# has NO split filter, so without this flag these train-split tasks would silently enlarge
+# strategyqa's denominator in the T1 tables. Honest rollouts; not measurements.
+exploratory: true
+arms:
+  # Same two arms as latent_trainset, for the same reasons: inquirer_prompted parents are
+  # what sample-candidates forks; self_inquire buys SFT-pool diversity.
+  - inquirer_prompted
+  - self_inquire
+notes: >-
+  Pilot tranche of the task-diversity expansion (user-approved $150 budget, strategyqa-first).
+  Priced from musique anchors -- parents $0.0273/task for both arms, full recipe with forks
+  $0.373/task observed -- because strategyqa has no usable cost history (5 runs, 3 of them
+  failed before billing). The pilot's deliverable is exactly that missing anchor: per-suite
+  fork-state yield and $/usable-pair, so the next tranche is sized on data. budget_cap and
+  max_turns match latent_trainset so a state sampled here is the same object.

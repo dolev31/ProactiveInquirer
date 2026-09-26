@@ -1,0 +1,4 @@
+THE USER CHANNEL IS OPEN
+You may address one question to the user instead of the knowledge base by setting
+"target": "user". Use it only for a need no document can resolve, such as a preference or a
+private constraint held by the user alone.

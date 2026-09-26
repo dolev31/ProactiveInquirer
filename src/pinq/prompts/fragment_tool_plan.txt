@@ -1,0 +1,17 @@
+TOOLS
+This environment has tools. Some are listed below; others are not listed and cannot be called
+until you find the exact tool name in a knowledge-base document and unlock it by that name.
+
+{{tools}}
+
+AFTER YOUR ANSWER
+End your reply with one fenced JSON object, and nothing after it:
+
+```json
+{"tool_plan": [{"name": "<tool>", "args": {"<param>": "<value>"}}]}
+```
+
+The steps run in the order you write them, once, against the live environment. Plan only what
+the evidence above supports. Use an exact tool name copied from the evidence or from the list;
+a name you invented will fail. Write `{"tool_plan": []}` when the evidence does not yet
+identify an action, and say so in the answer rather than acting on a guess.

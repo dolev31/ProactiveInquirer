@@ -1,0 +1,14 @@
+{
+  "id": "fix_001",
+  "description": "Fixture task: one KB-discoverable fact, one user-private fact.",
+  "user_scenario": {
+    "persona": "Fixture customer",
+    "instructions": "You are playing the role of a customer.\n\n## Phase 1: Background\n\nMy cat is named Persimmon and she dislikes thunderstorms.\nDisputes must be filed within 90 days of the transaction date.\n\n## Phase 2: Request\n\nI would like the dispute filed today please.\n"
+  },
+  "evaluation_criteria": {
+    "actions": [],
+    "reward_basis": ["DB"]
+  },
+  "required_documents": ["doc_alpha_001", "doc_beta_002"],
+  "user_tools": []
+}

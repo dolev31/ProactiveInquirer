@@ -1,0 +1,36 @@
+name: tier1_pilot
+description: >-
+  KILL-SWITCH DAY. The contrasts that can end the paper, run first and cheaply so a
+  failure costs a day rather than a month. The count is the arms list below and
+  pi_eval.prereg.KILL_SWITCHES, never a number written here: it said "five" while the
+  list held six.
+suites: [musique]
+n_tasks: 120
+# DISJOINT FROM tier1_confirmatory, which takes the first 200. A pilot chooses thresholds by
+# looking at its results, which burns those tasks; while this was a strict PREFIX of the
+# confirmatory slice, every burned task was also a confirmatory task. 600 unused musique tasks
+# make the offset free.
+task_offset: 200
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+pilot: true          # burned: these ids are mechanically excluded from confirmatory analysis
+arms:
+  - drafter_only
+  - inquirer_prompted
+  - verbosity            # if this matches inquirer_prompted the effect is length: STOP
+  - self_inquire         # if this matches, the contribution is the protocol, not two agents
+  - inquirer_noevidence  # if this matches, vertical proactivity does not exist
+  - parallel_replay      # DETERMINISM check: its delta is identically zero by construction,
+                         # so a match confirms harness purity and says nothing about the
+                         # graph. A non-zero delta indicts the harness.
+  - inquirer_depth1      # the SEQUENCING switch, moved here from parallel_replay: its
+                         # questions never saw an answer AND its strings genuinely differ
+  - random_q             # the null for phi; without it phi has no meaningful zero
+  - compute_matched      # ADDED with its kill switch: the same token budget spent on
+                         # sampling instead of on questions. If it matches, the gain is the
+                         # compute. It had a preregistered ENDPOINT and no preregistered
+                         # consequence, and a switch that is not in the pilot fires too late.
+notes: >-
+  Runs before anything is sealed. Its ids are burned precisely because data used to choose a
+  threshold cannot also be used to test it.

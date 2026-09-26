@@ -1,0 +1,39 @@
+{
+  "_source": "tau2-bench src/tau2/domains/<domain>/tools.py, @is_tool(ToolType.*) decorators",
+  "_tau2_bench_commit": "fc0055dc4e0a316c3f83133267fbd6faaa770992",
+  "_why": "The EnvCall `mutating` field is True on every tau2 record (the actuator's probe falls back to True when the environment cannot answer), and `requestor` is always 'assistant', so neither separates lookups from actions. This map is the environment's own declaration.",
+  "retail": {
+    "calculate": "GENERIC",
+    "cancel_pending_order": "WRITE",
+    "exchange_delivered_order_items": "WRITE",
+    "find_user_id_by_name_zip": "READ",
+    "find_user_id_by_email": "READ",
+    "get_order_details": "READ",
+    "get_product_details": "READ",
+    "get_item_details": "READ",
+    "get_user_details": "READ",
+    "list_all_product_types": "READ",
+    "modify_pending_order_address": "WRITE",
+    "modify_pending_order_items": "WRITE",
+    "modify_pending_order_payment": "WRITE",
+    "modify_user_address": "WRITE",
+    "return_delivered_order_items": "WRITE",
+    "transfer_to_human_agents": "GENERIC"
+  },
+  "airline": {
+    "book_reservation": "WRITE",
+    "calculate": "GENERIC",
+    "cancel_reservation": "WRITE",
+    "get_reservation_details": "READ",
+    "get_user_details": "READ",
+    "list_all_airports": "READ",
+    "search_direct_flight": "READ",
+    "search_onestop_flight": "READ",
+    "send_certificate": "WRITE",
+    "transfer_to_human_agents": "GENERIC",
+    "update_reservation_baggages": "WRITE",
+    "update_reservation_flights": "WRITE",
+    "update_reservation_passengers": "WRITE",
+    "get_flight_status": "READ"
+  }
+}

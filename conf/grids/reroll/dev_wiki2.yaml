@@ -1,0 +1,15 @@
+name: dev_baseline_wiki2
+description: >-
+  DEV-SPLIT BASELINE for rung-1/rung-2 checkpoint selection: the prompted policy on the fixed
+  loop (3ffa972), so a trained checkpoint evaluated later runs the same code as its baseline.
+  Not a measurement: exploratory, and dev tasks never enter a reported table.
+suites: [wiki2]
+split: dev
+n_tasks: 200
+seeds: [0]
+budget_cap: 8
+max_turns: 16
+k: 5
+exploratory: true
+arms:
+  - inquirer_prompted

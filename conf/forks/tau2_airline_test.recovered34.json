@@ -1,0 +1,187 @@
+{
+ "_why": "The 34 TEST fork points of the recorded prompted campaign on tau2_airline, recovered from the manifests it wrote (foreign_trace_sha, foreign_prefix_k, task_id are SEMANTIC_FIELDS). Written as an explicit selection so a NEW arm can be launched on the SAME cuts: run_tau2_forks.py's --forkpoints-from-runs uses one --arm list both to READ the points and to LAUNCH, so it cannot read points recorded under inquirer_prompted/self_ask and run inquirer_trained. --forkpoints with this dict takes every point, unsampled.",
+ "fork_points": [
+  {
+   "k": 19,
+   "task_id": "16",
+   "trace_sha": "15672d51ffab6df3a9d18054812deabfdab5bc4b96ca0a45b633a08c0d8fb00e"
+  },
+  {
+   "k": 2,
+   "task_id": "25",
+   "trace_sha": "16b02864016f6ced300cc9a6ff41426c839557be16fbebd3f482ff3550682e0f"
+  },
+  {
+   "k": 13,
+   "task_id": "30",
+   "trace_sha": "1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9"
+  },
+  {
+   "k": 21,
+   "task_id": "30",
+   "trace_sha": "1cdd60d18f99e3bfe05b32fff8c05da626d5577f35d1af04cc0a1ba0d2a269d9"
+  },
+  {
+   "k": 12,
+   "task_id": "16",
+   "trace_sha": "1d4d7b28920de0608104dad152758253c0649ef9fbe5a7e0df1585e5ea386ea4"
+  },
+  {
+   "k": 2,
+   "task_id": "31",
+   "trace_sha": "20437840b53a86206372536edff93e33ce55cc664a4cb37f345123dc5f4f7c29"
+  },
+  {
+   "k": 6,
+   "task_id": "24",
+   "trace_sha": "2b994204127eb0b541d640a89e89ddf5720b6b1b12609e631e59ca0bfac9418f"
+  },
+  {
+   "k": 14,
+   "task_id": "45",
+   "trace_sha": "2d37c35f32705d609113aeecf6d82f9008da7f1f2b8238b5c6998048df5a3bb4"
+  },
+  {
+   "k": 4,
+   "task_id": "19",
+   "trace_sha": "2e92d38652041e1c8607c6d05ca076a16542d82c339eadfaa09bece3b01759c7"
+  },
+  {
+   "k": 2,
+   "task_id": "31",
+   "trace_sha": "2f6e4ce3df1fbfad9c8d8a7b6bd7aa3a74480ef0dfdc290e9613d3f8173171e1"
+  },
+  {
+   "k": 6,
+   "task_id": "25",
+   "trace_sha": "32ecc7ff012163bd51c48d2b3652555b267653f9b5031f245075d48cef0088c7"
+  },
+  {
+   "k": 4,
+   "task_id": "18",
+   "trace_sha": "3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514"
+  },
+  {
+   "k": 71,
+   "task_id": "18",
+   "trace_sha": "3d8097c3fb290e0abed5258c1849f7a5c3a40105bdef17d6d8792e0264d16514"
+  },
+  {
+   "k": 18,
+   "task_id": "8",
+   "trace_sha": "61322b49ed9ca1ad6de9ecb8969466df39f03afd9b189b3739a5cb051e2e8ae6"
+  },
+  {
+   "k": 2,
+   "task_id": "13",
+   "trace_sha": "6ed9f438a4d17c25a553ced20e077ab9712b17771ef8ec5e83d8ea42d487be2f"
+  },
+  {
+   "k": 4,
+   "task_id": "13",
+   "trace_sha": "741ec105a634cac94c295dca30e8b13930d9cb921022b6990c2a80ac18716f5c"
+  },
+  {
+   "k": 19,
+   "task_id": "6",
+   "trace_sha": "8061a2f31af5c0a5479988de3b2794ec0e9e2c67762f86700c22de516e88124e"
+  },
+  {
+   "k": 2,
+   "task_id": "22",
+   "trace_sha": "80dd4f5afd2d15eede29b35e627e26d5aa48aa46933796aeea89c85bc49f0b96"
+  },
+  {
+   "k": 2,
+   "task_id": "24",
+   "trace_sha": "8df2acb202fb8478652a661eb14bf9624ae65f8d854af0975e20e361733371dc"
+  },
+  {
+   "k": 2,
+   "task_id": "29",
+   "trace_sha": "9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa"
+  },
+  {
+   "k": 13,
+   "task_id": "29",
+   "trace_sha": "9c32fd058b8f4d8317c14fc169a33d6ce9b48296466c1b9252d0694e4c33dfaa"
+  },
+  {
+   "k": 2,
+   "task_id": "37",
+   "trace_sha": "9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292"
+  },
+  {
+   "k": 21,
+   "task_id": "37",
+   "trace_sha": "9d3cc2a7db2ade3265db097bc24fc92b00943b98f88118ba2bafbe80ebdf5292"
+  },
+  {
+   "k": 4,
+   "task_id": "2",
+   "trace_sha": "ab0a7a0c048079ad40310e86286777909ae16cb95071c5971a701a091d71a986"
+  },
+  {
+   "k": 4,
+   "task_id": "6",
+   "trace_sha": "abc0990ec2eabc5f508f1bbd908f17d80293316229ffa85e73042eaeaded07c1"
+  },
+  {
+   "k": 19,
+   "task_id": "2",
+   "trace_sha": "b1d32a011f2aab2fe86251fc9409ee46d7d406d0686574b1bf9bafb0920ea428"
+  },
+  {
+   "k": 4,
+   "task_id": "48",
+   "trace_sha": "b43536ce228faae54560b811405b19c15e77a5cc49ba2d2ab5577481c3795f17"
+  },
+  {
+   "k": 2,
+   "task_id": "48",
+   "trace_sha": "ba53ba1ee895adeea2530bda1a52a097fee843786d88753e88f08263b3332db1"
+  },
+  {
+   "k": 4,
+   "task_id": "19",
+   "trace_sha": "c647f80989dc28b7009d72f9ff8ac0081b6ba78a3de5b85f017efeb2f828f37a"
+  },
+  {
+   "k": 2,
+   "task_id": "26",
+   "trace_sha": "d928a6160aaab78fe02e30027351f5a20bf928e3dc93586e8f86a2f2c90e8222"
+  },
+  {
+   "k": 18,
+   "task_id": "22",
+   "trace_sha": "e1daf8e803963af80f1e1cba044ce411e8929347804af20ce1b29534fe90b1b4"
+  },
+  {
+   "k": 2,
+   "task_id": "26",
+   "trace_sha": "ea3aadeef258338524cb2837c8bb0a030ab3480410d1cba8c5f2561e58866813"
+  },
+  {
+   "k": 8,
+   "task_id": "45",
+   "trace_sha": "ec8239338323cfdee8ee37bbdcbd1e9d399be078545a7405ecc4939a2a389770"
+  },
+  {
+   "k": 2,
+   "task_id": "8",
+   "trace_sha": "fb857900346cc775b009741a8e6f20239c4a7cf14cd77b6647ecbc717a33c075"
+  }
+ ],
+ "n_fork_points": 34,
+ "provenance": {
+  "matches_docs_reports": "docs/reports/forks_tau2_airline_test.json provenance.run_ids_sha",
+  "n_source_runs": 204,
+  "run_ids_sha": "4fc108b375d5b0cb"
+ },
+ "source_arms": [
+  "inquirer_prompted",
+  "self_ask"
+ ],
+ "split": "test",
+ "suite_id": "tau2_airline"
+}

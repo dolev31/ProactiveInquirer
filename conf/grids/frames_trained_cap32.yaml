@@ -1,0 +1,67 @@
+name: frames_trained_cap32
+description: >-
+  One point on the EXTERNAL cost frontier: the same three pins as `frames_trained_cap24.yaml`
+  on FRAMES (Google DeepMind, NAACL 2025, arXiv:2409.12941, Apache-2.0) in the oracle-articles
+  setting, at a retrieval budget of 32 -- one step past this family's own cap-24 point, which
+  was itself the point that located where the prompted base's stopping behaviour was still
+  moving rather than flat. The six `frames_trained*` files (`frames_trained.yaml` is the cap-8
+  member) differ in `budget_cap` and in nothing else -- except this file and cap-24, which also
+  raise `max_turns`, for the reason `frontier_trained_musique_cap24.yaml` states.
+suites: [frames]
+split: test
+n_tasks: 824
+seeds: [0]
+budget_cap: 32
+max_turns: 32
+k: 5
+arms:
+  - drafter_only
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  THE CAP IS THE ONLY AXIS, AND IT IS NOT A GRID FLAG. `pi run --sweep` assigns
+  `sub.budget_cap = grid.budget_cap` unconditionally, so a cap sweep on this suite is SIX FILES,
+  never one file and a flag -- and, since 2026-09-18, a `--budget-cap` flag that disagrees with
+  the grid is REFUSED rather than silently discarded (`--budget-cap 32 but the grid makes it 8`),
+  so a mislabelled point can no longer pass as a real one.
+
+  MAX_TURNS RISES WITH THE CAP HERE, AND ONLY HERE, exactly as it did at cap 24: at cap 16
+  `max_turns: 16` coincides exactly with the budget, so a file that raised `budget_cap` while
+  leaving `max_turns` behind would have the turn ceiling bind first and silently produce a
+  lower-cap run wearing a higher-cap name. `budget_cap` and `max_turns` are therefore the only
+  two fields that differ from `conf/grids/frames_trained_cap24.yaml`. Read this file's
+  `stop_reason` distribution knowing that `budget` and `max_turns` name the same ceiling here,
+  not two different stopping mechanisms.
+
+  THE TWO-PIN PROTOCOL IS INHERITED VERBATIM from `frames_trained.yaml`: `inquirer_prompted` is
+  run TWICE at this cap, once with PI_MODEL_INQUIRER=openai/aws/gpt-oss-120b (the teacher-scale
+  reference) and once with PI_MODEL_INQUIRER=qwen3-8b-base (the same-base isolation of
+  training), and `model_pin_hash` separates them in the manifest; `inquirer_trained` is run once
+  with PI_MODEL_INQUIRER=qwen3-8b-dpo-stacked-notdone-both. `arm_id` IS NOT A SELECTOR on this
+  suite.
+
+  `drafter_only` IS EXPECTED TO BE CAP-INVARIANT AND IS RUN ANYWAY. `NeverAsk` emits zero asks,
+  so no retrieval is charged and no cap can bind; its trajectory should be identical at every
+  cap and its calls should be a total cache replay of the cap-8 campaign's. That is a
+  measurement worth taking rather than an assertion worth making, and it costs cache lookups
+  only.
+
+  COMPARABILITY WITH THE INTERNAL FRONTIER IS THE POINT. This cap value matches
+  `conf/grids/frontier_trained_musique_cap32.yaml` and
+  `conf/grids/frontier_trained_strategyqa_cap32.yaml`, so the external curve and the internal
+  one are read on the same x-axis at this new point too. k stays at 5 for the reason it does
+  there: vary the budget OR the retrieval depth, never both. What is NOT shared is the y-axis --
+  FRAMES ships no need-graph, is in `pi_eval.score.GOLD_FREE_SUITES`, and emits NO coverage,
+  depth, facet or frontier-Q metric, so the external frontier is success-versus-spend where the
+  internal one is coverage-versus-spend. Those are two axes, not one; the curves are compared on
+  SHAPE, not on level.
+
+  EXPLORATORY BY REGISTRY, NOT BY OVERSIGHT, exactly as the cap-8 file records:
+  `pi_run.suites.REGISTRY["frames"].endpoint_status` is "exploratory" because FRAMES was chosen
+  on 2026-09-11, after the preregistration was sealed. Point estimate and clustered CI; NO
+  p-value. The `exploratory` GRID flag is deliberately NOT set -- that flag means "these runs
+  are data generation, not measurement", and `pi_eval.report.ELIGIBLE` carries
+  `AND r.exploratory = FALSE`, so setting it would make every unit here ineligible to be
+  reported.
+
+  Not yet run as of writing; cost basis to be recorded here once it has been.

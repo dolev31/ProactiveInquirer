@@ -1,0 +1,187 @@
+{
+ "_why": "The 34 TEST fork points of the recorded prompted campaign on tau2_retail, recovered from the manifests it wrote (foreign_trace_sha, foreign_prefix_k, task_id are SEMANTIC_FIELDS). Written as an explicit selection so a NEW arm can be launched on the SAME cuts: run_tau2_forks.py's --forkpoints-from-runs uses one --arm list both to READ the points and to LAUNCH, so it cannot read points recorded under inquirer_prompted/self_ask and run inquirer_trained. --forkpoints with this dict takes every point, unsampled.",
+ "fork_points": [
+  {
+   "k": 34,
+   "task_id": "55",
+   "trace_sha": "07a61bc4b3301ab0fc40bb4e16ad6d9d8b72b8379ffeba20056b4e42110fc7e8"
+  },
+  {
+   "k": 12,
+   "task_id": "40",
+   "trace_sha": "11b5877b8c0c90ba6be7e855432a1ff60863c5b4a5fd1a6629135708d299e0b5"
+  },
+  {
+   "k": 4,
+   "task_id": "104",
+   "trace_sha": "1ae85edba14f0f46821f8aad34ba8a504486246606a2aebd0998c9a8d09adf77"
+  },
+  {
+   "k": 21,
+   "task_id": "105",
+   "trace_sha": "1ecab1dc525df268686405a4286dad5c19bff5b18d984e4dbd44f222fdf5035c"
+  },
+  {
+   "k": 16,
+   "task_id": "19",
+   "trace_sha": "1fed91ee3128d87f36c598e3b07dbbb6a436041dde79015241329d1b4d6e5b6f"
+  },
+  {
+   "k": 25,
+   "task_id": "97",
+   "trace_sha": "2152192f7eb96ed86801ae039c0cab42e342083cfd1397a4df46eb3b969d56b3"
+  },
+  {
+   "k": 16,
+   "task_id": "88",
+   "trace_sha": "3bb37f41af544a79419cf112ae8320a5d426a51c0abb319d9d321e05f752c36a"
+  },
+  {
+   "k": 13,
+   "task_id": "61",
+   "trace_sha": "3ea8167906e7f78a95327f0f6525b0095979d9d7075b05df9f6c8fdca6f79bc9"
+  },
+  {
+   "k": 20,
+   "task_id": "104",
+   "trace_sha": "3fff735015218473cfc774a369cb7993b6ae7ba27a0028dd7bd74f5274b9b1b4"
+  },
+  {
+   "k": 2,
+   "task_id": "108",
+   "trace_sha": "453d75df479730a66b6452c9ab7fbcdc0841df876f523df6056343314d20ce24"
+  },
+  {
+   "k": 6,
+   "task_id": "84",
+   "trace_sha": "518cb2e783cfffedbfe00b0482d58955501ab99a1f996868c6d1d70a31c6c13c"
+  },
+  {
+   "k": 4,
+   "task_id": "108",
+   "trace_sha": "585bfb722ee2c657df994d4f8c373702833b2c673b7ecb614eb7ad683741e849"
+  },
+  {
+   "k": 8,
+   "task_id": "37",
+   "trace_sha": "5b31e09f0180c1145d3460d19abf94906dac2f2bfc6f4b6ad87417c85097b574"
+  },
+  {
+   "k": 11,
+   "task_id": "40",
+   "trace_sha": "5b3e17901eaddbdf8f387e95f1f06522f5b037bd140c73f764a45034dc09dbca"
+  },
+  {
+   "k": 2,
+   "task_id": "76",
+   "trace_sha": "5d4197f3314f248a744d471e5b813ef5f8f28202787ce8a3a52853f8f1cfa10a"
+  },
+  {
+   "k": 4,
+   "task_id": "15",
+   "trace_sha": "5f557fdfb07e4448de6e77e0b6fd15afb3a55d2c94400ceca907376ac1791727"
+  },
+  {
+   "k": 16,
+   "task_id": "51",
+   "trace_sha": "67036a5f65cacfe24b2efd8ac2b524a73a7025b099b75924117e9441b9382824"
+  },
+  {
+   "k": 11,
+   "task_id": "71",
+   "trace_sha": "73432084905d0b916dc57639e6db1a9eaa3296e849eae82b24f8a7ff4369faf6"
+  },
+  {
+   "k": 21,
+   "task_id": "95",
+   "trace_sha": "83bf41c29b9ecdad80194c960aba5d7aa09a6d97a91c53efee35c0c10d26b2f9"
+  },
+  {
+   "k": 2,
+   "task_id": "98",
+   "trace_sha": "87980f9204e46038cb3876775aec9b6e3ec82bddc8fff67aebeec2026ccd217a"
+  },
+  {
+   "k": 4,
+   "task_id": "64",
+   "trace_sha": "936e437024076f2a4ba3fc083429fc1add3f357927e5bf70d3cde39507d65fd6"
+  },
+  {
+   "k": 2,
+   "task_id": "19",
+   "trace_sha": "94d8f220447e306dd41ae4a07219511b4e116cf208d1bc5f5fb48887b62ef127"
+  },
+  {
+   "k": 28,
+   "task_id": "15",
+   "trace_sha": "9aeca4c5518ed3a2c3dc4c52b056499f5814e4b648e0a920ebaf16f3021b0e94"
+  },
+  {
+   "k": 14,
+   "task_id": "37",
+   "trace_sha": "a5bd4244165fe5bf76f1f5fd1fc41de954bd023b3e897b31781600728f7152bf"
+  },
+  {
+   "k": 4,
+   "task_id": "22",
+   "trace_sha": "a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb"
+  },
+  {
+   "k": 18,
+   "task_id": "22",
+   "trace_sha": "a6d1ae8a2a489996ed5c3a6b053f2b948339a2aa7ee4ea39eb9b05b61e6a3edb"
+  },
+  {
+   "k": 6,
+   "task_id": "18",
+   "trace_sha": "abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910"
+  },
+  {
+   "k": 26,
+   "task_id": "18",
+   "trace_sha": "abe4f08ab6b9dbb26b34991e13759a1c7b85fc43f464824e51223a05ff48e910"
+  },
+  {
+   "k": 21,
+   "task_id": "65",
+   "trace_sha": "b19ea58a453aeb68ba431ef4cafc87d4d31a9153804aefa9eb9531b7a0e82ddd"
+  },
+  {
+   "k": 4,
+   "task_id": "60",
+   "trace_sha": "b1cf20069acd0d8466b0d36876e404e6e27b953e2c0bc09ee93ab1d920cfca4c"
+  },
+  {
+   "k": 15,
+   "task_id": "91",
+   "trace_sha": "cbeb1a9bc0078ecd6d817160fde5f4e17a40878fcd923ebfafe0cc7434e62455"
+  },
+  {
+   "k": 13,
+   "task_id": "105",
+   "trace_sha": "d4edff0e3ee084df732a6eb706d80a6fa5179e6fa7adaf9f6e2afde1be919c98"
+  },
+  {
+   "k": 2,
+   "task_id": "90",
+   "trace_sha": "d732f3b38276b4fafbad9b7cde61ff44650a5f3ab211ed3ab655ef6dc9ab3e96"
+  },
+  {
+   "k": 14,
+   "task_id": "67",
+   "trace_sha": "d8ae000dd3d56644d8c2ea9767a4fdbcd524de73992e8febf1f1f0347a82af3c"
+  }
+ ],
+ "n_fork_points": 34,
+ "provenance": {
+  "matches_docs_reports": "docs/reports/forks_tau2_retail_test.json provenance.run_ids_sha",
+  "n_source_runs": 204,
+  "run_ids_sha": "1a060380806fff3e"
+ },
+ "source_arms": [
+  "inquirer_prompted",
+  "self_ask"
+ ],
+ "split": "test",
+ "suite_id": "tau2_retail"
+}

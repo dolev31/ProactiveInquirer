@@ -1,0 +1,56 @@
+name: tier0_canary
+description: >-
+  Every runnable arm, once, on musique, to prove the code path reaches a real provider before
+  any grid is funded. NOT a measurement.
+exploratory: true      # a canary is not preregistered; seed 7 is deliberately outside SEEDS_BY_SUITE
+suites: [musique]
+n_tasks: 3
+seeds: [8]
+max_turns: 1
+k: 2
+budget_cap: 1
+arms:
+  # --- LLM arms that need no setup
+  - inquirer_prompted
+  - inquirer_noevidence
+  - inquirer_depth1
+  - inquirer_may_ask_user
+  - self_inquire
+  - self_ask
+  - ircot
+  - checklist
+  - query_expansion
+  - compute_matched
+  - drafter_only
+  - verbosity
+  # --- replay + ceiling arms; questions supplied on the command line
+  - parallel_replay      # --seed-questions-from runs   (needs ITS OWN task's questions)
+  - random_q             # --seed-questions-from runs   (needs a pool spanning >= 2 tasks)
+  - gold_evidence        # --questions-from-file gold_evidence=data/gold/q_gold_evidence.json
+  - oracle_vreq          # --questions-from-file oracle_vreq=data/gold/q_oracle_vreq.json
+  # --- PARE arms. Grid E is cut, but the arm ids are not suite-bound: all three use ordinary
+  #     policy classes (NeverAsk / PromptedInquirer / LLMDrafter / VerbosityDrafter), so the
+  #     canary still proves their code path.
+  - pare_baseline
+  - pare_plus_inquirer_prompted
+  - pare_plus_verbosity
+  # --- llm_free, zero tokens. Only fake_drafter_only is meaningful on musique: it is a
+  #     NeverAsk arm, so 0 asks is correct for it. fake_chain and fake_depth1 are SYNTH
+  #     stand-ins -- ChainInquirer follows the synthetic suite's dependency chain by
+  #     construction -- so on musique they emit 0 asks and `pi verify arms` reports a defect
+  #     that is really a suite mismatch. Measured on this canary: 3 runs each, n_asks 0.0,
+  #     n_turns 0.0, tok_total 0. They are canaried on synth by `make smoke` instead.
+  - fake_drafter_only
+notes: >-
+  EXCLUDES inquirer_trained. It is inquirer_prompted with a different MODEL PIN and the same
+  prompt, and no trained pin exists yet -- so it would issue byte-identical requests, hit the
+  cache on every call, and trip `pi verify arms`'s "0 of N calls reached the provider" check
+  while proving nothing. It joins the canary when a checkpoint is pinned.
+
+  seed 8 because 0, 1 and 7 are now warm on musique. A cache-warm probe proves the code path
+  ran, not that the model answered -- and `pi verify arms` says so: a replay of the seed-7
+  canary reported 17 of 20 cells as "0 calls reached the provider", which was correct.
+  A canary's seed is single-use by construction.
+
+  max_turns 1 still exercises the whole chain: run_loop is `for i in range(max_turns)`, so one
+  turn is one act -> retrieve -> resolve -> draft, plus the terminal draft and the Answerer.

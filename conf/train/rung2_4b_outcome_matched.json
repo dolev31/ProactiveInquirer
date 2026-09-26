@@ -1,0 +1,34 @@
+{
+  "_what": "A11 / E48-matched, `dpo_control_matched_n` at 4B: the rung-2 grid of record SUBSAMPLED to the outcome-only arm's n. `pi train rung2 --config conf/train/rung2_4b_outcome_matched.json --base-model Qwen/Qwen3-4B --adapter {artifacts}/E11/s{seed} --pairs data/rl/headline/pairs.jsonl --out ... --seed S`. Every flag overrides the value here, and every value here is in cfg.sha.",
+  "_not_here_on_purpose": "base_model, adapter and pairs. The experiment row names all three; under reference=adapter the policy IS rung 1's LoRA, so the adapter path is the run's identity and must be typed, not defaulted. `4b` in this file's name is the base the ROW pairs it with -- nothing in this file selects a model. AND NOT exclude_decided_by: this arm is the CONTROL, it keeps every decider and is cut to E48's n instead. An earlier draft of this file carried the exclusion as well, and the defect is invisible in the number it produces: the subsample then draws 6,341 of the 6,341 the exclusion had already left, so drops['subsample'] is 0, n_pairs reads 6,341 -- exactly the target -- and the control trains E48's own dataset under the control's name. MEASURED on login-node 2026-09-18, both readings in artifacts/a11_prep_20260918/RESULT.md: the defective file printed n_dropped_by_filter={decided_by: 4964, pair_kind: 6125} and this one prints {pair_kind: 6125, subsample: 4964}. Assert the SUBSAMPLE drop, never only the n.",
+  "_why_this_is_the_8b_recipe_verbatim": "The only difference between this arm and E48 is that this one keeps every decider and is cut to E48's n instead. Every other key is byte-identical to conf/train/rung2_8b.json (tests/test_rung2_exclude_decided_by_config.py::test_the_two_a11_grids_share_one_recipe pins that), because a contrast that also moves a hyperparameter measures the pair of them and A11's own sentence -- 'if the two arms are equal, the gain-decided pairs carried no signal' -- is then unavailable. The 4B rows E44-E48 already ran conf/train/rung2_8b.json for the same reason: the numbers below were measured on the tokenizer and the objective, not on the parameter count.",
+  "_why_subsample_pairs": "6,341 IS A READING, NOT A DERIVATION. It is the n_pairs `pi train rung2` printed for conf/train/rung2_4b_outcome_only.json over data/rl/headline/pairs.jsonl (sha256 05cf3bf845493be384412b4600f20e120768f4b3e487c05d77233265d17400f3) on login-node, 2026-09-18, preflight only -- see artifacts/a11_prep_20260918/RESULT.md for the command and its output. The Mac holds a DIFFERENT pairs file (data/rl/pairs.jsonl: 14,927 ask_ask, 45.7% gain) and computing the target from it would have named 8,100, an arm that trains 1,759 pairs more than its partner under a config that claims to be matched. WHAT MATCHING BUYS: A11 asks whether the pairs only the gain rule could order carry signal. Its answer is a comparison of two arms, and if they also differ in n then 'equal' says nothing -- the control would have been trained on 11,305 pairs against 6,341. Subsampling is not a filter: it draws over `pair_id`, applies after every filter, and REFUSES rather than returning fewer (TooFewPairsToSubsample), so an arm cannot silently report an n it does not have. Preflighted: n_pairs=6341 exactly and n_dropped_by_filter.subsample=4964, the remainder of 11,305.",
+  "subsample_pairs": 6341,
+  "_why_subsample_seed": "WHICH DRAW, named rather than defaulted. There is no default on purpose: borrowing cfg.seed would make this arm's three replicates (seeds 0, 1, 2) three DIFFERENT datasets, so its spread would mix subset choice into what the table calls training-seed variance. 20260918 is the date this was chosen, picked before any preflight was run and before any arm was trained -- so it is not a draw selected on its own outcome -- and it is deliberately NOT 0, 1 or 2, so that no log line can be read as if the training seed and the subset seed were the same number. It is fixed across the three replicates: one dataset, three training seeds.",
+  "subsample_seed": 20260918,
+  "_why_max_seq_len": "MEASURED on the real tokenizer: the longest state is 4,963 tokens and the longest templated example ~5,045. 5,120 is the next multiple of 1,024 above that.",
+  "max_seq_len": 5120,
+  "_why_max_prompt_len": "512 below max_seq_len, which is well above the longest action (a question is 40-120 characters). On trl 1.x there is no separate prompt budget at all and this is recorded rather than applied -- `prompt_length_hook` in rung2.manifest.json says which regime the run was under, because truncating the prompt and truncating the concatenation are not the same experiment.",
+  "max_prompt_len": 4608,
+  "_why_bf16": "As rung 1: the compute dtype, not a storage dtype.",
+  "bf16": true,
+  "_why_batch_and_accum": "As rung 1. Two forward passes per example here, so the wall time per step is roughly twice rung 1's.",
+  "per_device_batch": 1,
+  "grad_accum": 16,
+  "_why_learning_rate": "5e-6, an order of magnitude below rung 1: DPO moves a policy that already exists.",
+  "learning_rate": 5e-06,
+  "_why_epochs": "One pass. A preference dataset re-visited is a preference dataset memorised.",
+  "epochs": 1,
+  "_why_beta": "0.1 is the standard DPO KL weight. It is in cfg.sha because beta and label_smoothing are the two fields that define the objective itself.",
+  "beta": 0.1,
+  "_why_loss_type": "Plain DPO -- the default, named here because the objective is the one thing this grid should never leave implicit. A single name renders in cfg.sha as the bare string the pre-tuple field rendered, so writing it changes nothing about this run's identity.",
+  "loss_type": [
+    "sigmoid"
+  ],
+  "_why_include_pair_kinds": "ask_ask ALONE is the primary arm, as in the grid of record. On the headline export this drops 6,125 rows before the decider filter is applied at all, which is why the 11,305 above is not the file's 17,430.",
+  "include_pair_kinds": [
+    "ask_ask"
+  ],
+  "_why_reference": "The frozen rung-1 adapter, not a merge: a bf16 fold lost 44.7% of rung 1's update and the fp32 fix makes an 8B base ~32 GB that this rung would then load. See docs/TRAINING.md 6.1.",
+  "reference": "adapter"
+}

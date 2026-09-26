@@ -1,0 +1,12 @@
+{
+  "keypoint_contradiction_rate": 0.065291,
+  "keypoint_recall": 0.203657,
+  "kpr_incremental": 0.203657,
+  "kpr_repetition_gap": 0.0,
+  "quality_balance": 1.04318,
+  "quality_breadth": 0.531555,
+  "quality_clarity": 0.717508,
+  "quality_depth": 0.475266,
+  "quality_insightfulness": 0.461161,
+  "quality_support": 0.0
+}

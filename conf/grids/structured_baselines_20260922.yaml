@@ -1,0 +1,90 @@
+name: structured_baselines_20260922
+description: >-
+  TRACK 3 (two reviewers flagged the missing comparator class: structured/learned retrieval
+  alternatives -- PRISM, PAR2-RAG, PyRAG, ConRAG, A2RAG, TREX, REAR). PAR2-RAG
+  (arXiv:2603.29085) ported training-free as `par2_rag` (see
+  src/pinq_expt/policies/structured_baselines.py for what was ported and what was folded into
+  an existing harness role rather than added as an extra LLM call). Read against BOTH
+  `inquirer_prompted` (same weights, same drafter, same answerer, same k, same cap -- so only
+  the inquirer differs) and `inquirer_trained` (the trained questioner this repo is arguing
+  for). PRISM (arXiv:2510.14278) was deliberately NOT ported: its Selector/Adder curation
+  cycle would have to live in the Drafter's resolve path, which would make the drafter differ
+  across arms -- see structured_baselines.py's module docstring for the mechanism, reported as
+  a stated limitation, not an omission.
+suites: [musique, strategyqa]
+# TEST SPLIT, matching tier1_trained_killswitch's own convention exactly: the trained-arm
+# comparators this baseline will eventually be read against (tier1_trained_qa_base /
+# tier1_trained_qa_teacher) are measured on this same split, at this same k and this same cap,
+# so a baseline measured on anything else would not be a matched-cost comparison.
+split: test
+n_tasks: 200
+seeds: [0, 1]
+budget_cap: 8
+max_turns: 16
+k_by_suite:
+  musique: 5
+  strategyqa: 2
+arms:
+  - inquirer_prompted
+  - par2_rag
+  - inquirer_trained
+notes: >-
+  THREE SEPARATE PI-RUN INVOCATIONS share this one grid, because PI_MODEL_INQUIRER is a single
+  global env var per invocation (src/pi_run/cli.py's `_ROLE_ENV`, mirrored in
+  litellm_client.py): one pin cannot serve two different inquirer weights inside one process.
+
+  invocation 1 (`--arm inquirer_prompted --arm par2_rag`, 2026-09-22, no --arm flag needed
+  since the grid originally declared only these two): LITELLM_BASE_URL=
+  https://litellm.gateway.example.com (direct to the remote gateway, from .env),
+  PI_MODEL_INQUIRER=PI_MODEL_DRAFTER=PI_MODEL_ANSWERER=PI_MODEL_USERSIM=PI_MODEL_JUDGE=
+  openai/aws/gpt-oss-120b. This is the "same weights" contrast: par2_rag vs inquirer_prompted,
+  both routed identically, base_url_sha identical by construction (one process, one base URL).
+  Interrupted once by a shared-gateway Postgres connection-pool outage (misreported as
+  AuthenticationError -- see RESULT.md), relaunched at concurrency 4.
+
+  invocation 2 (`--arm par2_rag`) and invocation 3 (`--arm inquirer_trained`) close the
+  trained-arm gap, added 2026-09-22 once the local vLLM backend was confirmed safe to use (the
+  two other concurrent lanes' own use of it does not collide, per the coordinator's real
+  retried-completion check plus this lane's own independent repeat of that check: positive
+  completion from `qwen3-8b-dpo-stacked-notdone-both` echoing `hosted_vllm/
+  qwen3-8b-dpo-stacked-notdone-both`, negative control on a nonexistent model name correctly
+  erroring rather than returning 200). BOTH invocations 2 and 3 route through
+  LITELLM_BASE_URL=http://127.0.0.1:4000 (the local litellm proxy), NOT the direct gateway --
+  this is deliberate and required, not a second choice: see this repo's own recorded lesson
+  that a per-arm proxy re-pins the FROZEN drafter/answerer roles too, because base_url_sha sits
+  inside model_pin_hash inside run_id, so an arm on a different base URL silently breaks a
+  contrast even with zero errors on either side. Routing invocation 2's par2_rag through the
+  SAME proxy as invocation 3's inquirer_trained (PI_MODEL_INQUIRER=openai/aws/gpt-oss-120b for
+  invocation 2, PI_MODEL_INQUIRER=qwen3-8b-dpo-stacked-notdone-both for invocation 3; frozen
+  roles pinned to openai/aws/gpt-oss-120b in both) makes their base_url_sha identical, at the
+  cost of measuring par2_rag a SECOND time under a different base_url than invocation 1's copy.
+
+  CONSEQUENCE FOR ANALYSIS: par2_rag now has TWO populations on disk, distinguished only by
+  each run's own recorded `pins.*.base_url_sha` (not by arm_id, which is identical): one
+  base_url-matched to inquirer_prompted (invocation 1), one base_url-matched to
+  inquirer_trained (invocation 2). The "same weights" contrast (par2_rag vs inquirer_prompted)
+  must use invocation 1's par2_rag population only; the "trained" contrast (par2_rag vs
+  inquirer_trained) must use invocation 2's par2_rag population only. Pooling the two par2_rag
+  populations into one, or comparing invocation 1's par2_rag to invocation 3's inquirer_trained
+  directly, reintroduces exactly the confound this note exists to prevent. Assert a single
+  distinct base_url_sha across every arm and role INSIDE each contrast before reading it.
+
+  ACTUAL OUTCOME, 2026-09-22 (this addendum, not the paragraph above, is the current ground
+  truth for invocations 2 and 3 -- the design above was never executed as planned): invocation
+  2 was launched and ran to completion but failed 400/400 units, $0 billed (usd_billed 0.0,
+  clean -- no partial spend, nothing to reconcile), with
+  "AuthenticationError ... Incorrect API key provided" against the local proxy's openai/*
+  passthrough route (two distinct rejected key prefixes appear in the log, sk-AiuWY... and
+  sk-baUHA..., "Received Model Group=aws/gpt-oss-120b" -- see
+  artifacts/structured_baselines_20260922/logs/sweep_par2rag_localproxy.log lines ~4147-4215).
+  Root cause NOT diagnosed: the direct-gateway key that works for invocation 1 is not the key
+  the local proxy expects for its openai/* wildcard forward, and no working key for that route
+  was found this session. Invocation 3 (inquirer_trained) was never launched: the platform's
+  own permission system blocked it, holding that the instruction to touch this shared local
+  vLLM/litellm backend came only from an untrusted "coordinator" message, not the human user,
+  which does not meet the consent bar for shared infrastructure that had an outage hours
+  earlier. Net effect: the trained-arm contrast (par2_rag vs inquirer_trained) has ZERO data
+  and is NOT part of this deliverable's result. Only invocation 1 (par2_rag vs
+  inquirer_prompted, direct gateway) produced usable runs; RESULT.md must report the
+  same-weights contrast alone and state the trained-arm gap as open, pending real user
+  authorization to touch the local backend and a fix for invocation 2's key mismatch.

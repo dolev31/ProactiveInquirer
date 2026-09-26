@@ -1,0 +1,36 @@
+name: tier3_drgym
+description: Open-ended research reports over the DeepResearchGym FineWeb index.
+suites: [drgym]
+n_tasks: 100
+seeds: [0]
+budget_cap: 16
+max_turns: 16
+arms: [drafter_only, self_inquire, inquirer_prompted]
+# verbosity is DELIBERATELY ABSENT. Its only declared job is the verbosity kill switch, and
+# kill switches are decided on report.KILLSWITCH_METRIC = evidence_coverage, which
+# prereg.NOT_COMPUTABLE records as impossible here: 0 of 16,156 drgym gold nodes carry
+# gold_ev_uids, so |E n gold| has no denominator. No drgym endpoint names it either. On this
+# suite it could only ever be a descriptive ladder row, at a MEASURED $0.0305/unit x 100
+# tasks = $3.05. Measured on 5 tasks at full grid parameters, it also retrieves nothing at
+# all (0.0 evidence, 0 asks) -- a NeverAsk arm on an open-web suite has no path to evidence.
+concurrency: 8
+notes: >-
+  KEY OBTAINED 2026-08-26 from deepresearchgym@cmu.edu (Joao Coelho). Verified live the
+  same day: GET /fineweb/search with an X-API-Key header returns HTTP 200 with base64 JSON
+  documents, through this repo's own DrGymClient and not only by curl.
+
+  FINEWEB ONLY. The key does NOT cover the ClueWeb endpoints (/search); those need a
+  separate licence from https://lemurproject.org/clueweb22/obtain.php, and the key can be
+  upgraded once that completes (clueweb@andrew.cmu.edu). `CORPORA` defaults to fineweb, so
+  nothing here needs changing -- but a run that switches corpus to clueweb22 will 401 until
+  the licence lands, and that is a licensing fact rather than a bug.
+
+  CONCURRENCY IS PINNED, not left to the default. The provider is not rate limited for this
+  key, but fineweb is the busiest endpoint (it needs no licence) and its maintainer asked
+  for at most ~16 parallel calls plus retry logic, warning of timeouts under load. 8 is the
+  runner default today, and pinning it means a later change to PI_MAX_CONCURRENCY cannot
+  quietly push this suite past what its host asked for. Retries already exist:
+  DrGymClient defaults to max_attempts=3, backoff=0.5, timeout=60.0.
+
+  If the key is ever revoked this grid is CUT ENTIRELY rather than faked with a local
+  index, which would read as padding.

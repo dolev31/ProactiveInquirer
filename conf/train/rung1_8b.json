@@ -1,0 +1,26 @@
+{
+  "_what": "The rung-1 grid of record for the 8B run. `pi train rung1 --config conf/train/rung1_8b.json --base-model Qwen/Qwen3-8B --tau <measured> --sigma-j <measured>`. Every flag overrides the value here, and every value here is in cfg.sha.",
+  "_not_here_on_purpose": "base_model, tau and sigma_j. There is no default base model (two rungs trained from two different bases and compared as one arm is the confound the model pin exists to prevent), and tau/sigma_j must be MEASURED before the dataset is built -- tau is the 35th percentile of pilot phi_LOO and sigma_j is the judge's measured standard deviation. Guessing either changes what the checkpoint imitates with no trace in the output.",
+
+  "_why_max_seq_len": "MEASURED on the real tokenizer over the exported rows: the longest state is 4,963 tokens and the longest templated example ~5,045. 5,120 is the next multiple of 1,024 above that, so no row is truncated and nothing is paid for headroom no row uses. The old 12,288 was a guess and cost 2.4x the activation memory of the longest row that exists.",
+  "max_seq_len": 5120,
+
+  "_why_bf16": "The COMPUTE dtype, which is not the dtype anything is stored in -- see merge.py for that distinction and the 44.7% of a LoRA update a bf16 STORE rounds away.",
+  "bf16": true,
+
+  "_why_batch_and_accum": "The dataset yields no padding, so per_device_batch > 1 raises in the default collator rather than silently mis-batching; 1 x 16 is the shipped shape and 16 is the effective batch.",
+  "per_device_batch": 1,
+  "grad_accum": 16,
+
+  "_why_learning_rate": "1e-4 is the usual LoRA SFT rate at r=32 with alpha=2r. Rung 2 runs an order of magnitude below it: DPO is a nudge, not a fit.",
+  "learning_rate": 1e-4,
+
+  "_why_epochs": "Two passes over a rejection-sampled set. More overfits a corpus whose rows are already filtered to the accepted ones.",
+  "epochs": 2,
+
+  "_why_lora_r": "r=32 with alpha=2r. The coupling is enforced by LoraSpec.validate: decoupling them means a rank sweep also silently sweeps the adapter's effective learning rate.",
+  "lora_r": 32,
+
+  "_why_chat_template": "The SERVER renders through the template. Training on the raw concatenation measures every dev NLL on a prompt the policy never sees.",
+  "chat_template": true
+}

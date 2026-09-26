@@ -1,0 +1,24 @@
+name: frames_recipe_cap16
+description: >-
+  FRAMES, the gold-free external suite, at five budget ceilings for the reported questioner (the recipe,
+  training seeds 1 and 2) and both prompted comparators at ONE code version. The published FRAMES
+  sweep (artifacts/frames_frontier, conf/grids/frames_trained*.yaml, code 107ef2221a55) ran the
+  registered pin, which is seed 0 (artifacts/seed_identity_20260923). Every field below equals
+  frames_trained_cap16.yaml except the name; the runs are made from the pinned worktree at
+  a61c4f4be3e9 through proxy 4030, the code and base URL of artifacts/frontier_recipe_20260923.
+suites: [frames]
+split: test
+n_tasks: 824
+seeds: [0]
+budget_cap: 16
+max_turns: 16
+k: 5
+arms:
+  - drafter_only
+  - inquirer_prompted
+  - inquirer_trained
+notes: >-
+  One pi run invocation per questioner (PI_MODEL_INQUIRER is one global per process):
+  inquirer_prompted at openai/aws/gpt-oss-120b and at qwen3-8b-base, inquirer_trained at
+  qwen3-8b-dpo-stacked-notdone-both-s1 and -s2; drafter_only once, at cap 8, since it asks nothing.
+  Frozen drafter and answerer openai/aws/gpt-oss-120b.
