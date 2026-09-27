@@ -21,14 +21,26 @@ abstract: >-
   questions.
 license: Apache-2.0
 repository-code: "https://github.com/dolev31/ProactiveInquirer"
+repository-artifact: "https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B"
+url: "https://dolev31.github.io/ProactiveInquirer/"
 keywords:
   - proactive agents
+  - proactivity
+  - LLM agents
   - information seeking
+  - question asking
+  - clarifying questions
+  - need graph
+  - multi-hop question answering
+  - agentic search
   - retrieval-augmented generation
   - agent evaluation
+  - direct preference optimization
 preferred-citation:
   type: article
   title: "Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents"
+  year: 2026
+  url: "https://dolev31.github.io/ProactiveInquirer/"
   authors:
     - family-names: Levy
       given-names: Ido

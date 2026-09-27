@@ -4,11 +4,12 @@
 
 ### Asking for What Was Never Requested:<br>Horizontal and Vertical Proactivity in Agents
 
-**Ido Levy**<sup>1,2</sup> · **Asaf Yehudai**<sup>1</sup> · **Segev Shlomov**<sup>1</sup> · **Asaf Adi**<sup>1</sup> · **Leshem Choshen**<sup>1,2</sup>
+[**Ido Levy**](https://github.com/dolev31)<sup>1,2</sup> · **Asaf Yehudai**<sup>1</sup> · **Segev Shlomov**<sup>1</sup> · **Asaf Adi**<sup>1</sup> · **Leshem Choshen**<sup>1,2</sup>
 
 <sup>1</sup>IBM &nbsp;&nbsp; <sup>2</sup>Weizmann Institute of Science
 
-[![Paper](https://img.shields.io/badge/arXiv-coming%20soon-b31b1b?logo=arxiv&logoColor=white)](#-citation)
+[![Project page](https://img.shields.io/badge/Project-page-1B5EA8)](https://dolev31.github.io/ProactiveInquirer/)
+[![Paper](https://img.shields.io/badge/arXiv-coming%20soon-b31b1b?logo=arxiv&logoColor=white)](https://dolev31.github.io/ProactiveInquirer/)
 [![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Model-ProactiveInquirer--Qwen3--8B-FFD21E)](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B)
 [![Tests](https://github.com/dolev31/ProactiveInquirer/actions/workflows/tests.yml/badge.svg)](https://github.com/dolev31/ProactiveInquirer/actions/workflows/tests.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
@@ -31,7 +32,7 @@
 
 - **2026-09** · The code, the need-graph metrics and the trained questioner
   ([🤗 ProactiveInquirer-Qwen3-8B](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B)) are
-  public. The paper is coming to arXiv.
+  public, with a [project page](https://dolev31.github.io/ProactiveInquirer/). The paper is coming to arXiv.
 
 ## ✨ Highlights
 
