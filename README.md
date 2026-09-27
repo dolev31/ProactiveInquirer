@@ -2,7 +2,10 @@
 
 # 🔎 ProactiveInquirer
 
-### Asking for What Was Never Requested:<br>Horizontal and Vertical Proactivity in Agents
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/title-dark.png">
+  <img src="docs/assets/title-light.png" width="760" alt="Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents">
+</picture>
 
 [**Ido Levy**](https://scholar.google.com/citations?user=Ok_7M80AAAAJ)<sup>1,2</sup> · **Asaf Yehudai**<sup>1</sup> · **Segev Shlomov**<sup>1</sup> · **Asaf Adi**<sup>1</sup> · **Leshem Choshen**<sup>1,2</sup>
 
