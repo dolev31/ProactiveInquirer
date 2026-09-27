@@ -115,6 +115,15 @@ questioner = PeftModel.from_pretrained(base, "dolev31/ProactiveInquirer-Qwen3-8B
 It replies with one JSON action per step: `{"action": "ask", "question": ...}` or
 `{"action": "stop", ...}`.
 
+To run it on your own machine, there are
+[GGUF files](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B-GGUF) for Ollama, LM Studio and
+llama.cpp, and [merged weights](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B-Merged) that
+need no PEFT:
+
+```bash
+ollama run hf.co/dolev31/ProactiveInquirer-Qwen3-8B-GGUF:Q4_K_M --think=false
+```
+
 ## 🧭 How it works
 
 ```
