@@ -494,6 +494,8 @@ base = AutoModelForCausalLM.from_pretrained(
     <span class="s">"Qwen/Qwen3-8B"</span>, dtype=torch.bfloat16, device_map=<span class="s">"auto"</span>
 )
 questioner = PeftModel.from_pretrained(base, <span class="s">"dolev31/ProactiveInquirer-Qwen3-8B"</span>)</code></pre>
+  <p style="margin-top:14px">To run it on your own machine, with <a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B-GGUF">GGUF files</a> for Ollama, LM Studio and llama.cpp, or with <a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B-Merged">merged weights</a> that need no PEFT:</p>
+<pre class="code"><code>ollama run hf.co/dolev31/ProactiveInquirer-Qwen3-8B-GGUF:Q4_K_M --think=false</code></pre>
   <p style="margin-top:14px">To run the whole loop with a retriever, a drafter and the paper's metrics, start from the <a href="https://github.com/dolev31/ProactiveInquirer">repository</a>: <code>make smoke</code> runs it end to end on a synthetic suite, with no API keys.</p>
 </section>
 
