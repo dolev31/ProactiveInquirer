@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents</title>
+<meta name="description" content="What should an LLM agent pursue that the user never asked for? Horizontal and vertical proactivity, need graphs with no model judge, and Q&amp;D training.">
+<meta name="author" content="Ido Levy, Asaf Yehudai, Segev Shlomov, Asaf Adi, Leshem Choshen">
+<meta name="keywords" content="proactive agents, proactivity, LLM agents, tool-using agents, information seeking, question asking, clarifying questions, need graph, multi-hop question answering, agentic search, direct preference optimization, tau2-bench">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://dolev31.github.io/ProactiveInquirer/">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<!-- Google Scholar -->
+<meta name="citation_title" content="Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents">
+<meta name="citation_author" content="Levy, Ido">
+<meta name="citation_author_institution" content="IBM">
+<meta name="citation_author_institution" content="Weizmann Institute of Science">
+<meta name="citation_author" content="Yehudai, Asaf">
+<meta name="citation_author_institution" content="IBM">
+<meta name="citation_author" content="Shlomov, Segev">
+<meta name="citation_author_institution" content="IBM">
+<meta name="citation_author" content="Adi, Asaf">
+<meta name="citation_author_institution" content="IBM">
+<meta name="citation_author" content="Choshen, Leshem">
+<meta name="citation_author_institution" content="IBM">
+<meta name="citation_author_institution" content="Weizmann Institute of Science">
+<meta name="citation_publication_date" content="2026">
+<meta name="citation_language" content="en">
+<meta name="citation_keywords" content="proactive agents; proactivity; LLM agents; tool-using agents; information seeking; question asking; clarifying questions; need graph; multi-hop question answering; agentic search; direct preference optimization; tau2-bench">
+<meta name="citation_abstract_html_url" content="https://dolev31.github.io/ProactiveInquirer/">
+<!-- Open Graph and Twitter cards -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProactiveInquirer">
+<meta property="og:title" content="Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents">
+<meta property="og:description" content="Tool-using LLM agents do what they are asked, yet a task often needs information the user never mentions. We study what an agent should pursue unasked, measure it against need graphs with no model judge, and train it with Q&amp;D, which learns from the consequences of its own questions.">
+<meta property="og:url" content="https://dolev31.github.io/ProactiveInquirer/">
+<meta property="og:image" content="https://dolev31.github.io/ProactiveInquirer/assets/social_preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="The paper&#x27;s title, its authors and affiliations, and Figure 1: one customer request handled by the same model, prompted and trained with Q&amp;D.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents">
+<meta name="twitter:description" content="Tool-using LLM agents do what they are asked, yet a task often needs information the user never mentions. We study what an agent should pursue unasked, measure it against need graphs with no model judge, and train it with Q&amp;D, which learns from the consequences of its own questions.">
+<meta name="twitter:image" content="https://dolev31.github.io/ProactiveInquirer/assets/social_preview.png">
+<meta name="twitter:image:alt" content="The paper&#x27;s title, its authors and affiliations, and Figure 1: one customer request handled by the same model, prompted and trained with Q&amp;D.">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "ScholarlyArticle",
+   "@id": "https://dolev31.github.io/ProactiveInquirer/#paper",
+   "headline": "Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents",
+   "name": "Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents",
+   "abstract": "An agent that uses tools typically responds to what the user explicitly asks, yet completing the task may require information the user never requested. Work on proactive agents mainly studies whether and when an agent should act on its own, not what information it should pursue. We study a distinct axis of proactivity: its content. Horizontal proactivity pursues unstated information that the current context already identifies, and vertical proactivity pursues needs that only earlier evidence reveals. A need graph, recovered from a benchmark's own decomposition, records which needs depend on which, so both forms, and whether the agent stops at the right time, can be scored from a transcript without a model judge. To learn this behavior, we propose Q&D (questioner and drafter), which trains a questioner to prefer the question whose continuation retrieves more of the required evidence, with no reward model or judge. On held-out splits of three multi-hop question-answering benchmarks, at equal retrieval spend, the trained questioner improves both forms of proactivity over the same model, prompted, and outperforms a prompted model 15× larger in the same role on two of the three, and the gain persists after controlling for question volume and length. Without further training, we place the questioner in an interactive customer-service agent with a simulated customer, where it completes more tasks while asking fewer questions, and in retail it outperforms the 15× larger model with fewer follow-up turns from the customer. These results show that proactivity depends not only on whether an agent acts without being asked, but also on what it chooses to pursue and when it stops.",
+   "description": "Tool-using LLM agents do what they are asked, yet a task often needs information the user never mentions. We study what an agent should pursue unasked, measure it against need graphs with no model judge, and train it with Q&D, which learns from the consequences of its own questions.",
+   "keywords": [
+    "proactive agents",
+    "proactivity",
+    "LLM agents",
+    "tool-using agents",
+    "information seeking",
+    "question asking",
+    "clarifying questions",
+    "need graph",
+    "multi-hop question answering",
+    "agentic search",
+    "direct preference optimization",
+    "tau2-bench"
+   ],
+   "author": [
+    {
+     "@type": "Person",
+     "name": "Ido Levy",
+     "givenName": "Ido",
+     "familyName": "Levy",
+     "affiliation": [
+      {
+       "@type": "Organization",
+       "name": "IBM"
+      },
+      {
+       "@type": "Organization",
+       "name": "Weizmann Institute of Science"
+      }
+     ],
+     "url": "https://github.com/dolev31",
+     "sameAs": [
+      "https://github.com/dolev31"
+     ]
+    },
+    {
+     "@type": "Person",
+     "name": "Asaf Yehudai",
+     "givenName": "Asaf",
+     "familyName": "Yehudai",
+     "affiliation": [
+      {
+       "@type": "Organization",
+       "name": "IBM"
+      }
+     ]
+    },
+    {
+     "@type": "Person",
+     "name": "Segev Shlomov",
+     "givenName": "Segev",
+     "familyName": "Shlomov",
+     "affiliation": [
+      {
+       "@type": "Organization",
+       "name": "IBM"
+      }
+     ]
+    },
+    {
+     "@type": "Person",
+     "name": "Asaf Adi",
+     "givenName": "Asaf",
+     "familyName": "Adi",
+     "affiliation": [
+      {
+       "@type": "Organization",
+       "name": "IBM"
+      }
+     ]
+    },
+    {
+     "@type": "Person",
+     "name": "Leshem Choshen",
+     "givenName": "Leshem",
+     "familyName": "Choshen",
+     "affiliation": [
+      {
+       "@type": "Organization",
+       "name": "IBM"
+      },
+      {
+       "@type": "Organization",
+       "name": "Weizmann Institute of Science"
+      }
+     ]
+    }
+   ],
+   "inLanguage": "en",
+   "isAccessibleForFree": true,
+   "url": "https://dolev31.github.io/ProactiveInquirer/",
+   "mainEntityOfPage": "https://dolev31.github.io/ProactiveInquirer/",
+   "image": "https://dolev31.github.io/ProactiveInquirer/assets/social_preview.png",
+   "about": [
+    {
+     "@type": "DefinedTerm",
+     "name": "horizontal proactivity",
+     "description": "Pursuing information a task needs that the current state already names, such as looking up an account from a name and ZIP code the user gave."
+    },
+    {
+     "@type": "DefinedTerm",
+     "name": "vertical proactivity",
+     "description": "Pursuing information a task needs that only newly found evidence names, such as the order that a retrieved account lists."
+    },
+    {
+     "@type": "DefinedTerm",
+     "name": "need graph",
+     "description": "The evidence a task requires, with an edge wherever one need can be named only after another is found; it scores proactivity from a transcript without a model judge."
+    },
+    {
+     "@type": "DefinedTerm",
+     "name": "Q&D (questioner and drafter)",
+     "description": "A training algorithm that prefers the question whose continuation retrieves more of the required evidence, with no reward model or judge."
+    }
+   ]
+  },
+  {
+   "@type": "SoftwareSourceCode",
+   "@id": "https://github.com/dolev31/ProactiveInquirer",
+   "name": "ProactiveInquirer",
+   "description": "The agent loop, the need-graph metrics, the Q&D training ladder and the analyses.",
+   "codeRepository": "https://github.com/dolev31/ProactiveInquirer",
+   "programmingLanguage": "Python",
+   "license": "https://www.apache.org/licenses/LICENSE-2.0",
+   "author": {
+    "@type": "Person",
+    "name": "Ido Levy",
+    "givenName": "Ido",
+    "familyName": "Levy",
+    "affiliation": [
+     {
+      "@type": "Organization",
+      "name": "IBM"
+     },
+     {
+      "@type": "Organization",
+      "name": "Weizmann Institute of Science"
+     }
+    ],
+    "url": "https://github.com/dolev31",
+    "sameAs": [
+     "https://github.com/dolev31"
+    ]
+   },
+   "subjectOf": {
+    "@id": "https://dolev31.github.io/ProactiveInquirer/#paper"
+   }
+  },
+  {
+   "@type": "CreativeWork",
+   "@id": "https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B",
+   "name": "ProactiveInquirer-Qwen3-8B",
+   "description": "The trained questioner: a LoRA adapter on Qwen3-8B, two training seeds.",
+   "url": "https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B",
+   "license": "https://www.apache.org/licenses/LICENSE-2.0",
+   "isBasedOn": "https://huggingface.co/Qwen/Qwen3-8B",
+   "subjectOf": {
+    "@id": "https://dolev31.github.io/ProactiveInquirer/#paper"
+   }
+  }
+ ]
+}
+</script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #FFFFFF;
+    --panel: #F3F6FA;
+    --ink: #111C2A;
+    --ink-2: #37465A;
+    --muted: #5C6A7C;
+    --line: #E0E6EE;
+    --blue: #1B5EA8;
+    --blue-soft: #E7F0FA;
+    --orange: #B0521A;
+    --orange-soft: #FBEEE4;
+    --green: #0F7B5F;
+    --code-bg: #0F1B2A;
+    --code-ink: #E2E9F2;
+    --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0D131A;
+      --panel: #141D27;
+      --ink: #E7EDF4;
+      --ink-2: #C3CDD9;
+      --muted: #97A4B4;
+      --line: #25313E;
+      --blue: #80B3EB;
+      --blue-soft: #16293F;
+      --orange: #F09A62;
+      --orange-soft: #3A2618;
+      --green: #4CC59E;
+      --code-bg: #09111A;
+      --code-ink: #DCE5EF;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: var(--blue); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+  img { max-width: 100%; height: auto; display: block; }
+  sup { font-size: .68em; line-height: 0; }
+  code { font-family: var(--mono); font-size: .86em; background: var(--panel); padding: .1em .35em; border-radius: 4px; }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; }
+  .text { max-width: 720px; margin-inline: auto; }
+
+  /* title block */
+  header.hero { padding-block: 64px 36px; text-align: center; }
+  .eyebrow { font: 500 12.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 22px; }
+  h1 { font: 600 clamp(28px, 4.6vw, 44px)/1.16 var(--serif); letter-spacing: -.012em; margin: 0 auto 22px; max-width: 900px; text-wrap: balance; }
+  h1 .line2 { display: block; color: var(--blue); }
+  .authors { font-size: 18px; margin: 0; }
+  .authors a { color: inherit; text-decoration-color: var(--blue); }
+  .authors .sep { color: var(--muted); padding-left: .3em; }
+  .authors .au { white-space: nowrap; }
+  .plate a { display: block; }
+  .affil { margin: 6px 0 0; color: var(--muted); font-size: 15.5px; }
+  .affil span + span { margin-left: 1.1em; }
+  nav.links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
+  .btn { display: inline-flex; align-items: center; gap: 9px; padding: 10px 17px; border-radius: 999px; font: 500 15.5px/1 var(--sans); text-decoration: none; color: var(--bg); background: var(--ink); border: 1px solid var(--ink); }
+  .btn:hover { background: var(--blue); border-color: var(--blue); }
+  .btn svg { width: 17px; height: 17px; flex: none; }
+  .btn .emoji { font-size: 17px; line-height: 1; }
+  .btn small { font: 400 12.5px/1 var(--mono); opacity: .75; }
+  .btn.is-soon { background: transparent; color: var(--muted); border-color: var(--line); border-style: dashed; cursor: default; }
+
+  /* teaser */
+  figure { margin: 0; }
+  .teaser { margin-top: 8px; }
+  .plate { background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; padding: clamp(10px, 2.4vw, 22px); }
+  figcaption { color: var(--ink-2); font-size: 15.5px; line-height: 1.6; margin: 14px auto 0; max-width: 820px; }
+  figcaption b { color: var(--ink); }
+
+  /* in short */
+  .short { margin-top: 56px; }
+  .short p.lead { font: 400 21px/1.55 var(--serif); margin: 0; color: var(--ink); }
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
+  .stat { background: var(--panel); border-radius: 12px; padding: 18px 18px 16px; }
+  .stat .num { font: 600 30px/1.1 var(--serif); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .stat .num .was { color: var(--orange); }
+  .stat .num .now { color: var(--blue); }
+  .stat .num .arrow { color: var(--muted); font-weight: 500; padding-inline: .15em; }
+  .stat p { margin: 8px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+
+  /* sections */
+  section.block { margin-top: 72px; }
+  h2 { font: 600 28px/1.25 var(--serif); letter-spacing: -.005em; margin: 0 0 14px; text-wrap: balance; }
+  h3 { font: 600 17px/1.4 var(--sans); margin: 0 0 6px; }
+  section.block p { margin: 0 0 14px; color: var(--ink-2); }
+  section.block p strong { color: var(--ink); font-weight: 600; }
+  .abstract p { font-size: 16.5px; }
+
+  .forms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+  .form { border: 1px solid var(--line); border-radius: 14px; padding: 20px 20px 18px; background: var(--bg); }
+  .form header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .badge { width: 34px; height: 34px; border-radius: 50%; border: 2px solid currentColor; display: grid; place-items: center; font: 600 16px/1 var(--serif); flex: none; }
+  .form.h .badge { color: var(--ink); }
+  .form.v .badge { color: var(--blue); }
+  .form p { font-size: 16px; margin: 0 0 12px !important; }
+  .chain { font: 500 14px/1.5 var(--mono); color: var(--ink); background: var(--panel); border-radius: 8px; padding: 9px 12px; overflow-wrap: anywhere; }
+  .chain .to { color: var(--blue); padding-inline: .3em; }
+
+  ol.stages { margin: 18px 0 0; padding: 0; list-style: none; counter-reset: stage; display: grid; gap: 10px; }
+  ol.stages li { counter-increment: stage; display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: baseline; color: var(--ink-2); font-size: 16px; }
+  ol.stages li::before { content: counter(stage); font: 600 14px/1 var(--mono); color: var(--blue); background: var(--blue-soft); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; }
+  ol.stages strong { color: var(--ink); }
+
+  .table-wrap { overflow-x: auto; margin: 22px 0 8px; border: 1px solid var(--line); border-radius: 12px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+  th, td { padding: 12px 16px; text-align: left; border-top: 1px solid var(--line); vertical-align: top; }
+  thead th { border-top: 0; font: 500 12px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+  td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.n.was { color: var(--orange); }
+  td.n.now { color: var(--blue); font-weight: 600; }
+  ul.points { margin: 18px 0 0; padding-left: 1.2em; color: var(--ink-2); }
+  ul.points li { margin-bottom: 8px; }
+  .results-figs { display: grid; gap: 22px; margin-top: 30px; }
+
+  pre { margin: 0; }
+  .code { background: var(--code-bg); color: var(--code-ink); border-radius: 12px; padding: 18px 20px; overflow-x: auto; font: 400 13.5px/1.65 var(--mono); }
+  .code code { background: none; padding: 0; font-size: inherit; color: inherit; border-radius: 0; }
+  .code .k { color: #8FC1FF; }
+  .code .s { color: #F2B98A; }
+  .code .c { color: #8A9BB0; }
+
+  .faq { display: grid; gap: 22px; margin-top: 20px; }
+  .faq div p { margin: 0 !important; }
+
+  .cite { position: relative; }
+  .cite pre { background: var(--panel); border-radius: 12px; padding: 18px 20px; overflow-x: auto; font: 400 13.5px/1.6 var(--mono); color: var(--ink); }
+  .copy { position: absolute; top: 10px; right: 10px; font: 500 13px/1 var(--sans); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; }
+  .copy:hover { border-color: var(--blue); color: var(--blue); }
+
+  footer.foot { margin-top: 88px; padding-block: 28px 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14.5px; }
+  footer.foot .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
+  footer.foot a { color: var(--ink-2); }
+
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    header.hero { padding-top: 44px; }
+    .stats, .forms { grid-template-columns: 1fr; }
+    section.block { margin-top: 56px; }
+    h2 { font-size: 24px; }
+    .short p.lead { font-size: 19px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn, .copy { transition: background-color .15s, border-color .15s, color .15s; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Preprint · 2026</p>
+  <h1>Asking for What Was Never Requested: <span class="line2">Horizontal and Vertical Proactivity in Agents</span></h1>
+  <p class="authors"><span class="au"><a href="https://github.com/dolev31">Ido Levy</a><sup>1,2</sup></span><span class="sep">·</span> <span class="au">Asaf Yehudai<sup>1</sup></span><span class="sep">·</span> <span class="au">Segev Shlomov<sup>1</sup></span><span class="sep">·</span> <span class="au">Asaf Adi<sup>1</sup></span><span class="sep">·</span> <span class="au">Leshem Choshen<sup>1,2</sup></span></p>
+  <p class="affil"><span><sup>1</sup>IBM</span><span><sup>2</sup>Weizmann Institute of Science</span></p>
+  <nav class="links" aria-label="Paper, code and model">
+    <span class="btn is-soon" aria-disabled="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h6l3 3v10h-9z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 1.5v3h3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Paper <small>arXiv, soon</small></span>
+    <a class="btn" href="https://github.com/dolev31/ProactiveInquirer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"/></svg>Code</a>
+    <a class="btn" href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B"><span class="emoji" aria-hidden="true">🤗</span>Model</a>
+    <a class="btn" href="#citation"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.5 3.5h4.25v4.25H4.9c0 1.45.55 2.35 1.85 2.95l-.62 1.55C3.7 11.4 2.5 9.75 2.5 7.2zm6.75 0h4.25v4.25h-1.85c0 1.45.55 2.35 1.85 2.95l-.62 1.55c-2.43-.85-3.63-2.5-3.63-5.05z"/></svg>BibTeX</a>
+  </nav>
+</header>
+
+<figure class="teaser">
+  <div class="plate"><a href="assets/figure1.png"><img src="assets/figure1.png" width="1700" height="932" fetchpriority="high" alt="Figure 1. One customer request handled by the same model, prompted and trained with Q&amp;D. The customer asks to change a pending order's boots to size 8 and gives a name and ZIP code, not the email or the order ID. Prompted, the agent spends all 16 of its questions asking the customer for the email or the order ID and the task fails. Trained, it finds the user profile from the name and ZIP code (horizontal), then the order, the boots and the size-8 variant from values it found (vertical), and the task is completed. Panel b shows Q&amp;D: a questioner asks or stops, a retriever answers, a frozen drafter updates the draft, and training prefers the question whose continuation finds more of what the task needs."></a></div>
+  <figcaption><b>One request, two agents.</b> A customer asks to change the boots in a pending order to size 8 and gives a name and a ZIP code, but not the email or the order number. The same model, prompted, asks the customer for them sixteen times and the task fails. Trained with Q&amp;D, it finds the account, the order and the size-8 boots in the store's records and completes the task: a <b>horizontal</b> step from what the customer said, then <b>vertical</b> steps from what it found.</figcaption>
+</figure>
+
+<section class="short text" aria-label="In short">
+  <p class="lead">Tool-using LLM agents do what they are asked, yet a task often needs information the user never mentions. We study what an agent should pursue unasked, measure it against need graphs with no model judge, and train it with Q&amp;D, which learns from the consequences of its own questions.</p>
+</section>
+<div class="stats" role="list">
+  <div class="stat" role="listitem"><div class="num"><span class="was">78%</span><span class="arrow">→</span><span class="now">90%</span></div><p>of the required evidence recovered on MuSiQue at equal retrieval spend: the same 8B model, prompted and then trained</p></div>
+  <div class="stat" role="listitem"><div class="num"><span class="now">2 of 3</span></div><p>multi-hop benchmarks where, at equal retrieval spend, the 8B questioner outperforms GPT-OSS-120B, a prompted model 15× larger in the same role</p></div>
+  <div class="stat" role="listitem"><div class="num"><span class="was">13%</span><span class="arrow">→</span><span class="now">34%</span></div><p>task success in τ²-bench retail, with no further training, while asking fewer questions</p></div>
+</div>
+
+<section class="block text abstract" id="abstract">
+  <h2>Abstract</h2>
+  <p>An agent that uses tools typically responds to what the user explicitly asks, yet completing the task may require information the user never requested. Work on proactive agents mainly studies whether and when an agent should act on its own, not what information it should pursue. We study a distinct axis of proactivity: its content. Horizontal proactivity pursues unstated information that the current context already identifies, and vertical proactivity pursues needs that only earlier evidence reveals. A need graph, recovered from a benchmark's own decomposition, records which needs depend on which, so both forms, and whether the agent stops at the right time, can be scored from a transcript without a model judge. To learn this behavior, we propose Q&amp;D (questioner and drafter), which trains a questioner to prefer the question whose continuation retrieves more of the required evidence, with no reward model or judge. On held-out splits of three multi-hop question-answering benchmarks, at equal retrieval spend, the trained questioner improves both forms of proactivity over the same model, prompted, and outperforms a prompted model 15× larger in the same role on two of the three, and the gain persists after controlling for question volume and length. Without further training, we place the questioner in an interactive customer-service agent with a simulated customer, where it completes more tasks while asking fewer questions, and in retail it outperforms the 15× larger model with fewer follow-up turns from the customer. These results show that proactivity depends not only on whether an agent acts without being asked, but also on what it chooses to pursue and when it stops.</p>
+</section>
+
+<section class="block text" id="proactivity">
+  <h2>Two forms of proactivity</h2>
+  <p>Work on proactive agents mostly asks <strong>whether</strong> and <strong>when</strong> an agent should act on its own. We ask <strong>what</strong> it should go after, and distinguish two forms.</p>
+  <div class="forms">
+    <article class="form h">
+      <header><span class="badge" aria-hidden="true">H</span><h3>Horizontal proactivity</h3></header>
+      <p>Pursuing a need the current state already names. A customer gives a name and a ZIP code, so the agent looks up the account.</p>
+      <div class="chain">name + ZIP code<span class="to">→</span>account</div>
+    </article>
+    <article class="form v">
+      <header><span class="badge" aria-hidden="true">V</span><h3>Vertical proactivity</h3></header>
+      <p>Pursuing a need that only newly found evidence names. The account lists the order, the order names the product, and the product lists the size-8 variant.</p>
+      <div class="chain">account<span class="to">→</span>order<span class="to">→</span>product<span class="to">→</span>size-8 variant</div>
+    </article>
+  </div>
+</section>
+
+<section class="block text" id="need-graphs">
+  <h2>Measured without a model judge</h2>
+  <p>A <strong>need graph</strong> records the evidence a task requires, with an edge wherever one need can be named only after another is found. Multi-hop question-answering benchmarks supply these graphs through their own decompositions of their questions. Both forms of proactivity, and whether the agent stops at the right time, are then scored from a transcript, with no model judge.</p>
+  <p>Agents are compared at <strong>equal retrieval spend</strong>, after the same number of questions, so asking more cannot pass for asking better.</p>
+</section>
+
+<section class="block text" id="method">
+  <h2>Q&amp;D: learning from the consequences of its own questions</h2>
+  <p><strong>Q&amp;D (questioner and drafter)</strong> splits the agent in two. A questioner asks one question at a time or stops, a retriever answers it from the task's evidence, and a frozen drafter folds the evidence into a draft. Because the drafter is fixed, every change in what the agent holds is caused by a question.</p>
+  <p>To learn, Q&amp;D forks a run at one state, continues it after several candidate questions and after stopping, and prefers the candidate whose continuation retrieves more of the required evidence. Asking is preferred over stopping while required evidence is still missing. There is no reward model and no model judge. The questioner is trained in three stages:</p>
+  <ol class="stages">
+    <li><span><strong>Imitation</strong> of good decisions: stop where the required evidence is already in hand, and otherwise ask the best sampled question.</span></li>
+    <li><span><strong>Direct preference optimization</strong> on pairs of questions asked from the same state.</span></li>
+    <li><span>The same, with <strong>contrasts between asking and stopping</strong> added.</span></li>
+  </ol>
+</section>
+
+<section class="block" id="results">
+  <div class="text">
+    <h2>Results</h2>
+    <p>On held-out test splits: MuSiQue at equal retrieval spend, and τ²-bench under the benchmark's own per-dialogue caps.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Setting</th><th scope="col">Measure</th><th scope="col">Qwen3-8B, prompted</th><th scope="col">Q&amp;D questioner</th></tr></thead>
+        <tbody>
+          <tr><td>MuSiQue</td><td>Required evidence recovered</td><td class="n was">78%</td><td class="n now">90%</td></tr>
+          <tr><td>τ²-bench retail, base prompt</td><td>Task success</td><td class="n was">13%</td><td class="n now">34%</td></tr>
+          <tr><td>τ²-bench retail, stop prompt</td><td>Task success</td><td class="n was">12%</td><td class="n now">32%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="points">
+      <li>It improves both forms of proactivity over the same model, prompted, on held-out splits of MuSiQue, StrategyQA and 2WikiMultiHopQA.</li>
+      <li>The gain comes from what it asks, not from asking more or longer questions: it holds against a question-volume control and a length control.</li>
+      <li>In τ²-bench retail it is better on ten of twenty-five tasks and worse on none, under each of two prompts, and asks 1.3 and 1.4 fewer questions per dialogue. In airline, success rises by 6.9 and 6.4 points.</li>
+      <li>Against GPT-OSS-120B in retail, it completes 17.0 and 12.7 points more tasks, with 1.6 and 1.8 fewer follow-up turns from the customer.</li>
+    </ul>
+  </div>
+  <div class="results-figs">
+    <figure>
+      <div class="plate"><a href="assets/results_frontier.png"><img src="assets/results_frontier.png" width="1065" height="441" loading="lazy" alt="Required-evidence coverage against mean retrieval calls on MuSiQue and StrategyQA, and answer correctness on FRAMES. The trained questioner, labeled by its budget of 4 to 24 calls, is compared with the same model and GPT-OSS-120B, both prompted."></a></div>
+      <figcaption>Required-evidence coverage against the mean number of retrieval calls (MuSiQue, StrategyQA) and answer correctness (FRAMES): the trained questioner, labeled by its call budget, against the same model and GPT-OSS-120B, both prompted.</figcaption>
+    </figure>
+    <figure>
+      <div class="plate"><a href="assets/results_tau2.png"><img src="assets/results_tau2.png" width="1210" height="337" loading="lazy" alt="Differences on tau2-bench, the trained questioner minus each prompted baseline, in retail and airline under two prompts: task success in percentage points on the left, follow-up turns per dialogue on the right, where negative means fewer turns."></a></div>
+      <figcaption>τ²-bench, the trained questioner minus each prompted baseline: task success in percentage points (left) and follow-up turns from the customer per dialogue (right, fewer to the left).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="block text" id="use">
+  <h2>Use the trained questioner</h2>
+  <p>The questioner is a LoRA adapter on Qwen3-8B, released with both training seeds. It reads the prompt template it was trained on and replies with one JSON action per step, to ask or to stop. The <a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B">model card</a> has a complete example, run on a GPU with its output shown.</p>
+<pre class="code"><code><span class="k">import</span> torch
+<span class="k">from</span> peft <span class="k">import</span> PeftModel
+<span class="k">from</span> transformers <span class="k">import</span> AutoModelForCausalLM, AutoTokenizer
+
+tok = AutoTokenizer.from_pretrained(<span class="s">"Qwen/Qwen3-8B"</span>)
+base = AutoModelForCausalLM.from_pretrained(
+    <span class="s">"Qwen/Qwen3-8B"</span>, dtype=torch.bfloat16, device_map=<span class="s">"auto"</span>
+)
+questioner = PeftModel.from_pretrained(base, <span class="s">"dolev31/ProactiveInquirer-Qwen3-8B"</span>)</code></pre>
+  <p style="margin-top:14px">To run the whole loop with a retriever, a drafter and the paper's metrics, start from the <a href="https://github.com/dolev31/ProactiveInquirer">repository</a>: <code>make smoke</code> runs it end to end on a synthetic suite, with no API keys.</p>
+</section>
+
+<section class="block text" id="questions">
+  <h2>Questions</h2>
+  <div class="faq">
+    <div><h3>What is the difference between horizontal and vertical proactivity?</h3><p>Horizontal proactivity pursues a need the current state already names, such as looking up an account from a name and ZIP code the customer gave. Vertical proactivity pursues a need that only newly found evidence names, such as the order that account lists. Vertical needs form chains, and each link can be pursued only after the one before it is found.</p></div>
+    <div><h3>How is proactivity scored without an LLM judge?</h3><p>Each task comes with a need graph, recovered from the benchmark's own decomposition of its question. A transcript is scored by which required evidence it retrieved, at which depth of the graph, and whether the agent stopped at the right time.</p></div>
+    <div><h3>What does Q&amp;D learn from, if not a reward model?</h3><p>From consequences. A run is forked at one state and continued after each of several candidate questions. The question whose continuation retrieves more of the required evidence is preferred, and these preferences train the questioner with direct preference optimization.</p></div>
+    <div><h3>Does it work beyond question answering?</h3><p>It was trained only on multi-hop question answering. Placed without further training in a τ²-bench customer-service agent with a simulated customer, it completes more tasks than the same model, prompted, in both retail and airline, and asks fewer questions in retail.</p></div>
+    <div><h3>Does finding more evidence give better final answers?</h3><p>Not yet. The extra evidence the questioner finds does not yet translate into better final answers, and it has learned what to ask more readily than when to stop. The paper reports both as open problems.</p></div>
+    <div><h3>What is released?</h3><p>The code: the agent loop, the need-graph builders and metrics, the training ladder, the analyses behind the paper, and a test suite with an end-to-end check that runs without API keys. The model: the trained questioner as a LoRA adapter on Qwen3-8B, both training seeds, with its prompt template. Both are under Apache-2.0.</p></div>
+  </div>
+</section>
+
+<section class="block text" id="citation">
+  <h2>Citation</h2>
+  <div class="cite">
+    <button class="copy" type="button" id="copy-bib" hidden>Copy</button>
+<pre id="bibtex">@article{levy2026asking,
+  title   = {Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents},
+  author  = {Levy, Ido and Yehudai, Asaf and Shlomov, Segev and Adi, Asaf and Choshen, Leshem},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</pre>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="row">
+    <span>Ido Levy, Asaf Yehudai, Segev Shlomov, Asaf Adi and Leshem Choshen · IBM and the Weizmann Institute of Science</span>
+    <span><a href="https://github.com/dolev31/ProactiveInquirer">Code</a> and <a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B">model</a> under Apache-2.0</span>
+  </div>
+</footer>
+
+</div>
+<script>
+(function () {
+  var btn = document.getElementById("copy-bib");
+  var pre = document.getElementById("bibtex");
+  if (!btn || !pre || !navigator.clipboard) return;
+  btn.hidden = false;
+  btn.addEventListener("click", function () {
+    navigator.clipboard.writeText(pre.textContent).then(function () {
+      btn.textContent = "Copied";
+      setTimeout(function () { btn.textContent = "Copy"; }, 1600);
+    }, function () {
+      var r = document.createRange(); r.selectNodeContents(pre);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    });
+  });
+})();
+</script>
+</body>
+</html>

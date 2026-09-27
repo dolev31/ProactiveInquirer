@@ -1,0 +1,36 @@
+# Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents
+
+> Tool-using LLM agents do what they are asked, yet a task often needs information the user never mentions. We study what an agent should pursue unasked, measure it against need graphs with no model judge, and train it with Q&D, which learns from the consequences of its own questions.
+
+By Ido Levy (IBM, Weizmann Institute of Science), Asaf Yehudai (IBM), Segev Shlomov (IBM), Asaf Adi (IBM), Leshem Choshen (IBM, Weizmann Institute of Science), 2026.
+
+Key terms:
+
+- horizontal proactivity: Pursuing information a task needs that the current state already names, such as looking up an account from a name and ZIP code the user gave.
+- vertical proactivity: Pursuing information a task needs that only newly found evidence names, such as the order that a retrieved account lists.
+- need graph: The evidence a task requires, with an edge wherever one need can be named only after another is found; it scores proactivity from a transcript without a model judge.
+- Q&D (questioner and drafter): A training algorithm that prefers the question whose continuation retrieves more of the required evidence, with no reward model or judge.
+
+Results: on MuSiQue at equal retrieval spend, a trained Qwen3-8B questioner recovers 90% of the required evidence against 78% for the same model, prompted, and it outperforms GPT-OSS-120B, a prompted model 15× larger in the same role, on two of three multi-hop benchmarks. With no further training, inside a τ²-bench customer-service agent with a simulated customer, it raises retail task success from 13% to 34% while asking fewer questions. Open problems: it has learned what to ask more readily than when to stop, and the extra evidence does not yet give better final answers.
+
+## Links
+
+- [Project page](https://dolev31.github.io/ProactiveInquirer/): overview, results and citation
+- Paper: on arXiv soon; this page will link it
+- [Code](https://github.com/dolev31/ProactiveInquirer): the agent loop, the need-graph builders and metrics, the training ladder and the analyses, Apache-2.0
+- [Model](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B): the trained questioner, a LoRA adapter on Qwen3-8B with two training seeds, Apache-2.0
+
+## Abstract
+
+An agent that uses tools typically responds to what the user explicitly asks, yet completing the task may require information the user never requested. Work on proactive agents mainly studies whether and when an agent should act on its own, not what information it should pursue. We study a distinct axis of proactivity: its content. Horizontal proactivity pursues unstated information that the current context already identifies, and vertical proactivity pursues needs that only earlier evidence reveals. A need graph, recovered from a benchmark's own decomposition, records which needs depend on which, so both forms, and whether the agent stops at the right time, can be scored from a transcript without a model judge. To learn this behavior, we propose Q&D (questioner and drafter), which trains a questioner to prefer the question whose continuation retrieves more of the required evidence, with no reward model or judge. On held-out splits of three multi-hop question-answering benchmarks, at equal retrieval spend, the trained questioner improves both forms of proactivity over the same model, prompted, and outperforms a prompted model 15× larger in the same role on two of the three, and the gain persists after controlling for question volume and length. Without further training, we place the questioner in an interactive customer-service agent with a simulated customer, where it completes more tasks while asking fewer questions, and in retail it outperforms the 15× larger model with fewer follow-up turns from the customer. These results show that proactivity depends not only on whether an agent acts without being asked, but also on what it chooses to pursue and when it stops.
+
+## Citation
+
+```bibtex
+@article{levy2026asking,
+  title   = {Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents},
+  author  = {Levy, Ido and Yehudai, Asaf and Shlomov, Segev and Adi, Asaf and Choshen, Leshem},
+  journal = {arXiv preprint},
+  year    = {2026}
+}
+```
