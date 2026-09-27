@@ -4,7 +4,7 @@
 
 ### Asking for What Was Never Requested:<br>Horizontal and Vertical Proactivity in Agents
 
-[**Ido Levy**](https://github.com/dolev31)<sup>1,2</sup> · **Asaf Yehudai**<sup>1</sup> · **Segev Shlomov**<sup>1</sup> · **Asaf Adi**<sup>1</sup> · **Leshem Choshen**<sup>1,2</sup>
+[**Ido Levy**](https://scholar.google.com/citations?user=Ok_7M80AAAAJ)<sup>1,2</sup> · **Asaf Yehudai**<sup>1</sup> · **Segev Shlomov**<sup>1</sup> · **Asaf Adi**<sup>1</sup> · **Leshem Choshen**<sup>1,2</sup>
 
 <sup>1</sup>IBM &nbsp;&nbsp; <sup>2</sup>Weizmann Institute of Science
 
