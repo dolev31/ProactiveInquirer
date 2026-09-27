@@ -53,7 +53,7 @@
   candidate questions, and prefers the question whose continuation retrieves more of the required
   evidence. No reward model, no model judge.
 - **It transfers.** With no further training, the questioner makes a customer-service agent complete
-  more tasks while asking fewer questions.
+  more tasks, and it asks less and finds more: fewer questions, more of which reach the records the task needs.
 
 ## 📊 Results
 
