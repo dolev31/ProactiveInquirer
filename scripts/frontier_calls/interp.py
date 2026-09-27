@@ -13,7 +13,7 @@ point against the comparator AT THE SAME SPEND:
     the comparator's cheapest cap or to the right of its most expensive one), there is no
     comparator measurement to interpolate BETWEEN. Extrapolating a line beyond the two
     outermost measured points would manufacture a comparator value nobody measured -- exactly
-    the "never state a measurement you did not take" rule (CLAUDE.md rule 3) -- so this rule
+    the "never state a measurement you did not take" rule (CONTRIBUTING.md rule 3) -- so this rule
     refuses to do that. Instead the nearest comparator POINT (the comparator's own cheapest or
     most expensive cap cell) is reported, labelled as unmatched, with the spend gap stated
     alongside the delta.

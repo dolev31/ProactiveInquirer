@@ -13,7 +13,7 @@
 # `PI_GOLD_ROOT` IS UNSET UNCONDITIONALLY. Nothing in scripts/hpc runs a rollout today, so
 # nothing here would trip `pi_eval.gold.gold_root()`. It is unset anyway, because the day a
 # rollout does move to the cluster the firewall must already be standing and not need a diff:
-# CLAUDE.md, "a process split: rollout workers run with PI_GOLD_ROOT unset, so gold_root()
+# CONTRIBUTING.md, "a process split: rollout workers run with PI_GOLD_ROOT unset, so gold_root()
 # raises -- that raise is the firewall working".
 
 # Refuse to be run instead of sourced: `bash common.sh` would set variables in a shell that
@@ -94,7 +94,7 @@ hf_offline() { export HF_HUB_OFFLINE=1; log "HF_HUB_OFFLINE=1 (offline)"; }
 #
 # Everything printed here is provenance for whatever the job writes afterwards: which host,
 # which GPUs, which commit. The refusal is the part that matters. An adapter trained from an
-# uncommitted tree is an adapter whose code version cannot be named, and CLAUDE.md rule 1 is
+# uncommitted tree is an adapter whose code version cannot be named, and CONTRIBUTING.md rule 1 is
 # that a number without provenance is not a result -- the same reason `RunManifest.run_id`
 # prefixes `dev-` on a dirty tree (docs/GPU_RUNBOOK.md 8) and the same reason a `dev-` rung is
 # training-only. Untracked files are NOT dirty (`--untracked-files=no`): artifacts/, logs/ and
@@ -115,7 +115,7 @@ hpc_banner() {
   if [ -n "$dirty" ]; then
     log "working tree is DIRTY -- refusing to start:"
     printf '%s\n' "$dirty" >&2
-    die "commit (or stash) these paths first; an artifact from an uncommitted tree cannot name its code version (CLAUDE.md rule 1)"
+    die "commit (or stash) these paths first; an artifact from an uncommitted tree cannot name its code version (CONTRIBUTING.md rule 1)"
   fi
   log "working tree clean at $(git -C "$REPO" rev-parse --short HEAD)"
 }

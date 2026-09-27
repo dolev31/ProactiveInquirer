@@ -73,7 +73,9 @@ TSV_SHA256 = "4255093c93b595b5b04c7c8dde290b48ec87d72ca0fb0b760d9dd02740d669ff"
 REVISION_AS_OF = "2024-09-01T00:00:00Z"
 
 API = "https://en.wikipedia.org/w/api.php"
-UA = "proactive-inquirer/0.1 (research corpus builder; https://github.com/anthropics/claude-code)"
+UA = (
+    "proactive-inquirer/0.1 (research corpus builder; https://github.com/dolev31/ProactiveInquirer)"
+)
 
 # The one retrieval knob in this file, and it is reported rather than tuned. Below this a
 # "paragraph" is a caption, a stub heading or a one-cell table row, and a pool padded with

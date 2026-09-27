@@ -33,7 +33,7 @@ def test_the_discoverability_verdict_does_not_move_with_the_phrasing(question):
     asking, two verdicts.
 
     `private_share` is the hard ceiling on what any autonomous inquirer could reach, which
-    CLAUDE.md calls the single most important number for the framing. It was partly a property
+    CONTRIBUTING.md calls the single most important number for the framing. It was partly a property
     of how politely the mining policy happened to write, and a verbose policy manufactures a
     higher ceiling.
     """

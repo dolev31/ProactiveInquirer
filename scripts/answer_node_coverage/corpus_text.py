@@ -1,7 +1,7 @@
 """Resolve a gold node's `gold_ev_uids` back to corpus TEXT.
 
 `EvidenceUnit.uid` is `h("ev", corpus_id, doc_id, span)` (`pinq.ids.evidence_uid`) -- a hash,
-not a reversible encoding (CLAUDE.md: "Hashing any model-produced string into it makes every
+not a reversible encoding (CONTRIBUTING.md: "Hashing any model-produced string into it makes every
 memoization key nondeterministic", which is exactly why it is opaque). So the only way back to
 text is the same forward computation the builder used: `pi_eval.build.common.unit_uid` over
 every paragraph of the task's public corpus record, keeping whichever paragraph's uid matches.
@@ -21,7 +21,7 @@ from pi_eval.build.common import unit_uid
 
 # One constant per suite, read verbatim from each builder (`CORPUS_ID = ...`) rather than
 # re-derived: a mismatch here silently resolves zero uids, which is exactly the failure mode
-# CLAUDE.md's corpus_hash paragraph warns about (looks like an absence, is a plumbing bug).
+# CONTRIBUTING.md's corpus_hash paragraph warns about (looks like an absence, is a plumbing bug).
 CORPUS_ID = {
     "musique": "musique_ans_v1p0",
     "strategyqa": "strategyqa_v1",

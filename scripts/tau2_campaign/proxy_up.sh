@@ -4,7 +4,7 @@
 # WHAT THIS GUARDS AGAINST, MEASURED. The shared proxy (PID 75168) was launched at 13:52 on
 # 2026-09-20 without `PINQ_GATEWAY_BASE_URL`. Every gateway route in `conf/serving/litellm.yaml`
 # reads `api_base: os.environ/PINQ_GATEWAY_BASE_URL`; litellm treats an unresolved `api_base` as
-# unspecified and falls back to the default OpenAI endpoint. So the proxy sent a gateway key
+# unspecified and falls back to the default OpenAI endpoint. So the proxy sent an IBM gateway key
 # to `api.openai.com` and relayed back, verbatim:
 #
 #   401  Incorrect API key provided: sk-...h3tw.   (body names https://platform.openai.com)

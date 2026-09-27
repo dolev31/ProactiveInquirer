@@ -590,7 +590,7 @@ _CORE_CLAUSES: tuple[tuple[str, str], ...] = (
 # `loo`, `forced_continue`, `candidate_branch`, `shapley_perm`, `random_q_branch` --
 # `pinq.types.CounterfactualKind`) are both alternate rollouts OF an existing run rather than
 # an independent arm run on the task, and pooling either under the task's plain task_id would
-# be exactly the identifier collision the firewall section of CLAUDE.md warns about for forks
+# be exactly the identifier collision the firewall section of CONTRIBUTING.md warns about for forks
 # specifically. Re-running the suite on `split: test` cannot admit these rows: the new run
 # would carry the identical flag for the identical reason and the clause would refuse it
 # again. Checked against the live store on 2026-09-17: no suite's test population is
@@ -797,7 +797,7 @@ RANGE_MIN_SPAN = 0.2
 RANGE_MIN_NONNAN = 0.9
 
 # Families whose metrics are scores of the policy. `operational` is excluded because wall_ms
-# and usd are machine artifacts that are never compared across arms (CLAUDE.md), and `frontier`
+# and usd are machine artifacts that are never compared across arms (CONTRIBUTING.md), and `frontier`
 # and `qvalue` are indexed ladders whose points are not per-task scores. `--metric` overrides
 # this for a deliberate look at one name.
 RANGE_FAMILIES = frozenset({"quality", "discovery", "structure", "latent", "human"})

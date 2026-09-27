@@ -7,7 +7,7 @@ commits (221 of 1200 sampled keys disagreed, some by the full range 0.0..1.0) --
 compaction defect that dropped `turns`/`evidence`/`calls` rows for 21,001 runs while the run
 directories on disk still hold them (Lane L0.6 / coordinator correction, 2026-09-18). Reading
 gold-scored values back out of a store that lost the rows it scored them from is exactly the
-"instrument error that looks like a finding" this repo's CLAUDE.md warns about.
+"instrument error that looks like a finding" this repo's CONTRIBUTING.md warns about.
 
 The fix used here: build a private directory of symlinks to EXACTLY the run ids this lane
 needs (named by an explicit run-id-list file, never a live glob), point a fresh `pi compact`

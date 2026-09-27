@@ -1,6 +1,6 @@
 """ConvState obeys the same two walls State and TaskView obey.
 
-Wall 1, the budget rule (AGENTS.md): a policy that can see how much is left confounds STOP
+Wall 1, the budget rule (CONTRIBUTING.md): a policy that can see how much is left confounds STOP
 with the cap it was told about. Wall 2, the type wall: no field name is shared with GoldNode,
 so a gold record cannot be smuggled across by name.
 """

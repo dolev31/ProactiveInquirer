@@ -4,7 +4,7 @@
 in `cmd_run`'s source -- "remaining = spend_cap(", "sub.spend_cap = remaining",
 "_billed_usd", "spend cap is exhausted". It never executes the loop, so it passes whether or
 not the arithmetic is right: `remaining` could go undecremented, or be decremented by the
-wrong amount, and the assertion set would not move. CLAUDE.md rule 2: a test that passes
+wrong amount, and the assertion set would not move. CONTRIBUTING.md rule 2: a test that passes
 without the fix is not a test.
 
 The defect it is meant to guard is real and was expensive to find: `--spend-cap` was passed
@@ -34,7 +34,7 @@ def _drive(cap, per_suite_cost, grid="conf/grids/tier1_confirmatory.yaml"):
 
     Worse, `test_a_zero_cap_skips_every_suite` PASSED on a dirty tree while the refusal fired:
     "no suite dispatched, non-zero rc" is exactly what a refusal produces, so the assertion
-    was satisfied by a code path that never consulted the cap. CLAUDE.md rule 2.
+    was satisfied by a code path that never consulted the cap. CONTRIBUTING.md rule 2.
 
     The refusal keeps its own coverage in tests/test_dirty_sweep_refusal.py, including that
     `--allow-dirty` reaches the grid checks past it. These tests are about the arithmetic.

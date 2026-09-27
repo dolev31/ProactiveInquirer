@@ -1,7 +1,7 @@
 """Provenance companion to `cli.py`: the exact `run_id` list the analysis population is built
 from, one row per (suite, task_id, seed, arm, run_id, n_asks), plus the pinned scorer_hash and
 graph_version read straight off the store. Every number in `RESULT.md` traces back to this
-file by construction (CLAUDE.md rule 1: "a number without provenance is not a result").
+file by construction (CONTRIBUTING.md rule 1: "a number without provenance is not a result").
 
     PYTHONPATH=src python -m scripts.precedence_mechanism.dump_run_ids \\
         --store <abs artifacts/testsplit_qa/scores_parquet> --suite musique \\

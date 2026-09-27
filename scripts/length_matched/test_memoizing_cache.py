@@ -7,7 +7,7 @@ front of the log-prob evaluation `pair_accuracy` orders its verdict on. A cache 
 STALE or a WRONG value for some `(state_text, action_json)` key would silently change an ordering
 decision (`chosen_lp > rejected_lp`) on exactly the pairs this task exists to score, and nothing
 downstream -- `pair_accuracy` itself, or a human reading its `acc` field -- could tell a cached
-wrong answer from an honestly-computed one. Per CLAUDE.md rule 2, this is written and run BEFORE
+wrong answer from an honestly-computed one. Per CONTRIBUTING.md rule 2, this is written and run BEFORE
 any GPU job trusts the cache with real weights.
 
 Runs with NO torch and NO transformers: a scripted `render`/`logprob` pair plays the role of

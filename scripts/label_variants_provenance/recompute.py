@@ -5,7 +5,7 @@ symmetric matched-cost `evidence_coverage` gain over the prompted 8B base exclud
 three held-out suites for four preference-trained checkpoints that differ in label source, and
 the paper leans on it for "the gain follows the preference stage ... rather than the label
 source". That record names no store, no scorer_hash, no script and no run-id list, so under
-CLAUDE.md rule 1 it is not yet a result. This script re-derives it with provenance, LOCKS against
+CONTRIBUTING.md rule 1 it is not yet a result. This script re-derives it with provenance, LOCKS against
 already-published values before printing anything new, and only then answers the question the
 paper's sentence actually asks -- whether the four arms differ from EACH OTHER -- with direct
 paired arm-versus-arm contrasts, because overlapping per-arm intervals are not that test and

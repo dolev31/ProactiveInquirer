@@ -167,7 +167,7 @@ def cross_check_evidence_coverage(
 ) -> dict[str, Any]:
     """(n_checked, n_mismatched, examples): does `(n_answer_hit+n_nonanswer_hit)/(n_answer_gold
     +n_nonanswer_gold)` reproduce the run's own stored `evidence_coverage`? This is the
-    provenance check CLAUDE.md rule 1 asks for -- the span partition must reunite to the exact
+    provenance check CONTRIBUTING.md rule 1 asks for -- the span partition must reunite to the exact
     quantity already published, not a plausible-looking approximation of it.
     """
     stored = stopping_lib._metric_by_run(con, "evidence_coverage", scorer_hash=scorer_hash)

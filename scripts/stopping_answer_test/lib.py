@@ -119,7 +119,7 @@ def population_report(con, *, run_ids: Sequence[str], scorer_hash: str) -> dict[
 
     Per the analysis rules: a population must be checked present before it is read, not
     assumed present because a sibling document says it was scored once. Returns counts rather
-    than raising, so the caller can print the command-and-output pair CLAUDE.md rule 3 asks
+    than raising, so the caller can print the command-and-output pair CONTRIBUTING.md rule 3 asks
     for before deciding whether to trust anything downstream.
     """
     run_ids = sorted(set(run_ids))

@@ -258,7 +258,7 @@ def test_the_session_id_is_redacted_out_of_its_own_state():
             "type": "user",
             "message": {
                 "role": "user",
-                "content": f"read /private/tmp/claude-501/{sid}/scratchpad/notes.md",
+                "content": f"read /tmp/scratch/{sid}/scratchpad/notes.md",
             },
             "sessionId": sid,
         },

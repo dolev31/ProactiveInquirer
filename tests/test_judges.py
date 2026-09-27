@@ -111,7 +111,7 @@ def test_length_adjustment_leaves_a_genuine_effect_intact():
 
     Every pair here used to be la=100, lb=100, so the regressor had no variance and the slope
     was undefined -- and the assertion passed only because `sxx == 0` returned a slope of 0.0,
-    making `adjusted == raw` by arithmetic rather than by measurement. CLAUDE.md rule 4: the
+    making `adjusted == raw` by arithmetic rather than by measurement. CONTRIBUTING.md rule 4: the
     belief ("a genuine effect survives adjustment for length") is right, the fixture did not
     exercise it. Lengths now differ across pairs while A wins regardless, which is the case the
     test names: an effect that has nothing to do with length."""

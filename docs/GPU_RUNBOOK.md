@@ -3,7 +3,7 @@
 For someone renting an A100/H100 for the first time, with no other context on this repo. Every
 command was checked against `.venv/bin/pi train <sub> --help` on this checkout (main @
 `0b9b108a4b98`, 2026-09-12) or the source file cited beside it; every number names its file
-(CLAUDE.md rule 1), and a number measured for this runbook has its command and real output
+(CONTRIBUTING.md rule 1), and a number measured for this runbook has its command and real output
 pasted, dated 2026-09-12. Keep `plans/2026-09-11-training-regime.md` and `docs/TRAINING.md` open
 beside this file — it gives commands, not rationale.
 
@@ -27,7 +27,7 @@ uv run --no-sync ruff check . && uv run --no-sync ruff format --check .
 .venv/bin/lint-imports        # must print: Contracts: 4 kept, 0 broken
 .venv/bin/pi suites audit     # must print: registry audit: clean
 .venv/bin/python -m pytest -q
-bash scripts/check_no_home_paths.sh    # "main gate green" per CLAUDE.md
+bash scripts/check_no_home_paths.sh    # "main gate green" per CONTRIBUTING.md
 .venv/bin/pi train status              # ladder, split, what's on disk, what's missing
 ```
 - **`data/rl/{sft,pairs,pairs.rater,pairs.reaches}.jsonl` present.** MEASURED 2026-09-14: yes,
@@ -617,7 +617,7 @@ For every rung-1/rung-2 run and every sweep, write down — don't leave it "infe
 | `adapter_sha` | `merge.manifest.json` if merged, else the adapter dir's `*.safetensors` + `adapter_config.json` at its root (not the tree — `checkpoint-*/` subdirs must not move it) |
 | the `runs/` directory a sweep wrote into | `pi run`'s `--runs-root` (default under the repo root) |
 | what a sweep actually billed | each run's `status.json` `usd_billed`, summed — **not** `reconcile.terminal_usage.usd` (§8) |
-| `run_id`, `scorer_hash`, `graph_version` per reported number | CLAUDE.md rule 1 — missing any one, it doesn't go in a table |
+| `run_id`, `scorer_hash`, `graph_version` per reported number | CONTRIBUTING.md rule 1 — missing any one, it doesn't go in a table |
 
 Then place the number: throughput -> plan I.15's table (§3 says which cell); Tier A/B verdicts
 -> plan I.9's pass/fail read for that tier; Tier C contrasts -> the row of plan I.9's table they

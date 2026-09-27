@@ -2,7 +2,7 @@
 
 Two small, pure pieces of logic used by both `length_control_test_split.py` (contribution A,
 the token-charged length control) and `dominance_test_split.py` (contribution B, the
-trained-vs-teacher frontier): parsing a run-id list file, and the CLAUDE.md/ANALYSIS-RULES
+trained-vs-teacher frontier): parsing a run-id list file, and the CONTRIBUTING.md/ANALYSIS-RULES
 population assertion ("before computing, assert every run_id in your population is in
 runs.parquet and has scores at the scorer_hash your source artifact names").
 
@@ -35,14 +35,14 @@ def main_checkout(start: Path | None = None) -> Path:
     artifact under `artifacts/` to be read by absolute path FROM THE MAIN CHECKOUT specifically
     (a worktree has neither -- both are untracked), so a relative path is not a substitute.
 
-    Walks up from `start` for a `.claude/worktrees/<hash>` segment (the shape every worktree
+    Walks up from `start` for a `.agents/worktrees/<hash>` segment (the shape every worktree
     agent runs in) and returns its parent, i.e. the main checkout; a `start` that is not inside
     a worktree (the main checkout itself) returns `start`'s own repo root.
     """
     here = (start or Path(__file__)).resolve()
     parts = here.parts
-    if ".claude" in parts and "worktrees" in parts:
-        i = parts.index(".claude")
+    if ".agents" in parts and "worktrees" in parts:
+        i = parts.index(".agents")
         return Path(*parts[:i])
     # Not inside a worktree: climb to the repo root (this file lives at <root>/scripts/
     # contributions_on_test/lib.py, three levels down).
@@ -156,7 +156,7 @@ def assert_population_scored(
     """Assert every id in `run_ids` is in `parquet_dir/runs.parquet` AND carries a `metric_name`
     score in `parquet_dir/scores.parquet` at exactly `(expected_scorer_hash, expected_graph_version)`.
 
-    This is CLAUDE.md rule 1 ("a number without provenance is not a result") applied before a
+    This is CONTRIBUTING.md rule 1 ("a number without provenance is not a result") applied before a
     single number is computed, not after: a run_id silently absent from either table would make
     every downstream mean an unweighted average over whoever happened to be scored, not the
     population the source artifact named.

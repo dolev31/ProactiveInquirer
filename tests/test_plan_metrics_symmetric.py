@@ -1,7 +1,7 @@
 """scripts/plan_metrics_symmetric/ladder.py, on a synthetic fixture -- no gold, no parquet.
 
 The failure this file exists to catch: a truncation or pairing bug that produces a plausible
-number for the wrong reason, exactly the class of bug CLAUDE.md's rules exist for. Every case
+number for the wrong reason, exactly the class of bug CONTRIBUTING.md's rules exist for. Every case
 here is hand-computed.
 """
 

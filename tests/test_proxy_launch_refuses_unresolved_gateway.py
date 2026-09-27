@@ -3,7 +3,7 @@
 WHY THIS TEST EXISTS. On 2026-09-20 13:52 the shared proxy (PID 75168) was launched without
 `PINQ_GATEWAY_BASE_URL` in its environment. Every gateway entry in `conf/serving/litellm.yaml`
 sets `api_base: os.environ/PINQ_GATEWAY_BASE_URL`, and litellm treats an unresolved `api_base`
-as "not specified" -- so it fell back to the DEFAULT OpenAI endpoint and sent a gateway
+as "not specified" -- so it fell back to the DEFAULT OpenAI endpoint and sent an IBM gateway
 key to `api.openai.com`, which answered
 
     401 {"error": {"message": "Incorrect API key provided: sk-...h3tw. You c..."}}
@@ -62,7 +62,7 @@ def test_it_refuses_when_the_gateway_base_url_is_unset() -> None:
     proc = _run({"PINQ_GATEWAY_BASE_URL": None})
     assert proc.returncode != 0, (
         "launcher started with an unresolvable gateway api_base -- this is the fault that sent "
-        f"a key to OpenAI.\nstdout:\n{proc.stdout}\nstderr:\n{proc.stderr}"
+        f"an IBM key to OpenAI.\nstdout:\n{proc.stdout}\nstderr:\n{proc.stderr}"
     )
     combined = proc.stdout + proc.stderr
     assert "PINQ_GATEWAY_BASE_URL" in combined, (

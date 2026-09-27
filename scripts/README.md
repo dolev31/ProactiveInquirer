@@ -33,7 +33,7 @@ once those outputs are regenerated with the `pi` pipeline.
 | `power_analysis.py` | Minimum detectable effect for every preregistered endpoint, THROUGH THE ACTUAL TEST. |
 | `preflight_tau2_channel.py` | Did the policy's questions actually get ANSWERED? A precondition for any tau2 sweep. |
 | `probe_retrieval.py` | Run the retrieval-sensitivity probe. Zero tokens, zero dollars, seconds. |
-| `recover_graph_version.py` | Recover `graph_version`, the third element of the provenance triple CLAUDE.md rule 1 requires (beside `run_id` and `scorer_hash`), for gate verdicts ... |
+| `recover_graph_version.py` | Recover `graph_version`, the third element of the provenance triple CONTRIBUTING.md rule 1 requires (beside `run_id` and `scorer_hash`), for gate ... |
 | `replay_budget_gate.py` | When would `BudgetGate` have refused a call in a recorded tau2 fork campaign? |
 | `replay_post_hoc_harvest.py` | What the pre-change post-simulate harvest would do to a recorded fork campaign. |
 | `report_forks.py` | Paired-fork engagement report over runs on disk: the paper's headline, by command. |

@@ -1045,7 +1045,7 @@ _LIVE_ENV = {
 
 # AN EXPLICIT OPT-IN, BECAUSE THESE TWO TESTS SPEND MONEY.
 #
-# `integration` alone is not enough. AGENTS.md's own pre-flight is a bare `pytest -q`, which
+# `integration` alone is not enough. CONTRIBUTING.md's own pre-flight is a bare `pytest -q`, which
 # runs integration tests; the marker's declared meaning is "requires an external service or a
 # large download", and every other test carrying it costs nothing. A billed test that hides
 # behind a marker meaning "slow" is how a developer with a populated `.env` discovers a

@@ -1,6 +1,6 @@
-"""Read-only census of a score store: what CLAUDE.md rule 1 asks for, without the parquet.
+"""Read-only census of a score store: what CONTRIBUTING.md rule 1 asks for, without the parquet.
 
-CLAUDE.md: "Every reported value traces to a `run_id`, a `scorer_hash` and a `graph_version`."
+CONTRIBUTING.md: "Every reported value traces to a `run_id`, a `scorer_hash` and a `graph_version`."
 `runs.parquet` carries `arm_id` / `suite_id` / `split` / `code_version` per run; `scores.parquet`
 carries `scorer_hash` / `graph_version` per scored row. A census records the distinct values of
 each, with counts, plus a row count and sha256 for every table in the store. That is enough for

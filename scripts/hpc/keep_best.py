@@ -28,7 +28,7 @@ the copy exactly as perishable as the checkpoint it was made to outlive. MEASURE
 its adapter sha (cd0a1884...) at 20:00; at 20:24 the final checkpoint won the criterion and
 overwrote `best/by_stop2x2/`; checkpoint-1200 had already rotated out of the trainer's
 retention, so the registered weights then existed NOWHERE and that row had to be deleted. A
-registry row naming weights that no longer exist is CLAUDE.md rule 1 failing after the fact.
+registry row naming weights that no longer exist is CONTRIBUTING.md rule 1 failing after the fact.
 
 So the layout is:
 

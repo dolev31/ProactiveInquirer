@@ -1,6 +1,6 @@
 """A TRAINING ROW WITHOUT PROVENANCE IS NOT A TRAINING ROW.
 
-AGENTS.md rule 1: every reported value traces to a `run_id`, a `scorer_hash` and a
+CONTRIBUTING.md rule 1: every reported value traces to a `run_id`, a `scorer_hash` and a
 `graph_version`. `rows_from_run` has always PRODUCED those keys -- and `Example` never
 declared them, so `write_jsonl`'s `asdict()` dropped every one at write time. Measured on the
 export that was on disk: `data/rl/sft.jsonl` carried 9 keys, none of them `scorer_hash`,
@@ -30,7 +30,7 @@ REQUIRED_SFT_FIELDS = {
     "turn_idx",  # identity
     "scorer_hash",
     "graph_version",
-    "matcher_id",  # AGENTS.md rule 1
+    "matcher_id",  # CONTRIBUTING.md rule 1
     "reward_weights_sha",  # which reward ranked this row
     "split",
     "template_id",  # contamination auditing

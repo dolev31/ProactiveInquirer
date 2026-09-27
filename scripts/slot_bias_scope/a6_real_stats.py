@@ -20,7 +20,7 @@ Output pasted at artifacts/slot_bias_scope_20260918/RESULT.md. Lives under scrip
 artifacts/, because ruff's `extend-exclude` for `artifacts/` is justified on that tree holding
 no python (see tests/test_artifacts_hold_no_python.py) -- this is tooling, not a result.
 
-Run with `PYTHONPATH=$PWD/src` set (see CLAUDE.md), from the repository root:
+Run with `PYTHONPATH=$PWD/src` set (see CONTRIBUTING.md), from the repository root:
     .venv/bin/python scripts/slot_bias_scope/a6_real_stats.py
 """
 

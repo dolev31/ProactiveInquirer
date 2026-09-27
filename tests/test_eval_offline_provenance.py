@@ -2,7 +2,7 @@
 
 TWO THINGS ARE BEING PROTECTED HERE AND THEY PULL IN OPPOSITE DIRECTIONS.
 
-The first is that `pinq_train.eval_offline` now writes what CLAUDE.md rule 1 asks for: a dataset
+The first is that `pinq_train.eval_offline` now writes what CONTRIBUTING.md rule 1 asks for: a dataset
 identity, the scorer hashes and graph versions its rows were scored under, the adapter digest the
 checkpoint registry knows the weights by, the base model, the code version, the STOP bytes the
 2x2 argmaxes against, and the exact command line. Seven \\NOTREADY markers in the paper were

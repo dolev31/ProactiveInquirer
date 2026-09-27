@@ -28,7 +28,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from pi_eval.stats.inference import cluster_bootstrap, paired_difference  # noqa: E402
 
-STORE = "/private/tmp/claude-501/-Users-someone-PycharmProjects-ProactiveInquirer/3593f11f-056f-4800-a24f-c5870cda2e31/scratchpad/teacher_token_charge_store"
+STORE = "/tmp/scratch/3593f11f-056f-4800-a24f-c5870cda2e31/scratchpad/teacher_token_charge_store"
 SCORER_HASH = "e82c7458ee8efa11660445bbf434b4c1dc74253253e8f190cc36e92fc50f40c7"
 GRAPH_VERSION = "v1"
 TEACHER_PIN = "5a1322e03e1b7588c214529a36ba718ca96aab243ac9c82c83944ece3c096ebf"

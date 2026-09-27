@@ -208,7 +208,7 @@ def test_the_frozen_test_histogram_still_matches_runs():
     """Provenance check, not the core rule: the 34 target k values frozen in
     `k_histograms.test_benchmark_34_points` should still be exactly what
     `runs/*/manifest.json` gives for the recorded tau2_retail TEST fork benchmark today.
-    `runs/` is a large, shared, ever-changing tree (see CLAUDE.md's runs-dir-is-shared note),
+    `runs/` is a large, shared, ever-changing tree (see CONTRIBUTING.md's runs-dir-is-shared note),
     not something a committed test should hard-depend on, so this skips rather than fails when
     it is not the expected shape here -- the byte-for-byte reproduction test above is the one
     that always runs and always must pass."""

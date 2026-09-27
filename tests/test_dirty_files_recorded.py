@@ -93,7 +93,7 @@ def test_a_broken_git_is_still_dirty_with_no_list() -> None:
 #     porcelain first line: ' M paper/sections/mechanism.tex'
 #     dirty_files:          ('aper/sections/mechanism.tex', 'src/pi_run/cli.py')
 #
-# `aper/...` is not a path in this repository. Under CLAUDE.md rule 1 that makes it a
+# `aper/...` is not a path in this repository. Under CONTRIBUTING.md rule 1 that makes it a
 # provenance defect, not a formatting one: it is what `dirty_sweep_refusal` prints to the
 # operator whose campaign was just refused.
 #

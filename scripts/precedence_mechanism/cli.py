@@ -66,7 +66,7 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--suite", default="musique")
     p.add_argument("--graph-version", default="v1")
     p.add_argument("--out-dir", default="artifacts/precedence_mechanism_20260918")
-    # The LOCAL LiteLLM proxy, not `LITELLM_BASE_URL` (that .env var is the remote
+    # The LOCAL LiteLLM proxy, not `LITELLM_BASE_URL` (that .env var is the remote IBM
     # gateway itself, which has never heard of "qwen3-8b-base" -- only the local proxy's own
     # `conf/serving/litellm.yaml` maps that served name to the vLLM deployment). MEASURED:
     # asking the remote gateway for "qwen3-8b-base" 403s with "team not allowed to access

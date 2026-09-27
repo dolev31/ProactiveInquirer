@@ -72,7 +72,7 @@ SOURCE_KINDS = (
     SYNTH_STOP_REJECTED,
 )
 
-# What a row must be able to name. AGENTS.md rule 1: a row that cannot name the instrument that
+# What a row must be able to name. CONTRIBUTING.md rule 1: a row that cannot name the instrument that
 # scored it is not a training row, and a KTO row is one step further from its origin than a pair
 # is -- the pair it came from no longer exists once the sides are split.
 PROVENANCE_FIELDS = (

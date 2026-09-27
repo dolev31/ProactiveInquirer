@@ -8,7 +8,7 @@ report said:
 
 MEASURED at the time: the same runs' `status.json` carried `n_asks: 8`, runs.parquet
 carried 8, 8, 1, 8, and the true mean was 6.25. The arm asked constantly. The instrument
-reported a measurement nobody had taken, which is the one thing CLAUDE.md rule 3 forbids,
+reported a measurement nobody had taken, which is the one thing CONTRIBUTING.md rule 3 forbids,
 and the cell in the SAME report printed `mean_asks: NaN` -- the two code paths disagreed
 about whether the number existed.
 

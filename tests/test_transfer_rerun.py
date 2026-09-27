@@ -707,7 +707,7 @@ def _argv(tmp_path, records, probes, serves):
 
 
 def test_the_probe_must_cover_the_comparator_and_the_trained_models_only(tmp_path, capsys):
-    """CHANGED 2026-09-23 (item 4; CLAUDE.md rule 4): the probe used to be required to cover every
+    """CHANGED 2026-09-23 (item 4; CONTRIBUTING.md rule 4): the probe used to be required to cover every
     model in the role pins, the frontier drafter and answerer included. The required set is now
     exactly the comparator plus the trained models; gateway roles are route-proved separately."""
     recs = healthy()
@@ -963,7 +963,7 @@ def test_a_non_ok_unit_is_counted_and_imputed(tmp_path, capsys):
 
 
 def test_an_absent_prefix_turn_count_refuses_now_that_it_is_the_primary(tmp_path, capsys):
-    """CHANGED with amendment 7 (CLAUDE.md rule 4): follow-up turns were a secondary, and an absent
+    """CHANGED with amendment 7 (CONTRIBUTING.md rule 4): follow-up turns were a secondary, and an absent
     n_prefix_user_turns read NOT RECORDED. They are now the PRIMARY; follow_ups() reads an absent
     prefix as 0, which would charge a fork for its own prefix, so absence refuses."""
     recs = healthy()
@@ -1002,7 +1002,7 @@ def test_a_malformed_probe_route_is_refused(tmp_path, capsys):
 def test_an_absent_refused_count_refuses_a_gated_run_and_reads_not_recorded_on_legacy(
     tmp_path, capsys
 ):
-    """CHANGED 2026-09-23 with the final enforcement fields (ba48ab0; CLAUDE.md rule 4): this test
+    """CHANGED 2026-09-23 with the final enforcement fields (ba48ab0; CONTRIBUTING.md rule 4): this test
     read an absent n_refused_budget as NOT RECORDED on any run. On a refuse_and_tell run the field is
     final and must equal len(refused_budget_calls), so absence there is a refusal; NOT RECORDED is
     what a legacy population, which predates the field, still prints."""
@@ -1043,7 +1043,7 @@ def _known_answer_records() -> list:
       -> up 2, down 2, tied 0; mean 0.5/4 = +0.125; floor (4-0) = 2/16 = 0.125
       Pooling PAIRS instead would give B = (-1 - 1 + 0)/3 = -0.6667 and a mean of +0.0833.
 
-    CORRECTED 2026-09-23 (CLAUDE.md rule 4): the first draft of this docstring read s2's D as 0
+    CORRECTED 2026-09-23 (CONTRIBUTING.md rule 4): the first draft of this docstring read s2's D as 0
     and expected (up, down, tied) = (1, 1, 2), mean -0.125. The reader returned (2, 1, 1); the
     table above gives D: C=0, s2=1, i.e. +1. The test encoded a wrong belief, not the code.
     """
@@ -1785,7 +1785,7 @@ def test_every_amendment_4_secondary_has_both_arms_and_a_task_level_interval(tmp
 def test_the_first_call_fields_refuse_on_a_gated_run_and_read_not_recorded_on_legacy(
     tmp_path, capsys
 ):
-    """CHANGED 2026-09-23 (CLAUDE.md rule 4): an absent spent_before_first_live_call read as NOT
+    """CHANGED 2026-09-23 (CONTRIBUTING.md rule 4): an absent spent_before_first_live_call read as NOT
     RECORDED on any run. The enforcement lane now writes it, so on a gated run its absence refuses;
     NOT RECORDED is kept for legacy populations only."""
     recs = _stopping_population()
@@ -2211,7 +2211,7 @@ def test_a_refused_tool_call_under_the_tool_cap_is_a_leak(tmp_path, capsys):
 
 
 def test_asks_at_their_cap_with_no_tool_call_read_under_separate_budgets(tmp_path, capsys):
-    """CHANGED after 9e2c761 (the coordinator's correction, CLAUDE.md rule 4): the starvation
+    """CHANGED after 9e2c761 (the coordinator's correction, CONTRIBUTING.md rule 4): the starvation
     refusal is REMOVED. Under separate budgets the asks reaching their own cap is legitimate, with
     or without a tool call after it. 16 asks and no tool call READS, and is counted."""
     recs = healthy()
@@ -2325,7 +2325,7 @@ def test_a_task_with_no_pre_dialogue_gold_object_has_no_hit_rate_or_recall(tmp_p
 
 
 def test_the_deleted_metric_name_never_appears(tmp_path, capsys):
-    """Amendment 7's sign-off: never 'precision' (CLAUDE.md lists Proactive Precision as deleted).
+    """Amendment 7's sign-off: never 'precision' (CONTRIBUTING.md lists Proactive Precision as deleted).
     Named without the word: pytest's tmp path carries the test name into the output."""
     code, out = run(tmp_path, _hit_population(), capsys=capsys)
     assert code == 0

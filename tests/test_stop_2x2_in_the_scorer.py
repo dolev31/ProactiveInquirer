@@ -5,7 +5,7 @@ grid at gate time and throws the per-run detail away. Nothing in `scores.parquet
 so no paper table, no arm contrast and no re-score can ever recover "how often did this policy
 stop when it was already done" -- the question the stopping half of the thesis is about. The
 gate's number is also computed under whatever `scorer_hash` the gate was pointed at and is not
-itself a scored row, so it has no provenance in the sense CLAUDE.md means.
+itself a scored row, so it has no provenance in the sense CONTRIBUTING.md means.
 
 WHY IT IS A SECOND IMPLEMENTATION AND NOT AN IMPORT. import-linter contract 4 forbids anything
 (including `pi_eval`) from importing `pinq_train`, and contract 1 forbids `pinq_train` from

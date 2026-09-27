@@ -19,7 +19,7 @@ THE DEFECT, EXACTLY
 
     So a run with a wrong API key, an exhausted quota, a rate limit, or a model that stopped
     emitting JSON produces a COMPLETE, WELL-FORMED, ENTIRELY-ZERO results file. Every task
-    present, every reward 0.0, no traceback, no non-zero exit code. Under AGENTS.md rule 1
+    present, every reward 0.0, no traceback, no non-zero exit code. Under CONTRIBUTING.md rule 1
     that file is indistinguishable from a real measurement of a policy that never scored, and
     there is nothing in it that a reader could use to tell the difference.
 

@@ -19,7 +19,7 @@ WHERE THE FIX LIVES, AND WHERE IT DOES NOT.
 
   * Not in `contains_answer` or `pi_eval.score`. The scorer's hash carries no answer term, so
     a changed definition would ship under an unchanged `scorer_hash` and one hash would denote
-    two measurements (AGENTS.md rule 1). `contains_answer` is also right for a free-text span:
+    two measurements (CONTRIBUTING.md rule 1). `contains_answer` is also right for a free-text span:
     the rescue case it exists for ("does not specify ...; 1960 is mentioned") is real.
   * Not in `pinq_train`. An earlier draft of this file demanded a
     `pinq_train.export.dataset.answer_correct_for_suite`, keyed on the SUITE id. That location

@@ -933,7 +933,7 @@ def test_a_prompt_edit_changes_run_identity():
 
     `semantic_hash` covers `prompt_hashes`, so two rows of one table can never have come
     from two different prompts without carrying two different run ids. This is the join key
-    the whole provenance rule (AGENTS.md rule 1) rests on.
+    the whole provenance rule (CONTRIBUTING.md rule 1) rests on.
     """
     from pi_run.manifest import build_manifest
     from pinq_expt.components import prompt_hashes_of

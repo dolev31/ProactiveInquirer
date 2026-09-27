@@ -73,7 +73,7 @@ def test_preflight_probe_n_1_against_the_real_file_is_refused_not_truncated():
     """
     r = _dry_run(REAL_FORKPOINTS, ["--n", "1"])
     assert r.returncode != 0, (
-        "if this ever returns 0, the explicit-selection guard has been weakened -- CLAUDE.md "
+        "if this ever returns 0, the explicit-selection guard has been weakened -- CONTRIBUTING.md "
         f"rule 4 forbids that. stdout:\n{r.stdout}\nstderr:\n{r.stderr}"
     )
     assert "explicit selection" in (r.stdout + r.stderr).lower(), (

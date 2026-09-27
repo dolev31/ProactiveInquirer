@@ -450,7 +450,7 @@ def test_distinct3_passes_on_by_seed_when_only_the_seed_pooled_value_fails_the_f
     the floor while `by_seed`, which cannot be moved by how many seeds were evaluated (see
     `within_task_seed_distinct_n`'s docstring), stays high. A gate whose `passed` bit still
     reads FAIL in that shape is reporting how many seeds ran, not whether the policy collapsed
-    -- CLAUDE.md's "never state a measurement you did not take" cuts against publishing that
+    -- CONTRIBUTING.md's "never state a measurement you did not take" cuts against publishing that
     FAIL as a finding about the arm.
 
     NON-VACUITY: `test_distinct3_fails_when_the_policy_asks_one_question_forever` already
@@ -1712,7 +1712,7 @@ def test_the_cap8_rule_reproduces_the_previous_verdict_bit_for_bit(tmp_path) -> 
 
 
 def test_a_verdict_carries_the_graph_version_beside_the_scorer_hash(tmp_path) -> None:
-    """CLAUDE.md rule 1: the provenance triple is (run_id, scorer_hash, graph_version), and a
+    """CONTRIBUTING.md rule 1: the provenance triple is (run_id, scorer_hash, graph_version), and a
     number missing any element is not a result. `scores.parquet` carries `graph_version` on
     every scored row -- measured on
     artifacts/gate/8b2-t20/parquet_qwen3-8b-dpo-headline-rater/scores.parquet, one distinct

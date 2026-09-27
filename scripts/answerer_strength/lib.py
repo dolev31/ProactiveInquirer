@@ -8,7 +8,7 @@ run, rebuilds the FINAL recorded evidence set and the final recorded draft text 
 frozen corpus (`data/corpora/<suite>/<hash>/tasks.jsonl`) -- never from a second, hand-rolled
 copy of the corpus reader. The reconstructed evidence's `subset_hash` is asserted equal to the
 recorded one on every run: that assertion, not the harness's own say-so, is what licenses
-calling this reconstruction "the byte-identical prompt" CLAUDE.md's Drafter-purity rule
+calling this reconstruction "the byte-identical prompt" CONTRIBUTING.md's Drafter-purity rule
 promises.
 
 WHY THIS IMPORTS `pinq_train.gate` PRIVATE NAMES. `_by_key`, `_coverage_ladder`, `_matched_cost`,
@@ -22,7 +22,7 @@ itself calls only `pinq_train.gate`'s own primitives) rather than a second impor
 boundaries, because worktrees are independent checkouts and this one must build standalone.
 
 WHY THIS IMPORTS `pi_eval`. This is analysis tooling run by an operator with `PI_GOLD_ROOT` set,
-scoring already-collected text against gold answers -- exactly the sanctioned use CLAUDE.md's
+scoring already-collected text against gold answers -- exactly the sanctioned use CONTRIBUTING.md's
 firewall describes ("gold is read only through pi_eval for scoring"). `scripts/` is not a
 root_package import-linter's forbidden-import contracts scan, so this is not contract 1 or
 contract 3 in `pyproject.toml`, and `lint-imports` is part of this lane's own gate.

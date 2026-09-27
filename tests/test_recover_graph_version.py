@@ -1,4 +1,4 @@
-"""Test-first for the graph_version recovery sidecar (CLAUDE.md rule 2).
+"""Test-first for the graph_version recovery sidecar (CONTRIBUTING.md rule 2).
 
 `pinq_train.gate.run_gate` now writes `selection.graph_version` on every verdict it produces
 (commit 68f4f49, merged to main in 4dc17c3), and
@@ -9,12 +9,12 @@ fix landed: measured on the shared `artifacts/gate/` tree (see
 `graph_version` anywhere, all 176 name a `parquet_dir` that still holds the `scores.parquet`
 their numbers came from, and none of those directories carries more than one distinct
 `graph_version` under the verdict's own `scorer_hash`. So the field is recoverable, not lost --
-this is a promotion, not a re-score, and CLAUDE.md's "recorded verdicts are immutable" means the
+this is a promotion, not a re-score, and CONTRIBUTING.md's "recorded verdicts are immutable" means the
 recovery must read a verdict file and never write to it.
 
 Before `scripts/recover_graph_version.py` existed, `import recover_graph_version` raised
 `ModuleNotFoundError` -- there was nothing to import and nothing that could recover the field.
-That is the failing state this test-first rule (CLAUDE.md rule 2) asks for; the module below
+That is the failing state this test-first rule (CONTRIBUTING.md rule 2) asks for; the module below
 makes it pass.
 """
 
@@ -65,7 +65,7 @@ def test_recovers_the_graph_version_a_legacy_verdict_is_missing(tmp_path):
     assert out["graph_version"] == GRAPH
     assert out["scorer_hash"] == SCORER
     assert out["n_runs"] > 0
-    # CLAUDE.md: recorded verdicts are immutable. Recovery reads; it never writes the file.
+    # CONTRIBUTING.md: recorded verdicts are immutable. Recovery reads; it never writes the file.
     assert p.read_text() == before
 
 

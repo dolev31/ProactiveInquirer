@@ -206,7 +206,7 @@ def user_private_ask(turns, graph) -> dict[str, float]:
 
     ANY USER-PRIVATE COUNT IS VERSION-LOAD-BEARING. The recall denominator below is 219 at v1
     and 252 at v7 for tau2_retail -- a 15% move, all `required` in both -- so a user-private n
-    quoted without its graph_version is not a result (CLAUDE.md rule 1).
+    quoted without its graph_version is not a result (CONTRIBUTING.md rule 1).
 
     AND v2..v7 CANNOT BE LOADED AT ALL. `load_graphs` raises
     `TypeError: GoldNode.__init__() got an unexpected keyword argument 'gold_h1_label'`

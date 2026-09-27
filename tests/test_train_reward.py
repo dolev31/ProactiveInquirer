@@ -178,7 +178,7 @@ def test_a_negative_coefficient_is_refused():
 
 
 def test_every_weight_changes_the_sha():
-    """A stored reward value must name the weights that produced it (AGENTS.md rule 1)."""
+    """A stored reward value must name the weights that produced it (CONTRIBUTING.md rule 1)."""
     base = RewardWeights().sha
     assert RewardWeights(w_phi=0.6).sha != base
     assert RewardWeights(lambda_fmt=0.3).sha != base
@@ -208,7 +208,7 @@ def test_a_malformed_generation_is_charged():
 
 
 def test_tokens_are_charged_per_thousand_and_latency_is_free_by_default():
-    """wall_ms is a machine artifact (AGENTS.md); a reward that depends on it produces a
+    """wall_ms is a machine artifact (CONTRIBUTING.md); a reward that depends on it produces a
     checkpoint that cannot be reproduced on another host."""
     r = reward_of(_resp([0.0, 0.5], tok_total=12_000, wall_ms=600_000))
     assert r.token_cost == pytest.approx(12 * W.c_tok)

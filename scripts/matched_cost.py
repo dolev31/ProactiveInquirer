@@ -592,7 +592,7 @@ def contrast(
     within a task before the task enters the bootstrap"), which is what lets `reconcile` compare
     this n against the verdict's n at all: under seed-averaging both are task counts.
 
-    THE BELIEF THAT CHANGED, and what it cost (CLAUDE.md rule 4). Until 2026-09-18 this
+    THE BELIEF THAT CHANGED, and what it cost (CONTRIBUTING.md rule 4). Until 2026-09-18 this
     docstring read: "Pairing is on (suite, task, seed) -- the gate's own key. The trained arms
     carry seed 0 only, so this is seed 0 against seed 0 and no seed is averaged into the other."
     Only the FIRST half was ever true of the code: the comparator was looked up by
@@ -1507,7 +1507,7 @@ def _required(res: Mapping[str, Any], field: str, value: Any) -> Any:
     if value is None or (isinstance(value, str) and not value.strip()) or value == []:
         raise Refused(
             f"{PROVENANCE_ID}: `{field}` is {value!r}. A number without provenance is not a "
-            "result (CLAUDE.md rule 1); no matched-cost provenance block is written without it."
+            "result (CONTRIBUTING.md rule 1); no matched-cost provenance block is written without it."
         )
     return value
 

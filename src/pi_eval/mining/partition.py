@@ -88,7 +88,7 @@ def discoverability_of(
         "Could you please tell me in what year ... founded?"     0.357  -> USER_PRIVATE
 
     The same need, three ways of asking, two different verdicts. `private_share` is the hard
-    ceiling on what any autonomous inquirer could reach and CLAUDE.md calls it the single most
+    ceiling on what any autonomous inquirer could reach and CONTRIBUTING.md calls it the single most
     important number for the framing -- so it was partly a property of how politely the mining
     policy happened to write, and a verbose policy manufactures a higher ceiling. With content
     terms all three phrasings land on `kb`.

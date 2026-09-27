@@ -37,7 +37,7 @@ WHAT IS DELIBERATELY NOT HERE. `phi_LOO` is a leave-one-out value and is NOT ava
 deployed policy, so training on it trains on an oracle; the server returns it for diagnostics
 and this module ignores it. `usd` is not a term at all: it is a function of a price table
 that changes under the experiment. `c_lat` defaults to 0.0 for the same family of reasons —
-wall time is a machine artifact (see AGENTS.md), and a reward that depends on it produces a
+wall time is a machine artifact (see CONTRIBUTING.md), and a reward that depends on it produces a
 checkpoint that cannot be reproduced on a different host.
 
 WHY THE SERVER DOES NOT DO THIS. `pi_run` may not import `pinq_train` (contract 4), so the

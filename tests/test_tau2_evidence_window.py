@@ -137,7 +137,7 @@ def _view(suite):
     return dialogue_view(suite, suite.task_ids()[0], [UserMessage(role="user", content="Help.")])
 
 
-def _claude_prompts(suite, unit: EvidenceUnit, kw: dict[str, Any]) -> dict[str, str]:
+def _render_prompts(suite, unit: EvidenceUnit, kw: dict[str, Any]) -> dict[str, str]:
     """The resolve, draft and answer prompts of the tau2 `inquirer_prompted` arm over `unit`."""
     llm = _CaptureLLM()
     c = _build("inquirer_prompted", llm, **kw)
@@ -169,7 +169,7 @@ def test_a_the_tau2_drafter_sees_an_airline_flights_last_date_and_its_availabili
     assert last_date in unit.text and "available" in unit.text
     assert last_date not in unit.text[:QA_UNIT_CHARS], "the QA window would not cut this record"
 
-    prompts = _claude_prompts(suite, unit, _tau2_build_kwargs(suite, tmp_path, monkeypatch))
+    prompts = _render_prompts(suite, unit, _tau2_build_kwargs(suite, tmp_path, monkeypatch))
     for name, prompt in prompts.items():
         assert unit.text in prompt, f"the {name} prompt does not carry the whole record"
         assert last_date in prompt and "available" in prompt, name
@@ -182,7 +182,7 @@ def test_b_the_tau2_drafter_sees_the_longest_retail_product_whole(tmp_path, monk
     tail = unit.text[-200:]
     assert tail not in unit.text[:QA_UNIT_CHARS]
 
-    prompts = _claude_prompts(suite, unit, _tau2_build_kwargs(suite, tmp_path, monkeypatch))
+    prompts = _render_prompts(suite, unit, _tau2_build_kwargs(suite, tmp_path, monkeypatch))
     for name, prompt in prompts.items():
         assert unit.text in prompt, f"the {name} prompt does not carry the whole record"
 
@@ -396,7 +396,7 @@ def test_e_an_asks_long_search_result_reaches_the_drafter_whole(tmp_path, monkey
     assert unit.doc_id.startswith("call:search_onestop_flight:")
     assert unit.text == full, "the ask unit did not store the whole search result"
 
-    prompts = _claude_prompts(suite, unit, _tau2_build_kwargs(suite, tmp_path, monkeypatch))
+    prompts = _render_prompts(suite, unit, _tau2_build_kwargs(suite, tmp_path, monkeypatch))
     for name, prompt in prompts.items():
         assert last in prompt, f"the {name} prompt does not carry the last itinerary"
 

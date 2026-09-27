@@ -14,7 +14,7 @@ adapter onto a GPU is the expensive step (minutes), not evaluating ~1,000 pairs 
 resident (seconds). Seven `pi train eval-offline` invocations would reload the model seven
 times for no reason `pair_accuracy` cares about; this script loads it once.
 
-PROVENANCE (CLAUDE.md rule 1). Every output file's `checkpoint` block is `checkpoint_provenance`
+PROVENANCE (CONTRIBUTING.md rule 1). Every output file's `checkpoint` block is `checkpoint_provenance`
 verbatim (identical to what `cmd_train_eval_offline` writes), so `adapter_sha` and, where a
 `--registry-name` was passed, `adapter_sha_verified` are present exactly as they would be from
 the tracked CLI. Every stratum file's block is `dataset_provenance` verbatim, so `scorer_hash`

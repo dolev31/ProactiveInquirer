@@ -14,7 +14,7 @@ than the need. Measured on one document about Houston Baptist University:
     "When was Houston Baptist University founded?"                 cov 0.667  -> kb
     "Could you please tell me in what year ... was founded?"        cov 0.357  -> user_private
 
-The same need, three ways of asking, two different verdicts. `private_share` -- which CLAUDE.md
+The same need, three ways of asking, two different verdicts. `private_share` -- which CONTRIBUTING.md
 calls the hard ceiling on what any autonomous inquirer could reach, and "the single most
 important number for the framing" -- was therefore partly a property of how politely the
 mining policy happened to write, and a verbose policy manufactures a higher ceiling.

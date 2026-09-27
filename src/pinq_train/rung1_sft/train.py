@@ -70,7 +70,7 @@ class NotValidatedOnHardware(RuntimeError):
     """`train()` was called without acknowledging that this rung has never been run.
 
     Not a warning. A rung that has never touched a GPU and reports numbers as if it had is the
-    single failure this repository's rules exist to prevent (AGENTS.md rule 3).
+    single failure this repository's rules exist to prevent (CONTRIBUTING.md rule 3).
     """
 
 

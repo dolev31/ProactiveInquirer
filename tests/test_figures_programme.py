@@ -151,7 +151,7 @@ def test_provenance_names_a_source_file_with_its_sha256(gen, rendered, fid):
     "fid", ("P1_rater_panel", "P2_corpus_by_cohort", "P3_target_depth", "P4_margin_vs_agreement")
 )
 def test_corpus_figures_carry_run_identity(gen, rendered, fid):
-    """The three identities CLAUDE.md rule 1 names, for figures whose rows carry them.
+    """The three identities CONTRIBUTING.md rule 1 names, for figures whose rows carry them.
 
     P5 and P6 read the run ledger and the grid files, which carry no `scorer_hash`; their
     provenance records the empty list rather than omitting the key, which is a fact about

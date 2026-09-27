@@ -54,7 +54,7 @@ def pin_contrast(
 ) -> dict[str, Any]:
     """Matched-cost + cap-8 coverage deltas for one pin, split per suite by `_matched_cost`'s
     own `by_suite`. Also carries the exact run_id list both sides selected, so a caller can
-    write it out as this artifact's provenance file (CLAUDE.md rule 1: a run_id list, not a
+    write it out as this artifact's provenance file (CONTRIBUTING.md rule 1: a run_id list, not a
     filter description, is what makes a number reproducible).
 
     CHECKPOINT AND BASELINE CAN NEED DIFFERENT `grid_name`s. MEASURED: the existing

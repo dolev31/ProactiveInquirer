@@ -4,7 +4,7 @@ re-read at 50k under three seeds; a sign that disagrees across those reruns must
 "undecided", never a pass or fail).
 
 `test_train_gate_is_fooled_without_a_model_id_filter` is written FIRST and asserts the FAILURE
-mode CLAUDE.md rule 2 asks for: `pinq_train.gate.run_gate` itself, unmodified, pools three
+mode CONTRIBUTING.md rule 2 asks for: `pinq_train.gate.run_gate` itself, unmodified, pools three
 granite seeds sharing one grid_name into a single checkpoint arm when nothing selects a model,
 which is exactly why lane L2.5 cannot call it directly for the checkpoint side and needs
 `_select_runs(..., model_id=...)` in `contrasts.py` instead.
@@ -160,7 +160,7 @@ def _two_pin_specs():
 
 
 def test_train_gate_is_fooled_without_a_model_id_filter(tmp_path) -> None:
-    """THE FAILING CASE FIRST (CLAUDE.md rule 2). `run_gate`'s checkpoint selection is
+    """THE FAILING CASE FIRST (CONTRIBUTING.md rule 2). `run_gate`'s checkpoint selection is
     `_select_runs(..., model_id=None)`: unmodified, it pools seed s0's and s1's rows on
     `tier1_trained_qa_base` into one 4-run arm instead of two 2-run arms, which is exactly the
     tautological measurement lane L2.5 must not report.
@@ -183,7 +183,7 @@ def test_seed_contrast_separates_the_two_pins_by_model_id(tmp_path) -> None:
 
 def test_suite_matched_cost_deltas_reproduces_matched_costs_own_by_suite_mean(tmp_path) -> None:
     """`contrasts.suite_matched_cost_deltas` must average to exactly what `gate._matched_cost`
-    (the headline's own function, imported verbatim) reports for that suite -- CLAUDE.md's
+    (the headline's own function, imported verbatim) reports for that suite -- CONTRIBUTING.md's
     "same functions as the headline" is a testable claim, not a description.
     """
     d = _build(tmp_path, _two_pin_specs())

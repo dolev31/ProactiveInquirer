@@ -120,7 +120,7 @@ def test_the_one_spend_signal_on_state_is_deliberate():
     what it has spent so far. Recorded rather than removed, because the invariant is about the
     CAP, not about spend:
 
-      * CLAUDE.md's reason is that a budget-aware policy "confounds STOP with the cap you
+      * CONTRIBUTING.md's reason is that a budget-aware policy "confounds STOP with the cap you
         announced". Usage says what was spent; it does not say what the cap is, so a policy
         cannot stop at a cap it cannot see.
       * Prefix-exchangeability survives: the first k turns of a long rollout carry exactly the

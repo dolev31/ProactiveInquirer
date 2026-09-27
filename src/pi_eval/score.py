@@ -428,7 +428,7 @@ METRICS: tuple[MetricDef, ...] = (
 
 BY_NAME: dict[str, MetricDef] = {m.name: m for m in METRICS}
 
-# Machine artifacts. Recorded, never compared across arms as evidence. See AGENTS.md.
+# Machine artifacts. Recorded, never compared across arms as evidence. See CONTRIBUTING.md.
 ARTIFACT_METRICS: frozenset[str] = frozenset({"usd", "wall_ms", "usd_per_need_discovered"})
 
 

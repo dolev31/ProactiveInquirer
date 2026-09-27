@@ -20,7 +20,7 @@ number. Musique's ``n_baseline_shorter_than_k`` moved from 41 to 246 and ``delta
 0.1230 to 0.1246 -- a plausible number with no error message anywhere. ``select_and_contrast``
 below is the fix: it calls ``_select_runs`` directly with an explicit ``model_id`` on BOTH
 sides, exactly as ``run_gate`` already does for the baseline. ``tests/test_decomposition_test.py``
-encodes this as the failing-without-the-fix case (CLAUDE.md rule 2).
+encodes this as the failing-without-the-fix case (CONTRIBUTING.md rule 2).
 """
 
 from __future__ import annotations

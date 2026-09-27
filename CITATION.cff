@@ -1,9 +1,18 @@
 cff-version: 1.2.0
 title: "ProactiveInquirer"
-message: "If you use this software or the mined information-need graphs, please cite it."
+message: "If you use this software, please cite it and the paper it accompanies."
 type: software
 authors:
-  - name: "Anonymous (under double-blind review)"
+  - family-names: Levy
+    given-names: Ido
+  - family-names: Yehudai
+    given-names: Asaf
+  - family-names: Shlomov
+    given-names: Segev
+  - family-names: Adi
+    given-names: Asaf
+  - family-names: Choshen
+    given-names: Leshem
 abstract: >-
   Code for measuring and training proactive information-seeking in tool-using agents:
   horizontal proactivity (needs the current state already names) and vertical proactivity
@@ -11,8 +20,23 @@ abstract: >-
   and Q&D (questioner and drafter), which trains a questioner from the consequences of its
   questions.
 license: Apache-2.0
+repository-code: "https://github.com/dolev31/ProactiveInquirer"
 keywords:
   - proactive agents
   - information seeking
   - retrieval-augmented generation
   - agent evaluation
+preferred-citation:
+  type: article
+  title: "Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents"
+  authors:
+    - family-names: Levy
+      given-names: Ido
+    - family-names: Yehudai
+      given-names: Asaf
+    - family-names: Shlomov
+      given-names: Segev
+    - family-names: Adi
+      given-names: Asaf
+    - family-names: Choshen
+      given-names: Leshem

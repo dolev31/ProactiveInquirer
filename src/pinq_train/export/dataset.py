@@ -94,7 +94,7 @@ class Example:
     # `action_json` so the loss mask never supervises a content hash.
     parent_uids: tuple[str, ...] = ()
 
-    # ---- PROVENANCE (AGENTS.md rule 1). Not optional and not defaulted to "": a row that
+    # ---- PROVENANCE (CONTRIBUTING.md rule 1). Not optional and not defaulted to "": a row that
     # cannot name the instrument that scored it is not a training row. `rows_from_run` has
     # always produced these; they were absent HERE, so `asdict()` dropped them at write time
     # and the export on disk carried nine keys.
@@ -792,7 +792,7 @@ def _cross_cohort(hi: dict, lo: dict, cohort: frozenset[str]) -> bool:
 
 
 def _provenance(row: dict) -> dict:
-    """The fields AGENTS.md rule 1 requires, pulled off a row and REFUSED when absent.
+    """The fields CONTRIBUTING.md rule 1 requires, pulled off a row and REFUSED when absent.
 
     Deliberately not defaulted. A `scorer_hash=""` is worse than the missing-field bug it
     replaces: an empty string looks like provenance to every downstream consumer and to
@@ -807,7 +807,7 @@ def _provenance(row: dict) -> dict:
             raise ValueError(
                 f"row {row.get('suite_id')}/{row.get('task_id')}@{row.get('turn_idx')} has no "
                 f"{k!r}. A training row that cannot name the instrument that scored it is not "
-                "a training row (AGENTS.md rule 1)."
+                "a training row (CONTRIBUTING.md rule 1)."
             )
         out[k] = str(v)
     out["matcher_id"] = str(row.get("matcher_id") or "")

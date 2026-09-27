@@ -35,7 +35,7 @@ is a harness-level explanation that would have capped ANY policy, and it is chec
   6. `other` -- none of the above matched; `note` carries what IS known (db_match, reward_error)
      so a reader can extend the taxonomy rather than trust an unexplained bucket.
 
-A `note` accompanies every fail class: CLAUDE.md rule 3 ("never state a measurement you did
+A `note` accompanies every fail class: CONTRIBUTING.md rule 3 ("never state a measurement you did
 not take") applies to a LABEL as much as to a number, and a fail class with nothing behind it
 is a guess wearing a category's name.
 """

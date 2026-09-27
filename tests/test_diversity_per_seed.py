@@ -196,7 +196,7 @@ def test_cross_seed_determinism_shares_are_nested():
 
 def test_cross_seed_determinism_empty_is_nan_not_zero():
     """No (task, turn_idx) position reached by >= 2 seeds is an absent measurement, not a
-    measured zero -- an absent field read as zero is exactly the failure mode CLAUDE.md warns
+    measured zero -- an absent field read as zero is exactly the failure mode CONTRIBUTING.md warns
     this repo about."""
     rows = [_row("t0", 0, 0, "only one seed here")]
     d = cross_seed_determinism(rows)

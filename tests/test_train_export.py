@@ -26,7 +26,7 @@ def _row(
     suite="musique", task="t1", turn=0, value=1.0, action='{"q":"a"}', state="S", run="r", **over
 ):
     # `scorer_hash`/`graph_version` are NOT decoration here. `export_sft` refuses a row that
-    # cannot name the instrument that scored it (AGENTS.md rule 1), because the alternative --
+    # cannot name the instrument that scored it (CONTRIBUTING.md rule 1), because the alternative --
     # defaulting them to "" -- produces a row that LOOKS provenanced to every consumer
     # downstream. A fixture without them is not a smaller real row, it is an invalid one.
     r = {
@@ -462,7 +462,7 @@ def test_the_exporter_carries_phi_from_the_scorer():
 # genuine paraphrases -- of which 26 straddled the train/dev/test wall.
 #
 # test_template_id_binds_near_duplicates_to_one_side above hand-supplies template_id="tpl7", so
-# it tests the hash and would pass unchanged if template_id_of returned None forever. CLAUDE.md
+# it tests the hash and would pass unchanged if template_id_of returned None forever. CONTRIBUTING.md
 # rule 2: a test that passes without the fix is not a test.
 
 

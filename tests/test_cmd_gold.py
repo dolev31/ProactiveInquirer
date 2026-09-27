@@ -385,7 +385,7 @@ def test_inventory_counts_only_real_raw_files(tmp_path):
     This asserted `raw_verified == 1` for a file whose sidecar reads "deadbeef" -- which is not
     the sha256 of "{}" and never was. The assertion held because the field counted files that
     HAD a sidecar, not files whose digest matched, so a truncated download reported as verified
-    for as long as its sidecar survived. Per CLAUDE.md rule 4 the test encoded a wrong belief;
+    for as long as its sidecar survived. Per CONTRIBUTING.md rule 4 the test encoded a wrong belief;
     it now asserts the two things separately."""
     import hashlib
 

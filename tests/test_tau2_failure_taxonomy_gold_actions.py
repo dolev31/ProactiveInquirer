@@ -3,7 +3,7 @@ functions monkeypatched -- this suite must stay collectible without the `tau2` e
 
 The live, un-mocked check (all 97 banking_knowledge tasks, and a random 20-task subsample,
 against the real registered tool set) is run separately and pasted with its output into
-`artifacts/tau2_failure_taxonomy_20260919/RESULT.md` ss4, per CLAUDE.md rule 3 -- a pytest run
+`artifacts/tau2_failure_taxonomy_20260919/RESULT.md` ss4, per CONTRIBUTING.md rule 3 -- a pytest run
 is not where a citable measurement belongs, but the SET-DIFFERENCE LOGIC that measurement
 depends on is exactly what belongs in a test, pinned here so it cannot silently invert.
 """

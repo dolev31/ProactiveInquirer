@@ -2693,7 +2693,7 @@ MUSIQUE_TASKS = REPO / "data/corpora/musique/38f5afb69fb7ea18/tasks.jsonl"
 MUSIQUE_GOLD = REPO / "data/gold/graphs/musique/v1.jsonl"
 
 # A canary nonce rides inside gold strings so that a gold string reaching a served request can be
-# caught (CLAUDE.md, firewall layer 4). A generated paper asset is a published artifact, so a
+# caught (CONTRIBUTING.md, firewall layer 4). A generated paper asset is a published artifact, so a
 # canary must never reach one either: every gold string drawn here is stripped and the output is
 # then asserted canary-free.
 CANARY = re.compile(r"\s*PINQCANARY_[0-9A-Fa-f]+")

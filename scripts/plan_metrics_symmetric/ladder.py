@@ -8,7 +8,7 @@ produced those numbers and found none: every `.py` in this repository that menti
 `src/pi_eval/matcher/base.py`) or is unrelated; nothing rebuilds a per-k ladder over these
 metrics and contrasts it. The only description of the algorithm was prose in that artifact's own
 RESULT.md, describing an interactive session. A table in the paper computed by a script that is
-not in the repository cannot be reproduced by anyone -- CLAUDE.md rule 1 (a number without
+not in the repository cannot be reproduced by anyone -- CONTRIBUTING.md rule 1 (a number without
 provenance is not a result) fails on that alone, independent of the asymmetric-matching question
 this module also exists to answer.
 

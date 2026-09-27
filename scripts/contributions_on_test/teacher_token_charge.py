@@ -63,10 +63,7 @@ from pi_eval.gold import load_graphs  # noqa: E402
 
 MAIN_CHECKOUT = main_checkout()
 RUNS_ROOT = MAIN_CHECKOUT / "runs"
-SCRATCH = Path(
-    "/private/tmp/claude-501/-Users-someone-PycharmProjects-ProactiveInquirer/"
-    "3593f11f-056f-4800-a24f-c5870cda2e31/scratchpad"
-)
+SCRATCH = Path("/tmp/scratch/3593f11f-056f-4800-a24f-c5870cda2e31/scratchpad")
 LOCK_DIR = SCRATCH / "store.lock"
 FARM = SCRATCH / "teacher_token_charge_farm"
 STORE = SCRATCH / "teacher_token_charge_store"

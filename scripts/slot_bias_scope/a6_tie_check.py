@@ -16,7 +16,7 @@ Lives under scripts/, not artifacts/, for the same reason as a6_real_stats.py in
 directory: it is tooling, not a result, and artifacts/ is excluded from ruff on the recorded
 ground that no python lives there.
 
-Run with `PYTHONPATH=$PWD/src` set (see CLAUDE.md), from the repository root:
+Run with `PYTHONPATH=$PWD/src` set (see CONTRIBUTING.md), from the repository root:
     .venv/bin/python scripts/slot_bias_scope/a6_tie_check.py
 """
 

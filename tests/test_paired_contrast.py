@@ -2,7 +2,7 @@
 
 These are pure-Python, GPU-free unit tests of the CONTRAST arithmetic only -- they do not touch
 `score_checkpoint_paired.py`'s model-loading path (that needs a real checkpoint and a GPU, and
-is exercised on the cluster, not here). Per CLAUDE.md rule 2, each test is built to FAIL if the
+is exercised on the cluster, not here). Per CONTRIBUTING.md rule 2, each test is built to FAIL if the
 join or the statistic is wrong, not merely to exercise the code: every expected number below is
 computed by hand in the test body's comment, not copied from a first run of the implementation.
 """

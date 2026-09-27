@@ -236,7 +236,7 @@ def test_mcnemar_uses_only_discordant_pairs():
 
     The TEST still uses only the discordant pairs -- that is what the p-value below checks. But
     `Estimate.n` is the TASK COUNT on every path, and this asserted it was the discordant count.
-    CLAUDE.md rule 4: the belief about `n` was wrong, not the code. `paired_difference` returns
+    CONTRIBUTING.md rule 4: the belief about `n` was wrong, not the code. `paired_difference` returns
     len(diffs), so one field meant two things depending on which test ran, and two consumers
     read it as the sample size: `floor_flag` computes 2*sigma_J/sqrt(n) (a floor 2.46x too high
     from 16 discordant pairs instead of 97 tasks) and `killswitch` treats n == 0 as "NOT RUN".

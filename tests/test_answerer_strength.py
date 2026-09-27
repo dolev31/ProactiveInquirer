@@ -5,7 +5,7 @@ Hermetic: every fixture here is synthetic and built under `tmp_path` or in-memor
 not carry untracked files (see the repo's own `worktree-agents-autoclean-and-pythonpath`
 lesson), so a test that opened either would pass only on the machine that built it.
 
-CLAUDE.md rule 2: `test_build_view_and_evidence_raises_on_a_tampered_subset_hash` and
+CONTRIBUTING.md rule 2: `test_build_view_and_evidence_raises_on_a_tampered_subset_hash` and
 `test_build_view_and_evidence_raises_on_a_missing_cited_uid` exist because the whole lane's
 claim -- "the reconstructed prompt is byte-identical to the recorded run's" -- is worth nothing
 if a silent mismatch could pass through unnoticed; both are written to FAIL if the assertion in

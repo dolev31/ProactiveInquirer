@@ -116,7 +116,7 @@ def _promoted_run_ids(path: Path) -> set[str]:
     `run_ids.*.cap*.tsv` is `task_id\\tseed\\trun_id` (run_id last) -- confirmed by reading both
     formats' header comments and a sample data line, not assumed from the file extension.
     Picking a fixed column position silently read `seed` ("0"/"1") as musique's run_id in an
-    earlier version of this function, which is exactly the class of bug CLAUDE.md's rule 3
+    earlier version of this function, which is exactly the class of bug CONTRIBUTING.md's rule 3
     exists to catch: it produced a plausible-looking 2-element set instead of an error. Every
     run_id in this codebase is a 32-character lowercase-hex digest (see `pinq.ids.h`), so the
     field is identified by matching that shape rather than by column position.

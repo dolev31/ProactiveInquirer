@@ -7,7 +7,7 @@
 
 REUSES, DOES NOT REIMPLEMENT. `pinq_train.gate._select_runs`, `._matched_cost`,
 `._metric_by_run`, `._paired_by_task_map` and `.bca_ci` are the exact functions
-`pi train gate` runs for the qwen headline table (CLAUDE.md: "same functions as the
+`pi train gate` runs for the qwen headline table (CONTRIBUTING.md: "same functions as the
 headline"). This script's only original code is the per-seed MODEL_ID filter on the
 CHECKPOINT side, which `pinq_train.gate.run_gate` never needed before: every prior gated
 checkpoint was the only inquirer_trained pin on its grid, so grid_name alone disambiguated
@@ -21,7 +21,7 @@ CAP-8: `_matched_cost` already computes the cap-8 point delta internally (the or
 pair's cost line) but does not interval it -- it is "reported per suite and NOT gated"
 there. This script intervals it with the identical `bca_ci` call on the identical
 per-task deltas, because a reported delta without a reported interval is not a result
-CLAUDE.md's four rules would accept.
+CONTRIBUTING.md's four rules would accept.
 
 BOOTSTRAP STABILITY (coordinator rule, 2026-09-18). Every interval is read at
 `--n-resamples` (10000 here). Any interval whose lower OR upper bound lies within
@@ -327,7 +327,7 @@ def suite_matched_cost_deltas(
 
     This duplicates `_matched_cost`'s inner loop rather than changing that function's return
     shape, because `_matched_cost` is imported verbatim from `pinq_train.gate` (the headline's
-    own function, per CLAUDE.md) and is not this repo's to edit for one caller's convenience.
+    own function, per CONTRIBUTING.md) and is not this repo's to edit for one caller's convenience.
     `test_suite_matched_cost_deltas_reproduces_matched_costs_own_by_suite_mean` pins this
     function's MEAN against `_matched_cost`'s own `by_suite[suite]["delta"]`; the task-clustering
     test above pins its SHAPE, which the mean-only test cannot see.

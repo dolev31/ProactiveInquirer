@@ -451,7 +451,7 @@ policy class through the same loop as the shipped template — and because `prom
 hashes the bytes actually loaded, a candidate rollout carries different `prompt_hashes` and a
 different `run_id`. A candidate can never be confused with a baseline rollout.
 
-**The reflector was verified live, once** (2026-08-24, `aws/gpt-oss-120b` through the remote
+**The reflector was verified live, once** (2026-08-24, `aws/gpt-oss-120b` through the IBM
 LiteLLM proxy). One call, parent = the shipped `inquirer_prompted.txt`, two synthetic measured
 traces:
 
@@ -1571,7 +1571,7 @@ Three operational notes that cost real money if missed:
 
 **A sizing fact the plan does not state.** 180 GPU-h on **one** 80 GB card constrains the
 trainable base to roughly ≤ 30 B parameters in bf16 with LoRA. `gpt-oss-120b` — the model pinned
-for the *frozen* roles through the remote proxy — does **not** fit that budget. The trained arm's
+for the *frozen* roles through the IBM proxy — does **not** fit that budget. The trained arm's
 base must therefore be chosen and pinned explicitly (`SFTConfig.base_model` has no default, and
 `validate()` refuses an empty one), and it will not be the same model the frozen roles run. That
 is fine for the experiment — the comparison is between two *Inquirer* pins with everything else

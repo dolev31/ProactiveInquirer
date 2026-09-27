@@ -1,7 +1,7 @@
 """Lane L0.10: back up the isolated per-campaign score stores that published paper cells
 depend on, and make the backups verifiable without the parquet itself.
 
-CLAUDE.md rule 1 ("a number without provenance is not a result") names the triple a reported
+CONTRIBUTING.md rule 1 ("a number without provenance is not a result") names the triple a reported
 value must trace to: `run_id`, `scorer_hash`, `graph_version`. Those live inside a campaign's
 `scores_parquet`-shaped store (a directory of fixed-name tables: `runs.parquet`,
 `scores.parquet`, and siblings), and `.gitignore` deliberately never tracks that store --
@@ -21,7 +21,7 @@ This package does three things, kept in separate modules so each is independentl
 - `manifest.sha256_manifest` hashes every file under a directory, used twice: once to verify a
   backup copy matches its source file-for-file, and once inside a census so a *restored* copy
   can be checked against the census without needing the original again.
-- `census.compute_census` reads (never writes) a store's tables and records what CLAUDE.md rule
+- `census.compute_census` reads (never writes) a store's tables and records what CONTRIBUTING.md rule
   1 asks for -- distinct `arm_id` / `suite_id` / `split` / `code_version` (from `runs.parquet`)
   and `scorer_hash` / `graph_version` (from `scores.parquet`), each with counts -- plus a row
   count and sha256 per table. The census is small enough to commit even when the parquet is not,

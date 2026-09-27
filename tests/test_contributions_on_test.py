@@ -30,14 +30,14 @@ from scripts.matched_cost import Ladder
 # --------------------------------------------------------------------- main_checkout
 
 
-def test_main_checkout_strips_the_claude_worktrees_segment(tmp_path):
+def test_main_checkout_strips_the_agents_worktrees_segment(tmp_path):
     """The exact shape a worktree agent runs in. A hardcoded absolute path would fail
     scripts/check_no_home_paths.sh; this derives it from a fake `__file__` instead, so the
     check never sees a literal `/Users/...` (or similar) string in this file's source."""
     repo = tmp_path / "some_repo"
     fake = (
         repo
-        / ".claude"
+        / ".agents"
         / "worktrees"
         / "agent-abc123"
         / "scripts"

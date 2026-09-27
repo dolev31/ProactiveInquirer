@@ -5,7 +5,7 @@ is answerable from parametric knowledge alone; they are not a policy rollout, ca
 `run_id`, `semantic_hash` or `RunManifest`, and must never be written under `runs/`. They are
 still gold-adjacent (the question text is built from a gold node), so every prompt is
 canary-scanned before it is sent -- firewall layer 4, the one layer that catches leakage
-through a string rather than through code (`CLAUDE.md`).
+through a string rather than through code (`CONTRIBUTING.md`).
 
 WHY `resolve_placeholders` AND NOT THE RAW `gold_text`. MuSiQue's gold node text is scored
 byte-identical to the dataset (`pi_eval.build.musique_build`'s module docstring), so a

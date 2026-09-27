@@ -6,7 +6,7 @@ synthetic. `answer_node.py` and `corpus_text.py` need no gold root or isolated s
 in-memory duckdb connection with hand-built tables, never `artifacts/testsplit_qa` (untracked,
 main-checkout-only, absent from a worktree).
 
-CLAUDE.md rule 2: `test_coverage_gain_share_additivity_holds_when_a_group_is_empty` exists
+CONTRIBUTING.md rule 2: `test_coverage_gain_share_additivity_holds_when_a_group_is_empty` exists
 because building `coverage_gain_share` against the real store found exactly this bug --
 `shared_tasks = set(mc_answer) & set(mc_nonanswer)` silently dropped every task whose
 depth-tied answer-node fallback leaves `nonanswer_group` empty (86 of 200 on StrategyQA), so

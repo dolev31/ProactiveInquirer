@@ -6,7 +6,7 @@ that directory is untracked (git status `??`) and a worktree does not carry untr
 would pass on the machine that built it and fail, silently for the wrong reason, everywhere
 else including CI.
 
-CLAUDE.md rule 2: the aggregation-consistency tests below (`test_pooled_...`,
+CONTRIBUTING.md rule 2: the aggregation-consistency tests below (`test_pooled_...`,
 `test_matched_cost_coverage_by_task_...`) exist because `run.py` trusts two things that are not
 obviously true until checked -- that summing per-task stop-2x2 cells reproduces the pooled
 arm-level cells, and that this module's `matched_cost_coverage_by_task` (which exposes an

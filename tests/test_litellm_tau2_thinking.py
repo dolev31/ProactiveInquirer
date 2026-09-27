@@ -194,7 +194,7 @@ def test_router_add_cannot_silently_add_a_route_to_the_tau2_config(tmp_path):
 # proof both accept -- neither one can tell "the right local model answered" from "a different
 # model on a different host answered", because both look identical on the wire: 200, a message,
 # some tokens. This is not hypothetical: it is the literal shape of a silently wrong published
-# number, which is why CLAUDE.md's rule 1 requires a `run_id` to name what actually answered.
+# number, which is why CONTRIBUTING.md's rule 1 requires a `run_id` to name what actually answered.
 #
 # THE TEST USES LITELLM'S OWN `Router`, NOT A REIMPLEMENTATION OF ITS MATCHING RULES.
 # `Router.get_model_list(model_name=...)` is the exact call the proxy's request path uses to

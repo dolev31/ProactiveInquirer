@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recover `graph_version`, the third element of the provenance triple CLAUDE.md rule 1
+"""Recover `graph_version`, the third element of the provenance triple CONTRIBUTING.md rule 1
 requires (beside `run_id` and `scorer_hash`), for gate verdicts written before
 `pinq_train.gate.run_gate` began recording it in `selection` (commit 68f4f49, merged to main in
 4dc17c3).
@@ -10,7 +10,7 @@ the `scores.parquet` a verdict's own `selection.parquet_dir` already names and r
 that scoring already wrote. Nothing under `data/`, `runs/` or a gateway is touched, and
 `recover_one` never opens a connection with `PI_GOLD_ROOT` set.
 
-THIS IS A SIDECAR, NOT AN EDIT. CLAUDE.md: "recorded verdicts are immutable." `recover_one`
+THIS IS A SIDECAR, NOT AN EDIT. CONTRIBUTING.md: "recorded verdicts are immutable." `recover_one`
 reads a verdict file and returns a dict describing what its `graph_version` is or would be; it
 never writes to the verdict path it was given. `main` writes one row per verdict to a sidecar
 JSON/TSV under `--out`, never back into `artifacts/gate/`.

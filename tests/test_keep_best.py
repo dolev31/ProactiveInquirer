@@ -16,7 +16,7 @@ as perishable as the checkpoint it was made to outlive. MEASURED 2026-09-16 on t
 by its adapter sha (cd0a1884...) at 20:00; at 20:24 the final checkpoint won the criterion and
 overwrote `best/by_stop2x2/`; checkpoint-1200 had already rotated out of the trainer's
 retention, so the registered weights then existed NOWHERE and that row had to be deleted. A
-row in conf/checkpoints.json naming weights that no longer exist is CLAUDE.md rule 1 failing
+row in conf/checkpoints.json naming weights that no longer exist is CONTRIBUTING.md rule 1 failing
 after the fact. So a winner is copied to `<out>/best/<criterion>/step-<tag>/`, one directory
 per step ever selected, and a directory this script has written is never deleted, moved or
 rewritten; `CURRENT` names the current winner and `SELECTION.json`'s `history` says which

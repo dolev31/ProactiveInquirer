@@ -188,7 +188,7 @@ def test_the_pooling_bug_this_module_fixes(tmp_path) -> None:
     checkpoint models pooled into one "checkpoint" side. This pins the WRONG number
     (+0.1, the midpoint) so a future change that drops the checkpoint-side model filter shows
     up as this test passing when it should fail -- i.e. this is the failing-without-the-fix
-    case CLAUDE.md rule 2 asks for, expressed as "the old code's answer is provably not either
+    case CONTRIBUTING.md rule 2 asks for, expressed as "the old code's answer is provably not either
     model's own number".
     """
     from pinq_train.gate import _by_key, _con, _matched_cost, _select_runs

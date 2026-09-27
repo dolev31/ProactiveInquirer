@@ -22,7 +22,7 @@ already-passing tests (`test_facet_breadth_is_gated_as_no_loss_rather_than_as_a_
 `test_a_facet_loss_is_gated_at_cap8_and_report_only_at_matched_cost`) exercise this on
 purpose, in both directions. Forcing `PAIRED_METRICS`'s declared `gated` to `False` to
 satisfy an "exploratory metrics never gate" invariant across BOTH systems would break those
-two tests to make a THIRD, over-scoped test pass -- exactly the CLAUDE.md rule-4 case where
+two tests to make a THIRD, over-scoped test pass -- exactly the CONTRIBUTING.md rule-4 case where
 the test, not the code, encodes the wrong belief. So this file asserts nothing about (a); the
 full refutation with commands and output lives in RESULT.md, not here.
 

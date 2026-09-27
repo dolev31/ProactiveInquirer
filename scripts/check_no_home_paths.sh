@@ -7,7 +7,6 @@ if grep -rInE '/Users/[a-z0-9_.-]+/' \
      --include='*.py' --include='*.toml' --include='*.yaml' --include='*.yml' \
      --include='*.md' --include='*.cfg' --include='*.sh' --include='*.tex' \
      --exclude-dir='.venv*' --exclude-dir=.git --exclude-dir=data --exclude-dir=runs \
-     --exclude-dir=.claude \
      . ; then
   echo "ERROR: absolute home paths found in committed files (see above)" >&2
   exit 1

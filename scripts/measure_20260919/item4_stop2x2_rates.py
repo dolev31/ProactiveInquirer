@@ -4,7 +4,7 @@ Follow-up check on item 4: stop2x2_n_stop_at_done and stop2x2_n_ask_at_not_done 
 COUNTS of decision points, not rates -- and item 3 already shows trained asks far fewer
 questions per task than teacher (musique 2.57 vs 5.24, strategyqa 1.58 vs 6.14, wiki2 1.97
 vs 3.08), so trained structurally has fewer decision points of every kind. A raw count is
-therefore confounded with spend exactly the way tok_total/n_turns are (CLAUDE.md: "wall_ms
+therefore confounded with spend exactly the way tok_total/n_turns are (CONTRIBUTING.md: "wall_ms
 and usd are machine artifacts ... never compared across arms as evidence"; same logic
 applies to any unnormalized per-run count). This computes the RATE instead:
   rate_stop_at_done   = stop2x2_n_stop_at_done / stop2x2_n_done        (of the chances to

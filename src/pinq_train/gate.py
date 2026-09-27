@@ -124,7 +124,7 @@ class LadderInconsistent(RuntimeError):
 class GraphVersionAmbiguous(RuntimeError):
     """The runs a verdict selected carry more than one `graph_version`.
 
-    `graph_version` is the third element of the provenance triple CLAUDE.md rule 1 requires of
+    `graph_version` is the third element of the provenance triple CONTRIBUTING.md rule 1 requires of
     every reported value, beside `run_id` and `scorer_hash`. It is an IDENTITY, not a
     measurement: there is no mean of two graph versions and no defensible rule for picking one,
     so a verdict spanning two of them cannot name the graph its numbers came from. Refused here
@@ -1811,7 +1811,7 @@ def run_gate(
         )
         scorer_hash = str(rows[0]["scorer_hash"]) if rows else ""
 
-    # ---- graph_version: the third element of the provenance triple (CLAUDE.md rule 1). Read
+    # ---- graph_version: the third element of the provenance triple (CONTRIBUTING.md rule 1). Read
     # from the SAME rows `scorer_hash` is read from and filtered to that hash, because what the
     # verdict must name is the graph THIS scoring ran against -- a parquet holding two
     # generations would otherwise report the newer hash beside the older graph. Where the

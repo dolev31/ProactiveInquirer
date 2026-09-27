@@ -415,7 +415,7 @@ def _finite(x: float) -> float | None:
 # --------------------------------------------------------------------------- provenance
 #
 # WHY THIS BLOCK EXISTS AT ALL. Until 2026-09-18 this module computed three numbers and wrote
-# them beside a checkpoint path and a tokenizer name, and nothing else. CLAUDE.md rule 1 is that
+# them beside a checkpoint path and a tokenizer name, and nothing else. CONTRIBUTING.md rule 1 is that
 # a number without provenance is not a result: every reported value traces to a run identity, a
 # `scorer_hash` and a `graph_version`. Seven \NOTREADY markers in the paper said, in seven
 # different wordings, that the offline half of the stopping comparison could not be tabulated
@@ -441,7 +441,7 @@ PROVENANCE_SCHEMA = "tierA-provenance-1"
 WEIGHTS_FILE = "adapter_model.safetensors"
 
 # The row fields that are provenance rather than data. `scorer_hash` and `graph_version` are
-# CLAUDE.md rule 1's second and third; `code_version` is the exporter's own, which is a different
+# CONTRIBUTING.md rule 1's second and third; `code_version` is the exporter's own, which is a different
 # commit from the one running this command and must not be confused with it; `matcher_id` and
 # `pins_sha` are carried because the live gate verdicts this table is read beside quote them.
 _ROW_PROVENANCE_FIELDS = (

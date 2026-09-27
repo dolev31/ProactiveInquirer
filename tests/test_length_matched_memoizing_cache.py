@@ -9,7 +9,7 @@ agreeing with it. That file is a SCRIPT with a `main()`, and `pyproject.toml` se
 This correctness proof is exactly the kind a refactor could silently break (the same script's
 first version DID break it -- an `eo._score` lookup made inside the wrapper, at call time,
 resolved to the wrapper itself once installed, and recursed until `RecursionError`; this test is
-what caught that, per CLAUDE.md rule 2, before any GPU time was spent on it). So this wrapper puts
+what caught that, per CONTRIBUTING.md rule 2, before any GPU time was spent on it). So this wrapper puts
 it inside the gate. It shells out rather than importing, so the script stays usable standalone and
 there is exactly one copy of the assertions.
 """

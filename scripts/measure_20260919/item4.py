@@ -18,7 +18,7 @@ ARTIFACT_METRICS = score_mod.ARTIFACT_METRICS
 # higher_is_better=True is the MetricDef dataclass DEFAULT (never set deliberately
 # for a descriptive spend counter) -- treating "fewer tokens/calls/turns" as an
 # "adverse" or "favouring" QUALITY finding via that default would misrepresent a
-# spend signal as a quality claim, the same category error CLAUDE.md calls out for
+# spend signal as a quality claim, the same category error CONTRIBUTING.md calls out for
 # wall_ms/usd. Reported for completeness, never classified as qualifying/adverse.
 SPEND_NOT_QUALITY = {
     "tok_prompt",
@@ -148,7 +148,7 @@ else:
 
 print()
 print(
-    "=== SUMMARY: ARTIFACT bucket (excluded from qualifying per CLAUDE.md/ARTIFACT_METRICS regardless of CI) ==="
+    "=== SUMMARY: ARTIFACT bucket (excluded from qualifying per CONTRIBUTING.md/ARTIFACT_METRICS regardless of CI) ==="
 )
 for name, suite, bucket, status, const_val, r in rows:
     if bucket == "ARTIFACT" and status not in ("NOT_EMITTED", "NO_OVERLAP"):

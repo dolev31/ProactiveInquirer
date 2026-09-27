@@ -2,7 +2,7 @@
 directly from gold graphs, not from a metric.
 
 This reads `pi_eval.gold.load_graphs`, which raises `GoldAccessError` (via `gold_root()`) in
-any process without `PI_GOLD_ROOT` set -- that raise is the firewall documented in CLAUDE.md
+any process without `PI_GOLD_ROOT` set -- that raise is the firewall documented in CONTRIBUTING.md
 working correctly, not a bug in this script. It is run with `PI_GOLD_ROOT` pointed at the
 repo-local `data/gold` (see the README beside this file for the exact invocation). This module
 is analysis tooling under `scripts/`, not one of the root packages

@@ -7,7 +7,7 @@ transfer rewards (retail 0.392 vs 0.167, airline 0.500 vs 0.529) were produced B
 `40b3f95` ("load a foreign prefix, fork the task, and grade against the fork"), and a campaign
 re-run at HEAD on the SAME 34 points, arms, seeds and caps scores zero on every control run --
 joint probability 6.8e-7 under the published rates. Either HEAD grades forks correctly and those
-cited numbers are not the quantity the paper says they are, or HEAD regressed. Under CLAUDE.md
+cited numbers are not the quantity the paper says they are, or HEAD regressed. Under CONTRIBUTING.md
 rule 1 a cited number whose grader cannot reproduce it has no provenance, so this has to be
 answerable, and no instrument in the tree could answer it.
 

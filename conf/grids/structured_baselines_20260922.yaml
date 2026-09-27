@@ -35,7 +35,7 @@ notes: >-
 
   invocation 1 (`--arm inquirer_prompted --arm par2_rag`, 2026-09-22, no --arm flag needed
   since the grid originally declared only these two): LITELLM_BASE_URL=
-  https://litellm.gateway.example.com (direct to the remote gateway, from .env),
+  https://litellm.gateway.example.com (direct to the remote IBM gateway, from .env),
   PI_MODEL_INQUIRER=PI_MODEL_DRAFTER=PI_MODEL_ANSWERER=PI_MODEL_USERSIM=PI_MODEL_JUDGE=
   openai/aws/gpt-oss-120b. This is the "same weights" contrast: par2_rag vs inquirer_prompted,
   both routed identically, base_url_sha identical by construction (one process, one base URL).

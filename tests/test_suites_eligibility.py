@@ -120,7 +120,7 @@ def test_by_design_clauses_are_a_subset_of_the_core_clauses():
 # `pi suites eligibility` printed the SAME advisory -- re-run this suite on `split: test` --
 # whether a suite had zero test rows ON DISK or had 344 of them, all excluded BY DESIGN
 # because they are flagged `exploratory` (a forked rollout inherits a foreign prefix and must
-# never pool with our own arms under one task_id; CLAUDE.md's firewall section and
+# never pool with our own arms under one task_id; CONTRIBUTING.md's firewall section and
 # `pi_eval.fork_report`'s own docstring say the same thing about forks specifically). Re-running
 # the by-design suite reproduces the identical exploratory-flagged rows for zero benefit -- a
 # real lane was assigned exactly that re-run today. These two tests pin the fix: the by-design
