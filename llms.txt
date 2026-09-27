@@ -8,15 +8,69 @@ Key terms:
 
 - horizontal proactivity: Pursuing information a task needs that the current state already names, such as looking up an account from a name and ZIP code the user gave.
 - vertical proactivity: Pursuing information a task needs that only newly found evidence names, such as the order that a retrieved account lists.
-- need graph: The evidence a task requires, with an edge wherever one need can be named only after another is found; it scores proactivity from a transcript without a model judge.
+- need graph: The evidence a task requires, with an edge wherever one need can be named only after another is found. It scores proactivity from a transcript without a model judge.
 - Q&D (questioner and drafter): A training algorithm that prefers the question whose continuation retrieves more of the required evidence, with no reward model or judge.
 
 Results: on MuSiQue at equal retrieval spend, a trained Qwen3-8B questioner recovers 90% of the required evidence against 78% for the same model, prompted, and it outperforms GPT-OSS-120B, a prompted model 15× larger in the same role, on two of three multi-hop benchmarks. With no further training, inside a τ²-bench customer-service agent with a simulated customer, it raises retail task success from 13% to 34% while asking fewer questions. Open problems: it has learned what to ask more readily than when to stop, and the extra evidence does not yet give better final answers.
 
+## Questions and answers
+
+### What does it mean for an LLM agent to be proactive about content?
+
+A tool-using LLM agent usually does what the user asks, yet completing the task often needs information the user never mentions. Work on proactive agents mostly studies whether and when an agent should act on its own. This paper studies what the agent pursues unasked, in a horizontal and a vertical form, and measures and trains both.
+
+### What is the difference between horizontal and vertical proactivity?
+
+Horizontal proactivity pursues a need the current state already names, such as looking up an account from a name and ZIP code the customer gave. Vertical proactivity pursues a need that only newly found evidence names, such as the order that account lists. Vertical needs form chains, and each link can be pursued only after the one before it is found.
+
+### How is proactivity measured without an LLM judge?
+
+Each task carries a need graph recovered from the benchmark's own decomposition of its question. A finished transcript is scored by which required evidence it retrieved, matched by identifier, at which depth, and whether the agent stopped at the right time. No quantity the paper reports is judged by a model.
+
+### How does Q&D train a questioner without a reward model?
+
+From the consequences of its questions. A recorded run is forked at a step, eight alternative questions are sampled there, and each is continued to the end. Pairs are ordered by whether the run answered the task, then by which reached the complete evidence sooner, then by how much evidence each turn added. The questioner is trained in three stages: imitation of good decisions, direct preference optimization on question pairs, and direct preference optimization on question pairs together with contrasts that rank asking above stopping at unfinished states.
+
+### How does this differ from training agentic search on answer correctness?
+
+Search agents trained with outcome rewards credit a whole run with whether its final answer was right. Q&D credits each question with what followed it, so a question that reaches an unstated need early wins even when the final answers agree. Answers decide only 6% of the pairs Q&D trains on.
+
+### How does this differ from asking clarifying questions?
+
+Work on clarifying questions learns what to ask the user when a request is ambiguous or incomplete. Here the questioner goes after the missing information itself, in the evidence it can retrieve. In a customer-service agent it completes more retail tasks than GPT-OSS-120B, a prompted model 15× larger, with fewer follow-up turns from the customer, which the paper attributes to the agent finding more of what the task needs in the store's records.
+
+### Which benchmarks and models does the paper use?
+
+Training data are mined from MuSiQue, StrategyQA and 2WikiMultiHopQA, and results are read on held-out test splits of 200 tasks per benchmark. The trained questioner is Qwen3-8B. GPT-OSS-120B is the drafter and the answerer in every arm except the single-model control, and a prompted comparator in the questioner's role. The transfer study uses the retail and airline domains of τ²-bench with a simulated customer.
+
+### What are the main results?
+
+At equal retrieval spend, the trained 8B questioner recovers more of the required evidence than the same model, prompted, on every suite, and reaches deeper into each task's dependencies. On MuSiQue it recovers 90% of the required evidence against 78%. It leads GPT-OSS-120B, a prompted model 15× larger in the same role, on MuSiQue and StrategyQA, by 7.0 and 4.3 points, and trails it on 2WikiMultiHopQA, by 3.5 points. The gain comes from what it asks, not from asking more or longer questions. Stopping on its own, it asks fewer questions than either prompted model and still leads on the deepest chains.
+
+### Does the questioner work beyond question answering?
+
+Yes, without further training. Placed in a customer-service agent on τ²-bench, it raises retail task success from 13% and 12% to 34% and 32% under two prompt variants, better on ten of twenty-five tasks and worse on none in each, and asks 1.3 and 1.4 fewer questions per retail dialogue. In airline, task success rises by 6.9 and 6.4 points. Against GPT-OSS-120B in retail, it completes 17.0 and 12.7 points more tasks, with 1.6 and 1.8 fewer follow-up turns from the customer.
+
+### Does finding more evidence give better final answers?
+
+Not yet detectably. The extra evidence does not yet reach the final answers, and training teaches what to ask more readily than when to stop.
+
+### What are the limitations?
+
+The two reported seeds share one supervised checkpoint and one pair export, so intervals are over tasks alone. The released retrieval pools are small enough that most prerequisite edges do not gate retrieval, so the vertical result concerns depth in a decomposition. Every user-facing number comes from a simulated customer, and Q&D is one round of off-policy training, not compared with on-policy reinforcement learning.
+
+### Which research areas does this work connect to?
+
+Proactive and mixed-initiative agents, benchmarks that test whether a model recognizes missing information or unstated needs, learning what to ask, including clarifying questions, agentic search and retrieval-augmented generation, question decomposition for multi-hop question answering, step-level preference training, and simulated users for evaluating agents.
+
+### What is released, and where?
+
+The code, with the agent loop, the need-graph builders and metrics, the training ladder, the analyses and a test suite, is on GitHub at dolev31/ProactiveInquirer. The trained questioner is on Hugging Face at dolev31/ProactiveInquirer-Qwen3-8B, a LoRA adapter with both training seeds, with merged weights and GGUF quantizations for Ollama and LM Studio in companion repositories. All are under Apache-2.0.
+
 ## Links
 
 - [Project page](https://dolev31.github.io/ProactiveInquirer/): overview, results and citation
-- Paper: on arXiv soon; this page will link it
+- Paper: on arXiv soon, and this page will link it
 - [Code](https://github.com/dolev31/ProactiveInquirer): the agent loop, the need-graph builders and metrics, the training ladder and the analyses, Apache-2.0
 - [Model](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B): the trained questioner, a LoRA adapter on Qwen3-8B with two training seeds, Apache-2.0
 
