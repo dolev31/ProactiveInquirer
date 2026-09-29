@@ -340,7 +340,9 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap"></noscript>
 <style>
   :root {
     color-scheme: light;
@@ -385,6 +387,7 @@
   a { color: var(--blue); text-underline-offset: 3px; text-decoration-thickness: 1px; }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
   img { max-width: 100%; height: auto; display: block; }
+  picture { display: block; }
   sup { font-size: .68em; line-height: 0; }
   code { font-family: var(--mono); font-size: .86em; background: var(--panel); padding: .1em .35em; border-radius: 4px; }
 
@@ -497,6 +500,7 @@
 </head>
 <body>
 <div class="wrap">
+<main>
 
 <header class="hero">
   <p class="eyebrow">Preprint · 2026</p>
@@ -512,7 +516,7 @@
 </header>
 
 <figure class="teaser">
-  <div class="plate"><a href="assets/figure1.png"><img src="assets/figure1.png" width="1700" height="932" fetchpriority="high" alt="Figure 1. One customer request handled by the same model, prompted and trained with Q&amp;D. The customer asks to change a pending order's boots to size 8 and gives a name and ZIP code, not the email or the order ID. Prompted, the agent spends all 16 of its questions asking the customer for the email or the order ID and the task fails. Trained, it finds the user profile from the name and ZIP code (horizontal), then the order, the boots and the size-8 variant from values it found (vertical), and the task is completed. Panel b shows Q&amp;D: a questioner asks or stops, a retriever answers, a frozen drafter updates the draft, and training prefers the question whose continuation finds more of what the task needs."></a></div>
+  <div class="plate"><a href="assets/figure1.png"><picture><source type="image/webp" srcset="assets/figure1-850.webp 850w, assets/figure1.webp 1700w" sizes="(max-width: 1040px) calc(100vw - 64px), 954px"><img src="assets/figure1.png" width="1700" height="932" fetchpriority="high" alt="Figure 1. One customer request handled by the same model, prompted and trained with Q&amp;D. The customer asks to change a pending order's boots to size 8 and gives a name and ZIP code, not the email or the order ID. Prompted, the agent spends all 16 of its questions asking the customer for the email or the order ID and the task fails. Trained, it finds the user profile from the name and ZIP code (horizontal), then the order, the boots and the size-8 variant from values it found (vertical), and the task is completed. Panel b shows Q&amp;D: a questioner asks or stops, a retriever answers, a frozen drafter updates the draft, and training prefers the question whose continuation finds more of what the task needs."></picture></a></div>
   <figcaption><b>One request, two agents.</b> A customer asks to change the boots in a pending order to size 8 and gives a name and a ZIP code, but not the email or the order number. The same model, prompted, asks the customer for them sixteen times and the task fails. Trained with Q&amp;D, it finds the account, the order and the size-8 boots in the store's records and completes the task: a <b>horizontal</b> step from what the customer said, then <b>vertical</b> steps from what it found.</figcaption>
 </figure>
 
@@ -645,6 +649,8 @@ questioner = PeftModel.from_pretrained(base, <span class="s">"dolev31/ProactiveI
 }</pre>
   </div>
 </section>
+
+</main>
 
 <footer class="foot">
   <div class="row">
