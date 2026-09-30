@@ -12,7 +12,8 @@
 <sup>1</sup>IBM &nbsp;&nbsp; <sup>2</sup>Weizmann Institute of Science
 
 [![Project page](https://img.shields.io/badge/Project-page-1B5EA8)](https://dolev31.github.io/ProactiveInquirer/)
-[![Paper](https://img.shields.io/badge/arXiv-coming%20soon-b31b1b?logo=arxiv&logoColor=white)](https://dolev31.github.io/ProactiveInquirer/)
+[![Paper](https://img.shields.io/badge/arXiv-2609.37236-b31b1b?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2609.37236)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23023448.svg)](https://doi.org/10.5281/zenodo.23023448)
 [![Model](https://img.shields.io/badge/%F0%9F%A4%97%20Model-ProactiveInquirer--Qwen3--8B-FFD21E)](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B)
 [![Tests](https://github.com/dolev31/ProactiveInquirer/actions/workflows/tests.yml/badge.svg)](https://github.com/dolev31/ProactiveInquirer/actions/workflows/tests.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
@@ -35,7 +36,7 @@
 
 - **2026-09** · The code, the need-graph metrics and the trained questioner
   ([🤗 ProactiveInquirer-Qwen3-8B](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B)) are
-  public, with a [project page](https://dolev31.github.io/ProactiveInquirer/). The paper is coming to arXiv.
+  public, with a [project page](https://dolev31.github.io/ProactiveInquirer/). The paper is on [arXiv](https://arxiv.org/abs/2609.37236).
 
 ## ✨ Highlights
 
@@ -250,7 +251,8 @@ If you use this code or the model, please cite:
 @article{levy2026asking,
   title   = {Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents},
   author  = {Levy, Ido and Yehudai, Asaf and Shlomov, Segev and Adi, Asaf and Choshen, Leshem},
-  journal = {arXiv preprint},
+  journal = {arXiv preprint arXiv:2609.37236},
+  url     = {https://arxiv.org/abs/2609.37236},
   year    = {2026}
 }
 ```

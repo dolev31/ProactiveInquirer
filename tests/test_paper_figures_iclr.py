@@ -3363,3 +3363,27 @@ def test_table_fourseeds_fits_at_full_size_with_six_columns(gen, tmp_path):
     spec = next(ln for ln in body if ln.startswith(r"\begin{tabular}"))
     assert "{@{}lccccc@{}}" in spec, spec
     assert not any("between-run SD" in ln or "bootstrap SE" in ln for ln in body)
+
+
+# --------------------------------------------------------------------------- font embedding
+
+
+def test_a_figure_pdf_embeds_its_fonts_as_truetype_not_type_3(gen):
+    """Google Scholar's inclusion guidelines: "Avoid use of Type 3 fonts in PDF files, because
+    they're often generated with missing or incorrect font size and character encoding information,
+    which makes it difficult for our parser software to extract the bibliographic data." matplotlib
+    writes Type 3 unless told otherwise, so the script's style must set TrueType (fonttype 42)."""
+    import io
+
+    plt = gen._mpl()
+    fig, ax = plt.subplots(figsize=(2, 1))
+    ax.set_title("(a) what each need costs")
+    ax.plot([0, 1], [0, 1], label="the trained questioner")
+    ax.legend()
+    buf = io.BytesIO()
+    fig.savefig(buf, format="pdf")
+    plt.close(fig)
+    pdf = buf.getvalue()
+    assert b"/Type3" not in pdf
+    assert b"/FontFile2" in pdf  # the TrueType program itself is embedded
+    assert plt.rcParams["ps.fonttype"] == 42

@@ -8,7 +8,8 @@ per-decision stopping cells), `table1_heldout.tex` (both axes at equal spend on 
 splits) and `table2_mechanism.tex` (which supervision moves what, on development).
 
 The style is copied from `src/pi_run/render.py` and `scripts/figures_programme.py` so the three
-sets sit together without a seam: the same rcParams, the same Okabe-Ito palette, a PDF and a PNG
+sets sit together without a seam: the same rcParams (these PDFs embed TrueType fonts, not Type 3),
+the same Okabe-Ito palette, a PDF and a PNG
 per figure, and a provenance record whose `inputs` map every source file to its sha256.
 
 WHAT THIS SCRIPT REFUSES TO DO.
@@ -205,6 +206,9 @@ def _mpl():
             "axes.spines.right": False,
             "figure.dpi": 150,
             "savefig.bbox": "tight",
+            # TrueType, not matplotlib's default Type 3, which Google Scholar asks PDFs to avoid
+            "pdf.fonttype": 42,
+            "ps.fonttype": 42,
         }
     )
     return plt
