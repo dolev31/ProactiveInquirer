@@ -70,7 +70,7 @@ The code, with the agent loop, the need-graph builders and metrics, the training
 ## Links
 
 - [Project page](https://dolev31.github.io/ProactiveInquirer/): overview, results and citation
-- Paper: on arXiv soon, and this page will link it
+- [Paper on arXiv](https://arxiv.org/abs/2609.37236): the full paper
 - [Code](https://github.com/dolev31/ProactiveInquirer): the agent loop, the need-graph builders and metrics, the training ladder and the analyses, Apache-2.0
 - [Model](https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B): the trained questioner, a LoRA adapter on Qwen3-8B with two training seeds, Apache-2.0
 
@@ -84,7 +84,7 @@ An agent that uses tools typically responds to what the user explicitly asks, ye
 @article{levy2026asking,
   title   = {Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents},
   author  = {Levy, Ido and Yehudai, Asaf and Shlomov, Segev and Adi, Asaf and Choshen, Leshem},
-  journal = {arXiv preprint},
+  journal = {arXiv preprint arXiv:2609.37236},
   year    = {2026}
 }
 ```
