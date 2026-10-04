@@ -7,7 +7,7 @@
   <img src="docs/assets/title-light.png" width="760" alt="Asking for What Was Never Requested: Horizontal and Vertical Proactivity in Agents">
 </picture>
 
-[**Ido Levy**](https://scholar.google.com/citations?user=Ok_7M80AAAAJ)<sup>1,2</sup> · [**Asaf Yehudai**](https://scholar.google.com/citations?user=FprEf4oAAAAJ)<sup>1</sup> · [**Segev Shlomov**](https://scholar.google.com/citations?user=hhtOihkAAAAJ)<sup>1</sup> · [**Asaf Adi**](https://www.linkedin.com/in/asaf-adi/)<sup>1</sup> · [**Leshem Choshen**](https://scholar.google.com/citations?user=8b8IhUYAAAAJ)<sup>1,2</sup>
+[**Ido Levy**](https://scholar.google.com/citations?user=Ok_7M80AAAAJ)<sup>1,2</sup> · [**Asaf Yehudai**](https://scholar.google.com/citations?user=FprEf4oAAAAJ)<sup>1</sup> · [**Segev Shlomov**](https://scholar.google.com/citations?user=hhtOihkAAAAJ)<sup>1</sup> · [**Asaf Adi**](https://www.linkedin.com/in/asaf-adi/)<sup>1</sup> · [**Leshem Choshen**](https://borgr.github.io/)<sup>1,2</sup>
 
 <sup>1</sup>IBM &nbsp;&nbsp; <sup>2</sup>Weizmann Institute of Science
 
@@ -23,6 +23,12 @@
 
 <p align="center">
   <img src="docs/assets/figure1.png" width="96%" alt="One customer request, the same model prompted and trained with Q&D">
+</p>
+
+<p align="center">
+  <a href="https://dolev31.github.io/ProactiveInquirer/#video"><img src="docs/assets/animation.gif" width="720" alt="The same example, step by step: the questioner trained with Q&D finds the account, the order with the boots and the size-8 boots, and the task is completed"></a>
+  <br>
+  <sub>▶ <a href="https://dolev31.github.io/ProactiveInquirer/assets/animation.mp4">The 22-second video (MP4)</a>: the same example, step by step</sub>
 </p>
 
 > **TL;DR.** Tool-using agents do what they are asked, yet a task often needs information the user
