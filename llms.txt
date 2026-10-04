@@ -25,7 +25,7 @@ Horizontal proactivity pursues a need the current state already names, such as l
 
 ### How is proactivity measured without an LLM judge?
 
-Each task carries a need graph recovered from the benchmark's own decomposition of its question. A finished transcript is scored by which required evidence it retrieved, matched by identifier, at which depth, and whether the agent stopped at the right time. No quantity the paper reports is judged by a model.
+Each task carries a need graph recovered from the benchmark's own decomposition of its question. A finished transcript is scored by which required evidence it retrieved, matched by identifier, at which depth, and whether the agent stopped at the right time. Every metric is read from the transcript against the need graph; none is judged by a model.
 
 ### How does Q&D train a questioner without a reward model?
 
@@ -41,7 +41,7 @@ Work on clarifying questions learns what to ask the user when a request is ambig
 
 ### Which benchmarks and models does the paper use?
 
-Training data are mined from MuSiQue, StrategyQA and 2WikiMultiHopQA, and results are read on held-out test splits of 200 tasks per benchmark. The trained questioner is Qwen3-8B. GPT-OSS-120B is the drafter and the answerer in every arm except the single-model control, and a prompted comparator in the questioner's role. The transfer study uses the retail and airline domains of τ²-bench with a simulated customer.
+Training data are mined from MuSiQue, StrategyQA and 2WikiMultiHopQA, and results are read on held-out test splits of 200 tasks per benchmark. FRAMES, which has no need graph, is scored on answers. The trained questioner is Qwen3-8B. GPT-OSS-120B is the drafter and the answerer in every arm except the single-model control, and a prompted comparator in the questioner's role. The transfer study uses the retail and airline domains of τ²-bench with a simulated customer.
 
 ### What are the main results?
 

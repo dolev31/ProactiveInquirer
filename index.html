@@ -160,10 +160,10 @@
        "name": "Weizmann Institute of Science"
       }
      ],
-     "url": "https://scholar.google.com/citations?user=8b8IhUYAAAAJ",
+     "url": "https://borgr.github.io/",
      "sameAs": [
-      "https://scholar.google.com/citations?user=8b8IhUYAAAAJ",
-      "https://borgr.github.io/"
+      "https://borgr.github.io/",
+      "https://scholar.google.com/citations?user=8b8IhUYAAAAJ"
      ]
     }
    ],
@@ -274,7 +274,7 @@
      "name": "How is proactivity measured without an LLM judge?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Each task carries a need graph recovered from the benchmark's own decomposition of its question. A finished transcript is scored by which required evidence it retrieved, matched by identifier, at which depth, and whether the agent stopped at the right time. No quantity the paper reports is judged by a model."
+      "text": "Each task carries a need graph recovered from the benchmark's own decomposition of its question. A finished transcript is scored by which required evidence it retrieved, matched by identifier, at which depth, and whether the agent stopped at the right time. Every metric is read from the transcript against the need graph; none is judged by a model."
      }
     },
     {
@@ -306,7 +306,7 @@
      "name": "Which benchmarks and models does the paper use?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Training data are mined from MuSiQue, StrategyQA and 2WikiMultiHopQA, and results are read on held-out test splits of 200 tasks per benchmark. The trained questioner is Qwen3-8B. GPT-OSS-120B is the drafter and the answerer in every arm except the single-model control, and a prompted comparator in the questioner's role. The transfer study uses the retail and airline domains of τ²-bench with a simulated customer."
+      "text": "Training data are mined from MuSiQue, StrategyQA and 2WikiMultiHopQA, and results are read on held-out test splits of 200 tasks per benchmark. FRAMES, which has no need graph, is scored on answers. The trained questioner is Qwen3-8B. GPT-OSS-120B is the drafter and the answerer in every arm except the single-model control, and a prompted comparator in the questioner's role. The transfer study uses the retail and airline domains of τ²-bench with a simulated customer."
      }
     },
     {
@@ -362,29 +362,33 @@
  ]
 }
 </script>
-<script data-goatcounter="https://proactiveinquirer.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://proactiveinquirer.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap"></noscript>
+<script>document.documentElement.classList.add("js");</script>
 <style>
   :root {
     color-scheme: light;
     --bg: #FFFFFF;
-    --panel: #F3F6FA;
-    --ink: #111C2A;
-    --ink-2: #37465A;
-    --muted: #5C6A7C;
-    --line: #E0E6EE;
+    --panel: #F4F7FB;
+    --panel-2: #EAF0F7;
+    --ink: #0F1A28;
+    --ink-2: #33435A;
+    --muted: #5A687B;
+    --line: #DFE6EF;
     --blue: #1B5EA8;
-    --blue-soft: #E7F0FA;
-    --orange: #B0521A;
-    --orange-soft: #FBEEE4;
-    --green: #0F7B5F;
+    --blue-soft: #E6EFFA;
+    --orange: #A9501A;
+    --orange-soft: #FBEDE3;
+    --green: #0D7559;
+    --green-soft: #E3F4EE;
     --code-bg: #0F1B2A;
     --code-ink: #E2E9F2;
+    --shadow: 0 1px 2px rgba(15, 26, 40, .05), 0 8px 28px rgba(15, 26, 40, .06);
     --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
     --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -392,82 +396,89 @@
   @media (prefers-color-scheme: dark) {
     :root {
       color-scheme: dark;
-      --bg: #0D131A;
-      --panel: #141D27;
-      --ink: #E7EDF4;
-      --ink-2: #C3CDD9;
+      --bg: #0C1219;
+      --panel: #131C26;
+      --panel-2: #18232F;
+      --ink: #E8EEF5;
+      --ink-2: #C2CCD8;
       --muted: #97A4B4;
-      --line: #25313E;
-      --blue: #80B3EB;
-      --blue-soft: #16293F;
+      --line: #243140;
+      --blue: #82B5EC;
+      --blue-soft: #15283D;
       --orange: #F09A62;
-      --orange-soft: #3A2618;
+      --orange-soft: #36241A;
       --green: #4CC59E;
-      --code-bg: #09111A;
+      --green-soft: #12302A;
+      --code-bg: #080F17;
       --code-ink: #DCE5EF;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 28px rgba(0, 0, 0, .25);
     }
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-padding-top: 64px; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
   a { color: var(--blue); text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
   img { max-width: 100%; height: auto; display: block; }
   picture { display: block; }
   sup { font-size: .68em; line-height: 0; }
   code { font-family: var(--mono); font-size: .86em; background: var(--panel); padding: .1em .35em; border-radius: 4px; }
-
-  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; }
   .text { max-width: 720px; margin-inline: auto; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--bg); padding: 8px 12px; border-radius: 8px; z-index: 30; }
+  .skip:focus { left: 12px; }
 
-  /* title block */
-  header.hero { padding-block: 64px 36px; text-align: center; }
+  /* section bar */
+  .topnav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
+  .topnav .in { max-width: 1080px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 18px; height: 52px; }
+  .brand { font: 600 15px/1 var(--serif); color: var(--ink); text-decoration: none; white-space: nowrap; }
+  .topnav ul { list-style: none; margin: 0 0 0 auto; padding: 0; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .topnav ul::-webkit-scrollbar { display: none; }
+  .topnav a.sec { display: block; padding: 7px 10px; border-radius: 8px; font: 500 14px/1 var(--sans); color: var(--muted); text-decoration: none; white-space: nowrap; }
+  .topnav a.sec:hover, .topnav a.sec[aria-current="true"] { color: var(--ink); background: var(--panel); }
+
+  /* hero */
+  header.hero { position: relative; padding-block: 64px 30px; text-align: center; isolation: isolate; }
+  header.hero::before { content: ""; position: absolute; z-index: -1; left: 50%; top: -52px; width: 100vw; height: 520px; transform: translateX(-50%); background: radial-gradient(52% 62% at 50% 0%, var(--blue-soft), transparent 72%); }
   .eyebrow { font: 500 12.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 22px; }
-  h1 { font: 600 clamp(28px, 4.6vw, 44px)/1.16 var(--serif); letter-spacing: -.012em; margin: 0 auto 22px; max-width: 900px; text-wrap: balance; }
+  h1 { font: 600 clamp(29px, 4.7vw, 48px)/1.14 var(--serif); letter-spacing: -.015em; margin: 0 auto 20px; max-width: 940px; text-wrap: balance; }
   h1 .line2 { display: block; color: var(--blue); }
+  .claim { font: 400 clamp(18.5px, 2.3vw, 22px)/1.5 var(--serif); color: var(--ink-2); max-width: 720px; margin: 0 auto 24px; text-wrap: pretty; }
   .authors { font-size: 18px; margin: 0; }
   .authors a { color: inherit; text-decoration-color: var(--blue); }
   .authors .sep { color: var(--muted); padding-left: .3em; }
   .authors .au { white-space: nowrap; }
-  .plate a { display: block; }
   .affil { margin: 6px 0 0; color: var(--muted); font-size: 15.5px; }
   .affil span + span { margin-left: 1.1em; }
   nav.links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
-  .btn { display: inline-flex; align-items: center; gap: 9px; padding: 10px 17px; border-radius: 999px; font: 500 15.5px/1 var(--sans); text-decoration: none; color: var(--bg); background: var(--ink); border: 1px solid var(--ink); }
+  .btn { display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; border-radius: 999px; font: 500 15.5px/1 var(--sans); text-decoration: none; color: var(--bg); background: var(--ink); border: 1px solid var(--ink); }
   .btn:hover { background: var(--blue); border-color: var(--blue); }
   .btn svg { width: 17px; height: 17px; flex: none; }
   .btn .emoji { font-size: 17px; line-height: 1; }
   .btn small { font: 400 12.5px/1 var(--mono); opacity: .75; }
   .btn.is-soon { background: transparent; color: var(--muted); border-color: var(--line); border-style: dashed; cursor: default; }
+  .plate a { display: block; }
 
-  /* teaser */
   figure { margin: 0; }
-  .teaser { margin-top: 8px; }
-  .plate { background: #FFFFFF; border: 1px solid var(--line); border-radius: 14px; padding: clamp(10px, 2.4vw, 22px); }
+  .teaser { margin-top: 10px; }
+  .plate { background: #FFFFFF; border: 1px solid var(--line); border-radius: 16px; padding: clamp(10px, 2.4vw, 22px); box-shadow: var(--shadow); }
   figcaption { color: var(--ink-2); font-size: 15.5px; line-height: 1.6; margin: 14px auto 0; max-width: 820px; }
   figcaption b { color: var(--ink); }
 
-  /* in short */
-  .short { margin-top: 56px; }
+  .short { margin-top: 48px; }
   .short p.lead { font: 400 21px/1.55 var(--serif); margin: 0; color: var(--ink); }
-  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
-  .stat { background: var(--panel); border-radius: 12px; padding: 18px 18px 16px; }
-  .stat .num { font: 600 30px/1.1 var(--serif); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
-  .stat .num .was { color: var(--orange); }
-  .stat .num .now { color: var(--blue); }
-  .stat .num .arrow { color: var(--muted); font-weight: 500; padding-inline: .15em; }
-  .stat p { margin: 8px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
-
+  .abstract p { font-size: 16.5px; }
   /* sections */
-  section.block { margin-top: 72px; }
-  h2 { font: 600 28px/1.25 var(--serif); letter-spacing: -.005em; margin: 0 0 14px; text-wrap: balance; }
+  section.block { margin-top: 104px; }
+  .kicker { font: 500 12.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--blue); margin: 0 0 12px; }
+  h2 { font: 600 clamp(26px, 3.4vw, 34px)/1.2 var(--serif); letter-spacing: -.01em; margin: 0 0 16px; text-wrap: balance; }
   h3 { font: 600 17px/1.4 var(--sans); margin: 0 0 6px; }
   section.block p { margin: 0 0 14px; color: var(--ink-2); }
   section.block p strong { color: var(--ink); font-weight: 600; }
-  .abstract p { font-size: 16.5px; }
+  p.big { font: 400 21px/1.55 var(--serif); color: var(--ink) !important; }
 
-  .forms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
-  .form { border: 1px solid var(--line); border-radius: 14px; padding: 20px 20px 18px; background: var(--bg); }
+  .forms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+  .form { border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 20px; background: var(--bg); box-shadow: var(--shadow); }
   .form header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .badge { width: 34px; height: 34px; border-radius: 50%; border: 2px solid currentColor; display: grid; place-items: center; font: 600 16px/1 var(--serif); flex: none; }
   .form.h .badge { color: var(--ink); }
@@ -476,73 +487,178 @@
   .chain { font: 500 14px/1.5 var(--mono); color: var(--ink); background: var(--panel); border-radius: 8px; padding: 9px 12px; overflow-wrap: anywhere; }
   .chain .to { color: var(--blue); padding-inline: .3em; }
 
-  ol.stages { margin: 18px 0 0; padding: 0; list-style: none; counter-reset: stage; display: grid; gap: 10px; }
-  ol.stages li { counter-increment: stage; display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: baseline; color: var(--ink-2); font-size: 16px; }
-  ol.stages li::before { content: counter(stage); font: 600 14px/1 var(--mono); color: var(--blue); background: var(--blue-soft); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; }
+  /* the animation */
+  .anim { margin: 30px auto 0; max-width: 1000px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); }
+  .anim-loop { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .anim-loop svg { width: 100%; height: auto; display: block; }
+  .anim svg text { font: 500 13px var(--sans); fill: var(--ink); }
+  .anim svg .lbl { font: 400 11.5px var(--sans); fill: var(--muted); }
+  .anim svg .node rect { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+  .anim svg .arr { stroke: var(--line); stroke-width: 2; fill: none; }
+  .anim svg .head { fill: var(--line); }
+  .anim[data-phase="q"] .n-q rect, .anim[data-phase="r"] .n-r rect, .anim[data-phase="d"] .n-d rect, .anim[data-phase="s"] .n-s rect { stroke: var(--blue); fill: var(--blue-soft); }
+  .anim[data-phase="q"] .a-q .arr, .anim[data-phase="r"] .a-r .arr, .anim[data-phase="d"] .a-d .arr { stroke: var(--blue); }
+  .anim[data-phase="q"] .a-q .head, .anim[data-phase="r"] .a-r .head, .anim[data-phase="d"] .a-d .head { fill: var(--blue); }
+  .anim[data-phase="q"] .a-q .lbl, .anim[data-phase="r"] .a-r .lbl, .anim[data-phase="d"] .a-d .lbl { fill: var(--blue); font-weight: 600; }
+  .anim[data-phase="stop"] .n-q rect { stroke: var(--blue); fill: var(--blue-soft); }
+  .anim[data-phase="stop"] .stoplbl { fill: var(--blue); font-weight: 600; }
+  .draft { border-top: 1px dashed var(--line); padding-top: 10px; }
+  .draft h3 { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  .draft dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; font-size: 14px; }
+  .draft dt { color: var(--muted); }
+  .draft dd { margin: 0; font-family: var(--mono); font-size: 13px; color: var(--ink); overflow-wrap: anywhere; position: relative; }
+  .draft .ph { display: none; position: absolute; left: 0; top: 0; color: var(--muted); }
+  .js .draft .ph { display: block; }
+  .js .draft dd:has(.v.on) .ph { display: none; }
+  .anim-log { display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.5; min-width: 0; }
+  .msg { background: var(--bg); border: 1px solid var(--line); border-radius: 12px 12px 12px 4px; padding: 10px 12px; color: var(--ink-2); }
+  .msg .who, .step .who { display: block; font: 600 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .step { background: var(--bg); border: 1px solid var(--blue); border-radius: 12px 12px 4px 12px; padding: 9px 12px; color: var(--ink); margin-left: 8%; }
+  .step .who { color: var(--blue); }
+  .step .tag { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid currentColor; font: 600 11px/1 var(--serif); margin-right: 6px; vertical-align: -3px; }
+  .step .tag.v { color: var(--blue); }
+  .ev { font-family: var(--mono); font-size: 13px; color: var(--ink-2); overflow-wrap: anywhere; }
+  .step p { margin: 3px 0 0; }
+  .step .qline { margin: 0 0 2px; }
+  .step .qline b { font-weight: 600; }
+  .step .note { font-size: 12px; color: var(--muted); }
+  .ev b { color: var(--blue); font-weight: 500; }
+  .done { font-weight: 600; color: var(--green); background: var(--green-soft); border-radius: 10px; padding: 8px 12px; }
+  .anim-foot { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; gap: 8px 14px; align-items: center; }
+  .anim-cap { margin: 0; min-height: 3.1em; font: 400 17px/1.5 var(--serif); color: var(--ink); }
+  .anim-btn { font: 500 14px/1 var(--sans); padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; }
+  .anim-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .anim-bar { grid-column: 1 / -1; height: 3px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .anim-bar span { display: block; height: 100%; background: var(--blue); transform-origin: left; transform: scaleX(0); }
+  .js .anim [data-at] { opacity: 0; transform: translateY(4px); }
+  .js .anim [data-at].on { opacity: 1; transform: none; }
+  .js .anim .step[data-at]:not(.on) { opacity: 1; transform: none; color: transparent; background: transparent; border-style: dashed; border-color: var(--line); }
+  .js .anim .step[data-at]:not(.on) .who, .js .anim .step[data-at]:not(.on) .tag { color: transparent; border-color: transparent; }
+  .js .anim .step[data-at]:not(.on) p, .js .anim .step[data-at]:not(.on) b { color: transparent; }
+  @media (prefers-reduced-motion: no-preference) {
+    .js .anim [data-at] { transition: opacity .45s ease, transform .45s ease, color .45s ease, background-color .45s ease, border-color .45s ease; }
+    .anim svg rect, .anim svg .arr, .anim svg .head { transition: fill .3s, stroke .3s; }
+    .btn, .copy, .anim-btn { transition: background-color .15s, border-color .15s, color .15s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .anim [data-at] { opacity: 1; transform: none; }
+    .anim-btn, .anim-bar { display: none; }
+  }
+
+  .how-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 30px; }
+  .card { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .card p { font-size: 15.5px; margin: 0 0 10px !important; }
+  .card h3 { margin-bottom: 8px; }
+  ol.stages { margin: 6px 0 0; padding: 0; list-style: none; counter-reset: stage; display: grid; gap: 8px; }
+  ol.stages li { counter-increment: stage; display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: baseline; color: var(--ink-2); font-size: 15px; }
+  ol.stages li::before { content: counter(stage); font: 600 12.5px/1 var(--mono); color: var(--blue); background: var(--blue-soft); width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; }
   ol.stages strong { color: var(--ink); }
 
-  .table-wrap { overflow-x: auto; margin: 22px 0 8px; border: 1px solid var(--line); border-radius: 12px; }
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 26px; }
+  .stat { background: var(--panel); border-radius: 16px; padding: 20px 20px 18px; }
+  .stat .num { font: 600 34px/1.1 var(--serif); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .stat .num .was { color: var(--orange); }
+  .stat .num .now { color: var(--blue); }
+  .stat .num .arrow { color: var(--muted); font-weight: 500; padding-inline: .15em; }
+  .stat p { margin: 8px 0 0 !important; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+  .table-wrap { overflow-x: auto; margin: 26px 0 8px; border: 1px solid var(--line); border-radius: 14px; }
   table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
   th, td { padding: 12px 16px; text-align: left; border-top: 1px solid var(--line); vertical-align: top; }
   thead th { border-top: 0; font: 500 12px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
   td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table caption { caption-side: top; text-align: left; padding: 10px 16px; font-size: 14px; color: var(--muted); background: var(--panel); }
   td.n.was { color: var(--orange); }
   td.n.now { color: var(--blue); font-weight: 600; }
   ul.points { margin: 18px 0 0; padding-left: 1.2em; color: var(--ink-2); }
   ul.points li { margin-bottom: 8px; }
   .results-figs { display: grid; gap: 22px; margin-top: 30px; }
 
+  ul.limits { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; }
+  ul.limits li { background: var(--orange-soft); border-left: 3px solid var(--orange); border-radius: 0 12px 12px 0; padding: 12px 16px; color: var(--ink); font-size: 16px; }
+
+  .try { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 26px; }
+  .try .card { display: flex; flex-direction: column; }
+  .try .card .code { margin-top: 12px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .pill { font: 500 11.5px/1 var(--mono); padding: 5px 8px; border-radius: 999px; background: var(--blue-soft); color: var(--blue); }
   pre { margin: 0; }
-  .code { background: var(--code-bg); color: var(--code-ink); border-radius: 12px; padding: 18px 20px; overflow-x: auto; font: 400 13.5px/1.65 var(--mono); }
+  .code { position: relative; background: var(--code-bg); color: var(--code-ink); border-radius: 12px; padding: 16px 18px; overflow-x: auto; font: 400 13.5px/1.65 var(--mono); }
   .code code { background: none; padding: 0; font-size: inherit; color: inherit; border-radius: 0; }
   .code .k { color: #8FC1FF; }
   .code .s { color: #F2B98A; }
-  .code .c { color: #8A9BB0; }
+  .code.has-copy { padding-top: 44px; }
+  .cbtn { position: absolute; top: 8px; right: 8px; font: 500 12px/1 var(--sans); padding: 7px 10px; border-radius: 7px; border: 1px solid #2B3B4F; background: #16263A; color: #DCE5EF; cursor: pointer; }
+  .cbtn:hover { border-color: #8FC1FF; }
 
   .faq { display: grid; gap: 22px; margin-top: 20px; }
   .faq div p { margin: 0 !important; }
-
   .cite { position: relative; }
   .cite pre { background: var(--panel); border-radius: 12px; padding: 18px 20px; overflow-x: auto; font: 400 13.5px/1.6 var(--mono); color: var(--ink); }
   .copy { position: absolute; top: 10px; right: 10px; font: 500 13px/1 var(--sans); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; }
   .copy:hover { border-color: var(--blue); color: var(--blue); }
 
-  footer.foot { margin-top: 88px; padding-block: 28px 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14.5px; }
+  footer.foot { margin-top: 96px; padding-block: 28px 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14.5px; }
   footer.foot .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
   footer.foot a { color: var(--ink-2); }
 
+  @media (max-width: 860px) {
+    .anim { grid-template-columns: minmax(0, 1fr); }
+    .how-grid { grid-template-columns: minmax(0, 1fr); }
+  }
   @media (max-width: 760px) {
     body { font-size: 16px; }
-    header.hero { padding-top: 44px; }
-    .stats, .forms { grid-template-columns: 1fr; }
-    section.block { margin-top: 56px; }
-    h2 { font-size: 24px; }
-    .short p.lead { font-size: 19px; }
+    header.hero { padding-top: 40px; }
+    .brand { display: none; }
+    .topnav ul { margin-left: 0; }
+    .stats, .forms, .try { grid-template-columns: minmax(0, 1fr); }
+    th, td { padding: 10px 10px; }
+    table { font-size: 14.5px; }
+    section.block { margin-top: 76px; }
+    p.big { font-size: 19px; }
+    .step { margin-left: 4%; }
+    .anim-foot { order: -1; }
+    .anim-log { font-size: 13.5px; gap: 6px; }
+    .ev { font-size: 12.5px; }
   }
-  @media (prefers-reduced-motion: no-preference) {
-    .btn, .copy { transition: background-color .15s, border-color .15s, color .15s; }
-  }
+
 </style>
 </head>
 <body>
+<a class="skip" href="#problem">Skip to content</a>
+<nav class="topnav" aria-label="Sections">
+  <div class="in">
+    <a class="brand" href="#top">ProactiveInquirer</a>
+    <ul>
+      <li><a class="sec" href="#problem">Problem</a></li>
+      <li><a class="sec" href="#proactivity">Proactivity</a></li>
+      <li><a class="sec" href="#how">How it works</a></li>
+      <li><a class="sec" href="#results">Results</a></li>
+      <li><a class="sec" href="#limits">Limits</a></li>
+      <li><a class="sec" href="#try">Try it</a></li>
+      <li><a class="sec" href="#questions">Questions</a></li>
+      <li><a class="sec" href="#citation">Cite</a></li>
+    </ul>
+  </div>
+</nav>
 <div class="wrap">
 <main>
 
-<header class="hero">
-  <p class="eyebrow">Preprint · 2026</p>
+<header class="hero" id="top">
+  <p class="eyebrow">arXiv 2609.37236 · Preprint · 2026</p>
   <h1>Asking for What Was Never Requested: <span class="line2">Horizontal and Vertical Proactivity in Agents</span></h1>
-  <p class="authors"><span class="au"><a href="https://scholar.google.com/citations?user=Ok_7M80AAAAJ">Ido Levy</a><sup>1,2</sup></span><span class="sep">·</span> <span class="au"><a href="https://scholar.google.com/citations?user=FprEf4oAAAAJ">Asaf Yehudai</a><sup>1</sup></span><span class="sep">·</span> <span class="au"><a href="https://scholar.google.com/citations?user=hhtOihkAAAAJ">Segev Shlomov</a><sup>1</sup></span><span class="sep">·</span> <span class="au"><a href="https://www.linkedin.com/in/asaf-adi/">Asaf Adi</a><sup>1</sup></span><span class="sep">·</span> <span class="au"><a href="https://scholar.google.com/citations?user=8b8IhUYAAAAJ">Leshem Choshen</a><sup>1,2</sup></span></p>
+  <p class="claim">Trained with Q&amp;D (questioner and drafter), an agent finds for itself what a prompted agent asks the customer to supply.</p>
+  <p class="authors"><span class="au"><a href="https://scholar.google.com/citations?user=Ok_7M80AAAAJ">Ido Levy</a><sup>1,2</sup></span><span class="sep">·</span> <span class="au"><a href="https://scholar.google.com/citations?user=FprEf4oAAAAJ">Asaf Yehudai</a><sup>1</sup></span><span class="sep">·</span> <span class="au"><a href="https://scholar.google.com/citations?user=hhtOihkAAAAJ">Segev Shlomov</a><sup>1</sup></span><span class="sep">·</span> <span class="au"><a href="https://www.linkedin.com/in/asaf-adi/">Asaf Adi</a><sup>1</sup></span><span class="sep">·</span> <span class="au"><a href="https://borgr.github.io/">Leshem Choshen</a><sup>1,2</sup></span></p>
   <p class="affil"><span><sup>1</sup>IBM</span><span><sup>2</sup>Weizmann Institute of Science</span></p>
-  <nav class="links" aria-label="Paper, code and model">
+  <nav class="links" aria-label="Paper, code, models and citation">
     <a class="btn" href="https://arxiv.org/abs/2609.37236" data-goatcounter-click="paper"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h6l3 3v10h-9z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 1.5v3h3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Paper <small>arXiv</small></a>
     <a class="btn" href="https://github.com/dolev31/ProactiveInquirer" data-goatcounter-click="code"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"/></svg>Code</a>
-    <a class="btn" href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B" data-goatcounter-click="model"><span class="emoji" aria-hidden="true">🤗</span>Model</a>
+    <a class="btn" href="https://huggingface.co/collections/dolev31/asking-for-what-was-never-requested-6abccea5387af87237913165" data-goatcounter-click="models"><span class="emoji" aria-hidden="true">🤗</span>Models</a>
     <a class="btn" href="#citation" data-goatcounter-click="bibtex"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.5 3.5h4.25v4.25H4.9c0 1.45.55 2.35 1.85 2.95l-.62 1.55C3.7 11.4 2.5 9.75 2.5 7.2zm6.75 0h4.25v4.25h-1.85c0 1.45.55 2.35 1.85 2.95l-.62 1.55c-2.43-.85-3.63-2.5-3.63-5.05z"/></svg>BibTeX</a>
   </nav>
 </header>
 
 <figure class="teaser">
-  <div class="plate"><a href="assets/figure1.png"><picture><source type="image/webp" srcset="assets/figure1-850.webp 850w, assets/figure1.webp 1700w" sizes="(max-width: 1040px) calc(100vw - 64px), 954px"><img src="assets/figure1.png" width="1700" height="932" fetchpriority="high" alt="Figure 1. One customer request handled by the same model, prompted and trained with Q&amp;D. The customer asks to change a pending order's boots to size 8 and gives a name and ZIP code, not the email or the order ID. Prompted, the agent spends all 16 of its questions asking the customer for the email or the order ID and the task fails. Trained, it finds the user profile from the name and ZIP code (horizontal), then the order, the boots and the size-8 variant from values it found (vertical), and the task is completed. Panel b shows Q&amp;D: a questioner asks or stops, a retriever answers, a frozen drafter updates the draft, and training prefers the question whose continuation finds more of what the task needs."></picture></a></div>
+  <div class="plate"><a href="assets/figure1.png"><picture><source type="image/webp" srcset="assets/figure1-850.webp 850w, assets/figure1.webp 1700w" sizes="(max-width: 1080px) calc(100vw - 64px), 994px"><img src="assets/figure1.png" width="1700" height="932" fetchpriority="high" alt="Figure 1. One customer request handled by the same model, prompted and trained with Q&amp;D. The customer asks to change a pending order's boots to size 8 and gives a name and ZIP code, not the email or the order ID. Prompted, the agent spends all 16 of its questions asking the customer for the email or the order ID and the task fails. Trained, it finds the user profile from the name and ZIP code (horizontal), then the order, the boots and the size-8 variant from values it found (vertical), and the task is completed. Panel b shows Q&amp;D: a questioner asks or stops, a retriever answers, a frozen drafter updates the draft, and training prefers the question whose continuation finds more of what the task needs."></picture></a></div>
   <figcaption><b>One request, two agents.</b> A customer asks to change the boots in a pending order to size 8 and gives a name and a ZIP code, but not the email or the order number. The same model, prompted, asks the customer for them sixteen times and the task fails. Trained with Q&amp;D, it finds the account, the order and the size-8 boots in the store's records and completes the task: a <b>horizontal</b> step from what the customer said, then <b>vertical</b> steps from what it found.</figcaption>
 </figure>
 
@@ -550,9 +666,9 @@
   <p class="lead">Tool-using LLM agents do what they are asked, yet a task often needs information the user never mentions. We study what an agent should pursue unasked, measure it against need graphs with no model judge, and train it with Q&amp;D, which learns from the consequences of its own questions.</p>
 </section>
 <div class="stats" role="list">
-  <div class="stat" role="listitem"><div class="num"><span class="was">78%</span><span class="arrow">→</span><span class="now">90%</span></div><p>of the required evidence recovered on MuSiQue at equal retrieval spend: the same 8B model, prompted and then trained</p></div>
-  <div class="stat" role="listitem"><div class="num"><span class="now">2 of 3</span></div><p>multi-hop benchmarks where, at equal retrieval spend, the 8B questioner outperforms GPT-OSS-120B, a prompted model 15× larger in the same role</p></div>
-  <div class="stat" role="listitem"><div class="num"><span class="was">13%</span><span class="arrow">→</span><span class="now">34%</span></div><p>task success in τ²-bench retail, with no further training: it asks less and finds more</p></div>
+    <div class="stat" role="listitem"><div class="num"><span class="was">78%</span><span class="arrow">→</span><span class="now">90%</span></div><p>of the required evidence recovered on MuSiQue at equal retrieval spend: the same 8B model, prompted and then trained</p></div>
+    <div class="stat" role="listitem"><div class="num"><span class="now">2 of 3</span></div><p>multi-hop benchmarks where, at equal retrieval spend, the 8B questioner outperforms GPT-OSS-120B, a prompted model 15× larger in the same role</p></div>
+    <div class="stat" role="listitem"><div class="num"><span class="was">13%</span><span class="arrow">→</span><span class="now">34%</span></div><p>task success in τ²-bench retail, with no further training: it asks less and finds more</p></div>
 </div>
 
 <section class="block text abstract" id="abstract">
@@ -560,9 +676,18 @@
   <p>An agent that uses tools typically responds to what the user explicitly asks, yet completing the task may require information the user never requested. Work on proactive agents mainly studies whether and when an agent should act on its own, not what information it should pursue. We study a distinct axis of proactivity: its content. Horizontal proactivity pursues unstated information that the current context already identifies, and vertical proactivity pursues needs that only earlier evidence reveals. A need graph, recovered from a benchmark's own decomposition, records which needs depend on which, so both forms, and whether the agent stops at the right time, can be scored from a transcript without a model judge. To learn this behavior, we propose Q&amp;D (questioner and drafter), which trains a questioner to prefer the question whose continuation retrieves more of the required evidence, with no reward model or judge. On held-out splits of three multi-hop question-answering benchmarks, at equal retrieval spend, the trained questioner improves both forms of proactivity over the same model, prompted, and outperforms a prompted model 15× larger in the same role on two of the three, and the gain persists after controlling for question volume and length. Without further training, we place the questioner in an interactive customer-service agent with a simulated customer, where it completes more tasks while asking fewer questions, and in retail it outperforms the 15× larger model with fewer follow-up turns from the customer. These results show that proactivity depends not only on whether an agent acts without being asked, but also on what it chooses to pursue and when it stops.</p>
 </section>
 
+<section class="block text" id="problem">
+  <p class="kicker">01 · The problem</p>
+  <h2>Agents answer what they are asked</h2>
+  <p class="big">A tool-using agent usually does what the user asks, yet a task often needs information the user never mentions.</p>
+  <p>A customer who asks a store's agent to change the boots in a pending order to size 8 gives a name and a ZIP code, but not the order or an email they no longer remember. An agent that waits for the customer to supply these asks for the email and order number sixteen times, and the boots are never changed. Without proactivity, an agent stalls or hands the work back to the user as follow-up questions.</p>
+  <p>Work on proactive agents asks <strong>whether</strong> and <strong>when</strong> an agent should act on its own, and rarely <strong>what</strong> information it should seek unasked.</p>
+</section>
+
 <section class="block text" id="proactivity">
-  <h2>Two forms of proactivity</h2>
-  <p>Work on proactive agents mostly asks <strong>whether</strong> and <strong>when</strong> an agent should act on its own. We ask <strong>what</strong> it should go after, and distinguish two forms.</p>
+  <p class="kicker">02 · Two kinds of proactivity</p>
+  <h2>What to pursue, when nobody asked</h2>
+  <p>The paper names two forms of what an agent pursues unasked.</p>
   <div class="forms">
     <article class="form h">
       <header><span class="badge" aria-hidden="true">H</span><h3>Horizontal proactivity</h3></header>
@@ -571,36 +696,105 @@
     </article>
     <article class="form v">
       <header><span class="badge" aria-hidden="true">V</span><h3>Vertical proactivity</h3></header>
-      <p>Pursuing a need that only newly found evidence names. The account lists the order, the order names the product, and the product lists the size-8 variant.</p>
-      <div class="chain">account<span class="to">→</span>order<span class="to">→</span>product<span class="to">→</span>size-8 variant</div>
+      <p>Pursuing a need that only newly found evidence names: the order holding the boots, then the size-8 boots.</p>
+      <div class="chain">account<span class="to">→</span>order with the boots<span class="to">→</span>size-8 boots</div>
     </article>
   </div>
 </section>
 
-<section class="block text" id="need-graphs">
-  <h2>Measured without a model judge</h2>
-  <p>A <strong>need graph</strong> records the evidence a task requires, with an edge wherever one need can be named only after another is found. Multi-hop question-answering benchmarks supply these graphs through their own decompositions of their questions. Both forms of proactivity, and whether the agent stops at the right time, are then scored from a transcript, with no model judge.</p>
-  <p>Agents are compared at <strong>equal retrieval spend</strong>, after the same number of questions, so asking more cannot pass for asking better.</p>
-</section>
+<section class="block" id="how">
+  <div class="text">
+    <p class="kicker">03 · How it works</p>
+    <h2>Ask, retrieve, draft, and ask again</h2>
+    <p><strong>Q&amp;D (questioner and drafter)</strong> splits the agent in two. A questioner asks one question at a time or stops, a retriever answers it from the task's evidence, and a frozen drafter folds the evidence into a draft. Here is the paper's example, step by step.</p>
+  </div>
+  <div class="anim" id="anim" role="group" aria-label="Animation of the paper's example: the trained agent handles one customer request" data-phase="s">
+    <div class="anim-loop">
+      <svg viewBox="0 0 360 230" role="img" aria-label="The Q&amp;D loop: state, questioner, retriever, drafter, back to the state; the questioner can also stop">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="head"/></marker>
+        </defs>
+        <g class="a-q"><path class="arr" d="M256 62 V150" marker-end="url(#ah)"/><text class="lbl" x="264" y="110">ask question</text></g>
+        <g class="a-r"><path class="arr" d="M222 178 H128" marker-end="url(#ah)"/><text class="lbl" x="146" y="200">evidence</text></g>
+        <g class="a-d"><path class="arr" d="M62 150 V62" marker-end="url(#ah)"/><text class="lbl" x="70" y="110">new draft</text></g>
+        <g><path class="arr" d="M110 38 H196" marker-end="url(#ah)"/></g>
+        <g class="node n-s"><rect x="14" y="18" width="96" height="40" rx="10"/><text x="62" y="43" text-anchor="middle">state</text></g>
+        <g class="node n-q"><rect x="200" y="18" width="112" height="40" rx="10"/><text x="256" y="43" text-anchor="middle">questioner</text></g>
+        <g class="node n-r"><rect x="226" y="158" width="100" height="40" rx="10"/><text x="276" y="183" text-anchor="middle">retriever</text></g>
+        <g class="node n-d"><rect x="14" y="158" width="110" height="40" rx="10"/><text x="69" y="183" text-anchor="middle">drafter (frozen)</text></g>
+        <text class="lbl stoplbl" x="318" y="43">or stop</text>
+      </svg>
+      <div class="draft">
+        <h3>Found</h3>
+        <dl>
+          <dt>account</dt><dd><span class="v" data-at="3.8">fatima_johnson_7581</span><span class="v" data-at="6.4">, order #W5199551</span><span class="ph" aria-hidden="true">—</span></dd>
+          <dt>order with the boots</dt><dd><span class="v" data-at="8.8">product 7363354090, size 10</span><span class="ph" aria-hidden="true">—</span></dd>
+          <dt>size-8 boots</dt><dd><span class="v" data-at="11.4">item 3613716226</span><span class="ph" aria-hidden="true">—</span></dd>
+        </dl>
+      </div>
+    </div>
+    <div class="anim-log">
+      <div class="msg" data-at="0"><span class="who">Customer</span>“I need to modify an order I placed. It's for a pair of boots, and I want to change the size to 8.” … “I don't remember the email on my account, but my name is Fatima Johnson, and my ZIP code is 78712. … I don't have the order ID …”</div>
+      <div class="step" data-at="2.4"><span class="who">Questioner</span>
+        <p class="qline"><span class="tag" title="horizontal">H</span><b>account</b></p>
+        <p class="q">Q1: Find the user profile for Fatima Johnson with ZIP code 78712.</p>
+        <p class="ev" data-at="3.6">↪ user <b>fatima_johnson_7581</b></p>
+        <p class="q" data-at="5">Q3: …</p>
+        <p class="ev" data-at="6.2">↪ its profile: order <b>#W5199551</b></p>
+        <p class="note" data-at="5">questions 2 and 4 not shown</p>
+      </div>
+      <div class="step" data-at="7.4"><span class="who">Questioner</span>
+        <p class="qline"><span class="tag v" title="vertical">V</span><b>order with the boots</b></p>
+        <p class="q">Q5: Find the product variant details (…) for the boots in the pending order #W5199551 placed by user fatima_johnson_7581.</p>
+        <p class="ev" data-at="8.6">↪ the boots ordered: size 10, synthetic, product <b>7363354090</b></p>
+      </div>
+      <div class="step" data-at="10"><span class="who">Questioner</span>
+        <p class="qline"><span class="tag v" title="vertical">V</span><b>size-8 boots</b></p>
+        <p class="q">Q6: Find the product variant details (…) for the Hiking Boots (product ID 7363354090) that are available in size 8.</p>
+        <p class="ev" data-at="11.2">↪ item <b>3613716226</b>: size 8, synthetic</p>
+      </div>
+      <div class="done" data-at="13.8">✓ all three found: task completed</div>
+    </div>
+    <div class="anim-foot">
+      <p class="anim-cap">A customer asks to change the boots in a pending order to size 8, with a name and a ZIP code but no order number.</p>
+      <button class="anim-btn" type="button" hidden>Play</button>
+      <div class="anim-bar" aria-hidden="true"><span></span></div>
+    </div>
+  </div>
 
-<section class="block text" id="method">
-  <h2>Q&amp;D: learning from the consequences of its own questions</h2>
-  <p><strong>Q&amp;D (questioner and drafter)</strong> splits the agent in two. A questioner asks one question at a time or stops, a retriever answers it from the task's evidence, and a frozen drafter folds the evidence into a draft. Because the drafter is fixed, every change in what the agent holds is caused by a question.</p>
-  <p>To learn, Q&amp;D forks a run at one state, continues it after several candidate questions and after stopping, and prefers the candidate whose continuation retrieves more of the required evidence. Asking is preferred over stopping while required evidence is still missing. There is no reward model and no model judge. The questioner is trained in three stages:</p>
-  <ol class="stages">
-    <li><span><strong>Imitation</strong> of good decisions: stop where the required evidence is already in hand, and otherwise ask the best sampled question.</span></li>
-    <li><span><strong>Direct preference optimization</strong> on pairs of questions asked from the same state.</span></li>
-    <li><span>The same, with <strong>contrasts between asking and stopping</strong> added.</span></li>
-  </ol>
+  <div class="how-grid">
+    <article class="card">
+      <h3>Measured without a model judge</h3>
+      <p>A <strong>need graph</strong> records the evidence a task requires, with an edge wherever one need can be named only after another is found. Multi-hop question-answering benchmarks supply these graphs through their own decompositions of their questions.</p>
+      <p>Both forms of proactivity, and whether the agent stops at the right time, are scored from a transcript, with no model judge. Agents are compared at <strong>equal retrieval spend</strong>, after the same number of questions, so asking more cannot pass for asking better.</p>
+    </article>
+    <article class="card">
+      <h3>Learning from the consequences of its own questions</h3>
+      <p>Because the drafter is fixed, every change in what the agent holds is caused by a question. Q&amp;D forks a run at one state, continues it after several candidate questions and after stopping, and prefers the candidate whose continuation retrieves more of the required evidence.</p>
+      <p>Asking is preferred over stopping while required evidence is still missing. There is no reward model and no model judge.</p>
+    </article>
+    <article class="card">
+      <h3>Three training stages</h3>
+      <ol class="stages">
+        <li><span><strong>Imitation</strong> of good decisions: stop where the required evidence is already in hand, and otherwise ask the best sampled question, if its consequence score clears a fixed floor.</span></li>
+        <li><span><strong>Direct preference optimization</strong> on pairs of questions asked from the same state.</span></li>
+        <li><span>The same, with <strong>contrasts between asking and stopping</strong> added.</span></li>
+      </ol>
+    </article>
+  </div>
 </section>
 
 <section class="block" id="results">
   <div class="text">
-    <h2>Results</h2>
-    <p>On held-out test splits: MuSiQue at equal retrieval spend, and τ²-bench under the benchmark's own per-dialogue caps.</p>
+    <p class="kicker">04 · Results</p>
+    <h2>It finds more of what the task needs</h2>
+    <p>On held-out test splits of MuSiQue at equal retrieval spend, and on τ²-bench, never used for training, with sixteen questions per dialogue.</p>
+  </div>
+  <div class="text">
     <div class="table-wrap">
       <table>
-        <thead><tr><th scope="col">Setting</th><th scope="col">Measure</th><th scope="col">Qwen3-8B, prompted</th><th scope="col">Q&amp;D questioner</th></tr></thead>
+        <caption>The same model, Qwen3-8B, prompted and trained with Q&amp;D</caption>
+        <thead><tr><th scope="col">Setting</th><th scope="col">Measure</th><th scope="col">Prompted</th><th scope="col">Q&amp;D</th></tr></thead>
         <tbody>
           <tr><td>MuSiQue</td><td>Required evidence recovered</td><td class="n was">78%</td><td class="n now">90%</td></tr>
           <tr><td>τ²-bench retail, base prompt</td><td>Task success</td><td class="n was">13%</td><td class="n now">34%</td></tr>
@@ -610,7 +804,7 @@
     </div>
     <ul class="points">
       <li>It improves both forms of proactivity over the same model, prompted, on held-out splits of MuSiQue, StrategyQA and 2WikiMultiHopQA.</li>
-      <li>The gain comes from what it asks, not from asking more or longer questions: it holds against a question-volume control and a length control.</li>
+      <li>The gain comes from what it asks, not from asking more or longer questions: on MuSiQue and StrategyQA it holds against a question-volume control and, on development tasks, a length control.</li>
       <li>In τ²-bench retail it is better on ten of twenty-five tasks and worse on none, under each of two prompts. It asks less and finds more: 1.3 and 1.4 fewer questions per dialogue, more of which reach the records the task needs. In airline, success rises by 6.9 and 6.4 points.</li>
       <li>Against GPT-OSS-120B in retail, it completes 17.0 and 12.7 points more tasks, with 1.6 and 1.8 fewer follow-up turns from the customer.</li>
     </ul>
@@ -618,7 +812,7 @@
   <div class="results-figs">
     <figure>
       <div class="plate"><a href="assets/results_frontier.png"><img src="assets/results_frontier.png" width="1065" height="441" loading="lazy" alt="Required-evidence coverage against mean retrieval calls on MuSiQue and StrategyQA, and answer correctness on FRAMES. The trained questioner, labeled by its budget of 4 to 24 calls, is compared with the same model and GPT-OSS-120B, both prompted."></a></div>
-      <figcaption>Required-evidence coverage against the mean number of retrieval calls (MuSiQue, StrategyQA) and answer correctness (FRAMES): the trained questioner, labeled by its call budget, against the same model and GPT-OSS-120B, both prompted.</figcaption>
+      <figcaption>Figure 2(a) in the paper. Required-evidence coverage against the mean number of retrieval calls (MuSiQue, StrategyQA) and answer correctness (FRAMES): the trained questioner, labeled by its call budget, against the same model and GPT-OSS-120B, both prompted.</figcaption>
     </figure>
     <figure>
       <div class="plate"><a href="assets/results_tau2.png"><img src="assets/results_tau2.png" width="1210" height="337" loading="lazy" alt="Differences on tau2-bench, the trained questioner minus each prompted baseline, in retail and airline under two prompts: task success in percentage points on the left, follow-up turns per dialogue on the right, where negative means fewer turns."></a></div>
@@ -627,9 +821,31 @@
   </div>
 </section>
 
-<section class="block text" id="use">
-  <h2>Use the trained questioner</h2>
-  <p>The questioner is a LoRA adapter on Qwen3-8B, released with both training seeds. It reads the prompt template it was trained on and replies with one JSON action per step, to ask or to stop. The <a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B">model card</a> has a complete example, run on a GPU with its output shown.</p>
+<section class="block text" id="limits">
+  <p class="kicker">05 · What the paper does not show</p>
+  <h2>Main limitations, in the paper's words</h2>
+  <ul class="limits">
+    <li>Training teaches what to ask more readily than when to stop.</li>
+    <li>The extra evidence does not yet improve final answers detectably.</li>
+    <li>The released retrieval pools are small enough that most prerequisite edges do not gate retrieval, so the vertical result concerns depth in a decomposition.</li>
+    <li>Every user-facing number comes from a simulated customer.</li>
+    <li>Q&amp;D is one round of off-policy training, not compared with on-policy reinforcement learning or iterated on its own rollouts.</li>
+    <li>The two reported seeds share one supervised checkpoint and one pair export, so intervals are over tasks alone.</li>
+  </ul>
+  <p style="margin-top:18px">Four of these have a starting point in the code: <a href="https://github.com/dolev31/ProactiveInquirer/issues/1">issue #1</a> (stopping, and carrying the evidence into answers), <a href="https://github.com/dolev31/ProactiveInquirer/issues/2">issue #2</a> (retrieval pools that gate prerequisites) and <a href="https://github.com/dolev31/ProactiveInquirer/issues/3">issue #3</a> (on-policy training).</p>
+</section>
+
+<section class="block" id="try">
+  <div class="text">
+    <p class="kicker">06 · Try it</p>
+    <h2>Run the trained questioner</h2>
+    <p>The questioner is a LoRA adapter on Qwen3-8B, released with both training seeds. It reads the prompt template it was trained on and replies with one JSON action per step, to ask or to stop.</p>
+  </div>
+  <div class="try">
+    <article class="card">
+      <div class="tag-row"><span class="pill">Transformers + PEFT</span></div>
+      <h3><a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B">The adapter</a></h3>
+      <p>The model card has a complete example, run on a GPU with its output shown.</p>
 <pre class="code"><code><span class="k">import</span> torch
 <span class="k">from</span> peft <span class="k">import</span> PeftModel
 <span class="k">from</span> transformers <span class="k">import</span> AutoModelForCausalLM, AutoTokenizer
@@ -639,21 +855,40 @@ base = AutoModelForCausalLM.from_pretrained(
     <span class="s">"Qwen/Qwen3-8B"</span>, dtype=torch.bfloat16, device_map=<span class="s">"auto"</span>
 )
 questioner = PeftModel.from_pretrained(base, <span class="s">"dolev31/ProactiveInquirer-Qwen3-8B"</span>)</code></pre>
-  <p style="margin-top:14px">To run it on your own machine, with <a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B-GGUF">GGUF files</a> for Ollama, LM Studio and llama.cpp, or with <a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B-Merged">merged weights</a> that need no PEFT:</p>
+    </article>
+    <article class="card">
+      <div class="tag-row"><span class="pill">Ollama · LM Studio · llama.cpp</span></div>
+      <h3><a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B-GGUF">On your own machine</a></h3>
+      <p>GGUF files for local runs, or <a href="https://huggingface.co/dolev31/ProactiveInquirer-Qwen3-8B-Merged">merged weights</a> that need no PEFT.</p>
 <pre class="code"><code>ollama run hf.co/dolev31/ProactiveInquirer-Qwen3-8B-GGUF:Q4_K_M --think=false</code></pre>
-  <p style="margin-top:14px">To run the whole loop with a retriever, a drafter and the paper's metrics, start from the <a href="https://github.com/dolev31/ProactiveInquirer">repository</a>: <code>make smoke</code> runs it end to end on a synthetic suite, with no API keys.</p>
+    </article>
+    <article class="card">
+      <div class="tag-row"><span class="pill">The whole loop</span></div>
+      <h3><a href="https://github.com/dolev31/ProactiveInquirer">The code</a></h3>
+      <p>The agent loop, the need-graph builders and metrics, the training ladder and a test suite. <code>make smoke</code> runs it end to end on a synthetic suite, with no API keys.</p>
+<pre class="code"><code>git clone https://github.com/dolev31/ProactiveInquirer.git
+cd ProactiveInquirer && make smoke</code></pre>
+    </article>
+    <article class="card">
+      <div class="tag-row"><span class="pill">Hugging Face</span></div>
+      <h3><a href="https://huggingface.co/collections/dolev31/asking-for-what-was-never-requested-6abccea5387af87237913165">Everything in one place</a></h3>
+      <p>The collection holds the paper and the three releases: the adapter, the merged weights and the GGUF files. Code and models are under Apache-2.0.</p>
+      <p><a href="https://huggingface.co/papers/2609.37236">The paper on Hugging Face</a></p>
+    </article>
+  </div>
 </section>
 
 <section class="block text" id="questions">
+  <p class="kicker">07 · Questions</p>
   <h2>Questions</h2>
   <div class="faq">
     <div><h3>What does it mean for an LLM agent to be proactive about content?</h3><p>A tool-using LLM agent usually does what the user asks, yet completing the task often needs information the user never mentions. Work on proactive agents mostly studies whether and when an agent should act on its own. This paper studies what the agent pursues unasked, in a horizontal and a vertical form, and measures and trains both.</p></div>
     <div><h3>What is the difference between horizontal and vertical proactivity?</h3><p>Horizontal proactivity pursues a need the current state already names, such as looking up an account from a name and ZIP code the customer gave. Vertical proactivity pursues a need that only newly found evidence names, such as the order that account lists. Vertical needs form chains, and each link can be pursued only after the one before it is found.</p></div>
-    <div><h3>How is proactivity measured without an LLM judge?</h3><p>Each task carries a need graph recovered from the benchmark&#x27;s own decomposition of its question. A finished transcript is scored by which required evidence it retrieved, matched by identifier, at which depth, and whether the agent stopped at the right time. No quantity the paper reports is judged by a model.</p></div>
+    <div><h3>How is proactivity measured without an LLM judge?</h3><p>Each task carries a need graph recovered from the benchmark&#x27;s own decomposition of its question. A finished transcript is scored by which required evidence it retrieved, matched by identifier, at which depth, and whether the agent stopped at the right time. Every metric is read from the transcript against the need graph; none is judged by a model.</p></div>
     <div><h3>How does Q&amp;D train a questioner without a reward model?</h3><p>From the consequences of its questions. A recorded run is forked at a step, eight alternative questions are sampled there, and each is continued to the end. Pairs are ordered by whether the run answered the task, then by which reached the complete evidence sooner, then by how much evidence each turn added. The questioner is trained in three stages: imitation of good decisions, direct preference optimization on question pairs, and direct preference optimization on question pairs together with contrasts that rank asking above stopping at unfinished states.</p></div>
     <div><h3>How does this differ from training agentic search on answer correctness?</h3><p>Search agents trained with outcome rewards credit a whole run with whether its final answer was right. Q&amp;D credits each question with what followed it, so a question that reaches an unstated need early wins even when the final answers agree. Answers decide only 6% of the pairs Q&amp;D trains on.</p></div>
     <div><h3>How does this differ from asking clarifying questions?</h3><p>Work on clarifying questions learns what to ask the user when a request is ambiguous or incomplete. Here the questioner goes after the missing information itself, in the evidence it can retrieve. In a customer-service agent it completes more retail tasks than GPT-OSS-120B, a prompted model 15× larger, with fewer follow-up turns from the customer, which the paper attributes to the agent finding more of what the task needs in the store&#x27;s records.</p></div>
-    <div><h3>Which benchmarks and models does the paper use?</h3><p>Training data are mined from MuSiQue, StrategyQA and 2WikiMultiHopQA, and results are read on held-out test splits of 200 tasks per benchmark. The trained questioner is Qwen3-8B. GPT-OSS-120B is the drafter and the answerer in every arm except the single-model control, and a prompted comparator in the questioner&#x27;s role. The transfer study uses the retail and airline domains of τ²-bench with a simulated customer.</p></div>
+    <div><h3>Which benchmarks and models does the paper use?</h3><p>Training data are mined from MuSiQue, StrategyQA and 2WikiMultiHopQA, and results are read on held-out test splits of 200 tasks per benchmark. FRAMES, which has no need graph, is scored on answers. The trained questioner is Qwen3-8B. GPT-OSS-120B is the drafter and the answerer in every arm except the single-model control, and a prompted comparator in the questioner&#x27;s role. The transfer study uses the retail and airline domains of τ²-bench with a simulated customer.</p></div>
     <div><h3>What are the main results?</h3><p>At equal retrieval spend, the trained 8B questioner recovers more of the required evidence than the same model, prompted, on every suite, and reaches deeper into each task&#x27;s dependencies. On MuSiQue it recovers 90% of the required evidence against 78%. It leads GPT-OSS-120B, a prompted model 15× larger in the same role, on MuSiQue and StrategyQA, by 7.0 and 4.3 points, and trails it on 2WikiMultiHopQA, by 3.5 points. The gain comes from what it asks, not from asking more or longer questions. Stopping on its own, it asks fewer questions than either prompted model and still leads on the deepest chains.</p></div>
     <div><h3>Does the questioner work beyond question answering?</h3><p>Yes, without further training. Placed in a customer-service agent on τ²-bench, it raises retail task success from 13% and 12% to 34% and 32% under two prompt variants, better on ten of twenty-five tasks and worse on none in each. It asks less and finds more: 1.3 and 1.4 fewer questions per retail dialogue, more of which reach the records the task needs. In airline, task success rises by 6.9 and 6.4 points. Against GPT-OSS-120B in retail, it completes 17.0 and 12.7 points more tasks, with 1.6 and 1.8 fewer follow-up turns from the customer.</p></div>
     <div><h3>Does finding more evidence give better final answers?</h3><p>Not yet detectably. The extra evidence does not yet reach the final answers, and training teaches what to ask more readily than when to stop.</p></div>
@@ -664,6 +899,7 @@ questioner = PeftModel.from_pretrained(base, <span class="s">"dolev31/ProactiveI
 </section>
 
 <section class="block text" id="citation">
+  <p class="kicker">08 · Cite</p>
   <h2>Citation</h2>
   <div class="cite">
     <button class="copy" type="button" id="copy-bib" data-goatcounter-click="bibtex-copy" hidden>Copy</button>
@@ -675,6 +911,7 @@ questioner = PeftModel.from_pretrained(base, <span class="s">"dolev31/ProactiveI
 }</pre>
   </div>
 </section>
+
 
 </main>
 
@@ -689,19 +926,87 @@ questioner = PeftModel.from_pretrained(base, <span class="s">"dolev31/ProactiveI
 </div>
 <script>
 (function () {
-  var btn = document.getElementById("copy-bib");
-  var pre = document.getElementById("bibtex");
-  if (!btn || !pre || !navigator.clipboard) return;
-  btn.hidden = false;
-  btn.addEventListener("click", function () {
-    navigator.clipboard.writeText(pre.textContent).then(function () {
+  // copy buttons: the BibTeX, and every code block
+  function copyText(text, btn, label) {
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(text).then(function () {
       btn.textContent = "Copied";
-      setTimeout(function () { btn.textContent = "Copy"; }, 1600);
-    }, function () {
-      var r = document.createRange(); r.selectNodeContents(pre);
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      setTimeout(function () { btn.textContent = label; }, 1600);
     });
-  });
+  }
+  var bib = document.getElementById("copy-bib"), pre = document.getElementById("bibtex");
+  if (bib && pre && navigator.clipboard) {
+    bib.hidden = false;
+    bib.addEventListener("click", function () { copyText(pre.textContent, bib, "Copy"); });
+  }
+  if (navigator.clipboard) {
+    document.querySelectorAll("pre.code").forEach(function (p) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "cbtn"; b.textContent = "Copy";
+      p.classList.add("has-copy");
+      b.addEventListener("click", function () { copyText(p.querySelector("code").textContent, b, "Copy"); });
+      p.appendChild(b);
+    });
+  }
+
+  // the section bar marks the section in view
+  var links = Array.prototype.slice.call(document.querySelectorAll(".topnav a.sec"));
+  if ("IntersectionObserver" in window && links.length) {
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute("href").slice(1)] = a; });
+    var seen = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting && byId[e.target.id]) {
+          links.forEach(function (a) { a.removeAttribute("aria-current"); });
+          byId[e.target.id].setAttribute("aria-current", "true");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    Object.keys(byId).forEach(function (id) { var s = document.getElementById(id); if (s) seen.observe(s); });
+  }
+
+  // the animation: one timeline, rendered from a time t; it plays only while in view
+  var root = document.getElementById("anim");
+  if (!root) return;
+  var items = root.querySelectorAll("[data-at]");
+  var cap = root.querySelector(".anim-cap"), bar = root.querySelector(".anim-bar span"), btn = root.querySelector(".anim-btn");
+  var END = 20;
+  var CAPS = [
+    [0, "A customer asks to change the boots in a pending order to size 8, with a name and a ZIP code but no order number."],
+    [2.4, "Horizontal: a need the current state already names. The name and ZIP code name the account; the questioner asks, and the retriever answers from the store's records."],
+    [7.4, "Vertical: a need that only newly found evidence names: the order holding the boots, then the size-8 boots."],
+    [12.6, "It stops: all three found, and the agent completes the task."],
+    [16, "For contrast: prompted, the same model spends all sixteen of its questions asking for the email or the order ID, and the task fails."]
+  ];
+  var PHASES = [[0, "s"], [2.4, "q"], [3.6, "r"], [5, "q"], [6.2, "r"], [7.4, "q"], [8.6, "r"], [10, "q"], [11.2, "r"], [12.6, "stop"], [13.8, "d"], [15, "s"]];
+  function pick(list, t) { var v = list[0][1]; for (var i = 0; i < list.length; i++) if (t >= list[i][0]) v = list[i][1]; return v; }
+  function render(t) {
+    for (var i = 0; i < items.length; i++) items[i].classList.toggle("on", t >= parseFloat(items[i].getAttribute("data-at")));
+    var c = pick(CAPS, t);
+    if (cap.textContent !== c) cap.textContent = c;
+    root.setAttribute("data-phase", pick(PHASES, t));
+    bar.style.transform = "scaleX(" + Math.min(1, t / END) + ")";
+  }
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) { render(END); return; }
+    btn.hidden = false;
+  var playing = false, userPaused = false, start = 0, at = 0, raf = 0;
+  function tick(now) {
+    if (!playing) return;
+    at = (now - start) / 1000;
+    if (at >= END) { start = now; at = 0; }
+    render(at);
+    raf = requestAnimationFrame(tick);
+  }
+  function play() { if (playing) return; playing = true; btn.textContent = "Pause"; start = performance.now() - at * 1000; raf = requestAnimationFrame(tick); }
+  function pause() { playing = false; cancelAnimationFrame(raf); btn.textContent = "Play"; }
+  btn.addEventListener("click", function () { if (playing) { userPaused = true; pause(); } else { userPaused = false; play(); } });
+  render(0);
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { if (!userPaused) play(); } else { pause(); } });
+    }, { threshold: 0.35 }).observe(root);
+  } else { play(); }
 })();
 </script>
 </body>
