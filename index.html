@@ -358,6 +358,18 @@
      }
     }
    ]
+  },
+  {
+   "@type": "VideoObject",
+   "name": "Asking for What Was Never Requested: the paper's example, step by step",
+   "description": "The paper's Figure 1 example: a customer asks to change the boots in a pending order to size 8 and gives a name and a ZIP code. The questioner trained with Q&D finds the account, the order with the boots and the size-8 boots in the store's records, and the task is completed.",
+   "thumbnailUrl": "https://dolev31.github.io/ProactiveInquirer/assets/animation-poster.webp",
+   "uploadDate": "2026-10-04",
+   "duration": "PT22S",
+   "contentUrl": "https://dolev31.github.io/ProactiveInquirer/assets/animation.mp4",
+   "isPartOf": {
+    "@id": "https://dolev31.github.io/ProactiveInquirer/#paper"
+   }
   }
  ]
 }
@@ -545,6 +557,13 @@
     .anim-btn, .anim-bar { display: none; }
   }
 
+  .video { max-width: 1000px; margin: 22px auto 0; }
+  .video-play { position: relative; display: block; }
+  .video img, .video video { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); background: #FFFFFF; }
+  .video-btn { position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: 50%; background: rgba(15, 26, 40, .84); display: grid; place-items: center; transition: transform .15s; }
+  .video-btn svg { width: 32px; height: 32px; fill: #FFFFFF; margin-left: 4px; }
+  .video-play:hover .video-btn, .video-play:focus-visible .video-btn { transform: scale(1.08); }
+  .video figcaption { text-align: center; font-size: 14.5px; }
   .how-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 30px; }
   .card { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
   .card p { font-size: 15.5px; margin: 0 0 10px !important; }
@@ -653,6 +672,7 @@
     <a class="btn" href="https://arxiv.org/abs/2609.37236" data-goatcounter-click="paper"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 1.5h6l3 3v10h-9z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9.5 1.5v3h3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Paper <small>arXiv</small></a>
     <a class="btn" href="https://github.com/dolev31/ProactiveInquirer" data-goatcounter-click="code"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"/></svg>Code</a>
     <a class="btn" href="https://huggingface.co/collections/dolev31/asking-for-what-was-never-requested-6abccea5387af87237913165" data-goatcounter-click="models"><span class="emoji" aria-hidden="true">🤗</span>Models</a>
+    <a class="btn" href="#video" data-goatcounter-click="video"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M4 2.6v10.8c0 .5.5.8.9.5l8.4-5.4c.4-.3.4-.8 0-1.1L4.9 2.1c-.4-.2-.9 0-.9.5z"/></svg>Video</a>
     <a class="btn" href="#citation" data-goatcounter-click="bibtex"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.5 3.5h4.25v4.25H4.9c0 1.45.55 2.35 1.85 2.95l-.62 1.55C3.7 11.4 2.5 9.75 2.5 7.2zm6.75 0h4.25v4.25h-1.85c0 1.45.55 2.35 1.85 2.95l-.62 1.55c-2.43-.85-3.63-2.5-3.63-5.05z"/></svg>BibTeX</a>
   </nav>
 </header>
@@ -761,6 +781,14 @@
       <div class="anim-bar" aria-hidden="true"><span></span></div>
     </div>
   </div>
+
+  <figure class="video" id="video">
+    <a class="video-play" href="assets/animation.mp4" data-goatcounter-click="video-play">
+      <img src="assets/animation-poster.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Play the video. Its last frame: the account, the order with the boots and the size-8 boots are found, and the task is completed.">
+      <span class="video-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+    </a>
+    <figcaption>The same example as a 22-second video with captions. <a href="assets/animation.mp4" download data-goatcounter-click="video-download">Download the video (MP4)</a></figcaption>
+  </figure>
 
   <div class="how-grid">
     <article class="card">
@@ -963,6 +991,27 @@ cd ProactiveInquirer && make smoke</code></pre>
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
     Object.keys(byId).forEach(function (id) { var s = document.getElementById(id); if (s) seen.observe(s); });
+  }
+
+  // the video: the first HTML holds only its poster, linked to the MP4 (a <video> there delays
+  // Figure 1); the player replaces the link as it nears the screen
+  var vlink = document.querySelector("a.video-play");
+  if (vlink) {
+    var toPlayer = function () {
+      var v = document.createElement("video"), img = vlink.querySelector("img");
+      v.controls = true; v.muted = true; v.playsInline = true; v.preload = "none";
+      v.width = 1280; v.height = 720;
+      v.poster = img.getAttribute("src");
+      v.src = vlink.getAttribute("href");
+      v.setAttribute("aria-label", "The paper's example, step by step (22 seconds, no sound)");
+      vlink.replaceWith(v);
+    };
+    if ("IntersectionObserver" in window) {
+      var near = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { near.disconnect(); toPlayer(); }
+      }, { rootMargin: "800px 0px" });
+      near.observe(vlink);
+    }
   }
 
   // the animation: one timeline, rendered from a time t; it plays only while in view
